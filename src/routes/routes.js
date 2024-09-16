@@ -75,7 +75,7 @@ const publicRoutes = [
     {
         path: config.routes.productCategory,
         component: Products,
-        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.products} categoryType={1} />,
+        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.products} categoryType={'san-pham'} />,
     },
     { path: config.routes.products, component: Product, layout: OnlyHeaderLayout },
     { path: config.routes.productDetail, component: ProductDetail, layout: OnlyHeaderLayout },

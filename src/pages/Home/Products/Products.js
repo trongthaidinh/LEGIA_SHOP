@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import React, { useEffect, useState } from 'react';
 import Product from '~/components/Product';
 import { getProducts } from 'services/productService';
-import { getCategoriesByType } from '~/services/categoryService';
+import { getCategoriesBySlug } from 'services/categoryService';
 import styles from './Products.module.scss';
 import Title from '~/components/Title';
 import LoadingScreen from '~/components/LoadingScreen';
@@ -24,23 +24,26 @@ function Products() {
     useEffect(() => {
         const fetchProductsAndCategories = async () => {
             try {
-                const productsData = await getProducts();
-                const categoriesData = await getCategoriesByType(1);
-                setProducts(productsData);
+                const [categoriesData, productsData] = await Promise.all([
+                    getCategoriesBySlug('san-pham'),
+                    getProducts(),
+                ]);
+    
                 setCategories(categoriesData);
-                setLoading(false);
+                setProducts(productsData);
             } catch (err) {
                 setError(err);
-                setLoading(false);
                 console.error('Error fetching data:', err);
+            } finally {
+                setLoading(false);
             }
         };
-
+    
         fetchProductsAndCategories();
     }, []);
-
+    
     const getCategorySlug = (categoryId) => {
-        const category = categories.find((cat) => cat._id === categoryId);
+        const category = categories.find((cat) => cat.id === categoryId);
         return category ? category.slug : 'unknown';
     };
 
@@ -49,7 +52,7 @@ function Products() {
     }
 
     if (loading) {
-        return <LoadingScreen />;
+        return <LoadingScreen isLoading={loading} />;
     }
 
     return (
@@ -72,17 +75,20 @@ function Products() {
                         disableOnInteraction: false,
                     }}
                 >
-                    {products.map((product) => (
-                        <SwiperSlide key={product._id} className={cx('slide')}>
+                    {products.map((product) => {
+                        console.log(product.images[0]);
+                        return (
+                        <SwiperSlide key={product.id} className={cx('slide')}>
                             <Product
-                                image={product.image[0]}
+                                image={product.images[0]}
                                 name={product.name}
-                                productId={product._id}
-                                category={getCategorySlug(product.category_id)}
-                                link={`${routes.products}/${getCategorySlug(product)}/${product._id}`}
+                                productId={product.id}
+                                category={getCategorySlug(product.child_nav_id)}
+                                link={`${routes.products}/${getCategorySlug(product.child_nav_id)}/${product.id}`}
                             />
                         </SwiperSlide>
-                    ))}
+                    )
+                     })}
                 </Swiper>
             </div>
         </div>

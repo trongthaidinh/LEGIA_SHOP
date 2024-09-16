@@ -6,7 +6,8 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { getProductsByCategory } from '~/services/productService';
 import Title from '~/components/Title';
 import styles from './Products.module.scss';
-import { getCategoriesByType } from '~/services/categoryService';
+import LoadingScreen from '~/components/LoadingScreen';
+import { getCategoriesBySlug } from '~/services/categoryService';
 import routes from '~/config/routes';
 import { Helmet } from 'react-helmet';
 import { Empty } from 'antd';
@@ -21,6 +22,7 @@ function ProductCategory() {
     const [subcategoryId, setSubcategoryId] = useState(null);
     const [categoryName, setCategoryName] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
+    const [loading, setLoading] = useState(true);
     const productPerPage = 6;
 
     const extractSlugFromPathname = (pathname) => {
@@ -33,23 +35,23 @@ function ProductCategory() {
     useEffect(() => {
         async function fetchCategory() {
             try {
-                const categories = await getCategoriesByType(1);
+                const categories = await getCategoriesBySlug('san-pham');
                 let category = categories.find((cat) => cat.slug === slug);
 
                 if (!category) {
                     for (const cat of categories) {
-                        const subcategory = cat.subcategories.find((subcat) => subcat.slug === slug);
+                        const subcategory = cat.children.find((subcat) => subcat.slug === slug);
                         if (subcategory) {
-                            setCategoryId(cat._id);
-                            setSubcategoryId(subcategory._id);
-                            setCategoryName(subcategory.name);
+                            setCategoryId(cat.id);
+                            setSubcategoryId(subcategory.id);
+                            setCategoryName(subcategory.title);
                             return;
                         }
                     }
                 } else {
-                    setCategoryId(category._id);
+                    setCategoryId(category.id);
                     setSubcategoryId(null);
-                    setCategoryName(category.name);
+                    setCategoryName(category.title);
                 }
             } catch (error) {
                 console.error('Error fetching categories:', error);
@@ -70,16 +72,17 @@ function ProductCategory() {
                 } else if (categoryId) {
                     data = await getProductsByCategory(categoryId);
 
-                    if (!Array.isArray(data) || data.message === 'No products found') {
-                        const categories = await getCategoriesByType(1);
-                        const parentCategory = categories.find((cat) => cat._id === categoryId);
+                    if (!Array.isArray(data)) {
+                        const categories = await getCategoriesBySlug('san-pham');
+                        console.log(categories);
+                        const parentCategory = categories.find((cat) => cat.id === categoryId);
 
-                        if (parentCategory && parentCategory.subcategories) {
+                        if (parentCategory && parentCategory.children) {
                             const subcategoryProducts = await Promise.all(
-                                parentCategory.subcategories.map(async (subcat) => {
-                                    const products = await getProductsByCategory(subcat._id);
+                                parentCategory.children.map(async (subcat) => {
+                                    const products = await getProductsByCategory(subcat.id);
                                     if (Array.isArray(products) && products.length > 0) {
-                                        return products.filter((product) => product._id || product.name);
+                                        return products.filter((product) => product.id || product.name);
                                     } else {
                                         return null;
                                     }
@@ -93,6 +96,8 @@ function ProductCategory() {
                 setProduct(Array.isArray(data) ? data : []);
             } catch (error) {
                 console.error('Error fetching product:', error);
+            } finally {
+                setLoading(false);
             }
         }
 
@@ -100,6 +105,10 @@ function ProductCategory() {
             fetchProductCategory();
         }
     }, [categoryId, subcategoryId, slug]);
+
+    if (loading) {
+        return <LoadingScreen isLoading={loading} />;
+    }
 
     const indexOfLastProduct = currentPage * productPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productPerPage;
@@ -112,6 +121,7 @@ function ProductCategory() {
             setCurrentPage(pageNumber);
         }
     };
+
 
     const renderProductCategory = () => {
         if (currentProductCategory.length === 0) {
@@ -126,12 +136,12 @@ function ProductCategory() {
 
         return currentProductCategory.map((productItem) => (
             <Product
-                key={productItem._id}
-                image={productItem.image ? productItem.image[0] : ''}
+                key={productItem.id}
+                image={productItem.images ? productItem.images[0] : ''}
                 name={productItem.name}
-                productId={productItem._id}
+                productId={productItem.id}
                 category={slug}
-                link={`${routes.products}/${slug}/${productItem._id}`}
+                link={`${routes.products}/${slug}/${productItem.id}`}
             />
         ));
     };

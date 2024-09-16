@@ -10,12 +10,13 @@
     background-color: transparent;
     border-radius: 50%;
     cursor: pointer;
-    color: var(--white);
-    transition: all ease-in-out 200ms;
+    color: var(--primary);
+    transition: all ease-in-out 0.3s;
+    font-size: 2rem;
 
     &:hover {
-        background-color: var(--white);
-        color: var(--black);
+        background-color: var(--primary);
+        color: var(--white);
     }
 }
 

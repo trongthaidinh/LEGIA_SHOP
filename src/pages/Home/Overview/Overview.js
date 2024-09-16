@@ -7,54 +7,42 @@ import Button from '~/components/Button';
 import { Link } from 'react-router-dom';
 import routes from '~/config/routes';
 import overviewGif from '~/assets/images/overview';
-import { motion } from 'framer-motion';
 
 const cx = classNames.bind(styles);
 
 function Overview() {
     return (
         <div className={cx('wrapper')}>
-            <motion.div
+            <div
                 className={cx('inner')}
-                initial={{ y: 20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                viewport={{ once: false }}
                 style={{ perspective: '1000px' }}
             >
-                <motion.div
+                <div
                     className={cx('content')}
-                    initial={{ y: 100 }}
-                    whileInView={{ y: 0 }}
-                    transition={{ duration: 0.3 }}
                 >
-                    <h2 className={cx('title')}>CÔNG TY TNHH CÔNG NGHỆ TAKATECH</h2>
+                    <h2 className={cx('title')}>HỢP TÁC XÃ NÔNG NGHIỆP - DU LỊCH</h2>
+                    <h3 className={cx('sub-title')}>PHÚ NÔNG BUÔN ĐÔN</h3>
                     <p className={cx('text')}>
-                        Công ty TNHH Công Nghệ Takatech là đơn vị phát triển phần mềm, ứng dụng di động và digital
-                        marketing. Với đội ngũ lập trình viên chuyên nghiệp và chuyên gia marketing giàu kinh nghiệm,
-                        Takatech cung cấp các giải pháp công nghệ toàn diện, từ phát triển ứng dụng phần mềm, Website,
-                        App android, App IOS đến các chiến lược marketing số hiệu quả.
+                        Ngày 27/05/2019 Hợp tác xã Nông nghiệp và Du lịch Phú Nông – Buôn Đôn chính thức được thành lập và ra đời nhằm mục đích khai thác thế mạnh của thiên nhiên, điều kiện tự nhiên, văn hóa, xã hội để phát triển du lịch và nông nghiệp – sinh thái cộng đồng. Ngoài ra Hợp tác xã Nông nghiệp và Du lịch Phú Nông còn mang trong mình trọng trách thúc đẩy nền kinh tế địa phương, tạo công ăn việc làm, góp phần bảo vệ môi trường và một số vấn đề quan trọng trên địa bàn tỉnh Đắk Lăk và huyện Buôn Đôn.
                     </p>
-                    <p className={cx('text')}>
-                        Công ty cam kết mang đến sản phẩm và dịch vụ chất lượng cao, giúp khách hàng tối ưu hóa hiệu
-                        suất kinh doanh và tối ưu hóa trải nghiệm người dùng.
-                    </p>
+                    <p className={cx('text')}><strong>PHÁT TRIỂN LÀM GIÀU BỀN VỮNG</strong></p>
+                    <p className={cx('text')}>Sau quá trình nghiên cứu và chuẩn bị chúng tôi đã nhận ra rằng những khu vực trên địa bàn như thôn Tân Phú là nơi có tiềm năng phát triển nguồn tài nguyên thiên nhiên có sẵn phù hợp trong việc khai thác và canh tác nông nghiệp. Hiện nay có hơn 200 hộ dân từ khắp mọi miền đất nước tập trung về đây sinh sống, chủ yếu người dân sống bằng nghề truyền thống là sản xuất nông nghiệp.</p>
                     <Link to={`${routes.about}/tong-quan`}>
                         <Button className={cx('button')} primary rightIcon={<FontAwesomeIcon icon={faArrowRight} />}>
                             Tìm hiểu thêm
                         </Button>
                     </Link>
-                </motion.div>
+                </div>
 
-                <motion.div
+                <div
                     className={cx('sticker-container')}
                     initial={{ x: 200, opacity: 0 }}
                     whileInView={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.3 }}
                 >
-                    <img className={cx('sticker')} src={overviewGif.gif} alt="Animated Sticker" />
-                </motion.div>
-            </motion.div>
+                    <img className={cx('sticker')} src={overviewGif.image} alt="Animated Sticker" />
+                </div>
+            </div>
         </div>
     );
 }

@@ -5,7 +5,7 @@ import styles from './ProductDetail.module.scss';
 import LoadingScreen from '~/components/LoadingScreen';
 import PushNotification from '~/components/PushNotification';
 import Title from '~/components/Title';
-import { getProductById, getProductBySlug } from '~/services/productService';
+import { getProductById } from '~/services/productService';
 import { Helmet } from 'react-helmet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -31,13 +31,7 @@ const ProductDetail = () => {
     useEffect(() => {
         const fetchProductDetail = async () => {
             try {
-                let data;
-                if (id.length === 24 && /^[a-f\d]{24}$/i.test(id)) {
-                    data = await getProductById(id);
-                } else {
-                    data = await getProductBySlug(id);
-                }
-
+                const data = await getProductById(id);
                 setProductDetail(data);
                 console.log(data);
             } catch (error) {
@@ -56,11 +50,11 @@ const ProductDetail = () => {
     };
 
     const handlePrevClick = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? productDetail.image.length - 1 : prevIndex - 1));
+        setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? productDetail.images.length - 1 : prevIndex - 1));
     };
 
     const handleNextClick = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex === productDetail.image.length - 1 ? 0 : prevIndex + 1));
+        setCurrentImageIndex((prevIndex) => (prevIndex === productDetail.images.length - 1 ? 0 : prevIndex + 1));
     };
 
     const handleThumbnailPrevClick = () => {
@@ -68,7 +62,7 @@ const ProductDetail = () => {
     };
 
     const handleThumbnailNextClick = () => {
-        const totalImages = productDetail.image.length;
+        const totalImages = productDetail.images.length;
         const remainingImages = totalImages - (thumbnailStartIndex + 1);
         if (remainingImages > 0) {
             setThumbnailStartIndex((prevIndex) => prevIndex + 1);
@@ -110,18 +104,18 @@ const ProductDetail = () => {
                         className={cx('thumbnail-list')}
                         style={{ transform: `translateY(-${thumbnailStartIndex * 155}px)` }}
                     >
-                        {productDetail.image.slice(thumbnailStartIndex, thumbnailStartIndex + 4).map((image, index) => (
+                        {productDetail.images.slice(thumbnailStartIndex, thumbnailStartIndex + 4).map((image, index) => (
                             <div key={thumbnailStartIndex + index} className={cx('thumbnail-item')}>
                                 <img
                                     className={cx('thumbnail-image')}
-                                    src={image}
+                                    src={image.replace(/\\/g, '')}
                                     alt={`${productDetail.name} thumbnail ${thumbnailStartIndex + index + 1}`}
                                     onClick={() => handleThumbnailClick(thumbnailStartIndex + index)}
                                 />
                             </div>
                         ))}
                     </div>
-                    {thumbnailStartIndex + 4 < productDetail.image.length && (
+                    {thumbnailStartIndex + 4 < productDetail.images.length && (
                         <button
                             className={cx('thumbnail-button', 'thumbnail-next-button')}
                             onClick={handleThumbnailNextClick}
@@ -139,11 +133,11 @@ const ProductDetail = () => {
                         className={cx('main-image-wrapper')}
                         style={{ transform: `translateX(-${currentImageIndex * 600}px)` }}
                     >
-                        {productDetail.image.map((image, index) => (
+                        {productDetail.images.map((image, index) => (
                             <img
                                 key={index}
                                 className={cx('main-image')}
-                                src={image}
+                                src={image.replace(/\\/g, '')}
                                 alt={`${productDetail.name} main ${index + 1}`}
                             />
                         ))}

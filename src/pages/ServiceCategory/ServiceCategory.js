@@ -8,7 +8,7 @@ import Title from '~/components/Title';
 import styles from './ServiceCategory.module.scss';
 import { Link } from 'react-router-dom';
 import Card from '~/components/CardContent/CardContent';
-import { getCategoriesByType } from '~/services/categoryService';
+import { getCategoriesBySlug } from '~/services/categoryService';
 import routes from '~/config/routes';
 import { Helmet } from 'react-helmet';
 import LoadingScreen from '~/components/LoadingScreen';
@@ -35,7 +35,7 @@ function ServiceCategory() {
     useEffect(() => {
         async function fetchCategory() {
             try {
-                const categories = await getCategoriesByType(3);
+                const categories = await getCategoriesBySlug("dich-vu");
                 const category = categories.find((cat) => cat.slug === slug);
                 if (category) {
                     setCategoryId(category._id);

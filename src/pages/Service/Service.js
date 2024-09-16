@@ -10,7 +10,7 @@ import ButtonGroup from '~/components/ButtonGroup';
 import PushNotification from '~/components/PushNotification';
 import LoadingScreen from '~/components/LoadingScreen';
 import routes from '~/config/routes';
-import { getCategoriesByType } from '~/services/categoryService';
+import { getCategoriesBySlug } from 'services/categoryService';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -30,7 +30,7 @@ const Service = () => {
     useEffect(() => {
         const fetchCategoriesAndService = async () => {
             try {
-                const categoriesData = await getCategoriesByType(3);
+                const categoriesData = await getCategoriesBySlug("dich-vu");
                 setCategories(categoriesData);
 
                 const groupedServiceMap = {};

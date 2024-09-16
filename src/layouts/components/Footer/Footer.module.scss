@@ -37,8 +37,11 @@
         }
 
         .logo {
-            width: 160px;
+            width: 220px;
             height: auto;
+            @include respond-to(sm) {
+                width: 160px;
+            }
         }
 
         h5 {
@@ -171,7 +174,7 @@
     }
     .bottomBar {
         background-color: var(--primary);
-        border-top: 8px solid var(--secondary);
+        border-top: 2px solid var(--secondary);
         padding: 10px 0;
         text-align: center;
         font-size: 14px;

@@ -9,7 +9,7 @@ import { faFacebookF, faInstagram, faLinkedinIn, faTwitter } from '@fortawesome/
 const cx = classNames.bind(styles);
 
 const Tophead = () => {
-    const hotlines = [{ number: '0914 586 999', name: 'Mr. Tuấn' }];
+    const hotlines = [{ number: '0961 862 450', name: '' }];
 
     return (
         <div className={cx('wrapper')}>

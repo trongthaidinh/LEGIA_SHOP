@@ -30,7 +30,7 @@ export const getCategoryName = async (id) => {
 
 export const getCategoryById = async (id) => {
     try {
-        const response = await httpRequest.get(`/category/${id}`);
+        const response = await httpRequest.get(`/child-navs/${id}`);
         const category = response.data.data;
         return category;
     } catch (error) {
@@ -46,6 +46,17 @@ export const getCategoriesByType = async (value) => {
         return categories;
     } catch (error) {
         console.error(`Error fetching category name for type ${value}`, error);
+        throw error;
+    }
+};
+
+export const getCategoriesBySlug = async (slug) => {
+    try {
+        const response = await httpRequest.get(`/parent-navs/${slug}`);
+        const categories = response.data.data;
+        return categories;
+    } catch (error) {
+        console.error(`Error fetching category name for slug ${slug}`, error);
         throw error;
     }
 };

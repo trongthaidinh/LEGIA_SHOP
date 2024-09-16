@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleDot } from '@fortawesome/free-solid-svg-icons';
 import { useBaseRoute } from '~/context/BaseRouteContext';
 import { Link, useLocation } from 'react-router-dom';
-import { getCategoriesByType } from '~/services/categoryService';
+import { getCategoriesBySlug } from '~/services/categoryService';
 
 function SideBar({ categoryType }) {
     const [categoriesData, setCategoriesData] = useState([]);
@@ -17,7 +17,7 @@ function SideBar({ categoryType }) {
     useEffect(() => {
         async function fetchCategoryData() {
             try {
-                const data = await getCategoriesByType(categoryType);
+                const data = await getCategoriesBySlug(categoryType);
                 setCategoriesData(data);
                 setLoading(false);
             } catch (error) {
@@ -76,28 +76,28 @@ function SideBar({ categoryType }) {
         return categoriesData.map((category) => {
             const isActive = location.pathname.includes(category.slug);
 
-            if (category.subcategories && category.subcategories.length > 0) {
+            if (category.children && category.children.length > 0) {
                 return (
                     <Menu.SubMenu
-                        key={category._id}
+                        key={category.id}
                         title={
                             <span style={getTextStyle(isActive)}>
                                 <FontAwesomeIcon icon={faCircleDot} style={getIconStyle(isActive)} />
-                                {category.name}
+                                {category.title}
                             </span>
                         }
                     >
-                        {category.subcategories.map((subcategory) => {
+                        {category.children.map((subcategory) => {
                             const subcategoryActive = location.pathname.includes(subcategory.slug);
 
                             return (
-                                <Menu.Item key={subcategory._id}>
+                                <Menu.Item key={subcategory.id}>
                                     <Link
                                         to={`${baseRoute}/${subcategory.slug}`}
                                         style={getTextStyle(subcategoryActive)}
                                     >
                                         <FontAwesomeIcon icon={faCircleDot} style={getIconStyle(subcategoryActive)} />
-                                        {subcategory.name}
+                                        {subcategory.title}
                                     </Link>
                                 </Menu.Item>
                             );
@@ -107,10 +107,10 @@ function SideBar({ categoryType }) {
             }
 
             return (
-                <Menu.Item key={category._id}>
+                <Menu.Item key={category.id}>
                     <Link to={`${baseRoute}/${category.slug}`} style={getTextStyle(isActive)}>
                         <FontAwesomeIcon icon={faCircleDot} style={getIconStyle(isActive)} />
-                        {category.name}
+                        {category.title}
                     </Link>
                 </Menu.Item>
             );

@@ -2,6 +2,6 @@
 User-agent: *
 Disallow: /private/
 Allow: /
-Sitemap: https://takatech.com/sitemap.xml
+Sitemap: https://phunongbuondon.com/sitemap.xml
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useAuth } from '~/hooks/useAuth';
 import styles from './Login.module.scss';
-import companyLogo from '~/assets/images/takatech-logo.png';
+import companyLogo from '~/assets/images/phunong-logo.png';
 
 const Login = () => {
     const { signin } = useAuth();

@@ -1,39 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faEnvelope, faChevronRight, faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPhone, faEnvelope, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import { faFacebookF, faTwitter, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
-import companyLogo from '~/assets/images/takatech-logo.png';
+import companyLogo from '~/assets/images/phunong-logo.png';
 import styles from './Footer.module.scss';
 import classNames from 'classnames/bind';
-import io from 'socket.io-client';
 import routes from '~/config/routes';
 
 const cx = classNames.bind(styles);
 
 const Footer = () => {
-    const [stats, setStats] = useState({ daily: 0, total: 0 });
-
-    useEffect(() => {
-        const socket = io(`${process.env.REACT_APP_HOST}`, {
-            transports: ['websocket', 'polling'],
-        });
-
-        socket.on('connect', () => {
-            console.log('Connected to server');
-        });
-
-        socket.on('connect_error', (error) => {
-            console.error('Connection error:', error);
-        });
-
-        socket.on('stats', (data) => {
-            console.log('Received stats:', data);
-            setStats(data);
-        });
-
-        return () => socket.disconnect();
-    }, []);
 
     return (
         <footer className={cx('wrapper')}>
@@ -44,17 +21,6 @@ const Footer = () => {
                     </Link>
                     <h5>CÔNG TY TNHH CÔNG NGHỆ TAKATECH</h5>
                     <p>200 Hà Huy Tập, Phường Tân Lợi, Tp. Buôn Ma Thuột, Tỉnh Đắk Lắk</p>
-                    <div className={cx('onlineStatus')}>
-                        <span>
-                            <FontAwesomeIcon className={cx('footer-icon-dot')} icon={faCircle} />
-                            Truy cập hôm nay: <span className={cx('online-number')}>{stats.daily}</span>
-                        </span>{' '}
-                        |{' '}
-                        <span>
-                            <FontAwesomeIcon className={cx('footer-icon-dot')} icon={faCircle} />
-                            Tổng số lượt truy cập: <span className={cx('online-access')}>{stats.total}</span>
-                        </span>
-                    </div>
                     <div className={cx('contactInfo')}>
                         <div className={cx('contactItem')}>
                             <FontAwesomeIcon icon={faPhone} />

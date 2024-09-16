@@ -6,7 +6,7 @@ import Title from '~/components/Title';
 import PushNotification from '~/components/PushNotification';
 import LoadingScreen from '~/components/LoadingScreen';
 import routes from '~/config/routes';
-import { getCategoriesByType } from '~/services/categoryService';
+import { getCategoriesBySlug } from 'services/categoryService';
 import Product from '~/components/Product';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
@@ -26,15 +26,15 @@ const Products = () => {
     useEffect(() => {
         const fetchCategoriesAndProducts = async () => {
             try {
-                const categoriesData = await getCategoriesByType(1);
+                const categoriesData = await getCategoriesBySlug('san-pham');
                 setCategories(categoriesData);
 
                 const groupedProductsMap = {};
 
                 await Promise.all(
                     categoriesData.map(async (category) => {
-                        const productsData = await getProductsByCategory(category._id);
-                        groupedProductsMap[category._id] = productsData.map((item) => ({
+                        const productsData = await getProductsByCategory(category.id);
+                        groupedProductsMap[category.id] = productsData.map((item) => ({
                             ...item,
                         }));
                     }),
@@ -54,7 +54,7 @@ const Products = () => {
     }, []);
 
     const getCategorySlug = (categoryId) => {
-        const category = categories.find((cat) => cat._id === categoryId);
+        const category = categories.find((cat) => cat.id === categoryId);
         return category ? category.slug : 'unknown';
     };
 
@@ -81,7 +81,7 @@ const Products = () => {
                 <div className={cx('products-column')}>
                     <h2 className={cx('products-title')}>Sản Phẩm</h2>
                     {categories.map((category) => {
-                        const productsInCategory = groupedProducts[category._id];
+                        const productsInCategory = groupedProducts[category.id];
 
                         if (!productsInCategory || productsInCategory.length === 0) {
                             return null;
@@ -90,12 +90,12 @@ const Products = () => {
                         const shouldLoop = productsInCategory.length > 3;
 
                         return (
-                            <div key={category._id} className={cx('products-category')}>
+                            <div key={category.id} className={cx('products-category')}>
                                 <Title
-                                    text={category.name || 'Loading...'}
+                                    text={category.title || 'Loading...'}
                                     showSeeAll={true}
                                     slug={`${routes.products}/${category.slug}`}
-                                    categoryId={category._id}
+                                    categoryId={category.id}
                                 />
                                 <Swiper
                                     spaceBetween={10}
@@ -114,15 +114,15 @@ const Products = () => {
                                     }}
                                 >
                                     {productsInCategory.slice(0, 6).map((item) => (
-                                        <SwiperSlide key={item._id} className={cx('slide')}>
+                                        <SwiperSlide key={item.id} className={cx('slide')}>
                                             <Product
                                                 name={item.name}
-                                                image={item.image[0]}
+                                                image={item.images[0]}
                                                 price={item.price}
                                                 views={item.views}
-                                                productId={item._id}
-                                                category={getCategorySlug(item.category_id)}
-                                                link={`${routes.products}/${getCategorySlug(item)}/${item._id}`}
+                                                productId={item.id}
+                                                category={getCategorySlug(item.categoryid)}
+                                                link={`${routes.products}/${getCategorySlug(item)}/${item.id}`}
                                             />
                                         </SwiperSlide>
                                     ))}

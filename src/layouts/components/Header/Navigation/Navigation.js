@@ -12,26 +12,26 @@ import {
     faTimes,
     faChevronRight,
     faChevronDown,
-    faHome,
-    faInfoCircle,
-    faBox,
-    faLayerGroup,
-    faProjectDiagram,
-    faNewspaper,
-    faUsers,
-    faEnvelope,
+    // faHome,
+    // faInfoCircle,
+    // faBox,
+    // faLayerGroup,
+    // faProjectDiagram,
+    // faNewspaper,
+    // faUsers,
+    // faEnvelope,
 } from '@fortawesome/free-solid-svg-icons';
 import images from '~/assets/images';
 
-const iconsData = [
-    { position: 1, icon: faInfoCircle },
-    { position: 2, icon: faBox },
-    { position: 3, icon: faLayerGroup },
-    { position: 4, icon: faProjectDiagram },
-    { position: 5, icon: faNewspaper },
-    { position: 6, icon: faUsers },
-    { position: 7, icon: faEnvelope },
-];
+// const iconsData = [
+//     { position: 1, icon: faInfoCircle },
+//     { position: 2, icon: faBox },
+//     { position: 3, icon: faLayerGroup },
+//     { position: 4, icon: faProjectDiagram },
+//     { position: 5, icon: faNewspaper },
+//     { position: 6, icon: faUsers },
+//     { position: 7, icon: faEnvelope },
+// ];
 
 const cx = classNames.bind(styles);
 
@@ -145,22 +145,21 @@ function Navigation({ isFixed }) {
                         <div className={cx('menu-item')}>
                             <NavLink end to="/" className={({ isActive }) => cx({ 'active-link': isActive })}>
                                 <div className={cx('item-icon')}>
-                                    <FontAwesomeIcon icon={faHome} className={cx('nav-icon')} />
                                     Trang Chủ
                                 </div>
                             </NavLink>
                         </div>
                     </li>
                     {navigationLinks.map((link) => {
-                        const iconData = iconsData.find((icon) => icon.position === link.position);
-                        const sortedChilds = link.childs.sort((a, b) => a.position - b.position);
+                        // const iconData = iconsData.find((icon) => icon.position === link.position);
+                        const sortedChilds = link.children.sort((a, b) => a.position - b.position);
                         return (
                             <li
-                                key={link._id}
-                                className={cx({ 'has-children': link.childs.length > 0 })}
-                                onMouseEnter={() => handleMouseEnter(link._id)} // Hover event
-                                onMouseLeave={() => handleMouseLeave(link._id)} // Leave event
-                                onClick={() => toggleSubMenu(link._id)} // Click event for mobile
+                                key={link.id}
+                                className={cx({ 'has-children': link.children.length > 0 })}
+                                onMouseEnter={() => handleMouseEnter(link.id)} // Hover event
+                                onMouseLeave={() => handleMouseLeave(link.id)} // Leave event
+                                onClick={() => toggleSubMenu(link.id)} // Click event for mobile
                             >
                                 <div className={cx('menu-item')}>
                                     <NavLink
@@ -170,36 +169,36 @@ function Navigation({ isFixed }) {
                                         onClick={handleLinkClick}
                                     >
                                         <div className={cx('item-icon')}>
-                                            {iconData && (
+                                            {/* {iconData && (
                                                 <FontAwesomeIcon icon={iconData.icon} className={cx('nav-icon')} />
-                                            )}
+                                            )} */}
                                             {link.title}
                                         </div>
                                     </NavLink>
-                                    {link.childs.length > 0 && (
+                                    {link.children.length > 0 && (
                                         <FontAwesomeIcon
-                                            icon={openSubMenus[link._id] ? faChevronDown : faChevronRight}
+                                            icon={openSubMenus[link.id] ? faChevronDown : faChevronRight}
                                             className={cx('submenu-icon')}
                                         />
                                     )}
                                 </div>
                                 {sortedChilds.length > 0 && (
-                                    <ul className={cx('dropdown', { open: openSubMenus[link._id] })}>
+                                    <ul className={cx('dropdown', { open: openSubMenus[link.id] })}>
                                         {sortedChilds.map((childLink) => {
-                                            const sortedSubChilds = (childLink.child || []).sort(
+                                            const sortedSubChilds = (childLink.children || []).sort(
                                                 (a, b) => a.position - b.position,
                                             );
                                             return (
                                                 <li
-                                                    key={childLink._id}
+                                                    key={childLink.id}
                                                     className={cx({
                                                         'has-sub-children': sortedSubChilds.length > 0,
                                                     })}
-                                                    onMouseEnter={() => handleMouseEnterChild(link._id, childLink._id)}
-                                                    onMouseLeave={() => handleMouseLeaveChild(link._id, childLink._id)}
+                                                    onMouseEnter={() => handleMouseEnterChild(link.id, childLink.id)}
+                                                    onMouseLeave={() => handleMouseLeaveChild(link.id, childLink.id)}
                                                     onClick={(e) => {
                                                         e.stopPropagation();
-                                                        toggleSubSubMenu(link._id, childLink._id);
+                                                        toggleSubSubMenu(link.id, childLink.id);
                                                     }}
                                                 >
                                                     <div className={cx('sub-link-wrapper')}>
@@ -218,7 +217,7 @@ function Navigation({ isFixed }) {
                                                         {sortedSubChilds.length > 0 && (
                                                             <FontAwesomeIcon
                                                                 icon={
-                                                                    openSubSubMenus[`${link._id}-${childLink._id}`]
+                                                                    openSubSubMenus[`${link.id}-${childLink.id}`]
                                                                         ? faChevronDown
                                                                         : faChevronRight
                                                                 }
@@ -229,19 +228,19 @@ function Navigation({ isFixed }) {
                                                     {sortedSubChilds.length > 0 && (
                                                         <ul
                                                             className={cx('dropdown-second-level', {
-                                                                open: openSubSubMenus[`${link._id}-${childLink._id}`],
+                                                                open: openSubSubMenus[`${link.id}-${childLink.id}`],
                                                             })}
                                                         >
                                                             {sortedSubChilds.map((subChildLink) => {
                                                                 return (
-                                                                    <li key={subChildLink._id}>
+                                                                    <li key={subChildLink.id}>
                                                                         <NavLink
                                                                             to={`/${link.slug}/${childLink.slug}/${subChildLink.slug}`}
                                                                             className={({ isActive }) =>
                                                                                 cx({ 'active-link': isActive })
                                                                             }
                                                                             onClick={(e) => {
-                                                                                e.stopPropagation(); // Ngăn sự kiện click lan ra ngoài
+                                                                                e.stopPropagation(); 
                                                                                 handleLinkClick();
                                                                             }}
                                                                         >

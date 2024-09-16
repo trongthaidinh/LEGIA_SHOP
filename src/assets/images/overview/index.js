@@ -1,5 +1,5 @@
 const overviewGif = {
-    gif: require('~/assets/images/overview/overview.gif'),
+    image: require('~/assets/images/overview/overview.jpg'),
 };
 
 export default overviewGif;

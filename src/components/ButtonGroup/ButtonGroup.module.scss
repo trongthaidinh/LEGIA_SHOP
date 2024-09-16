@@ -1,0 +1,56 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+
+.button-group {
+    display: flex;
+    gap: 10px;
+
+    @include respond-to(sm) {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.button {
+    min-width: 120px;
+    padding: 8px 16px;
+    border: none;
+    font-size: 1.6rem;
+    border-top: 1px solid rgb(84, 168, 197);
+    border-bottom: 1px solid rgb(84, 168, 197);
+    border-width: 100%;
+    color: var(--primary);
+    margin-right: 4px;
+    background: white;
+    overflow: hidden;
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    @include respond-to(sm) {
+        padding: 6px 4px;
+        font-size: 1.2rem;
+        min-height: 40px;
+        min-width: 20px;
+    }
+
+    &.active {
+        background: var(--primary);
+        color: var(--white);
+        font-weight: 500;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-color: transparent;
+    }
+
+    &:hover {
+        background: var(--primary);
+        color: var(--white);
+        font-weight: 500;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-color: transparent;
+    }
+}

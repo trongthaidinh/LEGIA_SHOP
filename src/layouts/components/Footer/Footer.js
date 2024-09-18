@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faEnvelope, faChevronRight, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
-import {  faYoutube, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faPhone, faEnvelope, faChevronRight, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faYoutube, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import companyLogo from '~/assets/images/phunong-logo.png';
 import styles from './Footer.module.scss';
 import classNames from 'classnames/bind';
@@ -11,7 +11,6 @@ import routes from '~/config/routes';
 const cx = classNames.bind(styles);
 
 const Footer = () => {
-
     return (
         <footer className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -21,7 +20,7 @@ const Footer = () => {
                     </Link>
                     <h5>HỢP TÁC XÃ PHÚ NÔNG BUÔN ĐÔN</h5>
                     <div className={cx('contactInfo')}>
-                    <div className={cx('contactItem')}>
+                        <div className={cx('contactItem')}>
                             <FontAwesomeIcon icon={faMapMarkerAlt} />
                             <span>Thôn Tân phú , Xã Ea Nuôl , Huyện Buôn Đôn , Đắk Lắk</span>
                         </div>
@@ -41,20 +40,19 @@ const Footer = () => {
                         <Link to="https://www.youtube.com/@HtxPhunongbuondon">
                             <FontAwesomeIcon icon={faYoutube} />
                         </Link>
-
                     </div>
                 </div>
                 <div className={cx('footerColumn')}>
                     <h4>Thông tin doanh nghiệp</h4>
                     <ul>
                         <li>
-                            <Link to={`${routes.about}/tong-quan`}>
+                            <Link to={`${routes.about}/ve-chung-toi`}>
                                 <FontAwesomeIcon className={cx('footer-chevon-icon')} icon={faChevronRight} />
                                 Về chúng tôi
                             </Link>
                         </li>
                         <li>
-                            <Link to={`${routes.about}/tam-nhin-su-menh-gia-tri`}>
+                            <Link to={`${routes.about}/lich-su`}>
                                 <FontAwesomeIcon className={cx('footer-chevon-icon')} icon={faChevronRight} />
                                 Lịch sử
                             </Link>
@@ -108,7 +106,7 @@ const Footer = () => {
                     <a href="https://phunongbuondon.com/" className={cx('company-name')}>
                         HTX Phú Nông
                     </a>
-                    . All Rights Reserved. Thiết kế bởi {' '}
+                    . All Rights Reserved. Thiết kế bởi{' '}
                     <a href="https://www.takatech.com.vn/" className={cx('company-design-name')}>
                         TakaTech
                     </a>

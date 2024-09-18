@@ -5,7 +5,6 @@
     position: relative;
     border-radius: 8px;
     overflow: hidden;
-    margin: 0 8px;
 
     &:hover {
         .card_image {
@@ -18,7 +17,7 @@
     height: 250px;
     overflow: hidden;
     border: 1px solid var(--primary);
-    border-radius: 8px;
+    border-radius: 20px;
     transition: all 0.3s ease-in-out;
     @include respond-to(lg) {
         height: 320px;
@@ -96,21 +95,14 @@
     right: 0;
     background-color: red;
     color: white;
-    padding: 2px 8px;
+    padding: 2px 12px;
     font-size: 12px;
-    border-top-right-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
     font-weight: bold;
     white-space: nowrap;
     z-index: 800;
     animation: blink 2s infinite;
-    @include respond-to(lg) {
-        top: 24px;
-    }
-
-    @include respond-to(sm) {
-        top: 12px;
-    }
 }
 
 @keyframes blink {

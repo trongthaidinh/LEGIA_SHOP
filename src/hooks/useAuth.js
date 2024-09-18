@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, createContext } from 'react';
-import { login, logout } from '../services/auth/authService';
+import { login, logout, refreshAccessToken } from '../services/auth/authService';
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
@@ -15,47 +15,58 @@ export const useAuth = () => {
 
 const useProvideAuth = () => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true); 
     const navigate = useNavigate();
 
     useEffect(() => {
-        const tokenExp = localStorage.getItem('tokenExp');
-        const token = localStorage.getItem('user');
-        if (tokenExp) {
-            console.log(tokenExp, Date.now() / 1000);
-            const isExpired = tokenExp < Date.now() / 1000;
-            if (!isExpired) {
-                setUser(token);
-            } else {
-                localStorage.removeItem('user');
-                localStorage.removeItem('tokenExp');
-                localStorage.removeItem('userEmail');
-            }
-        }
+        const storedAccessToken = localStorage.getItem('accessToken');
+        const storedRefreshToken = localStorage.getItem('refreshToken');
+        const storedUserEmail = localStorage.getItem('userEmail');
+
+        if (storedAccessToken && storedRefreshToken) {
+            setUser({
+                accessToken: storedAccessToken,
+                refreshToken: storedRefreshToken,
+                email: storedUserEmail,
+            });
+        } 
+
         setLoading(false);
     }, []);
 
     const signin = async (credentials) => {
-        const response = await login(credentials);
-        if (response.status) {
-            const { data } = response;
-            setUser(data);
-            localStorage.setItem('user', data.token);
-            localStorage.setItem('tokenExp', data.decoded.exp);
-            localStorage.setItem('userEmail', credentials.email);
-            navigate('/admin/dashboard');
-        } else {
-            throw new Error(response.message);
+        try {
+            const response = await login(credentials);
+            if (response.statusCode === 200) {
+                const { data } = response;
+                setUser({ accessToken: data.accessToken });
+
+                localStorage.setItem('accessToken', data.accessToken);
+                localStorage.setItem('accessTokenExpiresAt', data.accessTokenExpiresAt);
+                localStorage.setItem('refreshToken', data.refreshToken);
+                localStorage.setItem('refreshTokenExpiresAt', data.refreshTokenExpiresAt);
+                localStorage.setItem('userEmail', credentials.email);
+
+                navigate('/admin/dashboard');
+            } else {
+                throw new Error(response.message);
+            }
+        } catch (error) {
+            console.error('Error signing in:', error);
+            throw error;
         }
-        return response;
     };
 
     const signout = () => {
         logout();
         setUser(null);
-        localStorage.removeItem('user');
-        localStorage.removeItem('tokenExp');
+
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('accessTokenExpiresAt');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('refreshTokenExpiresAt');
         localStorage.removeItem('userEmail');
+
         navigate('/login');
     };
 

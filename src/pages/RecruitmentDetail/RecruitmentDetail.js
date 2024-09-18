@@ -45,9 +45,9 @@ const RecruitmentDetail = () => {
     return (
         <article className={cx('wrapper')}>
             <Helmet>
-                <title>{recruitmentDetail.title} | TAKATECH</title>
+                <title>{recruitmentDetail.title} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta name="description" content={recruitmentDetail.summary} />
-                <meta name="keywords" content="tin tức, TAKATECH, chi tiết tin tuyển dụng" />
+                <meta name="keywords" content="tin tức, HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn, chi tiết tin tuyển dụng" />
             </Helmet>
             <div className={cx('header')}>
                 <Title text={`${recruitmentDetail.title}`} className={cx('title')} />

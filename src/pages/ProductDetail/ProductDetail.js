@@ -85,7 +85,7 @@ const ProductDetail = () => {
     return (
         <article className={cx('wrapper')}>
             <Helmet>
-                <title>{productDetail.name} | TAKATECH</title>
+                <title>{productDetail.name} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta name="description" content={`Chi tiết về sản phẩm: ${productDetail.name}.`} />
                 <meta name="keywords" content={`sản phẩm, ${productDetail.name}, takatech`} />
             </Helmet>
@@ -149,7 +149,7 @@ const ProductDetail = () => {
                 <div className={cx('product-details')}>
                     <h2 className={cx('product-name')}>{productDetail.name}</h2>
                     <ul className={cx('detail-function')}>
-                        <h4 className={cx('title-function')}>CHỨC NĂNG:</h4>
+                        {/* <h4 className={cx('title-function')}>Thông tin tổng quan:</h4> */}
                         {features.map((feature, index) => (
                             <li key={index} className={cx('txt-function')}>
                                 <FontAwesomeIcon className={cx('icon-function')} icon={faCircleDot} /> {feature}
@@ -158,13 +158,13 @@ const ProductDetail = () => {
                     </ul>
                     <Button className={cx('contact-button')} primary>
                         <FontAwesomeIcon icon={faPhone} className={cx('icon')} />
-                        <a href="tel:0914586999">Liên hệ ngay (0914586999)</a>
+                        <a href="tel:0961862450">Liên hệ ngay (0961862450)</a>
                     </Button>
                 </div>
             </div>
 
             <div className={cx('info-section')}>
-                <Title text="Mô tả chức năng" />
+                <Title text="Chi tiết sản phẩm" />
                 <div
                     className={cx('info-content')}
                     dangerouslySetInnerHTML={{ __html: productDetail.detail?.[0]?.content || '' }}

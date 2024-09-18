@@ -1,6 +1,6 @@
 import httpRequest from '~/utils/httpRequest';
 
-const API_URL = '/account';
+const API_URL = '/admin/users';
 
 export const getUsers = async () => {
     try {

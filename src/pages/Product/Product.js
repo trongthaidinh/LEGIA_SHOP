@@ -70,7 +70,7 @@ const Products = () => {
     return (
         <article className={cx('wrapper')}>
             <Helmet>
-                <title>Sản Phẩm | TAKATECH</title>
+                <title>Sản Phẩm | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta
                     name="description"
                     content="Công ty TNHH Công nghệ TakaTech cung cấp sản phẩm, dịch vụ xây dựng, phát triển phần mềm, ứng dụng di động - mobile app, website."

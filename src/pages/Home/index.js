@@ -7,6 +7,8 @@ import NewsLibrary from './NewsLibrary';
 import Banner from './Banner';
 // import Partners from './Partners';
 import FAQs from './FAQs';
+import Experiences from './Experiences';
+import Teams from './Teams';
 
 const Home = () => (
     <article>
@@ -20,15 +22,16 @@ const Home = () => (
                 name="keywords"
                 content="sản phẩm, dịch vụ phần mềm, thiết kế website, tin tức ngành công nghệ thông tin, takatech"
             />
-            <meta name="author" content="CÔNG TY TNHH CÔNG NGHỆ TAKATECH" />
+            <meta name="author" content="CÔNG TY TNHH CÔNG NGHỆ HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn" />
         </Helmet>
-        {/* <Banner /> */}
+        <Banner />
         <Overview />
         <Products />
-        {/* <Services />
-        <NewsLibrary />
-        <FAQs /> */}
-        {/* <Partners /> */}
+        <Services />
+        <Experiences />
+         <NewsLibrary />
+        {/*<FAQs /> */}
+        <Teams />
     </article>
 );
 

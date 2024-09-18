@@ -58,7 +58,10 @@ import RecruitmentDetail from '~/pages/RecruitmentDetail';
 import RecruitmentList from '~/pages/Admin/Recruitment/RecruitmentList';
 import AddRecruitment from '~/pages/Admin/Recruitment/AddRecruitment';
 import UpdateRecruitment from '~/pages/Admin/Recruitment/UpdateRecruitment';
-import UpdateCategory from 'pages/Admin/Category/UpdateCategory';
+import UpdateCategory from '~/pages/Admin/Category/UpdateCategory';
+import ExperienceDetail from '~/pages/ExperienceDetail';
+import ExperienceCategory from '~/pages/ExperienceCategory';
+import Experience from '~/pages/Experience';
 
 // Public Routes
 const publicRoutes = [
@@ -87,24 +90,35 @@ const publicRoutes = [
     {
         path: config.routes.newsCategory,
         component: IndustryNews,
-        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.news} categoryType={2} />,
+        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.news} categoryType={'tin-tuc'} />,
     },
     {
         path: config.routes.newsDetail,
         component: NewsDetail,
-        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.news} categoryType={2} />,
+        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.news} categoryType={'tin-tuc'} />,
     },
     { path: config.routes.news, component: News, layout: OnlyHeaderLayout },
     { path: config.routes.services, component: Service, layout: OnlyHeaderLayout },
     {
         path: config.routes.serviceDetail,
         component: ServiceDetail,
-        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.services} categoryType={3} />,
+        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.services} categoryType={'dich-vu'} />,
     },
     {
         path: config.routes.servicesCategory,
         component: ServiceCategory,
-        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.services} categoryType={3} />,
+        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.services} categoryType={'dich-vu'} />,
+    },
+    { path: config.routes.experiences, component: Experience, layout: OnlyHeaderLayout },
+    {
+        path: config.routes.experienceDetail,
+        component: ExperienceDetail,
+        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.experiences} categoryType={'trai-nghiem'} />,
+    },
+    {
+        path: config.routes.experiencesCategory,
+        component: ExperienceCategory,
+        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.experiences} categoryType={'trai-nghiem'} />,
     },
     { path: config.routes.search, component: Search, layout: OnlyHeaderLayout },
     { path: config.routes.error404, component: Error404, layout: NothingLayout },

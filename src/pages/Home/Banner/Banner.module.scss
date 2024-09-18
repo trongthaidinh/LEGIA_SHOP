@@ -15,6 +15,17 @@
         height: 100%;
         z-index: 1;
 
+        &:hover {
+            .swiper-button-prev,
+            .swiper-button-next {
+                background-color: rgba(8, 116, 54, 1);
+                border-color: var(--white);
+                .swiper-icon {
+                    opacity: 1;
+                }
+            }
+        }
+
         .slide {
             @include respond-to(lg) {
                 height: 200px;
@@ -32,9 +43,10 @@
             transform: translateY(-50%);
             width: 40px;
             height: 40px;
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(8, 116, 54, 0.3);
             color: #fff;
-            border-radius: 4px;
+            border-radius: 20px;
+            border: 1px solid transparent;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -44,14 +56,6 @@
 
             &::after {
                 font-size: 20px;
-            }
-
-            &:hover {
-                background-color: rgba(0, 0, 0, 0.5);
-
-                .swiper-icon {
-                    opacity: 1;
-                }
             }
 
             @include respond-to(sm) {

@@ -190,8 +190,18 @@
             }
         }
 
-        a {
+        .company-name {
+            color: var(--white);
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .company-design-name {
             color: var(--secondary);
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 }

@@ -4,6 +4,8 @@ import classNames from 'classnames/bind';
 import styles from './Product.module.scss';
 import { Link } from 'react-router-dom';
 import Button from '~/components/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -15,9 +17,10 @@ function Product({ image, name, link }) {
                 <div className={cx('product-item-details')}>
                     <h2 className={cx('product-item-name')}>{name}</h2>
 
-                    <Button outline className={cx('product-item-button')}>
+                    <Button rounded outline rightIcon={<FontAwesomeIcon icon={faChevronRight}/>} className={cx('product-item-button')}>
                         Xem chi tiết
                     </Button>
+                    
                 </div>
             </div>
         </Link>

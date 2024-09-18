@@ -12,10 +12,11 @@
 
 .title {
     color: var(--primary);
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 800;
     text-transform: capitalize;
     text-transform: uppercase;
+    text-align: center;
 
     @include respond-to(lg) {
         font-size: 2.4rem;
@@ -28,31 +29,31 @@
 
 .line {
     width: 100%;
-    height: 1px;
-    background-color: #ddd;
+    height: 2px;
+    background-color: var(--primary);
     position: absolute;
     bottom: -10px;
     left: 0;
     border-radius: 8px;
 }
 
-.line::after {
-    content: '';
-    display: block;
-    width: 100px;
-    height: 3px;
-    background-color: var(--secondary);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-radius: 8px;
-}
+// .line::after {
+//     content: '';
+//     display: block;
+//     width: 100px;
+//     height: 3px;
+//     background-color: var(--secondary);
+//     position: absolute;
+//     bottom: 0;
+//     left: 0;
+//     border-radius: 8px;
+// }
 
 .see-all {
-    border: 1px solid var(--secondary);
+    border: 1px solid var(--primary);
     border-radius: 20px;
     background-color: var(--white);
-    color: var(--secondary);
+    color: var(--primary);
     font-size: 1.4rem;
     cursor: pointer;
     text-transform: capitalize;
@@ -62,7 +63,7 @@
     transition: all 0.2s ease-in-out;
 
     &:hover {
-        background-color: var(--secondary);
+        background-color: var(--primary);
         color: var(--white);
     }
 

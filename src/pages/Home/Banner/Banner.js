@@ -1,16 +1,17 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { getConfiguration, getConfigurationMobile } from '~/services/configurationService';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation } from 'swiper/modules';
+import { Autoplay, Navigation, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
 import styles from './Banner.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import LoadingScreen from '~/components/LoadingScreen'; 
+import LoadingScreen from '~/components/LoadingScreen';
 
 const cx = classNames.bind(styles);
 
@@ -49,12 +50,14 @@ const Banner = () => {
                             spaceBetween={0}
                             slidesPerView={1}
                             loop={true}
-                            modules={[Autoplay, Navigation]}
+                            modules={[Autoplay, Navigation, EffectFade]}
+                            effect="fade"
+                            fadeEffect={{ crossFade: true }}
                             autoplay={{
                                 delay: 5000,
                                 disableOnInteraction: false,
                             }}
-                            speed={1000}
+                            speed={1500}
                             navigation={{
                                 nextEl: `.${cx('swiper-button-next')}`,
                                 prevEl: `.${cx('swiper-button-prev')}`,

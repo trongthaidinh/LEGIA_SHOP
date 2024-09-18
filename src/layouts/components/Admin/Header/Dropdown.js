@@ -10,7 +10,7 @@ const Dropdown = ({ isVisible, notifications, isUserDropdown }) => {
         <div className={`${styles.dropdown} ${isVisible ? styles.visible : ''}`}>
             {isUserDropdown ? (
                 notifications.map((item, index) => (
-                    <div key={item._id || index} className={styles.dropdownItem} onClick={item.action}>
+                    <div key={item.id || index} className={styles.dropdownItem} onClick={item.action}>
                         <FontAwesomeIcon icon={item.icon} className={styles.icon} />
                         {item.text}
                     </div>
@@ -18,7 +18,7 @@ const Dropdown = ({ isVisible, notifications, isUserDropdown }) => {
             ) : notifications.length > 0 ? (
                 <>
                     {notifications.map((notification) => (
-                        <Link to={routes.messagesList} key={notification._id}>
+                        <Link to={routes.messagesList} key={notification.id}>
                             <div className={styles.dropdownItem}>
                                 <FontAwesomeIcon icon={faEnvelope} className={styles.icon} />
                                 <div className={styles.notificationContent}>

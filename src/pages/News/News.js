@@ -10,7 +10,7 @@ import ButtonGroup from '~/components/ButtonGroup';
 import PushNotification from '~/components/PushNotification';
 import LoadingScreen from '~/components/LoadingScreen';
 import routes from '~/config/routes';
-import { getCategoriesByType } from '~/services/categoryService';
+import { getCategoriesBySlug } from '~/services/categoryService';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import { Helmet } from 'react-helmet';
@@ -31,15 +31,15 @@ const News = () => {
     useEffect(() => {
         const fetchCategoriesAndNews = async () => {
             try {
-                const categoriesData = await getCategoriesByType(2);
+                const categoriesData = await getCategoriesBySlug('tin-tuc');
                 setCategories(categoriesData);
 
                 const groupedNewsMap = {};
 
                 await Promise.all(
                     categoriesData.map(async (category) => {
-                        const newsData = await getNewsByCategory(category._id);
-                        groupedNewsMap[category._id] = newsData.news.map((item) => ({
+                        const newsData = await getNewsByCategory(category.id);
+                        groupedNewsMap[category.id] = newsData.map((item) => ({
                             ...item,
                             image: item.images,
                             isNew: dayjs().diff(dayjs(item.createdAt), 'day') <= 3,
@@ -65,7 +65,7 @@ const News = () => {
     };
 
     const getCategorySlug = (categoryId) => {
-        const category = categories.find((category) => categoryId === category._id);
+        const category = categories.find((category) => categoryId === category.id);
         return category ? category.slug : '';
     };
 
@@ -93,7 +93,7 @@ const News = () => {
     return (
         <article className={cx('wrapper')}>
             <Helmet>
-                <title>Tin Tức | VNETC</title>
+                <title>Tin Tức | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta
                     name="description"
                     content="Công ty TNHH Công nghệ TakaTech cung cấp sản phẩm, dịch vụ xây dựng, phát triển phần mềm, ứng dụng di động - mobile app, website."
@@ -104,16 +104,16 @@ const News = () => {
                 <div className={cx('news-column')}>
                     <h2 className={cx('news-title')}>Tin Tức</h2>
                     {categories.map((category) => {
-                        const slides = groupedNews[category._id]?.slice(0, 6) || [];
+                        const slides = groupedNews[category.id]?.slice(0, 6) || [];
                         const shouldLoop = slides.length > 3;
 
                         return (
-                            <div key={category._id} className={cx('news-category')}>
+                            <div key={category.id} className={cx('news-category')}>
                                 <Title
-                                    text={category.name || 'Loading...'}
+                                    text={category.title || 'Loading...'}
                                     showSeeAll={true}
                                     slug={`${routes.news}/${category.slug}`}
-                                    categoryId={category._id}
+                                    categoryId={category.id}
                                 />
                                 <Swiper
                                     spaceBetween={10}
@@ -131,9 +131,9 @@ const News = () => {
                                         disableOnInteraction: false,
                                     }}
                                 >
-                                    {groupedNews[category._id]?.slice(0, 6).map((item, index) => (
+                                    {groupedNews[category.id]?.slice(0, 6).map((item, index) => (
                                         <SwiperSlide key={index} className={cx('slide')}>
-                                            <Link to={`${routes.news}/${category.slug}/${item._id}`}>
+                                            <Link to={`${routes.news}/${category.slug}/${item.id}`}>
                                                 <Card
                                                     title={item.title}
                                                     summary={item.summary}
@@ -155,7 +155,7 @@ const News = () => {
                     <ButtonGroup buttons={['Nổi bật', 'Xem nhiều']} onButtonClick={handleButtonClick} />
                     <div className={cx('suggest-items')}>
                         {filteredNewsItems.map((item, index) => (
-                            <Link key={index} to={`${routes.news}/${getCategorySlug(item.categoryId)}/${item._id}`}>
+                            <Link key={index} to={`${routes.news}/${getCategorySlug(item.child_nav_id)}/${item.id}`}>
                                 <SuggestCard
                                     title={item.title}
                                     summary={item.summary}

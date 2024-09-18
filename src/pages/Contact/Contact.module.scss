@@ -43,7 +43,7 @@
 
 .formWrapper {
     display: flex;
-    border-radius: 4px;
+    border-radius: 20px;
     overflow: hidden;
     border: 1px solid #ddd;
     @include respond-to(sm) {

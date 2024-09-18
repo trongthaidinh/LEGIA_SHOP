@@ -8,12 +8,14 @@ import { getMessages } from '~/services/contactService';
 import { getUserByEmail } from '~/services/userService';
 import { useNavigate } from 'react-router-dom';
 import routes from '~/config/routes';
+import LoadingScreen from 'components/LoadingScreen';
 
 const Header = () => {
     const [isEmailDropdownVisible, setIsEmailDropdownVisible] = useState(false);
     const [isUserDropdownVisible, setIsUserDropdownVisible] = useState(false);
     const [user, setUser] = useState(null);
     const [notifications, setNotifications] = useState([]);
+    const [loading, setLoading] = useState(true); 
     const emailDropdownRef = useRef(null);
     const userDropdownRef = useRef(null);
     const { signout } = useAuth();
@@ -24,7 +26,7 @@ const Header = () => {
             try {
                 const userEmail = localStorage.getItem('userEmail');
                 const userData = await getUserByEmail(userEmail);
-                setUser(userData);
+                setUser(userData[0]);
             } catch (error) {
                 console.error('Error fetching user:', error);
             }
@@ -39,8 +41,12 @@ const Header = () => {
             }
         };
 
-        fetchUser();
-        fetchNotifications();
+        const loadData = async () => {
+            await Promise.all([fetchUser(), fetchNotifications()]);
+            setLoading(false); 
+        };
+
+        loadData();
     }, []);
 
     const handleClickOutside = (event) => {
@@ -79,13 +85,13 @@ const Header = () => {
         { icon: faSignOutAlt, text: 'Đăng xuất', action: handleLogout },
     ];
 
-    if (!user) {
-        return null;
+    if (loading) {
+        return <LoadingScreen isLoading={loading} />;
     }
 
     return (
         <div className={styles.header}>
-            <div className={styles.companyName}>CÔNG TY TNHH CÔNG NGHỆ TAKATECH</div>
+            <div className={styles.companyName}>CÔNG TY TNHH CÔNG NGHỆ HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</div>
             <div
                 className={styles.iconWrapper}
                 ref={emailDropdownRef}
@@ -105,7 +111,7 @@ const Header = () => {
                     setIsEmailDropdownVisible(false);
                 }}
             >
-                <span className={styles.userName}>{user.username}</span>
+                <span className={styles.userName}>{user.email}</span>
                 <FontAwesomeIcon icon={faChevronDown} className={styles.chevronIcon} />
                 <Dropdown isVisible={isUserDropdownVisible} notifications={userDropdownItems} isUserDropdown={true} />
             </div>

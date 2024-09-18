@@ -33,15 +33,15 @@ function Library() {
                 const [videoData, imageData] = await Promise.all([getVideos(), getImages()]);
                 const updatedVideos = videoData.map((item) => ({
                     ...item,
-                    link: extractVideoId(item.video),
+                    url: extractVideoId(item.url),
                 }));
                 setVideos(updatedVideos);
                 setImages(imageData);
-                setActiveVideo(updatedVideos[0]?.link);
-                setActiveImage(imageData[0]?.image);
-                setIsLoading(false);
+                setActiveVideo(updatedVideos[0]?.url);
+                setActiveImage(imageData[0]?.url);
             } catch (error) {
                 console.error('Failed to load library data', error);
+            } finally {
                 setIsLoading(false);
             }
         };
@@ -111,10 +111,10 @@ function Library() {
                                         <div
                                             key={index}
                                             className={cx('thumbnail')}
-                                            onClick={() => handleVideoClick(item.link)}
+                                            onClick={() => handleVideoClick(item.url)}
                                         >
                                             <img
-                                                src={getThumbnailUrl(item.link)}
+                                                src={getThumbnailUrl(item.url)}
                                                 alt={item.title}
                                                 className={cx('thumbnail-image')}
                                             />
@@ -145,10 +145,10 @@ function Library() {
                                         <div
                                             key={index}
                                             className={cx('thumbnail')}
-                                            onClick={() => handleImageClick(image.image)}
+                                            onClick={() => handleImageClick(image.url)}
                                         >
                                             <img
-                                                src={image.image}
+                                                src={image.url}
                                                 alt={`Thumbnail ${index + 1}`}
                                                 className={cx('thumbnail-image')}
                                             />

@@ -1,55 +1,108 @@
 import httpRequest from '~/utils/httpRequest';
 
+// Helper functions for sessionStorage
+const saveToSessionStorage = (key, data) => {
+    sessionStorage.setItem(key, JSON.stringify(data));
+};
+
+const getFromSessionStorage = (key) => {
+    const storedData = sessionStorage.getItem(key);
+    return storedData ? JSON.parse(storedData) : null;
+};
+
+// Get paginated services and cache the result
 export const getServicePagination = async (page = 1, limit = 4) => {
+    const sessionKey = `services_page_${page}_limit_${limit}`;
+
+    const cachedData = getFromSessionStorage(sessionKey);
+    if (cachedData) {
+        return cachedData;
+    }
+
     try {
         const response = await httpRequest.get(`/services?page=${page}&limit=${limit}`);
-        return response.data.data;
+        const servicesData = response.data.data;
+
+        // Save to sessionStorage
+        saveToSessionStorage(sessionKey, servicesData);
+
+        return servicesData;
     } catch (error) {
         console.error('Error fetching service', error);
         throw error;
     }
 };
 
+// Get all services and cache the result
 export const getServices = async () => {
-    try {
-        const response = await httpRequest.get(`/services`);
-        return response.data.data;
-    } catch (error) {
-        console.error('Error fetching service', error);
-        throw error;
-    }
-};
+    const sessionKey = 'allServices';
 
-export const getServiceAll = async () => {
+    const cachedData = getFromSessionStorage(sessionKey);
+    if (cachedData) {
+        return cachedData;
+    }
+
     try {
         const response = await httpRequest.get('/services');
-        return response.data.data;
+        const servicesData = response.data.data;
+
+        // Save to sessionStorage
+        saveToSessionStorage(sessionKey, servicesData);
+
+        return servicesData;
     } catch (error) {
         console.error('Error fetching service', error);
         throw error;
     }
 };
 
+// Get service by ID and cache the result
 export const getServiceById = async (id) => {
+    const sessionKey = `service_${id}`;
+
+    const cachedData = getFromSessionStorage(sessionKey);
+    if (cachedData) {
+        return cachedData;
+    }
+
     try {
         const response = await httpRequest.get(`/services/${id}`);
-        return response.data.data;
+        const serviceData = response.data.data;
+
+        // Save to sessionStorage
+        saveToSessionStorage(sessionKey, serviceData);
+
+        return serviceData;
     } catch (error) {
         console.error(`Error fetching service detail with id ${id}`, error);
         throw error;
     }
 };
 
+// Get services by category and cache the result
 export const getServiceByCategory = async (categoryId) => {
+    const sessionKey = `services_category_${categoryId}`;
+
+    const cachedData = getFromSessionStorage(sessionKey);
+    if (cachedData) {
+        return cachedData;
+    }
+
     try {
-        const response = await httpRequest.get(`/services?categoryId=${categoryId}`);
-        return response.data.data;
+        const response = await httpRequest.get(`/services?child_nav_id=${categoryId}`);
+        const servicesData = response.data.data;
+
+        // Save to sessionStorage
+        saveToSessionStorage(sessionKey, servicesData);
+
+        return servicesData;
     } catch (error) {
         console.error(`Error fetching service for id=${categoryId}:`, error);
         throw error;
     }
 };
 
+// Create service (no sessionStorage needed for POST requests)
 export const createService = async (serviceData) => {
     try {
         const response = await httpRequest.post('/services', serviceData);
@@ -60,9 +113,14 @@ export const createService = async (serviceData) => {
     }
 };
 
+// Update service and refresh sessionStorage for that service item
 export const updateService = async (id, serviceData) => {
     try {
         const response = await httpRequest.patch(`/services/${id}`, serviceData);
+
+        // Update sessionStorage with the new service data
+        saveToSessionStorage(`service_${id}`, response.data.data);
+
         return response.data.data;
     } catch (error) {
         console.error(`Error updating service with id ${id}`, error);
@@ -70,9 +128,13 @@ export const updateService = async (id, serviceData) => {
     }
 };
 
+// Delete service and remove it from sessionStorage
 export const deleteService = async (id) => {
     try {
         await httpRequest.delete(`/services/${id}`);
+
+        // Remove the deleted service from sessionStorage
+        sessionStorage.removeItem(`service_${id}`);
     } catch (error) {
         console.error(`Error deleting service with id ${id}`, error);
         throw error;

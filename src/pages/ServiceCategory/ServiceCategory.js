@@ -7,7 +7,7 @@ import { getServiceByCategory } from '~/services/serviceService';
 import Title from '~/components/Title';
 import styles from './ServiceCategory.module.scss';
 import { Link } from 'react-router-dom';
-import Card from '~/components/CardContent/CardContent';
+import CardService from 'components/CardService';
 import { getCategoriesBySlug } from '~/services/categoryService';
 import routes from '~/config/routes';
 import { Helmet } from 'react-helmet';
@@ -38,8 +38,8 @@ function ServiceCategory() {
                 const categories = await getCategoriesBySlug("dich-vu");
                 const category = categories.find((cat) => cat.slug === slug);
                 if (category) {
-                    setCategoryId(category._id);
-                    setCategoryName(category.name);
+                    setCategoryId(category.id);
+                    setCategoryName(category.title);
                 }
             } catch (error) {
                 console.error('Error fetching categories:', error);
@@ -92,14 +92,13 @@ function ServiceCategory() {
             );
         }
         return currentServiceCategory.map((serviceItem, index) => (
-            <Link to={`${routes.services}/${slug}/${serviceItem._id}`} key={serviceItem._id}>
-                <Card
+            <Link to={`${routes.services}/${slug}/${serviceItem.id}`} key={serviceItem.id}>
+                <CardService
                     key={index}
-                    title={serviceItem.title}
+                    title={serviceItem.name}
                     image={serviceItem.images}
                     summary={serviceItem.summary}
                     createdAt={new Date(serviceItem.createdAt).getTime()}
-                    views={serviceItem.views}
                 />
             </Link>
         ));
@@ -130,7 +129,7 @@ function ServiceCategory() {
     return (
         <div className={cx('container')}>
             <Helmet>
-                <title>{categoryName} | TAKATECH</title>
+                <title>{categoryName} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta name="description" content={`Xem các dịch vụ liên quan đến ${categoryName} trên Taktech.`} />
                 <meta name="keywords" content={`${categoryName}, dịch vụ, takatech`} />
             </Helmet>

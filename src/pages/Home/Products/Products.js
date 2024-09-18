@@ -76,7 +76,6 @@ function Products() {
                     }}
                 >
                     {products.map((product) => {
-                        console.log(product.images[0]);
                         return (
                         <SwiperSlide key={product.id} className={cx('slide')}>
                             <Product

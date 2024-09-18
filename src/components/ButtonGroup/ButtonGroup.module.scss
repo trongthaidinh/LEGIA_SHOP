@@ -14,10 +14,9 @@
 .button {
     min-width: 120px;
     padding: 8px 16px;
-    border: none;
     font-size: 1.6rem;
-    border-top: 1px solid rgb(84, 168, 197);
-    border-bottom: 1px solid rgb(84, 168, 197);
+    border: 1px solid var(--primary);
+    border-radius: 20px;
     border-width: 100%;
     color: var(--primary);
     margin-right: 4px;
@@ -40,8 +39,6 @@
         background: var(--primary);
         color: var(--white);
         font-weight: 500;
-        border-top-right-radius: 20px;
-        border-bottom-left-radius: 20px;
         border-color: transparent;
     }
 

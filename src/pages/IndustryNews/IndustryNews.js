@@ -8,7 +8,7 @@ import Title from '~/components/Title';
 import styles from './IndustryNews.module.scss';
 import { Link } from 'react-router-dom';
 import Card from '~/components/CardContent/CardContent';
-import { getCategoriesByType } from '~/services/categoryService';
+import { getCategoriesBySlug } from '~/services/categoryService';
 import routes from '~/config/routes';
 import { Helmet } from 'react-helmet';
 import dayjs from 'dayjs';
@@ -44,16 +44,14 @@ function NewsCategory() {
         async function fetchCategory() {
             try {
                 setLoading(true);
-                const categories = await getCategoriesByType(2);
+                const categories = await getCategoriesBySlug('tin-tuc');
                 const category = categories.find((cat) => cat.slug === slug);
                 if (category) {
-                    setCategoryId(category._id);
-                    setCategoryName(category.name);
+                    setCategoryId(category.id);
+                    setCategoryName(category.title);
                 }
             } catch (error) {
                 console.error('Error fetching categories:', error);
-            } finally {
-                setLoading(false);
             }
         }
 
@@ -73,7 +71,7 @@ function NewsCategory() {
                     const data = await getNewsByCategory(categoryId, startDate, endDate, currentPage, newsPerPage);
 
                     setNews(
-                        data.news.map((newsItem) => ({
+                        data.map((newsItem) => ({
                             ...newsItem,
                             isNew: dayjs().diff(dayjs(newsItem.createdAt), 'day') <= 3,
                         })),
@@ -125,12 +123,12 @@ function NewsCategory() {
         }
 
         return news.map((newsItem) => (
-            <Link to={`${routes.news}/${slug}/${newsItem._id}`} key={newsItem._id}>
+            <Link to={`${routes.news}/${slug}/${newsItem.id}`} key={newsItem.id}>
                 <Card
                     title={newsItem.title}
-                    image={newsItem.images}
+                    image={newsItem.images[0]}
                     summary={newsItem.summary}
-                    createdAt={newsItem.createdAt}
+                    createdAt={newsItem.created_at}
                     views={newsItem.views}
                     isNew={newsItem.isNew}
                 />
@@ -173,8 +171,8 @@ function NewsCategory() {
     return (
         <div className={cx('container')}>
             <Helmet>
-                <title>{categoryName} | VNETC</title>
-                <meta name="description" content={`Xem các tin tức liên quan đến ${categoryName} trên TAKATECH.`} />
+                <title>{categoryName} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
+                <meta name="description" content={`Xem các tin tức liên quan đến ${categoryName} trên HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn.`} />
                 <meta name="keywords" content={`${categoryName}, tin tức, takatech`} />
             </Helmet>
 

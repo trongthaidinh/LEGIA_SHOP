@@ -9,13 +9,13 @@ const cx = classNames.bind(styles);
 const About = () => (
     <article className={cx('wrapper')}>
         <Helmet>
-            <title>Giới thiệu | TAKATECH</title>
+            <title>Giới thiệu | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
             <meta
                 name="description"
                 content="Công ty TNHH Công nghệ TakaTech cung cấp sản phẩm, dịch vụ xây dựng, phát triển phần mềm, ứng dụng di động - mobile app, website."
             />
             <meta name="keywords" content="dịch vụ thiết kế website, lập trình website, mobile-app, Takatech" />
-            <meta name="author" content="CÔNG TY TNHH CÔNG NGHỆ TAKATECH" />
+            <meta name="author" content="CÔNG TY TNHH CÔNG NGHỆ HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn" />
         </Helmet>
         <div className={cx('inner')}>
             <Title text="Tổng quan về TakaTech" />

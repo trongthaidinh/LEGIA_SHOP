@@ -95,7 +95,7 @@ const Recruitment = () => {
     return (
         <article className={cx('wrapper')}>
             <Helmet>
-                <title>Tuyển dụng | TAKATECH</title>
+                <title>Tuyển dụng | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta name="description" content="Cập nhật những thông tin tuyển dụng mới nhất của Takatech." />
                 <meta name="keywords" content="tuyển dụng, công nghệ thông tin, Takatech" />
             </Helmet>

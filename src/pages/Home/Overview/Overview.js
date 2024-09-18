@@ -28,7 +28,7 @@ function Overview() {
                     <p className={cx('text')}><strong>PHÁT TRIỂN LÀM GIÀU BỀN VỮNG</strong></p>
                     <p className={cx('text')}>Sau quá trình nghiên cứu và chuẩn bị chúng tôi đã nhận ra rằng những khu vực trên địa bàn như thôn Tân Phú là nơi có tiềm năng phát triển nguồn tài nguyên thiên nhiên có sẵn phù hợp trong việc khai thác và canh tác nông nghiệp. Hiện nay có hơn 200 hộ dân từ khắp mọi miền đất nước tập trung về đây sinh sống, chủ yếu người dân sống bằng nghề truyền thống là sản xuất nông nghiệp.</p>
                     <Link to={`${routes.about}/tong-quan`}>
-                        <Button className={cx('button')} primary rightIcon={<FontAwesomeIcon icon={faArrowRight} />}>
+                        <Button className={cx('button')} rounded primary rightIcon={<FontAwesomeIcon icon={faArrowRight} />}>
                             Tìm hiểu thêm
                         </Button>
                     </Link>

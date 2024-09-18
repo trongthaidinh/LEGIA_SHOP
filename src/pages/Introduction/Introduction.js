@@ -53,7 +53,7 @@ const Introduction = () => {
     return (
         <article className={cx('wrapper')}>
             <Helmet>
-                <title>{pageContent.name} | TAKATECH</title>
+                <title>{pageContent.name} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta
                     name="description"
                     content={
@@ -62,7 +62,7 @@ const Introduction = () => {
                     }
                 />
                 <meta name="keywords" content="giới thiệu, takatech, thông tin công ty" />
-                <meta name="author" content="CÔNG TY TNHH CÔNG NGHỆ TAKATECH" />
+                <meta name="author" content="CÔNG TY TNHH CÔNG NGHỆ HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn" />
             </Helmet>
             <div className={cx('inner')}>
                 <Title text={pageContent.name} />

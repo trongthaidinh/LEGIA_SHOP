@@ -51,7 +51,7 @@ const NewsDetail = () => {
     return (
         <article className={cx('wrapper')}>
             <Helmet>
-                <title>{newsDetail.title} | TAKATECH</title>
+                <title>{newsDetail.title} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta name="description" content={newsDetail.summary} />
                 <meta name="keywords" content="tin tức, takatech, chi tiết tin tức" />
             </Helmet>
@@ -60,7 +60,7 @@ const NewsDetail = () => {
             </div>
             <div className={cx('content')} dangerouslySetInnerHTML={{ __html: newsDetail.content }} />
             <DateTime
-                timestamp={newsDetail.createdAt}
+                timestamp={newsDetail.created_at}
                 views={newsDetail.views}
                 showDate={true}
                 showTime={true}

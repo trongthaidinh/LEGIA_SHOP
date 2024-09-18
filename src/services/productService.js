@@ -1,55 +1,131 @@
 import httpRequest from '~/utils/httpRequest';
 
+// Helper functions for sessionStorage
+const saveToSessionStorage = (key, data) => {
+    sessionStorage.setItem(key, JSON.stringify(data));
+};
+
+const getFromSessionStorage = (key) => {
+    const storedData = sessionStorage.getItem(key);
+    return storedData ? JSON.parse(storedData) : null;
+};
+
+// Get all products and cache them in sessionStorage
 export const getProducts = async () => {
+    const sessionKey = 'allProducts';
+
+    const cachedData = getFromSessionStorage(sessionKey);
+    if (cachedData) {
+        return cachedData;
+    }
+
     try {
         const response = await httpRequest.get('/products');
-        return response.data.data;
+        const products = response.data.data;
+
+        // Save to sessionStorage
+        saveToSessionStorage(sessionKey, products);
+
+        return products;
     } catch (error) {
         console.error('Error fetching products:', error);
         throw error;
     }
 };
 
+// Get products with pagination and cache them in sessionStorage
 export const getProductsPagination = async ($page = 1, $limit = 8) => {
+    const sessionKey = `products_page_${$page}_limit_${$limit}`;
+
+    const cachedData = getFromSessionStorage(sessionKey);
+    if (cachedData) {
+        return cachedData;
+    }
+
     try {
         const response = await httpRequest.get(`/products?page=${$page}&limit=${$limit}`);
-        return response.data.data;
+        const products = response.data.data;
+
+        // Save to sessionStorage
+        saveToSessionStorage(sessionKey, products);
+
+        return products;
     } catch (error) {
         console.error('Error fetching products:', error);
         throw error;
     }
 };
 
+// Get product by ID and cache the result
 export const getProductById = async (id) => {
+    const sessionKey = `product_${id}`;
+
+    const cachedData = getFromSessionStorage(sessionKey);
+    if (cachedData) {
+        return cachedData;
+    }
+
     try {
         const response = await httpRequest.get(`/products/${id}`);
-        return response.data.data;
+        const product = response.data.data;
+
+        // Save to sessionStorage
+        saveToSessionStorage(sessionKey, product);
+
+        return product;
     } catch (error) {
         console.error(`Error fetching product detail with id ${id}:`, error);
         throw error;
     }
 };
 
+// Get products by category and cache them
 export const getProductsByCategory = async (categoryId) => {
+    const sessionKey = `products_category_${categoryId}`;
+
+    const cachedData = getFromSessionStorage(sessionKey);
+    if (cachedData) {
+        return cachedData;
+    }
+
     try {
         const response = await httpRequest.get(`/products?child_nav_id=${categoryId}`);
-        return response.data.data;
+        const products = response.data.data;
+
+        // Save to sessionStorage
+        saveToSessionStorage(sessionKey, products);
+
+        return products;
     } catch (error) {
         console.error(`Error fetching products for child nav id=${categoryId}:`, error);
         throw error;
     }
 };
 
+// Get product by slug and cache it
 export const getProductBySlug = async (slug) => {
+    const sessionKey = `product_slug_${slug}`;
+
+    const cachedData = getFromSessionStorage(sessionKey);
+    if (cachedData) {
+        return cachedData;
+    }
+
     try {
         const response = await httpRequest.get(`/products/slug/${slug}`);
-        return response.data.data;
+        const product = response.data.data;
+
+        // Save to sessionStorage
+        saveToSessionStorage(sessionKey, product);
+
+        return product;
     } catch (error) {
         console.error(`Error fetching products with slug ${slug}:`, error);
         throw error;
     }
 };
 
+// Create a product (no sessionStorage needed for POST requests)
 export const createProduct = async (productData) => {
     try {
         const response = await httpRequest.post('/products', productData);
@@ -60,9 +136,14 @@ export const createProduct = async (productData) => {
     }
 };
 
+// Update a product and refresh sessionStorage for that product
 export const updateProduct = async (id, productData) => {
     try {
         const response = await httpRequest.patch(`/products/${id}`, productData);
+
+        // Update sessionStorage with the new product data
+        saveToSessionStorage(`product_${id}`, response.data.data);
+
         return response.data.data;
     } catch (error) {
         console.error(`Error updating product with id ${id}:`, error);
@@ -70,9 +151,14 @@ export const updateProduct = async (id, productData) => {
     }
 };
 
+// Delete a product and remove it from sessionStorage
 export const deleteProduct = async (id) => {
     try {
         const response = await httpRequest.delete(`/products/${id}`);
+
+        // Remove the deleted product from sessionStorage
+        sessionStorage.removeItem(`product_${id}`);
+
         return response.data.data;
     } catch (error) {
         console.error(`Error deleting product with id ${id}:`, error);

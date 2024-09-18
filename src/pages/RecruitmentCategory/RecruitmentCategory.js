@@ -119,12 +119,12 @@ function RecruitmentCategory() {
     return (
         <div className={cx('container')}>
             <Helmet>
-                <title>{categoryName} | TAKATECH</title>
+                <title>{categoryName} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta
                     name="description"
-                    content={`Xem các tin tuyển dụng liên quan đến ${categoryName} trên TAKATECH.`}
+                    content={`Xem các tin tuyển dụng liên quan đến ${categoryName} trên HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn.`}
                 />
-                <meta name="keywords" content={`${categoryName}, tuyển dụng, TAKATECH`} />
+                <meta name="keywords" content={`${categoryName}, tuyển dụng, HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn`} />
             </Helmet>
             <Title text={categoryName} />
             {isLoading ? (

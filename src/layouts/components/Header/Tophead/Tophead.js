@@ -4,7 +4,7 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
 import styles from './Tophead.module.scss';
 import { Link } from 'react-router-dom';
-import { faFacebookF, faInstagram, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -33,17 +33,11 @@ const Tophead = () => {
                     </div>
                 </div>
                 <div className={cx('social-icons')}>
-                    <Link to="https://www.facebook.com/takatechsoft">
+                    <Link to="https://www.facebook.com/profile.php?id=100069322668251">
                         <FontAwesomeIcon icon={faFacebookF} />
                     </Link>
-                    <Link to="https://x.com/takatech_bmt">
-                        <FontAwesomeIcon icon={faTwitter} />
-                    </Link>
-                    <Link to="https://www.instagram.com/dinhtuan.le/">
-                        <FontAwesomeIcon icon={faInstagram} />
-                    </Link>
-                    <Link to="https://linkedin.com">
-                        <FontAwesomeIcon icon={faLinkedinIn} />
+                    <Link to="https://www.youtube.com/@HtxPhunongbuondon">
+                        <FontAwesomeIcon icon={faYoutube} />
                     </Link>
                 </div>
             </div>

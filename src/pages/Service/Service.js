@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
-import Card from '~/components/CardContent';
+import CardService from 'components/CardService';
 import SuggestCard from '~/components/SuggestCard';
 import { getServiceByCategory } from '~/services/serviceService';
 import styles from './Service.module.scss';
@@ -37,8 +37,8 @@ const Service = () => {
 
                 await Promise.all(
                     categoriesData.map(async (category) => {
-                        const serviceData = await getServiceByCategory(category._id);
-                        groupedServiceMap[category._id] = serviceData.map((item) => ({
+                        const serviceData = await getServiceByCategory(category.id);
+                        groupedServiceMap[category.id] = serviceData.map((item) => ({
                             ...item,
                             image: item.images,
                         }));
@@ -63,7 +63,7 @@ const Service = () => {
     };
 
     const getCategorySlug = (categoryId) => {
-        const category = categories.find((category) => categoryId === category._id);
+        const category = categories.find((category) => categoryId === category.id);
         return category ? category.slug : '';
     };
 
@@ -91,7 +91,7 @@ const Service = () => {
     return (
         <article className={cx('wrapper')}>
             <Helmet>
-                <title>Dịch Vụ | TAKATECH</title>
+                <title>Dịch Vụ | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta
                     name="description"
                     content="Công ty TNHH Công nghệ TakaTech cung cấp sản phẩm, dịch vụ xây dựng, phát triển phần mềm, ứng dụng di động - mobile app, website."
@@ -102,7 +102,7 @@ const Service = () => {
                 <div className={cx('service-column')}>
                     <h2 className={cx('service-title')}>Dịch Vụ</h2>
                     {categories.map((category) => {
-                        const slides = groupedService[category._id] || []; // Make sure to get the right services
+                        const slides = groupedService[category.id] || []; // Make sure to get the right services
                         const shouldLoop = slides.length > 3;
 
                         if (slides.length === 0) {
@@ -110,12 +110,12 @@ const Service = () => {
                         }
 
                         return (
-                            <div key={category._id} className={cx('service-category')}>
+                            <div key={category.id} className={cx('service-category')}>
                                 <Title
-                                    text={category.name || 'Loading...'}
+                                    text={category.title || 'Loading...'}
                                     showSeeAll={true}
                                     slug={`${routes.services}/${category.slug}`}
-                                    categoryId={category._id}
+                                    categoryId={category.id}
                                 />
                                 <Swiper
                                     spaceBetween={10}
@@ -135,9 +135,9 @@ const Service = () => {
                                 >
                                     {slides.map((item, index) => (
                                         <SwiperSlide key={index} className={cx('slide')}>
-                                            <Link to={`${routes.services}/${category.slug}/${item._id}`}>
-                                                <Card
-                                                    title={item.title}
+                                            <Link to={`${routes.services}/${category.slug}/${item.id}`}>
+                                                <CardService
+                                                    title={item.name}
                                                     summary={item.summary}
                                                     image={item.images}
                                                     createdAt={item.createdAt}
@@ -156,7 +156,7 @@ const Service = () => {
                     <ButtonGroup buttons={['Nổi bật', 'Xem nhiều']} onButtonClick={handleButtonClick} />
                     <div className={cx('suggest-items')}>
                         {filteredServiceItems.map((item, index) => (
-                            <Link key={index} to={`${routes.services}/${getCategorySlug(item.categoryId)}/${item._id}`}>
+                            <Link key={index} to={`${routes.services}/${getCategorySlug(item.categoryId)}/${item.id}`}>
                                 <SuggestCard
                                     title={item.title}
                                     summary={item.summary}

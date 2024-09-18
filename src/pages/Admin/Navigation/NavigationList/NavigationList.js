@@ -53,10 +53,10 @@ const NavigationList = () => {
                     parent: parent ? parent.title : null,
                 });
             }
-            if (nav.childs) {
-                nav.childs.forEach((child) => {
-                    if (child.child) {
-                        child.child.forEach((subChild) => processNav(subChild, child));
+            if (nav.childrend) {
+                nav.childrend.forEach((child) => {
+                    if (child.childrend) {
+                        child.childrend.forEach((subChild) => processNav(subChild, child));
                     }
                     return processNav(child, nav);
                 });
@@ -68,6 +68,8 @@ const NavigationList = () => {
     };
 
     const allNavigations = flattenNavigations(navigations);
+
+    console.log(allNavigations);
 
     const filteredNavigations = allNavigations.filter(
         (nav) =>
@@ -110,7 +112,7 @@ const NavigationList = () => {
                     <tbody>
                         {currentNavigations.length > 0 ? (
                             currentNavigations.map((nav) => (
-                                <React.Fragment key={nav._id}>
+                                <React.Fragment key={nav.id}>
                                     <tr>
                                         <td>{nav.title}</td>
                                         <td>{nav.type}</td>
@@ -118,14 +120,14 @@ const NavigationList = () => {
                                         <td>{nav.position}</td>
                                         <td>
                                             <Link
-                                                to={`/admin/edit-navigation/${nav._id}`}
+                                                to={`/admin/edit-navigation/${nav.id}`}
                                                 className={styles.editButton}
                                             >
                                                 <FontAwesomeIcon icon={faEdit} /> Sửa
                                             </Link>
                                             <button
                                                 onClick={() =>
-                                                    handleDelete(nav.type === 'Navigation chính' ? 2 : 1, nav._id)
+                                                    handleDelete(nav.type === 'Navigation chính' ? 2 : 1, nav.id)
                                                 }
                                                 className={styles.deleteButton}
                                             >

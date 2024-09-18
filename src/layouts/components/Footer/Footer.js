@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faEnvelope, faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import { faFacebookF, faTwitter, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import { faPhone, faEnvelope, faChevronRight, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
+import {  faYoutube, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import companyLogo from '~/assets/images/phunong-logo.png';
 import styles from './Footer.module.scss';
 import classNames from 'classnames/bind';
@@ -19,31 +19,29 @@ const Footer = () => {
                     <Link to="/">
                         <img src={companyLogo} alt="Company Logo" className={cx('logo')} />
                     </Link>
-                    <h5>CÔNG TY TNHH CÔNG NGHỆ TAKATECH</h5>
-                    <p>200 Hà Huy Tập, Phường Tân Lợi, Tp. Buôn Ma Thuột, Tỉnh Đắk Lắk</p>
+                    <h5>HỢP TÁC XÃ PHÚ NÔNG BUÔN ĐÔN</h5>
                     <div className={cx('contactInfo')}>
+                    <div className={cx('contactItem')}>
+                            <FontAwesomeIcon icon={faMapMarkerAlt} />
+                            <span>Thôn Tân phú , Xã Ea Nuôl , Huyện Buôn Đôn , Đắk Lắk</span>
+                        </div>
                         <div className={cx('contactItem')}>
                             <FontAwesomeIcon icon={faPhone} />
-                            <span>+84 914 586 999</span>
+                            <span>+84 961 862 450</span>
                         </div>
                         <div className={cx('contactItem')}>
                             <FontAwesomeIcon icon={faEnvelope} />
-                            <span>taka.techsoft@gmail.com</span>
+                            <span>htxphunong.buondon@gmail.com</span>
                         </div>
                     </div>
                     <div className={cx('socialIcons')}>
-                        <Link to="https://www.facebook.com/takatechsoft">
-                            <FontAwesomeIcon icon={faFacebookF} />
+                        <Link to="https://www.facebook.com/profile.php?id=100069322668251">
+                            <FontAwesomeIcon icon={faFacebook} />
                         </Link>
-                        <Link to="https://twitter.com">
-                            <FontAwesomeIcon icon={faTwitter} />
+                        <Link to="https://www.youtube.com/@HtxPhunongbuondon">
+                            <FontAwesomeIcon icon={faYoutube} />
                         </Link>
-                        <Link to="https://instagram.com">
-                            <FontAwesomeIcon icon={faInstagram} />
-                        </Link>
-                        <Link to="https://linkedin.com">
-                            <FontAwesomeIcon icon={faLinkedinIn} />
-                        </Link>
+
                     </div>
                 </div>
                 <div className={cx('footerColumn')}>
@@ -52,19 +50,13 @@ const Footer = () => {
                         <li>
                             <Link to={`${routes.about}/tong-quan`}>
                                 <FontAwesomeIcon className={cx('footer-chevon-icon')} icon={faChevronRight} />
-                                Tổng quan về TakaTech
+                                Về chúng tôi
                             </Link>
                         </li>
                         <li>
                             <Link to={`${routes.about}/tam-nhin-su-menh-gia-tri`}>
                                 <FontAwesomeIcon className={cx('footer-chevon-icon')} icon={faChevronRight} />
-                                Tầm nhìn - Sứ mệnh - Giá trị
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to={`${routes.about}/so-do-to-chuc`}>
-                                <FontAwesomeIcon className={cx('footer-chevon-icon')} icon={faChevronRight} />
-                                Sơ đồ tổ chức
+                                Lịch sử
                             </Link>
                         </li>
                     </ul>
@@ -81,19 +73,19 @@ const Footer = () => {
                         <li>
                             <Link to={routes.services}>
                                 <FontAwesomeIcon className={cx('footer-chevon-icon')} icon={faChevronRight} />
-                                Dịch vụ
+                                Dịch vụ du lịch
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={routes.experiences}>
+                                <FontAwesomeIcon className={cx('footer-chevon-icon')} icon={faChevronRight} />
+                                Trải nghiệm
                             </Link>
                         </li>
                         <li>
                             <Link to={routes.news}>
                                 <FontAwesomeIcon className={cx('footer-chevon-icon')} icon={faChevronRight} />
-                                Tin Tức
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to={routes.recruitment}>
-                                <FontAwesomeIcon className={cx('footer-chevon-icon')} icon={faChevronRight} />
-                                Tuyển dụng
+                                Tin tức
                             </Link>
                         </li>
                     </ul>
@@ -112,11 +104,14 @@ const Footer = () => {
             </div>
             <div className={cx('bottomBar')}>
                 <p>
-                    Copyright 2022 &copy;{' '}
-                    <a href="https://www.takatech.com.vn/" className={cx('company-name')}>
+                    Copyright 2024 &copy;{' '}
+                    <a href="https://phunongbuondon.com/" className={cx('company-name')}>
+                        HTX Phú Nông
+                    </a>
+                    . All Rights Reserved. Thiết kế bởi {' '}
+                    <a href="https://www.takatech.com.vn/" className={cx('company-design-name')}>
                         TakaTech
                     </a>
-                    . All Rights Reserved.
                 </p>
             </div>
         </footer>

@@ -65,14 +65,14 @@ const ContactPage = () => {
     return (
         <div className={cx('contactPage')}>
             <Helmet>
-                <title>Liên Hệ | TAKATECH</title>
+                <title>Liên Hệ | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta name="description" content="Hãy gửi tin nhắn cho chúng tôi nếu bạn có bất kỳ câu hỏi nào." />
                 <meta name="keywords" content="liên hệ, takatech, gửi tin nhắn" />
-                <meta name="author" content="CÔNG TY TNHH CÔNG NGHỆ TAKATECH" />
+                <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn" />
             </Helmet>
             <div className={cx('mapContainer')}>
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31137.243125385394!2d108.061915!3d12.703279!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3171f75d27c44c3b%3A0x4b9780df3cd87c5c!2zQ8O0bmcgdHkgQ8O0bmcgbmdo4buHIFRha2FUZWNo!5e0!3m2!1sen!2sus!4v1723283471077!5m2!1sen!2sus"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31131.235937264762!2d107.91724!3d12.752223!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31720586d0dfc317%3A0x7dc659b440c4ab2c!2zSFRYIFBow7ogTsO0bmcgLUJ1w7RuIMSQw7RuIEZhcm0!5e0!3m2!1sen!2sus!4v1726550851161!5m2!1sen!2sus"
                     width="100%"
                     height="600"
                     style={{ border: 0 }}
@@ -91,43 +91,19 @@ const ContactPage = () => {
                         <div className={cx('infoDetails')}>
                             <div className={cx('infoItem')}>
                                 <FontAwesomeIcon icon={faPhone} className={cx('icon')} />
-                                <a href="tel:0914586999">
-                                    Mobile/Zalo: <span>0914 586 999</span>
-                                </a>
-                            </div>
-                            <div className={cx('infoItem')}>
-                                <FontAwesomeIcon icon={faTelegram} className={cx('icon')} />
-                                <a href="https://t.me/+84914586999">
-                                    Telegram: <span>+84 914 586 999</span>
-                                </a>
-                            </div>
-                            <div className={cx('infoItem')}>
-                                <FontAwesomeIcon icon={faViber} className={cx('icon')} />
-                                <a href="viber://add?number=84914586999">
-                                    Viber: <span>+84 914 586 999</span>
-                                </a>
-                            </div>
-                            <div className={cx('infoItem')}>
-                                <FontAwesomeIcon icon={faWhatsapp} className={cx('icon')} />
-                                <a href="https://wa.me/84914586999">
-                                    WhatsApp: <span>+84 91 458 69 99</span>
-                                </a>
-                            </div>
-                            <div className={cx('infoItem')}>
-                                <FontAwesomeIcon icon={faSkype} className={cx('icon')} />
-                                <a href="skype:live:.cid.1651d5b9576b5bea?chat">
-                                    Skype: <span>taka.techsoft@gmail.com</span>
+                                <a href="tel:0961862450">
+                                    Mobile/Zalo: <span>0961 862 450</span>
                                 </a>
                             </div>
                             <div className={cx('infoItem')}>
                                 <FontAwesomeIcon icon={faEnvelope} className={cx('icon')} />
-                                <a href="mailto:taka.techsoft@gmail.com">
-                                    Email: <span>taka.techsoft@gmail.com</span>
+                                <a href="mailto:htxphunong.buondon@gmail.com">
+                                    Email: <span>htxphunong.buondon@gmail.com</span>
                                 </a>
                             </div>
                             <div className={cx('infoItem')}>
                                 <FontAwesomeIcon icon={faMapMarkerAlt} className={cx('icon')} />
-                                <span>Địa chỉ: 200 Hà Huy Tập, Phường Tân Lợi, Tp. Buôn Ma Thuột, Tỉnh Đắk Lắk</span>
+                                <span>Địa chỉ: Thôn Tân phú , Xã Ea Nuôl , Huyện Buôn Đôn , Đắk Lắk</span>
                             </div>
                         </div>
 
@@ -200,6 +176,16 @@ const ContactPage = () => {
                                                 type="radio"
                                                 name="subject"
                                                 id="subject3"
+                                                value="Trải nghiệm"
+                                                className={cx('customRadio')}
+                                            />
+                                            <label htmlFor="subject3" className={cx('radioLabel')}>
+                                                Trải nghiệm
+                                            </label>
+                                            <Field
+                                                type="radio"
+                                                name="subject"
+                                                id="subject4"
                                                 value="Khác"
                                                 className={cx('customRadio')}
                                             />

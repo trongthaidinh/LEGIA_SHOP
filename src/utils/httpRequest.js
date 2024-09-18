@@ -6,7 +6,7 @@ const httpRequest = axios.create({
 
 httpRequest.interceptors.request.use(
     (config) => {
-        const accessToken = localStorage.getItem('user');
+        const accessToken = localStorage.getItem('accessToken');
         if (accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`;
             config.headers.Accept = `charset=UTF-8`;
@@ -15,7 +15,7 @@ httpRequest.interceptors.request.use(
     },
     (error) => {
         return Promise.reject(error);
-    },
+    }
 );
 
 export const get = async (path, options = {}) => {

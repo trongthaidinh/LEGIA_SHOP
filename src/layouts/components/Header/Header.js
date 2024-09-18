@@ -32,10 +32,10 @@ function Header() {
 
     return (
         <header className={cx('wrapper')}>
-            <div className="tophead-wrapper">
+            <div className={cx('tophead-wrapper')}>
                 <Tophead />
             </div>
-            <div className="navigation-wrapper">
+            <div className={cx('navigation-wrapper')}>
                 <Navigation isFixed={isFixed} />
             </div>
         </header>

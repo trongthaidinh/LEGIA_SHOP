@@ -1,53 +1,66 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
-import styles from './Services.module.scss';
+import { getServices } from '~/services/serviceService';
+import { getCategoriesBySlug } from '~/services/categoryService';
+import CardService from '~/components/CardService';
 import Title from '~/components/Title';
+import PushNotification from '~/components/PushNotification';
+import LoadingScreen from '~/components/LoadingScreen';
+import { Link } from 'react-router-dom';
 import routes from '~/config/routes';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-import { motion } from 'framer-motion';
 import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import { getCategoriesByType } from '~/services/categoryService';
-import { Link } from 'react-router-dom';
-import LoadingScreen from '~/components/LoadingScreen';
+import 'swiper/css/autoplay';
+import styles from './Services.module.scss';
 
 const cx = classNames.bind(styles);
 
-const Services = () => {
+function Services() {
+    const [services, setServices] = useState([]);
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchCategories = async () => {
+        const loadServices = async () => {
             try {
-                const fetchedCategories = await getCategoriesByType(3);
-                setCategories(fetchedCategories);
-                setLoading(false);
+                const [servicesData, categoriesData] = await Promise.all([getServices(), getCategoriesBySlug("dich-vu")]);
+                setServices(servicesData);
+                setCategories(categoriesData);
             } catch (error) {
-                console.error('Error fetching categories:', error);
+                setError(error);
+            } finally {
                 setLoading(false);
             }
         };
 
-        fetchCategories();
+        loadServices();
     }, []);
+
+    if (error) {
+        const errorMessage = error.response ? error.response.data.message : 'Network Error';
+        return <PushNotification message={errorMessage} />;
+    }
 
     if (loading) {
         return <LoadingScreen isLoading={loading} />;
     }
 
+    const getCategorySlug = (categoryId) => {
+        const category = categories.find((cat) => cat.id === categoryId);
+        return category ? category.slug : '';
+    };
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Title text="Dịch vụ" showSeeAll={true} slug={routes.services} />
-
+                <Title text="Dịch vụ du lịch" showSeeAll={true} slug={`${routes.services}`} />
                 <Swiper
-                    spaceBetween={20}
-                    slidesPerView={4}
+                    spaceBetween={10}
+                    slidesPerView={3}
                     breakpoints={{
-                        1280: { slidesPerView: 4 },
+                        1280: { slidesPerView: 3 },
                         1024: { slidesPerView: 3 },
                         768: { slidesPerView: 2 },
                         0: { slidesPerView: 1 },
@@ -58,24 +71,16 @@ const Services = () => {
                         delay: 2000,
                         disableOnInteraction: false,
                     }}
-                    className={cx('swiper-container')}
                 >
-                    {categories.map((category, index) => (
-                        <SwiperSlide key={category._id} className={cx('slide')}>
-                            <Link to={`${routes.services}/${category.slug}`}>
-                                <motion.div
-                                    className={cx('service-item')}
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.5, delay: index * 0.25 }}
-                                    viewport={{ once: true }}
-                                >
-                                    <div
-                                        className={cx('image-container')}
-                                        style={{ backgroundImage: `url(${category.image})` }}
-                                    ></div>
-                                    <h3 className={cx('service-title')}>{category.name}</h3>
-                                </motion.div>
+                    {services.map((service, index) => (
+                        <SwiperSlide key={index} className={cx('slide')}>
+                            <Link to={`${routes.services}/${getCategorySlug(service.child_nav_id)}/${service.id}`}>
+                                <CardService
+                                    title={service.name}
+                                    summary={service.summary}
+                                    image={service.images[0]}
+                                    createdAt={service.created_at}
+                                />
                             </Link>
                         </SwiperSlide>
                     ))}
@@ -83,6 +88,6 @@ const Services = () => {
             </div>
         </div>
     );
-};
+}
 
 export default Services;

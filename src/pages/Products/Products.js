@@ -171,7 +171,7 @@ function ProductCategory() {
     return (
         <div className={cx('container')}>
             <Helmet>
-                <title>{categoryName} | TAKATECH</title>
+                <title>{categoryName} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta name="description" content={`Xem các dịch vụ liên quan đến ${categoryName} trên Taktech.`} />
                 <meta name="keywords" content={`${categoryName}, dịch vụ, takatech`} />
             </Helmet>

@@ -37,7 +37,7 @@ const routes = {
     updateCategory: '/admin/update-category/:id',
     //User
     home: '/',
-    about: '/gioi-thieu',
+    about: 'tong-quan',
     introduction: '/gioi-thieu/:slug',
     products: '/san-pham',
     productCategory: '/san-pham/:slug',
@@ -52,6 +52,9 @@ const routes = {
     services: '/dich-vu',
     serviceDetail: '/dich-vu/:category/:id',
     servicesCategory: `/dich-vu/:slug`,
+    experiences: '/trai-nghiem',
+    experienceDetail: '/trai-nghiem/:category/:id',
+    experiencesCategory: `/trai-nghiem/:slug`,
     recruitment: '/tuyen-dung',
     recruitmentDetail: `/tuyen-dung/:category/:id`,
     recruitmentCategory: '/tuyen-dung/:slug',

@@ -129,6 +129,9 @@ export const getProductBySlug = async (slug) => {
 export const createProduct = async (productData) => {
     try {
         const response = await httpRequest.post('/products', productData);
+
+        sessionStorage.removeItem('allProducts');
+
         return response.data.data;
     } catch (error) {
         console.error('Error creating product:', error);
@@ -158,6 +161,7 @@ export const deleteProduct = async (id) => {
 
         // Remove the deleted product from sessionStorage
         sessionStorage.removeItem(`product_${id}`);
+        sessionStorage.removeItem('allProducts');
 
         return response.data.data;
     } catch (error) {

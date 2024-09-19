@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { createProduct } from '~/services/productService';
-import { getCategoriesByType } from '~/services/categoryService';
+import { getCategoriesBySlug } from '~/services/categoryService';
 import CustomEditor from '~/components/CustomEditor';
 import PushNotification from '~/components/PushNotification';
 import { useDropzone } from 'react-dropzone';
@@ -13,12 +13,11 @@ import Title from '~/components/Title';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { Spin } from 'antd';
-import { createSubNavigationLink, getNavigationById } from 'services/navigationService';
+import { createSubNavigationLink } from 'services/navigationService';
 import Button from 'components/Button';
 
 const AddProduct = () => {
     const [categories, setCategories] = useState([]);
-    const [parentNavigations, setParentNavigations] = useState([]);
     const [notification, setNotification] = useState({ message: '', type: '' });
     const [files, setFiles] = useState([]);
     const [featureInput, setFeatureInput] = useState('');
@@ -30,8 +29,7 @@ const AddProduct = () => {
         images: [],
         content: '',
         summary: '',
-        categoryID: '',
-        parentNavId: '',
+        child_nav_id: '',
         features: [],
     };
 
@@ -40,33 +38,21 @@ const AddProduct = () => {
         images: Yup.array().required('Hình ảnh là bắt buộc'),
         content: Yup.string().required('Nội dung là bắt buộc'),
         summary: Yup.string().required('Tóm tắt là bắt buộc'),
-        categoryID: Yup.string().required('Danh mục là bắt buộc'),
-        parentNavId: Yup.string().required('Navigation cha là bắt buộc'),
+        child_nav_id: Yup.string().required('Danh mục là bắt buộc'),
         features: Yup.array().of(Yup.string().required('Chức năng không được bỏ trống')),
     });
 
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const fetchedCategories = await getCategoriesByType(1);
+                const fetchedCategories = await getCategoriesBySlug('san-pham');
                 setCategories(fetchedCategories);
             } catch (error) {
                 console.error('Lỗi khi tải danh mục:', error);
             }
         };
 
-        const fetchParentNavigations = async () => {
-            try {
-                const fetchedParentNavigations = await getNavigationById('66b826d912bc125879e8e651');
-                setParentNavigations(fetchedParentNavigations.childs);
-                console.log(fetchedParentNavigations);
-            } catch (error) {
-                console.error('Lỗi khi tải navigation cha:', error);
-            }
-        };
-
         fetchCategories();
-        fetchParentNavigations();
     }, []);
 
     const { getRootProps, getInputProps } = useDropzone({
@@ -81,21 +67,15 @@ const AddProduct = () => {
 
         formData.append('name', values.name);
         files.forEach((image) => {
-            formData.append('images', image);
+            formData.append('images[]', image);
         });
         formData.append('content', values.content);
         formData.append('summary', values.summary);
-        formData.append('categoryID', values.categoryID);
+        formData.append('child_nav_id', values.child_nav_id);
         formData.append('features', JSON.stringify(features));
 
         try {
             await createProduct(formData);
-            const navigationData = {
-                title: values.name,
-                parentNavId: values.parentNavId,
-                type: 1,
-            };
-            await createSubNavigationLink(navigationData);
 
             setNotification({ message: 'Thêm sản phẩm thành công!', type: 'success' });
             resetForm();
@@ -164,8 +144,8 @@ const AddProduct = () => {
                             ))}
                         </div>
                         <div className={styles.formGroup}>
-                            <label htmlFor="categoryID">Danh Mục</label>
-                            <Field as="select" name="categoryID" className={styles.input}>
+                            <label htmlFor="child_nav_id">Danh Mục</label>
+                            <Field as="select" name="child_nav_id" className={styles.input}>
                                 <option value="">Chọn danh mục</option>
                                 {categories.map((category) => (
                                     <option key={category.id} value={category.id}>
@@ -173,19 +153,7 @@ const AddProduct = () => {
                                     </option>
                                 ))}
                             </Field>
-                            <ErrorMessage name="categoryID" component="div" className={styles.error} />
-                        </div>
-                        <div className={styles.formGroup}>
-                            <label htmlFor="parentNavId">Navigation Cha</label>
-                            <Field as="select" name="parentNavId" className={styles.input}>
-                                <option value="">Chọn navigation cha</option>
-                                {parentNavigations.map((nav) => (
-                                    <option key={nav.id} value={nav.id}>
-                                        {nav.title}
-                                    </option>
-                                ))}
-                            </Field>
-                            <ErrorMessage name="parentNavId" component="div" className={styles.error} />
+                            <ErrorMessage name="child_nav_id" component="div" className={styles.error} />
                         </div>
                         <div className={styles.formGroup}>
                             <label htmlFor="summary">Tóm Tắt</label>

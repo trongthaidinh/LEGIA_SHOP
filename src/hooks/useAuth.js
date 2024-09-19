@@ -19,29 +19,42 @@ const useProvideAuth = () => {
     const navigate = useNavigate();
 
     const refreshAccessTokenIfNeeded = async () => {
-        const accessTokenExpiresAt = localStorage.getItem('accessTokenExpiresAt');
         const refreshToken = localStorage.getItem('refreshToken');
+        try {
+            const response = await refreshAccessToken(refreshToken);
+            if (response.statusCode === 200) {
+                const { data } = response;
+                setUser((prevUser) => ({
+                    ...prevUser,
+                    accessToken: data.accessToken,
+                }));
 
-        if (accessTokenExpiresAt && new Date().getTime() >= new Date(accessTokenExpiresAt).getTime()) {
-            try {
-                const response = await refreshAccessToken(refreshToken);
-                if (response.statusCode === 200) {
-                    const { data } = response;
-                    setUser((prevUser) => ({
-                        ...prevUser,
-                        accessToken: data.accessToken,
-                    }));
+                localStorage.setItem('accessToken', data.accessToken);
+                localStorage.setItem('accessTokenExpiresAt', data.accessTokenExpiresAt);
 
-                    localStorage.setItem('accessToken', data.accessToken);
-                    localStorage.setItem('accessTokenExpiresAt', data.accessTokenExpiresAt);
-                } else {
-                    signout();
-                    throw new Error('Làm mới token thất bại');
-                }
-            } catch (error) {
-                console.error('Error refreshing access token:', error);
+                scheduleAccessTokenRefresh(data.accessTokenExpiresAt);
+            } else {
                 signout();
+                throw new Error('Làm mới token thất bại');
             }
+        } catch (error) {
+            console.error('Error refreshing access token:', error);
+            signout();
+        }
+    };
+
+    const scheduleAccessTokenRefresh = (accessTokenExpiresAt) => {
+        const expirationTime = new Date(accessTokenExpiresAt).getTime();
+        const currentTime = new Date().getTime();
+        const timeUntilRefresh = expirationTime - currentTime - 5 * 60 * 1000;
+
+        if (timeUntilRefresh > 0) {
+            console.log(`Access token sẽ được làm mới sau ${timeUntilRefresh / 1000 / 60} phút.`);
+            setTimeout(() => {
+                refreshAccessTokenIfNeeded();
+            }, timeUntilRefresh);
+        } else {
+            refreshAccessTokenIfNeeded();
         }
     };
 
@@ -63,17 +76,11 @@ const useProvideAuth = () => {
                         refreshToken: storedRefreshToken,
                         email: storedUserEmail,
                     });
+                    scheduleAccessTokenRefresh(storedAccessTokenExpiresAt);
                 }
             }
 
             setLoading(false);
-
-            // Đặt interval để kiểm tra token thường xuyên
-            const intervalId = setInterval(() => {
-                refreshAccessTokenIfNeeded();
-            }, 5 * 60 * 1000);
-
-            return () => clearInterval(intervalId);
         };
 
         checkAccessToken();
@@ -91,6 +98,8 @@ const useProvideAuth = () => {
                 localStorage.setItem('refreshToken', data.refreshToken);
                 localStorage.setItem('refreshTokenExpiresAt', data.refreshTokenExpiresAt);
                 localStorage.setItem('userEmail', credentials.email);
+
+                scheduleAccessTokenRefresh(data.accessTokenExpiresAt);
 
                 navigate('/admin/dashboard');
             } else {

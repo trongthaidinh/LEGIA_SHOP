@@ -25,9 +25,13 @@ function Services() {
     useEffect(() => {
         const loadServices = async () => {
             try {
-                const [servicesData, categoriesData] = await Promise.all([getServices(), getCategoriesBySlug("dich-vu")]);
+                const [servicesData, categoriesData] = await Promise.all([
+                    getServices(),
+                    getCategoriesBySlug('dich-vu'),
+                ]);
                 setServices(servicesData);
                 setCategories(categoriesData);
+                console.log(categoriesData);
             } catch (error) {
                 setError(error);
             } finally {
@@ -49,6 +53,7 @@ function Services() {
 
     const getCategorySlug = (categoryId) => {
         const category = categories.find((cat) => cat.id === categoryId);
+        console.log(categoryId, category);
         return category ? category.slug : '';
     };
 

@@ -53,6 +53,8 @@ function Services() {
 
     const getCategorySlug = (categoryId) => {
         const category = categories.find((cat) => cat.id == categoryId);
+        console.log('Type of categoryId:', typeof categoryId);
+        console.log('Type of category.id:', typeof category?.id);
         console.log(categoryId, category);
         return category ? category.slug : '';
     };

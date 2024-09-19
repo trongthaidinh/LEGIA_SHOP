@@ -24,7 +24,7 @@ const useProvideAuth = () => {
 
         if (accessTokenExpiresAt && new Date().getTime() >= new Date(accessTokenExpiresAt).getTime()) {
             try {
-                const response = await refreshAccessToken({ refreshToken });
+                const response = await refreshAccessToken(refreshToken);
                 if (response.statusCode === 200) {
                     const { data } = response;
                     setUser((prevUser) => ({

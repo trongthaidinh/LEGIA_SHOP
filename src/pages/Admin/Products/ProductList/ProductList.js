@@ -37,7 +37,7 @@ const ProductList = () => {
         if (window.confirm('Bạn có chắn chắn sẽ muốn xóa sản phẩm này không?')) {
             try {
                 await deleteProduct(id);
-                setProducts(products.filter((prod) => prod._id !== id));
+                setProducts(products.filter((prod) => prod.id !== id));
                 setNotification({ message: 'Xóa sản phẩm thành công!', type: 'success' });
             } catch (error) {
                 console.error('Error deleting product:', error);
@@ -84,18 +84,18 @@ const ProductList = () => {
                     <tbody>
                         {currentProducts.length > 0 ? (
                             currentProducts.map((prod) => (
-                                <tr key={prod._id}>
+                                <tr key={prod.id}>
                                     <td>
-                                        <img src={prod.image[0]} alt={prod.name} className={styles.productImage} />
+                                        <img src={prod.images[0]} alt={prod.name} className={styles.productImage} />
                                     </td>
                                     <td>{prod.name}</td>
                                     <td>{prod.summary}</td>
-                                    <td>{new Date(prod.createdAt).toLocaleDateString()}</td>
+                                    <td>{new Date(prod.created_at).toLocaleDateString()}</td>
                                     <td>
-                                        <Link to={`/admin/edit-product/${prod._id}`} className={styles.editButton}>
+                                        <Link to={`/admin/edit-product/${prod.id}`} className={styles.editButton}>
                                             <FontAwesomeIcon icon={faEdit} /> Sửa
                                         </Link>
-                                        <button onClick={() => handleDelete(prod._id)} className={styles.deleteButton}>
+                                        <button onClick={() => handleDelete(prod.id)} className={styles.deleteButton}>
                                             <FontAwesomeIcon icon={faTrash} /> Xóa
                                         </button>
                                     </td>

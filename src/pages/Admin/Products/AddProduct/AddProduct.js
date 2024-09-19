@@ -3,7 +3,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { createProduct } from '~/services/productService';
 import { getCategoriesByType } from '~/services/categoryService';
-import { createNavigationLink } from '~/services/navigationService';
 import CustomEditor from '~/components/CustomEditor';
 import PushNotification from '~/components/PushNotification';
 import { useDropzone } from 'react-dropzone';
@@ -14,7 +13,7 @@ import Title from '~/components/Title';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { Spin } from 'antd';
-import { getNavigationById } from 'services/navigationService';
+import { createSubNavigationLink, getNavigationById } from 'services/navigationService';
 import Button from 'components/Button';
 
 const AddProduct = () => {
@@ -96,7 +95,7 @@ const AddProduct = () => {
                 parentNavId: values.parentNavId,
                 type: 1,
             };
-            await createNavigationLink(navigationData);
+            await createSubNavigationLink(navigationData);
 
             setNotification({ message: 'Thêm sản phẩm thành công!', type: 'success' });
             resetForm();
@@ -169,8 +168,8 @@ const AddProduct = () => {
                             <Field as="select" name="categoryID" className={styles.input}>
                                 <option value="">Chọn danh mục</option>
                                 {categories.map((category) => (
-                                    <option key={category._id} value={category._id}>
-                                        {category.name}
+                                    <option key={category.id} value={category.id}>
+                                        {category.title}
                                     </option>
                                 ))}
                             </Field>
@@ -181,7 +180,7 @@ const AddProduct = () => {
                             <Field as="select" name="parentNavId" className={styles.input}>
                                 <option value="">Chọn navigation cha</option>
                                 {parentNavigations.map((nav) => (
-                                    <option key={nav._id} value={nav._id}>
+                                    <option key={nav.id} value={nav.id}>
                                         {nav.title}
                                     </option>
                                 ))}

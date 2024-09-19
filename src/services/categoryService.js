@@ -104,7 +104,7 @@ export const getCategoriesBySlug = async (slug) => {
     }
 
     try {
-        const response = await httpRequest.get(`/parent-navs/${slug}`);
+        const response = await httpRequest.get(`/parent-navs/slug/${slug}`);
         const categories = response.data.data;
 
         // Save to sessionStorage

@@ -1,9 +1,8 @@
-import routes from '~/config/routes';
 import httpRequest from '~/utils/httpRequest';
 
-export const getPageContent = async (slug) => {
+export const getPageContent = async () => {
     try {
-        const response = await httpRequest.get(`${slug}`);
+        const response = await httpRequest.get(`/pages`);
         return response.data.data;
     } catch (error) {
         console.error('Error fetching page content:', error);
@@ -13,7 +12,7 @@ export const getPageContent = async (slug) => {
 
 export const addPageContent = async (data) => {
     try {
-        const response = await httpRequest.post(`${routes.about}`, data);
+        const response = await httpRequest.post(`/pages`, data);
         return response.data.data;
     } catch (error) {
         console.error('Error adding page content:', error);
@@ -23,7 +22,7 @@ export const addPageContent = async (data) => {
 
 export const updatePageContent = async (slug, data) => {
     try {
-        const response = await httpRequest.patch(`${routes.about}/${slug}`, data);
+        const response = await httpRequest.patch(`/pages/${slug}`, data);
         return response.data.data;
     } catch (error) {
         console.error('Error updating page content by slug:', error);
@@ -33,7 +32,7 @@ export const updatePageContent = async (slug, data) => {
 
 export const getPageBySlug = async (slug) => {
     try {
-        const response = await httpRequest.get(`${routes.about}/${slug}`);
+        const response = await httpRequest.get(`/pages/slug/${slug}`);
         return response.data.data;
     } catch (error) {
         console.error('Error updating page content:', error);
@@ -43,7 +42,7 @@ export const getPageBySlug = async (slug) => {
 
 export const deletePageContent = async (slug) => {
     try {
-        const response = await httpRequest.delete(`${routes.about}/${slug}`);
+        const response = await httpRequest.delete(`/pages/${slug}`);
         return response.data.data;
     } catch (error) {
         console.error('Error deleting page content:', error);

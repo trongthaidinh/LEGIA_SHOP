@@ -15,7 +15,7 @@ const Header = () => {
     const [isUserDropdownVisible, setIsUserDropdownVisible] = useState(false);
     const [user, setUser] = useState(null);
     const [notifications, setNotifications] = useState([]);
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true);
     const emailDropdownRef = useRef(null);
     const userDropdownRef = useRef(null);
     const { signout } = useAuth();
@@ -25,8 +25,7 @@ const Header = () => {
         const fetchUser = async () => {
             try {
                 const userEmail = localStorage.getItem('userEmail');
-                const userData = await getUserByEmail(userEmail);
-                setUser(userData[0]);
+                setUser(userEmail);
             } catch (error) {
                 console.error('Error fetching user:', error);
             }
@@ -43,7 +42,7 @@ const Header = () => {
 
         const loadData = async () => {
             await Promise.all([fetchUser(), fetchNotifications()]);
-            setLoading(false); 
+            setLoading(false);
         };
 
         loadData();
@@ -91,7 +90,7 @@ const Header = () => {
 
     return (
         <div className={styles.header}>
-            <div className={styles.companyName}>CÔNG TY TNHH CÔNG NGHỆ HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</div>
+            <div className={styles.companyName}>HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</div>
             <div
                 className={styles.iconWrapper}
                 ref={emailDropdownRef}
@@ -111,7 +110,7 @@ const Header = () => {
                     setIsEmailDropdownVisible(false);
                 }}
             >
-                <span className={styles.userName}>{user.email}</span>
+                <span className={styles.userName}>{user}</span>
                 <FontAwesomeIcon icon={faChevronDown} className={styles.chevronIcon} />
                 <Dropdown isVisible={isUserDropdownVisible} notifications={userDropdownItems} isUserDropdown={true} />
             </div>

@@ -91,7 +91,7 @@ const MessageList = () => {
                                     <td>{message.phone}</td>
                                     <td>{message.title}</td>
                                     <td>{message.content}</td>
-                                    <td>{new Date(message.createdAt).toLocaleString()}</td>
+                                    <td>{new Date(message.created_at).toLocaleString()}</td>
                                     <td>
                                         <button
                                             onClick={() => handleDelete(message._id)}

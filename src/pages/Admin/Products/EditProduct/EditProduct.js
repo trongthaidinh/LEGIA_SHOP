@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { updateProduct, getProductById } from '~/services/productService';
-import { getCategoriesByType } from '~/services/categoryService';
+import { getCategoriesBySlug } from '~/services/categoryService';
 import CustomEditor from '~/components/CustomEditor';
 import PushNotification from '~/components/PushNotification';
 import { useDropzone } from 'react-dropzone';
@@ -38,13 +38,13 @@ const EditProduct = () => {
         content: Yup.string().required('Nội dung là bắt buộc'),
         updateCate: Yup.string().required('Danh mục là bắt buộc'),
         summary: Yup.string().required('Tóm tắt là bắt buộc'),
-        features: Yup.array().of(Yup.string().required('Chức năng không được bỏ trống')),
+        features: Yup.array().of(Yup.string().required('Thông tin tổng quan không được bỏ trống')),
     });
 
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const fetchedCategories = await getCategoriesByType(1);
+                const fetchedCategories = await getCategoriesBySlug('san-pham');
                 setCategories(fetchedCategories);
             } catch (error) {
                 console.error('Lỗi khi tải danh mục:', error);
@@ -56,13 +56,13 @@ const EditProduct = () => {
                 const productData = await getProductById(id);
                 setProduct(productData);
                 setFeatures(JSON.parse(productData.features) || []);
-                setFiles(productData.image || []);
+                setFiles(productData.images || []);
 
                 initialValues.updateName = productData.name;
-                initialValues.content = productData.detail[0].content;
-                initialValues.updateCate = productData.category_id;
+                initialValues.content = productData.content;
+                initialValues.updateCate = productData.child_nav_id;
                 initialValues.summary = productData.summary;
-                setFiles(productData.image || []);
+                setFiles(productData.images || []);
             } catch (error) {
                 console.error('Lỗi khi tải sản phẩm:', error);
             }
@@ -82,20 +82,20 @@ const EditProduct = () => {
     const handleSubmit = async (values, { resetForm }) => {
         const formData = new FormData();
 
-        formData.append('updateName', values.updateName);
+        formData.append('name', values.updateName);
 
         if (files.length > 0) {
             files.forEach((image) => {
-                formData.append('updateImage', image);
+                formData.append('images', image);
             });
         } else {
-            formData.append('updateImage', product.image);
+            formData.append('images', product.images);
         }
 
         formData.append('content', values.content);
-        formData.append('updateCate', values.updateCate);
+        formData.append('parent_nav_id', values.updateCate);
         formData.append('summary', values.summary);
-        formData.append('features', JSON.stringify(features)); // Use the current features state
+        formData.append('features', JSON.stringify(features));
 
         try {
             await updateProduct(id, formData);
@@ -171,8 +171,8 @@ const EditProduct = () => {
                                 <Field as="select" name="updateCate" className={styles.input}>
                                     <option value="">Chọn danh mục</option>
                                     {categories.map((category) => (
-                                        <option key={category._id} value={category._id}>
-                                            {category.name}
+                                        <option key={category.id} value={category.id}>
+                                            {category.title}
                                         </option>
                                     ))}
                                 </Field>
@@ -184,14 +184,14 @@ const EditProduct = () => {
                                 <ErrorMessage name="summary" component="div" className={styles.error} />
                             </div>
                             <div className={styles.formGroup}>
-                                <label>Chức Năng</label>
+                                <label>Thông tin tổng quan</label>
                                 <div className={styles.featuresInput}>
                                     <input
                                         type="text"
                                         value={featureInput}
                                         onChange={(e) => setFeatureInput(e.target.value)}
                                         className={styles.input}
-                                        placeholder="Nhập chức năng và nhấn nút thêm"
+                                        placeholder="Nhập thông tin và nhấn nút thêm"
                                     />
                                     <Button type="button" primary onClick={addFeature} className={styles.addButton}>
                                         Thêm

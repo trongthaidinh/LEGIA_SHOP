@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEdit, faTrash, faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
-import { getNavigationLinks, deleteNavigationLink } from '~/services/navigationService';
+import {
+    getNavigationLinks,
+    deleteMainNavigationLink,
+    deleteSubNavigationLink,
+    deleteChildNavigationLink,
+} from '~/services/navigationService';
 import styles from './NavigationList.module.scss';
 import Title from '~/components/Title';
 import routes from '~/config/routes';
@@ -28,37 +33,28 @@ const NavigationList = () => {
         fetchNavigations();
     }, []);
 
-    const handleDelete = async (type, id) => {
-        if (window.confirm('Are you sure you want to delete this navigation?')) {
-            try {
-                await deleteNavigationLink(type, id);
-                await fetchNavigations();
-                setNotification({ message: 'Navigation đã xóa thành công', type: 'success' });
-            } catch (error) {
-                console.error('Error deleting navigation:', error);
-                setNotification({ message: 'Xảy ra lỗi khi xóa Navigation', type: 'error' });
-            }
-        }
-    };
-
     const flattenNavigations = (navs) => {
         const result = [];
 
-        const processNav = (nav, parent = null) => {
+        const processNav = (nav, parent = null, level = 0) => {
             if (!nav) return;
-            if (nav.title) {
-                result.push({
-                    ...nav,
-                    type: parent ? 'Navigation phụ' : 'Navigation chính',
-                    parent: parent ? parent.title : null,
-                });
+
+            let type = 'main';
+            if (level === 1) {
+                type = 'sub';
+            } else if (level === 2) {
+                type = 'child';
             }
-            if (nav.childrend) {
-                nav.childrend.forEach((child) => {
-                    if (child.childrend) {
-                        child.childrend.forEach((subChild) => processNav(subChild, child));
-                    }
-                    return processNav(child, nav);
+
+            result.push({
+                ...nav,
+                type,
+                parent: parent ? parent.title : null,
+            });
+
+            if (nav.children) {
+                nav.children.forEach((child) => {
+                    processNav(child, nav, level + 1);
                 });
             }
         };
@@ -68,8 +64,6 @@ const NavigationList = () => {
     };
 
     const allNavigations = flattenNavigations(navigations);
-
-    console.log(allNavigations);
 
     const filteredNavigations = allNavigations.filter(
         (nav) =>
@@ -81,6 +75,39 @@ const NavigationList = () => {
     const indexOfLastNav = currentPage * itemsPerPage;
     const indexOfFirstNav = indexOfLastNav - itemsPerPage;
     const currentNavigations = filteredNavigations.slice(indexOfFirstNav, indexOfLastNav);
+
+    const handleDelete = async (type, id) => {
+        if (window.confirm('Bạn có chắc muốn xóa navigation này không?')) {
+            try {
+                if (type === 'main') {
+                    await deleteMainNavigationLink(type, id);
+                } else if (type === 'sub') {
+                    await deleteSubNavigationLink(type, id);
+                } else if (type === 'child') {
+                    await deleteChildNavigationLink(type, id);
+                }
+
+                await fetchNavigations();
+                setNotification({ message: 'Navigation đã xóa thành công', type: 'success' });
+            } catch (error) {
+                console.error('Error deleting navigation:', error);
+                setNotification({ message: 'Xảy ra lỗi khi xóa Navigation', type: 'error' });
+            }
+        }
+    };
+
+    const getTypeLabel = (type) => {
+        switch (type) {
+            case 'main':
+                return 'Navigation chính';
+            case 'sub':
+                return 'Navigation cấp 1';
+            case 'child':
+                return 'Navigation cấp 2';
+            default:
+                return 'Không xác định';
+        }
+    };
 
     return (
         <div className={styles.navigationContainer}>
@@ -115,20 +142,18 @@ const NavigationList = () => {
                                 <React.Fragment key={nav.id}>
                                     <tr>
                                         <td>{nav.title}</td>
-                                        <td>{nav.type}</td>
+                                        <td>{getTypeLabel(nav.type)}</td>
                                         <td>{nav.parent ? nav.parent : ''}</td>
                                         <td>{nav.position}</td>
                                         <td>
                                             <Link
-                                                to={`/admin/edit-navigation/${nav.id}`}
+                                                to={`/admin/edit-navigation/${nav.id}?type=${nav.type}`}
                                                 className={styles.editButton}
                                             >
                                                 <FontAwesomeIcon icon={faEdit} /> Sửa
                                             </Link>
                                             <button
-                                                onClick={() =>
-                                                    handleDelete(nav.type === 'Navigation chính' ? 2 : 1, nav.id)
-                                                }
+                                                onClick={() => handleDelete(nav.type, nav.id)}
                                                 className={styles.deleteButton}
                                             >
                                                 <FontAwesomeIcon icon={faTrash} /> Xóa
@@ -139,7 +164,7 @@ const NavigationList = () => {
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="4">Không có dữ liệu</td>
+                                <td colSpan="5">Không có dữ liệu</td>
                             </tr>
                         )}
                     </tbody>

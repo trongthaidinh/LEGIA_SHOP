@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './News.module.scss';
 import classNames from 'classnames/bind';
-import { getNewsPagination } from '~/services/newsService';
+import { getNews } from 'services/newsService';
 import { getCategoriesBySlug } from 'services/categoryService';
 import CardContent from '~/components/CardContent';
 import ButtonGroup from '~/components/ButtonGroup';
@@ -10,7 +10,6 @@ import PushNotification from '~/components/PushNotification';
 import LoadingScreen from '~/components/LoadingScreen';
 import { Link } from 'react-router-dom';
 import routes from '~/config/routes';
-import io from 'socket.io-client';
 import dayjs from 'dayjs';
 
 const cx = classNames.bind(styles);
@@ -25,7 +24,7 @@ function News() {
     useEffect(() => {
         const loadData = async () => {
             try {
-                const [newsData, categoryData] = await Promise.all([getNewsPagination(), getCategoriesBySlug('tin-tuc')]);
+                const [newsData, categoryData] = await Promise.all([getNews(), getCategoriesBySlug('tin-tuc')]);
                 setNews(newsData);
                 setCategories(categoryData);
             } catch (error) {

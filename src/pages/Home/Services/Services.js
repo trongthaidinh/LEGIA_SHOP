@@ -52,7 +52,7 @@ function Services() {
     }
 
     const getCategorySlug = (categoryId) => {
-        const category = categories.find((cat) => cat.id === categoryId);
+        const category = categories.find((cat) => cat.id == categoryId);
         console.log(categoryId, category);
         return category ? category.slug : '';
     };

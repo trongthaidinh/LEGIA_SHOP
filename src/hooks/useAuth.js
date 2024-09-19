@@ -46,25 +46,37 @@ const useProvideAuth = () => {
     };
 
     useEffect(() => {
-        const storedAccessToken = localStorage.getItem('accessToken');
-        const storedRefreshToken = localStorage.getItem('refreshToken');
-        const storedUserEmail = localStorage.getItem('userEmail');
+        const checkAccessToken = () => {
+            const storedAccessToken = localStorage.getItem('accessToken');
+            const storedRefreshToken = localStorage.getItem('refreshToken');
+            const storedAccessTokenExpiresAt = localStorage.getItem('accessTokenExpiresAt');
+            const storedUserEmail = localStorage.getItem('userEmail');
 
-        if (storedAccessToken && storedRefreshToken) {
-            setUser({
-                accessToken: storedAccessToken,
-                refreshToken: storedRefreshToken,
-                email: storedUserEmail,
-            });
-        }
+            if (storedAccessToken && storedRefreshToken && storedAccessTokenExpiresAt) {
+                const isAccessTokenExpired = new Date().getTime() >= new Date(storedAccessTokenExpiresAt).getTime();
 
-        setLoading(false);
+                if (isAccessTokenExpired) {
+                    refreshAccessTokenIfNeeded();
+                } else {
+                    setUser({
+                        accessToken: storedAccessToken,
+                        refreshToken: storedRefreshToken,
+                        email: storedUserEmail,
+                    });
+                }
+            }
 
-        const intervalId = setInterval(() => {
-            refreshAccessTokenIfNeeded();
-        }, 5 * 60 * 1000);
+            setLoading(false);
 
-        return () => clearInterval(intervalId);
+            // Đặt interval để kiểm tra token thường xuyên
+            const intervalId = setInterval(() => {
+                refreshAccessTokenIfNeeded();
+            }, 5 * 60 * 1000);
+
+            return () => clearInterval(intervalId);
+        };
+
+        checkAccessToken();
     }, []);
 
     const signin = async (credentials) => {

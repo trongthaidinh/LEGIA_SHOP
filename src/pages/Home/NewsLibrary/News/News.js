@@ -64,7 +64,7 @@ function News() {
     };
 
     const getCategorySlug = (categoryId) => {
-        const category = categories.find((cat) => cat.id === categoryId);
+        const category = categories.find((cat) => cat.id == categoryId);
         return category ? category.slug : '';
     };
 

@@ -28,7 +28,7 @@ function Products() {
                     getCategoriesBySlug('san-pham'),
                     getProducts(),
                 ]);
-    
+
                 setCategories(categoriesData);
                 setProducts(productsData);
             } catch (err) {
@@ -38,12 +38,12 @@ function Products() {
                 setLoading(false);
             }
         };
-    
+
         fetchProductsAndCategories();
     }, []);
-    
+
     const getCategorySlug = (categoryId) => {
-        const category = categories.find((cat) => cat.id === categoryId);
+        const category = categories.find((cat) => cat.id == categoryId);
         return category ? category.slug : 'unknown';
     };
 
@@ -77,17 +77,17 @@ function Products() {
                 >
                     {products.map((product) => {
                         return (
-                        <SwiperSlide key={product.id} className={cx('slide')}>
-                            <Product
-                                image={product.images[0]}
-                                name={product.name}
-                                productId={product.id}
-                                category={getCategorySlug(product.child_nav_id)}
-                                link={`${routes.products}/${getCategorySlug(product.child_nav_id)}/${product.id}`}
-                            />
-                        </SwiperSlide>
-                    )
-                     })}
+                            <SwiperSlide key={product.id} className={cx('slide')}>
+                                <Product
+                                    image={product.images[0]}
+                                    name={product.name}
+                                    productId={product.id}
+                                    category={getCategorySlug(product.child_nav_id)}
+                                    link={`${routes.products}/${getCategorySlug(product.child_nav_id)}/${product.id}`}
+                                />
+                            </SwiperSlide>
+                        );
+                    })}
                 </Swiper>
             </div>
         </div>

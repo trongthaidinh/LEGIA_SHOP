@@ -25,7 +25,10 @@ function Experiences() {
     useEffect(() => {
         const loadExperiences = async () => {
             try {
-                const [experiencesData, categoriesData] = await Promise.all([getExperiences(), getCategoriesBySlug("trai-nghiem")]);
+                const [experiencesData, categoriesData] = await Promise.all([
+                    getExperiences(),
+                    getCategoriesBySlug('trai-nghiem'),
+                ]);
                 setExperiences(experiencesData);
                 setCategories(categoriesData);
             } catch (error) {
@@ -48,7 +51,7 @@ function Experiences() {
     }
 
     const getCategorySlug = (categoryId) => {
-        const category = categories.find((cat) => cat.id === categoryId);
+        const category = categories.find((cat) => cat.id == categoryId);
         return category ? category.slug : '';
     };
 
@@ -74,7 +77,11 @@ function Experiences() {
                 >
                     {experiences.map((experience, index) => (
                         <SwiperSlide key={index} className={cx('slide')}>
-                            <Link to={`${routes.experiences}/${getCategorySlug(experience.child_nav_id)}/${experience.id}`}>
+                            <Link
+                                to={`${routes.experiences}/${getCategorySlug(experience.child_nav_id)}/${
+                                    experience.id
+                                }`}
+                            >
                                 <CardExperience
                                     title={experience.name}
                                     summary={experience.summary}

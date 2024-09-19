@@ -15,8 +15,35 @@ export const useAuth = () => {
 
 const useProvideAuth = () => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+
+    const refreshAccessTokenIfNeeded = async () => {
+        const accessTokenExpiresAt = localStorage.getItem('accessTokenExpiresAt');
+        const refreshToken = localStorage.getItem('refreshToken');
+
+        if (accessTokenExpiresAt && new Date().getTime() >= new Date(accessTokenExpiresAt).getTime()) {
+            try {
+                const response = await refreshAccessToken({ refreshToken });
+                if (response.statusCode === 200) {
+                    const { data } = response;
+                    setUser((prevUser) => ({
+                        ...prevUser,
+                        accessToken: data.accessToken,
+                    }));
+
+                    localStorage.setItem('accessToken', data.accessToken);
+                    localStorage.setItem('accessTokenExpiresAt', data.accessTokenExpiresAt);
+                } else {
+                    signout();
+                    throw new Error('Làm mới token thất bại');
+                }
+            } catch (error) {
+                console.error('Error refreshing access token:', error);
+                signout();
+            }
+        }
+    };
 
     useEffect(() => {
         const storedAccessToken = localStorage.getItem('accessToken');
@@ -29,9 +56,15 @@ const useProvideAuth = () => {
                 refreshToken: storedRefreshToken,
                 email: storedUserEmail,
             });
-        } 
+        }
 
         setLoading(false);
+
+        const intervalId = setInterval(() => {
+            refreshAccessTokenIfNeeded();
+        }, 5 * 60 * 1000);
+
+        return () => clearInterval(intervalId);
     }, []);
 
     const signin = async (credentials) => {

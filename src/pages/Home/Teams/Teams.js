@@ -75,40 +75,39 @@ function Teams() {
         setSelectedTeam(null);
     };
 
-
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Title text="Đội ngũ" />
+                <Title text="Thành Viên Hợp Tác Xã" />
                 <div className={cx('slide-wrapper')}>
-                        <Swiper
-                            spaceBetween={20}
-                            slidesPerView={slidesPerView}
-                            breakpoints={{
-                                1280: { slidesPerView: 4 },
-                                1024: { slidesPerView: 3 },
-                                768: { slidesPerView: 2 },
-                                0: { slidesPerView: 1 },
-                            }}
-                            loop={true}
-                            modules={[Autoplay]}
-                            autoplay={{
-                                delay: 2000,
-                                disableOnInteraction: false,
-                            }}
-                        >
-                            {teamsArr?.map((team, index) => (
-                                <SwiperSlide key={index} className={cx('slide')} onClick={() => handleOpenDetail(team)}>
-                                    <div className={cx('team-card')}>
-                                        <img src={team.image} alt={team.name} className={cx('team-image')} />
-                                        <div className={cx('team-info')}>
-                                            <h3 className={cx('team-name')}>{team.name}</h3>
-                                            <p className={cx('team-position')}>{team.position}</p>
-                                        </div>
+                    <Swiper
+                        spaceBetween={20}
+                        slidesPerView={slidesPerView}
+                        breakpoints={{
+                            1280: { slidesPerView: 4 },
+                            1024: { slidesPerView: 3 },
+                            768: { slidesPerView: 2 },
+                            0: { slidesPerView: 1 },
+                        }}
+                        loop={true}
+                        modules={[Autoplay]}
+                        autoplay={{
+                            delay: 2000,
+                            disableOnInteraction: false,
+                        }}
+                    >
+                        {teamsArr?.map((team, index) => (
+                            <SwiperSlide key={index} className={cx('slide')} onClick={() => handleOpenDetail(team)}>
+                                <div className={cx('team-card')}>
+                                    <img src={team.image} alt={team.name} className={cx('team-image')} />
+                                    <div className={cx('team-info')}>
+                                        <h3 className={cx('team-name')}>{team.name}</h3>
+                                        <p className={cx('team-position')}>{team.position}</p>
                                     </div>
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
+                                </div>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
                 </div>
             </div>
             <TeamModal visible={!!selectedTeam} onClose={handleCloseDetail} team={selectedTeam} />

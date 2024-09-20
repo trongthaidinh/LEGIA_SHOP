@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { createNews } from '~/services/newsService';
-import { getCategoriesByType } from '~/services/categoryService';
+import { getCategoriesBySlug } from '~/services/categoryService';
 import CustomEditor from '~/components/CustomEditor';
 import PushNotification from '~/components/PushNotification';
 import styles from './AddNews.module.scss';
@@ -33,12 +33,13 @@ const AddNews = () => {
         images: Yup.array().required('Hình ảnh là bắt buộc'),
         categoryId: Yup.string().required('Danh mục là bắt buộc'),
         content: Yup.string().required('Nội dung là bắt buộc'),
+        isFeatured: Yup.boolean(),
     });
 
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const fetchedCategories = await getCategoriesByType(2);
+                const fetchedCategories = await getCategoriesBySlug('tin-tuc');
                 setCategories(fetchedCategories);
             } catch (error) {
                 console.error('Lỗi khi tải danh mục:', error);
@@ -60,11 +61,11 @@ const AddNews = () => {
         formData.append('title', values.title);
         formData.append('summary', values.summary);
         files.forEach((image) => {
-            formData.append('images', image);
+            formData.append('images[]', image);
         });
-        formData.append('categoryId', values.categoryId);
+        formData.append('child_nav_id', values.categoryId);
         formData.append('content', values.content);
-        formData.append('isFeatured', values.isFeatured);
+        formData.append('isFeatured', values.isFeatured ? 1 : 0);
 
         try {
             await createNews(formData);
@@ -132,8 +133,8 @@ const AddNews = () => {
                             <Field as="select" name="categoryId" className={styles.input}>
                                 <option value="">Chọn danh mục</option>
                                 {categories.map((category) => (
-                                    <option key={category._id} value={category._id}>
-                                        {category.name}
+                                    <option key={category.id} value={category.id}>
+                                        {category.title}
                                     </option>
                                 ))}
                             </Field>

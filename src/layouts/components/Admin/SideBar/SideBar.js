@@ -104,7 +104,7 @@ const SideBar = () => {
                         </div>
                     </NavLink>
                 </li>
-                <li>
+                {/* <li>
                     <div className={cx('menuItem')} onClick={() => toggleMenu('userManagement')}>
                         <div>
                             <FontAwesomeIcon icon={faUsers} className={cx('menuIcon')} />
@@ -127,7 +127,7 @@ const SideBar = () => {
                             <NavLink to={routes.addUser}>Thêm người dùng</NavLink>
                         </li>
                     </ul>
-                </li>
+                </li> */}
                 <li>
                     <div className={cx('menuItem')} onClick={() => toggleMenu('productManagement')}>
                         <div>
@@ -152,7 +152,7 @@ const SideBar = () => {
                         </li>
                     </ul>
                 </li>
-                {/* <li>
+                <li>
                     <div className={cx('menuItem')} onClick={() => toggleMenu('newsManagement')}>
                         <div>
                             <FontAwesomeIcon icon={faNewspaper} className={cx('menuIcon')} />
@@ -176,7 +176,7 @@ const SideBar = () => {
                         </li>
                     </ul>
                 </li>
-
+                {/* 
                 <li>
                     <div className={cx('menuItem')} onClick={() => toggleMenu('serviceManagement')}>
                         <div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEdit, faTrash, faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
-import { getNewsAll, deleteNews } from '~/services/newsService';
+import { deleteNews, getNews } from '~/services/newsService';
 import styles from './NewsList.module.scss';
 import Title from '~/components/Title';
 import routes from '~/config/routes';
@@ -18,9 +18,9 @@ const NewsList = () => {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const data = await getNewsAll();
+                const data = await getNews();
                 if (data) {
-                    setNews(data.news);
+                    setNews(data);
                 } else {
                     setNotification({ message: 'Failed to fetch news.', type: 'error' });
                 }
@@ -37,7 +37,7 @@ const NewsList = () => {
         if (window.confirm('Bạn có chắc chắn muốn xóa tin tức này?')) {
             try {
                 await deleteNews(id);
-                setNews(news.filter((article) => article._id !== id));
+                setNews(news.filter((article) => article.id !== id));
                 setNotification({ message: 'Tin đã được xóa thành công!', type: 'success' });
             } catch (error) {
                 console.error('Có lỗi khi xóa tin:', error);
@@ -46,6 +46,7 @@ const NewsList = () => {
         }
     };
 
+    console.log(news);
     const filteredNews = news.filter((article) => article.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
     const totalPages = Math.ceil(filteredNews.length / itemsPerPage);
@@ -74,31 +75,29 @@ const NewsList = () => {
                 <table className={styles.table}>
                     <thead>
                         <tr>
+                            <th>Hình ảnh</th>
                             <th>Tiêu đề</th>
                             <th>Tóm tắt</th>
-                            <th>Số lượt xem</th>
                             <th>Nổi bật</th>
-                            <th>Hình ảnh</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         {currentNews.length > 0 ? (
                             currentNews.map((article) => (
-                                <tr key={article._id}>
+                                <tr key={article.id}>
+                                    <td>
+                                        <img src={article.images[0]} alt={article.title} className={styles.newsImage} />
+                                    </td>
                                     <td>{article.title}</td>
                                     <td>{article.summary}</td>
-                                    <td>{article.views}</td>
                                     <td>{article.isFeatured ? 'Có' : 'Không'}</td>
                                     <td>
-                                        <img src={article.images} alt={article.title} className={styles.newsImage} />
-                                    </td>
-                                    <td>
-                                        <Link to={`/admin/update-news/${article._id}`} className={styles.editButton}>
+                                        <Link to={`/admin/update-news/${article.id}`} className={styles.editButton}>
                                             <FontAwesomeIcon icon={faEdit} /> Sửa
                                         </Link>
                                         <button
-                                            onClick={() => handleDelete(article._id)}
+                                            onClick={() => handleDelete(article.id)}
                                             className={styles.deleteButton}
                                         >
                                             <FontAwesomeIcon icon={faTrash} /> Xóa

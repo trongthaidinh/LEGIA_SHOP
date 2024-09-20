@@ -182,6 +182,9 @@ export const getNewsByCategory = async (child_nav_id, startDate = '', endDate = 
 export const createNews = async (newsData) => {
     try {
         const response = await httpRequest.post('/news', newsData);
+
+        sessionStorage.removeItem('allNews');
+
         return response.data.data;
     } catch (error) {
         console.error('Error adding news', error);
@@ -210,6 +213,7 @@ export const deleteNews = async (id) => {
         await httpRequest.delete(`/news/${id}`);
 
         // Remove the deleted news from sessionStorage
+        sessionStorage.removeItem('allNews');
         sessionStorage.removeItem(`news_${id}`);
     } catch (error) {
         console.error(`Error deleting news with id ${id}`, error);

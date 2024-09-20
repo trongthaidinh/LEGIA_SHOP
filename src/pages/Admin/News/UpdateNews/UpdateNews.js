@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { getNewsById, updateNews } from '~/services/newsService';
-import { getCategoriesByType } from '~/services/categoryService';
+import { getCategoriesBySlug } from '~/services/categoryService';
 import CustomEditor from '~/components/CustomEditor';
 import PushNotification from '~/components/PushNotification';
 import styles from './UpdateNews.module.scss';
@@ -31,7 +31,7 @@ const UpdateNews = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const fetchedCategories = await getCategoriesByType(2);
+                const fetchedCategories = await getCategoriesBySlug('tin-tuc');
                 setCategories(fetchedCategories);
             } catch (error) {
                 console.error('Lỗi khi tải danh mục:', error);
@@ -44,8 +44,8 @@ const UpdateNews = () => {
                 setInitialValues({
                     title: news.title,
                     summary: news.summary,
-                    image: news.images,
-                    categoryId: news.categoryId,
+                    image: news.images[0],
+                    categoryId: news.child_nav_id,
                     content: news.content,
                     isFeatured: news.isFeatured,
                 });
@@ -140,8 +140,8 @@ const UpdateNews = () => {
                             <Field as="select" name="categoryId" className={styles.input}>
                                 <option value="">Chọn danh mục</option>
                                 {categories.map((category) => (
-                                    <option key={category._id} value={category._id}>
-                                        {category.name}
+                                    <option key={category.id} value={category.id}>
+                                        {category.title}
                                     </option>
                                 ))}
                             </Field>

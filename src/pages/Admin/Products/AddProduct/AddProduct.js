@@ -161,14 +161,14 @@ const AddProduct = () => {
                             <ErrorMessage name="summary" component="div" className={styles.error} />
                         </div>
                         <div className={styles.formGroup}>
-                            <label>Chức Năng</label>
+                            <label>Thông tin tổng quan</label>
                             <div className={styles.featuresInput}>
                                 <input
                                     type="text"
                                     value={featureInput}
                                     onChange={(e) => setFeatureInput(e.target.value)}
                                     className={styles.input}
-                                    placeholder="Nhập chức năng và nhấn nút thêm"
+                                    placeholder="Nhập thông tin và nhấn nút thêm"
                                 />
                                 <Button type="button" primary onClick={addFeature} className={styles.addButton}>
                                     Thêm

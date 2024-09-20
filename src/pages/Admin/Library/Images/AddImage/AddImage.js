@@ -40,6 +40,7 @@ const AddImage = () => {
         const formData = new FormData();
         files.forEach((image) => {
             formData.append('image', image);
+            formData.append('name', 'phunong_image');
         });
 
         try {

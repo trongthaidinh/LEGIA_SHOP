@@ -26,8 +26,8 @@ const AddVideo = () => {
 
     const handleSubmit = async (values, { resetForm }) => {
         const videoData = {
-            video: values.videoUrl,
-            title: values.title,
+            url: values.videoUrl,
+            name: values.title,
             description: values.description,
             // createdBy: 'admin',
         };

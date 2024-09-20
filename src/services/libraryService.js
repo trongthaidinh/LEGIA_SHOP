@@ -59,6 +59,7 @@ export const createImage = async (imageData) => {
     try {
         const response = await httpRequest.post('/images', imageData);
 
+        sessionStorage.removeItem('allImages');
         // Refresh sessionStorage for all images list
         const updatedImages = await getImages();
         saveToSessionStorage('allImages', updatedImages);
@@ -92,6 +93,7 @@ export const deleteImage = async (imageId) => {
 
         // Remove the deleted image from sessionStorage
         sessionStorage.removeItem(`image_${imageId}`);
+        sessionStorage.removeItem('allImages');
 
         // Refresh sessionStorage for all images list
         const updatedImages = await getImages();
@@ -151,6 +153,7 @@ export const createVideo = async (videoData) => {
     try {
         const response = await httpRequest.post('/videos', videoData);
 
+        sessionStorage.removeItem('allVideos');
         // Refresh sessionStorage for all videos list
         const updatedVideos = await getVideos();
         saveToSessionStorage('allVideos', updatedVideos);
@@ -182,6 +185,7 @@ export const deleteVideo = async (videoId) => {
     try {
         await httpRequest.delete(`/videos/${videoId}`);
 
+        sessionStorage.removeItem('allVideos');
         // Remove the deleted video from sessionStorage
         sessionStorage.removeItem(`video_${videoId}`);
 

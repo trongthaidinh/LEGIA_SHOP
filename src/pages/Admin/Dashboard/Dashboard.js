@@ -7,11 +7,11 @@ import {
     faUsers,
     faBox,
     faNewspaper,
-    // faLayerGroup,
+    faLayerGroup,
     // faHandshake,
-    // faBookOpen,
+    faBookOpen,
     // faCogs,
-    // faInfoCircle,
+    faInfoCircle,
     // faUsersBetweenLines,
     // faList,
 } from '@fortawesome/free-solid-svg-icons';
@@ -24,10 +24,10 @@ const sidebarItems = [
     // { title: 'Quản lý người dùng', icon: faUsers, count: 0, route: routes.userList },
     { title: 'Quản lý sản phẩm', icon: faBox, count: 0, route: routes.productList },
     { title: 'Quản lý tin tức', icon: faNewspaper, count: 0, route: routes.newsList },
-    // { title: 'Quản lý dịch vụ', icon: faLayerGroup, count: 0, route: routes.serviceList },
+    { title: 'Quản lý dịch vụ', icon: faLayerGroup, count: 0, route: routes.serviceList },
     // { title: 'Quản lý trải nghiệm', icon: faLayerGroup, count: 0, route: routes.experienceList },
-    // { title: 'Quản lý thư viện', icon: faBookOpen, count: 0, route: routes.videosList },
-    // { title: 'Quản lý trang', icon: faInfoCircle, count: 0, route: routes.pageList },
+    { title: 'Quản lý thư viện', icon: faBookOpen, count: 0, route: routes.videosList },
+    { title: 'Quản lý trang', icon: faInfoCircle, count: 0, route: routes.pageList },
     // { title: 'Cài đặt', icon: faCogs, count: 0, route: routes.settings },
 ];
 

@@ -32,7 +32,7 @@ const ServiceList = () => {
         if (window.confirm('Bạn có chắc chắn muốn xóa dịch vụ này?')) {
             try {
                 await deleteService(id);
-                setServices(services.filter((service) => service._id !== id));
+                setServices(services.filter((service) => service.id !== id));
                 setNotification({ message: 'Dịch vụ đã được xóa thành công!', type: 'success' });
             } catch (error) {
                 console.error('Error deleting service:', error);
@@ -42,7 +42,7 @@ const ServiceList = () => {
     };
 
     const filteredServices = services.filter(
-        (service) => service.title && service.title.toLowerCase().includes(searchTerm.toLowerCase()),
+        (service) => service.name && service.name.toLowerCase().includes(searchTerm.toLowerCase()),
     );
 
     const totalPages = Math.ceil(filteredServices.length / itemsPerPage);
@@ -70,27 +70,31 @@ const ServiceList = () => {
                 <table className={styles.table}>
                     <thead>
                         <tr>
+                            <th>Hình ảnh</th>
                             <th>Tên dịch vụ</th>
                             <th>Tóm tắt</th>
-                            <th>Hình ảnh</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         {currentServices.length > 0 ? (
                             currentServices.map((service) => (
-                                <tr key={service._id}>
-                                    <td>{service.title}</td>
+                                <tr key={service.id}>
+                                    <td>
+                                        <img
+                                            src={service.images[0]}
+                                            alt={service.name}
+                                            className={styles.serviceImage}
+                                        />
+                                    </td>
+                                    <td>{service.name}</td>
                                     <td>{service.summary}</td>
                                     <td>
-                                        <img src={service.images} alt={service.title} className={styles.serviceImage} />
-                                    </td>
-                                    <td>
-                                        <Link to={`/admin/update-service/${service._id}`} className={styles.editButton}>
+                                        <Link to={`/admin/update-service/${service.id}`} className={styles.editButton}>
                                             <FontAwesomeIcon icon={faEdit} /> Sửa
                                         </Link>
                                         <button
-                                            onClick={() => handleDelete(service._id)}
+                                            onClick={() => handleDelete(service.id)}
                                             className={styles.deleteButton}
                                         >
                                             <FontAwesomeIcon icon={faTrash} /> Xóa

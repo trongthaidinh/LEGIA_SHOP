@@ -37,7 +37,7 @@ const ImageList = () => {
         if (window.confirm('Bạn có chắc chắn muốn xóa hình ảnh này?')) {
             try {
                 await deleteImage(id);
-                setImages(images.filter((image) => image._id !== id));
+                setImages(images.filter((image) => image.id !== id));
                 setNotification({ message: 'Hình ảnh đã được xóa thành công!', type: 'success' });
             } catch (error) {
                 console.error('Error deleting image:', error);
@@ -46,7 +46,7 @@ const ImageList = () => {
         }
     };
 
-    const filteredImages = images.filter((image) => image.image.toLowerCase().includes(searchTerm.toLowerCase()));
+    const filteredImages = images.filter((image) => image.url.toLowerCase().includes(searchTerm.toLowerCase()));
 
     const totalPages = Math.ceil(filteredImages.length / itemsPerPage);
     const indexOfLastImage = currentPage * itemsPerPage;
@@ -75,26 +75,20 @@ const ImageList = () => {
                     <thead>
                         <tr>
                             <th>Hình ảnh</th>
-                            <th>Ngày tạo</th>
-                            <th>Ngày cập nhật</th>
-                            <th>Người tạo</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         {currentImages.length > 0 ? (
                             currentImages.map((image) => (
-                                <tr key={image._id}>
+                                <tr key={image.id}>
                                     <td>
-                                        <a href={image.image} target="_blank" rel="noopener noreferrer">
-                                            {image.image}
+                                        <a href={image.url} target="_blank" rel="noopener noreferrer">
+                                            {image.url}
                                         </a>
                                     </td>
-                                    <td>{new Date(image.createdAt).toLocaleDateString()}</td>
-                                    <td>{new Date(image.updatedAt).toLocaleDateString()}</td>
-                                    <td>{image.createdBy}</td>
                                     <td>
-                                        <button onClick={() => handleDelete(image._id)} className={styles.deleteButton}>
+                                        <button onClick={() => handleDelete(image.id)} className={styles.deleteButton}>
                                             <FontAwesomeIcon icon={faTrash} /> Xóa
                                         </button>
                                     </td>

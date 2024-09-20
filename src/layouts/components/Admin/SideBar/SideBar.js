@@ -176,7 +176,7 @@ const SideBar = () => {
                         </li>
                     </ul>
                 </li>
-                {/* 
+
                 <li>
                     <div className={cx('menuItem')} onClick={() => toggleMenu('serviceManagement')}>
                         <div>
@@ -201,7 +201,8 @@ const SideBar = () => {
                         </li>
                     </ul>
                 </li>
-                <li>
+
+                {/* <li>
                     <div className={cx('menuItem')} onClick={() => toggleMenu('experienceManagement')}>
                         <div>
                             <FontAwesomeIcon icon={faLayerGroup} className={cx('menuIcon')} />
@@ -224,7 +225,7 @@ const SideBar = () => {
                             <NavLink to={routes.addRecruitment}>Thêm tin tuyển dụng</NavLink>
                         </li>
                     </ul>
-                </li>
+                </li> */}
                 <li>
                     <div className={styles.menuItem} onClick={() => toggleMenu('libraryManagement')}>
                         <div>
@@ -255,6 +256,7 @@ const SideBar = () => {
                         </li>
                     </ul>
                 </li>
+
                 <li>
                     <div className={styles.menuItem} onClick={() => toggleMenu('aboutManagement')}>
                         <div>
@@ -279,7 +281,7 @@ const SideBar = () => {
                         </li>
                     </ul>
                 </li>
-
+                {/* 
                 <li>
                     <NavLink to={routes.settings} className={styles.menuItem}>
                         <div>

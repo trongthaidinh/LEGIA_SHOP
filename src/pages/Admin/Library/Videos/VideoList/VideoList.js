@@ -37,7 +37,7 @@ const VideoList = () => {
         if (window.confirm('Bạn có chắc chắn muốn xóa video này không?')) {
             try {
                 await deleteVideo(id);
-                setVideos(videos.filter((video) => video._id !== id));
+                setVideos(videos.filter((video) => video.id !== id));
                 setNotification({ message: 'Video đã được xóa thành công!', type: 'success' });
             } catch (error) {
                 console.error('Error deleting video:', error);
@@ -46,7 +46,7 @@ const VideoList = () => {
         }
     };
 
-    const filteredVideos = videos.filter((video) => video.video.toLowerCase().includes(searchTerm.toLowerCase()));
+    const filteredVideos = videos.filter((video) => video.url.toLowerCase().includes(searchTerm.toLowerCase()));
 
     const totalPages = Math.ceil(filteredVideos.length / itemsPerPage);
     const indexOfLastVideo = currentPage * itemsPerPage;
@@ -75,25 +75,21 @@ const VideoList = () => {
                         <tr>
                             <th>Video</th>
                             <th>Ngày tạo</th>
-                            <th>Ngày cập nhật</th>
-                            <th>Người tạo</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         {currentVideos.length > 0 ? (
                             currentVideos.map((video) => (
-                                <tr key={video._id}>
+                                <tr key={video.id}>
                                     <td>
-                                        <a href={video.video} target="_blank" rel="noopener noreferrer">
-                                            {video.video}
+                                        <a href={video.url} target="_blank" rel="noopener noreferrer">
+                                            {video.url}
                                         </a>
                                     </td>
-                                    <td>{new Date(video.createdAt).toLocaleDateString()}</td>
-                                    <td>{new Date(video.updatedAt).toLocaleDateString()}</td>
-                                    <td>{video.createdBy}</td>
+                                    <td>{new Date(video.created_at).toLocaleDateString()}</td>
                                     <td>
-                                        <button onClick={() => handleDelete(video._id)} className={styles.deleteButton}>
+                                        <button onClick={() => handleDelete(video.id)} className={styles.deleteButton}>
                                             <FontAwesomeIcon icon={faTrash} /> Xóa
                                         </button>
                                     </td>

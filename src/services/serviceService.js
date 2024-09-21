@@ -134,13 +134,17 @@ export const updateService = async (id, serviceData) => {
     }
 };
 
-// Delete service and remove it from sessionStorage
 export const deleteService = async (id) => {
     try {
         await httpRequest.delete(`/services/${id}`);
 
         // Remove the deleted service from sessionStorage
         sessionStorage.removeItem(`service_${id}`);
+        sessionStorage.removeItem(`allServices`);
+
+        // Refresh sessionStorage for all services list
+        const updatedServices = await getServices();
+        saveToSessionStorage('allServices', updatedServices);
     } catch (error) {
         console.error(`Error deleting service with id ${id}`, error);
         throw error;

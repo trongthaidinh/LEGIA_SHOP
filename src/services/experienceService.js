@@ -159,6 +159,7 @@ export const deleteExperience = async (id) => {
 
         // Remove the deleted experience from sessionStorage
         sessionStorage.removeItem(`experience_${id}`);
+        sessionStorage.removeItem(`allExperiences`);
 
         // Refresh sessionStorage for all experiences list
         const updatedExperiences = await getExperiences();

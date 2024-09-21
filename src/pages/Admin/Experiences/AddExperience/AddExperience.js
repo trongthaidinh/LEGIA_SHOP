@@ -68,15 +68,15 @@ const AddExperience = () => {
 
         try {
             await createExperience(formData);
-            setNotification({ message: 'Thêm dịch vụ thành công!', type: 'success' });
+            setNotification({ message: 'Thêm trải nghiệm thành công!', type: 'success' });
             resetForm();
             setFiles([]);
             setTimeout(() => {
                 navigate(routes.experienceList);
             }, 1000);
         } catch (error) {
-            setNotification({ message: 'Lỗi khi thêm dịch vụ.', type: 'error' });
-            console.error('Lỗi khi tạo dịch vụ:', error);
+            setNotification({ message: 'Lỗi khi thêm trải nghiệm.', type: 'error' });
+            console.error('Lỗi khi tạo trải nghiệm:', error);
         }
     };
 
@@ -86,7 +86,7 @@ const AddExperience = () => {
 
     return (
         <div className={styles.addExperience}>
-            <Title text="Thêm mới dịch vụ" />
+            <Title text="Thêm mới trải nghiệm" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting, setFieldValue, values }) => (
@@ -133,7 +133,7 @@ const AddExperience = () => {
                                 <option value="">Chọn danh mục</option>
                                 {categories.map((category) => (
                                     <option key={category._id} value={category._id}>
-                                        {category.name}
+                                        {category.title}
                                     </option>
                                 ))}
                             </Field>
@@ -154,7 +154,7 @@ const AddExperience = () => {
                             </label>
                         </div>
                         <button type="submit" disabled={isSubmitting} className={styles.submitButton}>
-                            {isSubmitting ? <Spin size="small" /> : 'Thêm Dịch Vụ'}
+                            {isSubmitting ? <Spin size="small" /> : 'Thêm Trải nghiệm'}
                         </button>
                     </Form>
                 )}

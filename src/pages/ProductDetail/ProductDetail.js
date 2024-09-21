@@ -167,10 +167,7 @@ const ProductDetail = () => {
 
             <div className={cx('info-section')}>
                 <Title text="Chi tiết sản phẩm" />
-                <div
-                    className={cx('info-content')}
-                    dangerouslySetInnerHTML={{ __html: productDetail.detail?.[0]?.content || '' }}
-                />
+                <div className={cx('info-content')} dangerouslySetInnerHTML={{ __html: productDetail.content || '' }} />
             </div>
         </article>
     );

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { createService } from '~/services/serviceService';
-import { getCategoriesBySlug } from '~/services/categoryService';
 import CustomEditor from '~/components/CustomEditor';
 import PushNotification from '~/components/PushNotification';
 import styles from './AddService.module.scss';
@@ -11,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import Title from '~/components/Title';
 import { useDropzone } from 'react-dropzone';
 import { Spin } from 'antd';
+import { getCategoriesBySlug } from 'services/categoryService';
 
 const AddService = () => {
     const [categories, setCategories] = useState([]);

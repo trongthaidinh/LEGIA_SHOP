@@ -4,7 +4,8 @@ import * as Yup from 'yup';
 import styles from './AddNavigation.module.scss';
 import Title from '~/components/Title';
 import {
-    getNavigationLinks,
+    getSubNavigation,
+    getMainNavigation,
     createMainNavigationLink,
     createSubNavigationLink,
     createChildNavigationLink,
@@ -22,7 +23,7 @@ const AddNavigation = () => {
 
     useEffect(() => {
         const fetchNavigations = async () => {
-            const data = await getNavigationLinks();
+            const data = await getSubNavigation(); // Fetch initial data for sub-navigation
             setNavigations(data);
         };
 
@@ -123,7 +124,23 @@ const AddNavigation = () => {
                                         const value = e.target.value;
                                         setFieldValue('type', value);
                                         if (value === 'main') {
-                                            setFieldValue('parent_nav_id', '');
+                                            // Fetch main navigation or clear parent_nav_id
+                                            setNavigations([]); // Clear current navigation options
+                                            // Optionally fetch main navigation links here
+                                        } else if (value === 'sub') {
+                                            // Fetch sub navigation links
+                                            const fetchMainNavigations = async () => {
+                                                const data = await getMainNavigation();
+                                                setNavigations(data);
+                                            };
+                                            fetchMainNavigations();
+                                        } else if (value === 'child') {
+                                            // Fetch child navigation links
+                                            const fetchSubNavigations = async () => {
+                                                const data = await getSubNavigation();
+                                                setNavigations(data);
+                                            };
+                                            fetchSubNavigations();
                                         }
                                     }}
                                 >

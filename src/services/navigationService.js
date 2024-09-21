@@ -33,6 +33,75 @@ export const getNavigationLinks = async () => {
     }
 };
 
+// Navigation Links
+export const getMainNavigation = async () => {
+    const sessionKey = 'MainNavigation';
+
+    const cachedData = getFromSessionStorage(sessionKey);
+    if (cachedData) {
+        return cachedData;
+    }
+
+    try {
+        const response = await httpRequest.get('/parent-navs');
+        const navigationLinks = response.data.data;
+
+        // Save to sessionStorage
+        saveToSessionStorage(sessionKey, navigationLinks);
+
+        return navigationLinks;
+    } catch (error) {
+        console.error('Error fetching navigation links:', error);
+        throw error;
+    }
+};
+
+// Navigation Links
+export const getSubNavigation = async () => {
+    const sessionKey = 'SubNavigation';
+
+    const cachedData = getFromSessionStorage(sessionKey);
+    if (cachedData) {
+        return cachedData;
+    }
+
+    try {
+        const response = await httpRequest.get('/child-navs');
+        const navigationLinks = response.data.data;
+
+        // Save to sessionStorage
+        saveToSessionStorage(sessionKey, navigationLinks);
+
+        return navigationLinks;
+    } catch (error) {
+        console.error('Error fetching navigation links:', error);
+        throw error;
+    }
+};
+
+// Navigation Links
+export const getChildNavigation = async () => {
+    const sessionKey = 'ChildNavigation';
+
+    const cachedData = getFromSessionStorage(sessionKey);
+    if (cachedData) {
+        return cachedData;
+    }
+
+    try {
+        const response = await httpRequest.get('/child-navs-two');
+        const navigationLinks = response.data.data;
+
+        // Save to sessionStorage
+        saveToSessionStorage(sessionKey, navigationLinks);
+
+        return navigationLinks;
+    } catch (error) {
+        console.error('Error fetching navigation links:', error);
+        throw error;
+    }
+};
+
 export const getNavigationById = async (id) => {
     const sessionKey = `child_nav_${id}`;
 
@@ -126,6 +195,8 @@ export const createMainNavigationLink = async (data) => {
         const response = await httpRequest.post('/parent-navs', data);
 
         sessionStorage.removeItem('navigationLinks');
+        const updatedNavigationLinks = await getNavigationLinks();
+        saveToSessionStorage('navigationLinks', updatedNavigationLinks);
 
         return response.data.data;
     } catch (error) {
@@ -140,6 +211,8 @@ export const createSubNavigationLink = async (data) => {
 
         // Refresh sessionStorage for navigation links
         sessionStorage.removeItem('navigationLinks');
+        const updatedNavigationLinks = await getNavigationLinks();
+        saveToSessionStorage('navigationLinks', updatedNavigationLinks);
 
         return response.data.data;
     } catch (error) {
@@ -154,6 +227,8 @@ export const createChildNavigationLink = async (data) => {
 
         // Refresh sessionStorage for navigation links
         sessionStorage.removeItem('navigationLinks');
+        const updatedNavigationLinks = await getNavigationLinks();
+        saveToSessionStorage('navigationLinks', updatedNavigationLinks);
 
         return response.data.data;
     } catch (error) {

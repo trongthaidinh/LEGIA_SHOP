@@ -13,7 +13,6 @@ import Title from '~/components/Title';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { Spin } from 'antd';
-import { createSubNavigationLink } from 'services/navigationService';
 import Button from 'components/Button';
 
 const AddProduct = () => {
@@ -31,6 +30,7 @@ const AddProduct = () => {
         summary: '',
         child_nav_id: '',
         features: [],
+        phone_number: '', // Added phone number field
     };
 
     const validationSchema = Yup.object({
@@ -40,6 +40,7 @@ const AddProduct = () => {
         summary: Yup.string().required('Tóm tắt là bắt buộc'),
         child_nav_id: Yup.string().required('Danh mục là bắt buộc'),
         features: Yup.array().of(Yup.string().required('Chức năng không được bỏ trống')),
+        phone_number: Yup.string().required('Số điện thoại là bắt buộc'), // Validation for phone number
     });
 
     useEffect(() => {
@@ -73,6 +74,7 @@ const AddProduct = () => {
         formData.append('summary', values.summary);
         formData.append('child_nav_id', values.child_nav_id);
         formData.append('features', JSON.stringify(features));
+        formData.append('phone_number', values.phone_number); // Include phone number in submission
 
         try {
             await createProduct(formData);
@@ -159,6 +161,11 @@ const AddProduct = () => {
                             <label htmlFor="summary">Tóm Tắt</label>
                             <Field name="summary" type="text" className={styles.input} />
                             <ErrorMessage name="summary" component="div" className={styles.error} />
+                        </div>
+                        <div className={styles.formGroup}>
+                            <label htmlFor="phone_number">Số Điện Thoại</label>
+                            <Field name="phone_number" type="text" className={styles.input} />
+                            <ErrorMessage name="phone_number" component="div" className={styles.error} />
                         </div>
                         <div className={styles.formGroup}>
                             <label>Thông tin tổng quan</label>

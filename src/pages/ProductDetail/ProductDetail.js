@@ -104,16 +104,18 @@ const ProductDetail = () => {
                         className={cx('thumbnail-list')}
                         style={{ transform: `translateY(-${thumbnailStartIndex * 155}px)` }}
                     >
-                        {productDetail.images.slice(thumbnailStartIndex, thumbnailStartIndex + 4).map((image, index) => (
-                            <div key={thumbnailStartIndex + index} className={cx('thumbnail-item')}>
-                                <img
-                                    className={cx('thumbnail-image')}
-                                    src={image.replace(/\\/g, '')}
-                                    alt={`${productDetail.name} thumbnail ${thumbnailStartIndex + index + 1}`}
-                                    onClick={() => handleThumbnailClick(thumbnailStartIndex + index)}
-                                />
-                            </div>
-                        ))}
+                        {productDetail.images
+                            .slice(thumbnailStartIndex, thumbnailStartIndex + 4)
+                            .map((image, index) => (
+                                <div key={thumbnailStartIndex + index} className={cx('thumbnail-item')}>
+                                    <img
+                                        className={cx('thumbnail-image')}
+                                        src={image.replace(/\\/g, '')}
+                                        alt={`${productDetail.name} thumbnail ${thumbnailStartIndex + index + 1}`}
+                                        onClick={() => handleThumbnailClick(thumbnailStartIndex + index)}
+                                    />
+                                </div>
+                            ))}
                     </div>
                     {thumbnailStartIndex + 4 < productDetail.images.length && (
                         <button
@@ -158,7 +160,7 @@ const ProductDetail = () => {
                     </ul>
                     <Button className={cx('contact-button')} primary>
                         <FontAwesomeIcon icon={faPhone} className={cx('icon')} />
-                        <a href="tel:0961862450">Liên hệ ngay (0961862450)</a>
+                        <a href={`tel:${productDetail.phone_number}`}>Liên hệ ngay ({productDetail.phone_number})</a>
                     </Button>
                 </div>
             </div>

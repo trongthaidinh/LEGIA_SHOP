@@ -49,15 +49,6 @@
                 max-height: 200px;
             }
         }
-        em {
-            display: block;
-            margin: -20px 0 16px 0;
-            text-align: center;
-        }
-
-        a {
-            width: 100%;
-        }
 
         h1 {
             @include respond-to(sm) {

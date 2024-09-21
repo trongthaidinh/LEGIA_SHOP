@@ -223,7 +223,7 @@ const SideBar = () => {
                             <NavLink to={routes.experienceList}>Danh sách trải nghiệm</NavLink>
                         </li>
                         <li>
-                            <NavLink to={routes.addRecruitment}>Thêm mục trải nghiệm</NavLink>
+                            <NavLink to={routes.addExperience}>Thêm mục trải nghiệm</NavLink>
                         </li>
                     </ul>
                 </li>

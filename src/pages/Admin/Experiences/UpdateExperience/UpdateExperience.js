@@ -50,7 +50,7 @@ const UpdateExperience = () => {
                     isFeatured: experience.isFeatured,
                 });
             } catch (error) {
-                console.error('Lỗi khi tải dịch vụ:', error);
+                console.error('Lỗi khi tải trải nghiệm:', error);
             }
         };
 
@@ -80,14 +80,14 @@ const UpdateExperience = () => {
 
         try {
             await updateExperience(id, formData);
-            setNotification({ message: 'Cập nhật dịch vụ thành công!', type: 'success' });
+            setNotification({ message: 'Cập nhật trải nghiệm thành công!', type: 'success' });
             resetForm();
             setTimeout(() => {
                 navigate(routes.experienceList);
             }, 1000);
         } catch (error) {
-            setNotification({ message: 'Lỗi khi cập nhật dịch vụ.', type: 'error' });
-            console.error('Lỗi khi cập nhật dịch vụ:', error);
+            setNotification({ message: 'Lỗi khi cập nhật trải nghiệm.', type: 'error' });
+            console.error('Lỗi khi cập nhật trải nghiệm:', error);
         }
     };
 
@@ -97,7 +97,7 @@ const UpdateExperience = () => {
 
     return (
         <div className={styles.editExperience}>
-            <Title text="Cập nhật dịch vụ" />
+            <Title text="Cập nhật trải nghiệm" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting, setFieldValue, values }) => (

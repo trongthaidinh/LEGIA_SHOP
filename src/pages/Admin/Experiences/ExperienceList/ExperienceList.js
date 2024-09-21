@@ -29,14 +29,14 @@ const ExperienceList = () => {
     }, []);
 
     const handleDelete = async (id) => {
-        if (window.confirm('Bạn có chắc chắn muốn xóa dịch vụ này?')) {
+        if (window.confirm('Bạn có chắc chắn muốn xóa trải nghiệm này?')) {
             try {
                 await deleteExperience(id);
                 setExperiences(experiences.filter((experience) => experience.id !== id));
-                setNotification({ message: 'Dịch vụ đã được xóa thành công!', type: 'success' });
+                setNotification({ message: 'Trải nghiệm đã được xóa thành công!', type: 'success' });
             } catch (error) {
                 console.error('Error deleting experience:', error);
-                setNotification({ message: 'Đã xảy ra lỗi khi xóa dịch vụ!', type: 'error' });
+                setNotification({ message: 'Đã xảy ra lỗi khi xóa trải nghiệm!', type: 'error' });
             }
         }
     };
@@ -52,18 +52,18 @@ const ExperienceList = () => {
 
     return (
         <div className={styles.experienceContainer}>
-            <Title className={styles.pageTitle} text="Danh sách Dịch vụ" />
+            <Title className={styles.pageTitle} text="Danh sách Trải nghiệm" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}{' '}
             <div className={styles.actionsContainer}>
                 <input
                     type="text"
-                    placeholder="Tìm kiếm Dịch vụ..."
+                    placeholder="Tìm kiếm Trải nghiệm..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className={styles.searchInput}
                 />
                 <Link to={routes.addExperience} className={styles.addButton}>
-                    <FontAwesomeIcon icon={faPlus} /> Thêm mới Dịch vụ
+                    <FontAwesomeIcon icon={faPlus} /> Thêm mới Trải nghiệm
                 </Link>
             </div>
             <div className={styles.experienceList}>
@@ -71,7 +71,7 @@ const ExperienceList = () => {
                     <thead>
                         <tr>
                             <th>Hình ảnh</th>
-                            <th>Tên dịch vụ</th>
+                            <th>Tên trải nghiệm</th>
                             <th>Tóm tắt</th>
                             <th>Hành động</th>
                         </tr>

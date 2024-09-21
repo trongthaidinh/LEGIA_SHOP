@@ -125,6 +125,7 @@ export const createExperience = async (experienceData) => {
     try {
         const response = await httpRequest.post('/experiences', experienceData);
 
+        sessionStorage.removeItem(`allExperiences`);
         // Refresh sessionStorage for all experiences list
         const updatedExperiences = await getExperiences();
         saveToSessionStorage('allExperiences', updatedExperiences);

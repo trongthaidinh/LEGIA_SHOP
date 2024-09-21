@@ -103,12 +103,18 @@ export const getServiceByCategory = async (categoryId) => {
 };
 
 // Create service (no sessionStorage needed for POST requests)
-export const createService = async (serviceData) => {
+export const createService = async (experienceData) => {
     try {
-        const response = await httpRequest.post('/services', serviceData);
+        const response = await httpRequest.post('services', experienceData);
+
+        sessionStorage.removeItem(`allServices`);
+        // Refresh sessionStorage for all experiences list
+        const updatedServices = await getServices();
+        saveToSessionStorage('allServices', updatedServices);
+
         return response.data.data;
     } catch (error) {
-        console.error('Error adding service', error);
+        console.error('Error adding experience', error);
         throw error;
     }
 };

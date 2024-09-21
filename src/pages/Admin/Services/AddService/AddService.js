@@ -57,14 +57,13 @@ const AddService = () => {
     const handleSubmit = async (values, { resetForm }) => {
         const formData = new FormData();
 
-        formData.append('title', values.title);
+        formData.append('name', values.title);
         formData.append('summary', values.summary);
         files.forEach((image) => {
-            formData.append('images', image);
+            formData.append('images[]', image);
         });
-        formData.append('categoryId', values.categoryId);
+        formData.append('child_nav_id', values.categoryId);
         formData.append('content', values.content);
-        formData.append('isFeatured', values.isFeatured);
 
         try {
             await createService(formData);
@@ -146,12 +145,6 @@ const AddService = () => {
                                 initialValue={values.content}
                             />
                             <ErrorMessage name="content" component="div" className={styles.error} />
-                        </div>
-                        <div className={styles.formGroup}>
-                            <label>
-                                <Field type="checkbox" name="isFeatured" />
-                                Đánh dấu là nổi bật
-                            </label>
                         </div>
                         <button type="submit" disabled={isSubmitting} className={styles.submitButton}>
                             {isSubmitting ? <Spin size="small" /> : 'Thêm Dịch Vụ'}

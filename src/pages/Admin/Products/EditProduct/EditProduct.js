@@ -31,6 +31,7 @@ const EditProduct = () => {
         updateCate: '',
         summary: '',
         images: [],
+        phone_number: '',
     });
 
     const validationSchema = Yup.object({
@@ -39,6 +40,7 @@ const EditProduct = () => {
         updateCate: Yup.string().required('Danh mục là bắt buộc'),
         summary: Yup.string().required('Tóm tắt là bắt buộc'),
         features: Yup.array().of(Yup.string().required('Thông tin tổng quan không được bỏ trống')),
+        phone_number: Yup.string().required('Số điện thoại là bắt buộc'),
     });
 
     useEffect(() => {
@@ -62,6 +64,7 @@ const EditProduct = () => {
                 initialValues.content = productData.content;
                 initialValues.updateCate = productData.child_nav_id;
                 initialValues.summary = productData.summary;
+                initialValues.phone_number = productData.phone_number;
                 setFiles(productData.images || []);
             } catch (error) {
                 console.error('Lỗi khi tải sản phẩm:', error);
@@ -83,19 +86,23 @@ const EditProduct = () => {
         const formData = new FormData();
 
         formData.append('name', values.updateName);
+        formData.append('content', values.content);
+        formData.append('summary', values.summary);
+        formData.append('phone_number', values.phone_number);
+        formData.append('child_nav_id', values.updateCate);
+        formData.append('features', JSON.stringify(features));
 
         if (files.length > 0) {
-            files.forEach((image) => {
-                formData.append('images', image);
+            files.forEach((file) => {
+                if (typeof file === 'string') {
+                    formData.append('images[]', file);
+                } else {
+                    formData.append('images[]', file);
+                }
             });
         } else {
-            formData.append('images', product.images);
+            formData.append('images[]', product.images);
         }
-
-        formData.append('content', values.content);
-        formData.append('parent_nav_id', values.updateCate);
-        formData.append('summary', values.summary);
-        formData.append('features', JSON.stringify(features));
 
         try {
             await updateProduct(id, formData);
@@ -132,13 +139,28 @@ const EditProduct = () => {
             <Title text="Cập nhật sản phẩm" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             {product && (
-                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+                <Formik
+                    initialValues={{
+                        updateName: product ? product.name : '',
+                        content: product ? product.content : '',
+                        updateCate: product ? product.child_nav_id : '',
+                        summary: product ? product.summary : '',
+                        phone_number: product ? product.phone_number : '',
+                    }}
+                    validationSchema={validationSchema}
+                    onSubmit={handleSubmit}
+                >
                     {({ isSubmitting, setFieldValue, values }) => (
                         <Form className={styles.form}>
                             <div className={styles.formGroup}>
                                 <label htmlFor="updateName">Tên Sản Phẩm</label>
                                 <Field name="updateName" type="text" className={styles.input} />
                                 <ErrorMessage name="updateName" component="div" className={styles.error} />
+                            </div>
+                            <div className={styles.formGroup}>
+                                <label htmlFor="phone_number">Số Điện Thoại</label>
+                                <Field name="phone_number" type="text" className={styles.input} />
+                                <ErrorMessage name="phone_number" component="div" className={styles.error} />
                             </div>
                             <div className={styles.formGroup}>
                                 <label>Chọn Hình Ảnh</label>

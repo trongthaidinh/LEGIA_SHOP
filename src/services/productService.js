@@ -142,9 +142,14 @@ export const createProduct = async (productData) => {
 // Update a product and refresh sessionStorage for that product
 export const updateProduct = async (id, productData) => {
     try {
-        const response = await httpRequest.patch(`/products/${id}`, productData);
+        const response = await httpRequest.post(`/products/${id}`, productData);
 
+        sessionStorage.removeItem('allProducts');
+        sessionStorage.removeItem(`product_${id}`);
+
+        const updateProduct = await getProducts();
         // Update sessionStorage with the new product data
+        saveToSessionStorage('allProducts', updateProduct);
         saveToSessionStorage(`product_${id}`, response.data.data);
 
         return response.data.data;
@@ -162,6 +167,9 @@ export const deleteProduct = async (id) => {
         // Remove the deleted product from sessionStorage
         sessionStorage.removeItem(`product_${id}`);
         sessionStorage.removeItem('allProducts');
+
+        const updateProduct = await getProducts();
+        saveToSessionStorage('allProducts', updateProduct);
 
         return response.data.data;
     } catch (error) {

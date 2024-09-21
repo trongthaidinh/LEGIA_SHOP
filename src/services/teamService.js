@@ -33,35 +33,15 @@ export const getMembers = async () => {
     }
 };
 
-export const getDepartmentMembers = async (departmentId) => {
-    const sessionKey = `department_${departmentId}_members`;
-
-    const cachedData = getFromSessionStorage(sessionKey);
-    if (cachedData) {
-        return cachedData;
-    }
-
+export const addMember = async (memberData) => {
     try {
-        const response = await httpRequest.get(`/department/${departmentId}/members`);
-        const departmentMembersData = response.data.data;
+        const response = await httpRequest.post(`/teams`, memberData);
 
-        // Save to sessionStorage
-        saveToSessionStorage(sessionKey, departmentMembersData);
+        sessionStorage.removeItem(`allMembers`);
 
-        return departmentMembersData;
-    } catch (error) {
-        console.error('Error fetching department members', error);
-        throw error;
-    }
-};
-
-export const addMember = async (memberData, departmentId) => {
-    try {
-        const response = await httpRequest.post(`/department/${departmentId}`, memberData);
-
-        // Refresh sessionStorage for the department members list
-        const updatedMembers = await getDepartmentMembers(departmentId);
-        saveToSessionStorage(`department_${departmentId}_members`, updatedMembers);
+        // Refresh sessionStorage for all services list
+        const updateMember = await getMembers();
+        saveToSessionStorage('allMembers', updateMember);
 
         return response.data.data;
     } catch (error) {
@@ -70,13 +50,18 @@ export const addMember = async (memberData, departmentId) => {
     }
 };
 
-export const updateMember = async (memberId, departmentId, memberData) => {
+export const updateMember = async (memberId, memberData) => {
     try {
-        const response = await httpRequest.patch(`/department/${departmentId}/members/${memberId}`, memberData);
+        const response = await httpRequest.patch(`/members/${memberId}`, memberData);
 
-        // Refresh sessionStorage for the department members list
-        const updatedMembers = await getDepartmentMembers(departmentId);
-        saveToSessionStorage(`department_${departmentId}_members`, updatedMembers);
+        sessionStorage.removeItem(`allMembers`);
+        sessionStorage.removeItem(`member_${memberId}`);
+
+        // Refresh sessionStorage for all services list
+        const updateMember = await getMembers();
+        const updateMemberId = await getMemberById(memberId);
+        saveToSessionStorage('allMembers', updateMember);
+        saveToSessionStorage(`member_${memberId}`, updateMemberId);
 
         return response.data;
     } catch (error) {
@@ -85,8 +70,8 @@ export const updateMember = async (memberId, departmentId, memberData) => {
     }
 };
 
-export const getMemberById = async (memberId, departmentId) => {
-    const sessionKey = `member_${memberId}_department_${departmentId}`;
+export const getMemberById = async (memberId) => {
+    const sessionKey = `member_${memberId}`;
 
     const cachedData = getFromSessionStorage(sessionKey);
     if (cachedData) {
@@ -94,7 +79,7 @@ export const getMemberById = async (memberId, departmentId) => {
     }
 
     try {
-        const response = await httpRequest.get(`/department/${departmentId}/members/${memberId}`);
+        const response = await httpRequest.get(`/teams/${memberId}`);
         const memberData = response.data.data;
 
         // Save to sessionStorage
@@ -107,83 +92,18 @@ export const getMemberById = async (memberId, departmentId) => {
     }
 };
 
-export const deleteMember = async (memberId, departmentId) => {
+export const deleteMember = async (memberId) => {
     try {
-        await httpRequest.delete(`/department/${departmentId}/members/${memberId}`);
+        await httpRequest.delete(`/teams/${memberId}`);
 
-        // Remove the deleted member from sessionStorage
-        sessionStorage.removeItem(`member_${memberId}_department_${departmentId}`);
+        sessionStorage.removeItem(`allMembers`);
+        sessionStorage.removeItem(`member_${memberId}`);
 
-        // Refresh sessionStorage for the department members list
-        const updatedMembers = await getDepartmentMembers(departmentId);
-        saveToSessionStorage(`department_${departmentId}_members`, updatedMembers);
+        // Refresh sessionStorage for all services list
+        const updateMember = await getMembers();
+        saveToSessionStorage('allMembers', updateMember);
     } catch (error) {
         console.error('Error deleting member', error);
-        throw error;
-    }
-};
-
-// Department
-export const getDepartments = async () => {
-    const sessionKey = 'allDepartments';
-
-    const cachedData = getFromSessionStorage(sessionKey);
-    if (cachedData) {
-        return cachedData;
-    }
-
-    try {
-        const response = await httpRequest.get('/department');
-        const departmentsData = response.data.data;
-
-        // Save to sessionStorage
-        saveToSessionStorage(sessionKey, departmentsData);
-
-        return departmentsData;
-    } catch (error) {
-        console.error('Error fetching departments', error);
-        throw error;
-    }
-};
-
-export const addDepartment = async (departmentData) => {
-    try {
-        const response = await httpRequest.post('/department', departmentData);
-
-        // Refresh sessionStorage for the departments list
-        const updatedDepartments = await getDepartments();
-        saveToSessionStorage('allDepartments', updatedDepartments);
-
-        return response.data;
-    } catch (error) {
-        console.error('Error adding department', error);
-        throw error;
-    }
-};
-
-export const updateDepartment = async (departmentId, departmentData) => {
-    try {
-        const response = await httpRequest.put(`/department/${departmentId}`, departmentData);
-
-        // Refresh sessionStorage for the departments list
-        const updatedDepartments = await getDepartments();
-        saveToSessionStorage('allDepartments', updatedDepartments);
-
-        return response.data;
-    } catch (error) {
-        console.error('Error updating department', error);
-        throw error;
-    }
-};
-
-export const deleteDepartment = async (departmentId) => {
-    try {
-        await httpRequest.delete(`/department/${departmentId}`);
-
-        // Remove the deleted department from sessionStorage
-        sessionStorage.removeItem('allDepartments');
-    } catch (error) {
-        console.error('Error deleting department', error);
         throw error;
     }
 };

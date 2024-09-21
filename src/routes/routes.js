@@ -64,6 +64,9 @@ import Experience from '~/pages/Experience';
 import ExperienceList from '~/pages/Admin/Experiences/ExperienceList';
 import AddExperience from '~/pages/Admin/Experiences/AddExperience';
 import UpdateExperience from '~/pages/Admin/Experiences/UpdateExperience';
+import MemberList from '~/pages/Admin/Team/MemberList';
+import AddMember from '~/pages/Admin/Team/AddMember';
+// import UpdateMember from '~/pages/Admin/Team/UpdateMember';
 
 // Public Routes
 const publicRoutes = [
@@ -187,6 +190,9 @@ const privateRoutes = [
     { path: config.routes.categoryList, component: CategoryList, layout: AdminLayout },
     { path: config.routes.addCategory, component: AddCategory, layout: AdminLayout },
     { path: config.routes.updateCategory, component: UpdateCategory, layout: AdminLayout },
+    { path: config.routes.memberList, component: MemberList, layout: AdminLayout },
+    { path: config.routes.addMember, component: AddMember, layout: AdminLayout },
+    // { path: config.routes.updateMember, component: UpdateMember, layout: AdminLayout },
 ];
 
 export { publicRoutes, privateRoutes };

@@ -38,6 +38,9 @@ const routes = {
     categoryList: '/admin/category-list',
     addCategory: '/admin/add-category',
     updateCategory: '/admin/update-category/:id',
+    memberList: '/admin/member-list',
+    addMember: '/admin/add-member',
+    updateMember: '/admin/update-member/:id',
     //User
     home: '/',
     about: 'tong-quan',

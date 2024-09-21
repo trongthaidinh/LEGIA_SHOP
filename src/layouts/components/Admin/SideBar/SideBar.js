@@ -18,6 +18,7 @@ import {
     faBookOpen,
     faInfoCircle,
     faEarthAsia,
+    faUserFriends,
 } from '@fortawesome/free-solid-svg-icons';
 import routes from '~/config/routes';
 import images from '~/assets/images';
@@ -279,6 +280,30 @@ const SideBar = () => {
                         </li>
                         <li>
                             <NavLink to={routes.addPage}>Thêm trang</NavLink>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div className={styles.menuItem} onClick={() => toggleMenu('teamManagement')}>
+                        <div>
+                            <FontAwesomeIcon icon={faUserFriends} className={styles.menuIcon} />
+                            <span className={styles.menuText}>Quản lý thành viên</span>
+                        </div>
+                        {!isCollapsed && (
+                            <>
+                                <FontAwesomeIcon
+                                    icon={openMenus.teamManagement ? faChevronDown : faChevronRight}
+                                    className={styles.chevronIcon}
+                                />
+                            </>
+                        )}
+                    </div>
+                    <ul className={`${styles.subMenu} ${openMenus.teamManagement ? styles.open : ''}`}>
+                        <li>
+                            <NavLink to={routes.memberList}>Danh sách thành viên</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={routes.addMember}>Thêm thành viên</NavLink>
                         </li>
                     </ul>
                 </li>

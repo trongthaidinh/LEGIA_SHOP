@@ -1,4 +1,3 @@
-
 import config from '~/config';
 
 // Layouts
@@ -62,6 +61,9 @@ import UpdateCategory from '~/pages/Admin/Category/UpdateCategory';
 import ExperienceDetail from '~/pages/ExperienceDetail';
 import ExperienceCategory from '~/pages/ExperienceCategory';
 import Experience from '~/pages/Experience';
+import ExperienceList from '~/pages/Admin/Experiences/ExperienceList';
+import AddExperience from '~/pages/Admin/Experiences/AddExperience';
+import UpdateExperience from '~/pages/Admin/Experiences/UpdateExperience';
 
 // Public Routes
 const publicRoutes = [
@@ -113,12 +115,16 @@ const publicRoutes = [
     {
         path: config.routes.experienceDetail,
         component: ExperienceDetail,
-        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.experiences} categoryType={'trai-nghiem'} />,
+        layout: (props) => (
+            <DefaultLayout {...props} baseRoute={config.routes.experiences} categoryType={'trai-nghiem'} />
+        ),
     },
     {
         path: config.routes.experiencesCategory,
         component: ExperienceCategory,
-        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.experiences} categoryType={'trai-nghiem'} />,
+        layout: (props) => (
+            <DefaultLayout {...props} baseRoute={config.routes.experiences} categoryType={'trai-nghiem'} />
+        ),
     },
     { path: config.routes.search, component: Search, layout: OnlyHeaderLayout },
     { path: config.routes.error404, component: Error404, layout: NothingLayout },
@@ -160,6 +166,9 @@ const privateRoutes = [
     { path: config.routes.serviceList, component: ServiceList, layout: AdminLayout },
     { path: config.routes.addService, component: AddService, layout: AdminLayout },
     { path: config.routes.updateService, component: UpdateService, layout: AdminLayout },
+    { path: config.routes.experienceList, component: ExperienceList, layout: AdminLayout },
+    { path: config.routes.addExperience, component: AddExperience, layout: AdminLayout },
+    { path: config.routes.updateExperience, component: UpdateExperience, layout: AdminLayout },
     { path: config.routes.partnerList, component: PartnerList, layout: AdminLayout },
     { path: config.routes.addPartner, component: AddPartner, layout: AdminLayout },
     { path: config.routes.updateUser, component: UpdateUser, layout: AdminLayout },

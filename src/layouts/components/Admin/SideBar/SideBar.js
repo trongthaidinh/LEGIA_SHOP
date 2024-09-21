@@ -17,6 +17,7 @@ import {
     faLayerGroup,
     faBookOpen,
     faInfoCircle,
+    faEarthAsia,
 } from '@fortawesome/free-solid-svg-icons';
 import routes from '~/config/routes';
 import images from '~/assets/images';
@@ -202,10 +203,10 @@ const SideBar = () => {
                     </ul>
                 </li>
 
-                {/* <li>
+                <li>
                     <div className={cx('menuItem')} onClick={() => toggleMenu('experienceManagement')}>
                         <div>
-                            <FontAwesomeIcon icon={faLayerGroup} className={cx('menuIcon')} />
+                            <FontAwesomeIcon icon={faEarthAsia} className={cx('menuIcon')} />
                             <span className={cx('menuText')}>Quản lý trải nghiệm</span>
                         </div>
                         {!isCollapsed && (
@@ -217,15 +218,15 @@ const SideBar = () => {
                             </>
                         )}
                     </div>
-                    <ul className={cx('subMenu', { open: openMenus.recruitmentManagement })}>
+                    <ul className={cx('subMenu', { open: openMenus.experienceManagement })}>
                         <li>
-                            <NavLink to={routes.recruitmentList}>Danh sách tin tuyển dụng</NavLink>
+                            <NavLink to={routes.experienceList}>Danh sách trải nghiệm</NavLink>
                         </li>
                         <li>
-                            <NavLink to={routes.addRecruitment}>Thêm tin tuyển dụng</NavLink>
+                            <NavLink to={routes.addRecruitment}>Thêm mục trải nghiệm</NavLink>
                         </li>
                     </ul>
-                </li> */}
+                </li>
                 <li>
                     <div className={styles.menuItem} onClick={() => toggleMenu('libraryManagement')}>
                         <div>

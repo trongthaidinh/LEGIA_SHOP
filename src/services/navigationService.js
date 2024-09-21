@@ -241,7 +241,7 @@ export const updateMainNavigationLink = async (id, data) => {
     try {
         const response = await httpRequest.patch(`/parent-navs/${id}`, data);
 
-        sessionStorage.removeItem(`navigation_${id}`);
+        sessionStorage.removeItem(`parent_nav_${id}`);
         sessionStorage.removeItem('navigationLinks');
         const updatedNavigationLinks = await getNavigationLinks();
         saveToSessionStorage('navigationLinks', updatedNavigationLinks);
@@ -257,7 +257,7 @@ export const updateSubNavigationLink = async (id, data) => {
     try {
         const response = await httpRequest.patch(`/child-navs/${id}`, data);
 
-        sessionStorage.removeItem(`navigation_${id}`);
+        sessionStorage.removeItem(`child_nav_${id}`);
         sessionStorage.removeItem('navigationLinks');
         const updatedNavigationLinks = await getNavigationLinks();
         saveToSessionStorage('navigationLinks', updatedNavigationLinks);
@@ -273,7 +273,7 @@ export const updateChildNavigationLink = async (id, data) => {
     try {
         const response = await httpRequest.patch(`/child-navs-two/${id}`, data);
 
-        sessionStorage.removeItem(`navigation_${id}`);
+        sessionStorage.removeItem(`child_nav_two_${id}`);
         sessionStorage.removeItem('navigationLinks');
         const updatedNavigationLinks = await getNavigationLinks();
         saveToSessionStorage('navigationLinks', updatedNavigationLinks);

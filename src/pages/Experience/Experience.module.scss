@@ -20,7 +20,7 @@
 .experience-section {
     width: var(--default-layout-width);
     display: grid;
-    grid-template-columns: calc(75% - 10px) calc(25% - 10px);
+    grid-template-columns: 100%;
     gap: 20px;
 
     @include respond-to(lg) {
@@ -44,7 +44,7 @@
 
     .experience-title {
         font-size: 20px;
-        min-width: 120px;
+        min-width: 240px;
         width: 150px;
         padding: 4px 8px;
         background-color: var(--primary);

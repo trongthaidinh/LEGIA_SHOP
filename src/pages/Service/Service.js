@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import CardService from 'components/CardService';
-import SuggestCard from '~/components/SuggestCard';
+// import SuggestCard from '~/components/SuggestCard';
 import { getServiceByCategory } from '~/services/serviceService';
 import styles from './Service.module.scss';
 import Title from '~/components/Title';
-import ButtonGroup from '~/components/ButtonGroup';
+// import ButtonGroup from '~/components/ButtonGroup';
 import PushNotification from '~/components/PushNotification';
 import LoadingScreen from '~/components/LoadingScreen';
 import routes from '~/config/routes';
@@ -20,17 +20,17 @@ import { Helmet } from 'react-helmet';
 const cx = classNames.bind(styles);
 
 const Service = () => {
-    const [serviceItems, setServiceItems] = useState([]);
+    // const [serviceItems, setServiceItems] = useState([]);
     const [categories, setCategories] = useState([]);
     const [groupedService, setGroupedService] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [selectedSuggestion, setSelectedSuggestion] = useState(0);
+    // const [selectedSuggestion, setSelectedSuggestion] = useState(0);
 
     useEffect(() => {
         const fetchCategoriesAndService = async () => {
             try {
-                const categoriesData = await getCategoriesBySlug("dich-vu");
+                const categoriesData = await getCategoriesBySlug('dich-vu');
                 setCategories(categoriesData);
 
                 const groupedServiceMap = {};
@@ -46,7 +46,7 @@ const Service = () => {
                 );
 
                 setGroupedService(groupedServiceMap);
-                setServiceItems(Object.values(groupedServiceMap).flat());
+                // setServiceItems(Object.values(groupedServiceMap).flat());
             } catch (error) {
                 setError(error);
                 console.error('Error fetching service:', error);
@@ -58,14 +58,14 @@ const Service = () => {
         fetchCategoriesAndService();
     }, []);
 
-    const handleButtonClick = (index) => {
-        setSelectedSuggestion(index);
-    };
+    // const handleButtonClick = (index) => {
+    //     setSelectedSuggestion(index);
+    // };
 
-    const getCategorySlug = (categoryId) => {
-        const category = categories.find((category) => categoryId === category.id);
-        return category ? category.slug : '';
-    };
+    // const getCategorySlug = (categoryId) => {
+    //     const category = categories.find((category) => categoryId === category.id);
+    //     return category ? category.slug : '';
+    // };
 
     if (error) {
         const errorMessage = error.response ? error.response.data.message : 'Network Error';
@@ -76,22 +76,22 @@ const Service = () => {
         return <LoadingScreen isLoading={loading} />;
     }
 
-    const filteredServiceItems = serviceItems
-        .filter((item) => {
-            if (selectedSuggestion === 0) {
-                return item.isFeatured;
-            }
-            if (selectedSuggestion === 1) {
-                return item.views > 10;
-            }
-            return true;
-        })
-        .slice(0, 5);
+    // const filteredServiceItems = serviceItems
+    //     .filter((item) => {
+    //         if (selectedSuggestion === 0) {
+    //             return item.isFeatured;
+    //         }
+    //         if (selectedSuggestion === 1) {
+    //             return item.views > 10;
+    //         }
+    //         return true;
+    //     })
+    //     .slice(0, 5);
 
     return (
         <article className={cx('wrapper')}>
             <Helmet>
-                <title>Dịch Vụ | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
+                <title>Dịch Vụ Du Lịch | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta
                     name="description"
                     content="Công ty TNHH Công nghệ TakaTech cung cấp sản phẩm, dịch vụ xây dựng, phát triển phần mềm, ứng dụng di động - mobile app, website."
@@ -100,7 +100,7 @@ const Service = () => {
             </Helmet>
             <div className={cx('service-section')}>
                 <div className={cx('service-column')}>
-                    <h2 className={cx('service-title')}>Dịch Vụ</h2>
+                    <h2 className={cx('service-title')}>Dịch Vụ Du Lịch</h2>
                     {categories.map((category) => {
                         const slides = groupedService[category.id] || []; // Make sure to get the right services
                         const shouldLoop = slides.length > 3;
@@ -151,7 +151,7 @@ const Service = () => {
                         );
                     })}
                 </div>
-                <div className={cx('suggest')}>
+                {/* <div className={cx('suggest')}>
                     <h2 className={cx('suggest-title')}>Có thể bạn quan tâm</h2>
                     <ButtonGroup buttons={['Nổi bật', 'Xem nhiều']} onButtonClick={handleButtonClick} />
                     <div className={cx('suggest-items')}>
@@ -167,7 +167,7 @@ const Service = () => {
                             </Link>
                         ))}
                     </div>
-                </div>
+                </div> */}
             </div>
         </article>
     );

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import CardExperience from 'components/CardService';
-import SuggestCard from '~/components/SuggestCard';
+// import SuggestCard from '~/components/SuggestCard';
 import { getExperienceByCategory } from '~/services/experienceService';
 import styles from './Experience.module.scss';
 import Title from '~/components/Title';
-import ButtonGroup from '~/components/ButtonGroup';
+// import ButtonGroup from '~/components/ButtonGroup';
 import PushNotification from '~/components/PushNotification';
 import LoadingScreen from '~/components/LoadingScreen';
 import routes from '~/config/routes';
@@ -20,17 +20,17 @@ import { Helmet } from 'react-helmet';
 const cx = classNames.bind(styles);
 
 const Experience = () => {
-    const [experienceItems, setExperienceItems] = useState([]);
+    // const [experienceItems, setExperienceItems] = useState([]);
     const [categories, setCategories] = useState([]);
     const [groupedExperience, setGroupedExperience] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [selectedSuggestion, setSelectedSuggestion] = useState(0);
+    // const [selectedSuggestion, setSelectedSuggestion] = useState(0);
 
     useEffect(() => {
         const fetchCategoriesAndExperience = async () => {
             try {
-                const categoriesData = await getCategoriesBySlug("trai-nghiem");
+                const categoriesData = await getCategoriesBySlug('trai-nghiem');
                 setCategories(categoriesData);
 
                 const groupedExperienceMap = {};
@@ -46,7 +46,7 @@ const Experience = () => {
                 );
 
                 setGroupedExperience(groupedExperienceMap);
-                setExperienceItems(Object.values(groupedExperienceMap).flat());
+                // setExperienceItems(Object.values(groupedExperienceMap).flat());
             } catch (error) {
                 setError(error);
                 console.error('Error fetching experience:', error);
@@ -58,14 +58,14 @@ const Experience = () => {
         fetchCategoriesAndExperience();
     }, []);
 
-    const handleButtonClick = (index) => {
-        setSelectedSuggestion(index);
-    };
+    // const handleButtonClick = (index) => {
+    //     setSelectedSuggestion(index);
+    // };
 
-    const getCategorySlug = (categoryId) => {
-        const category = categories.find((category) => categoryId === category.id);
-        return category ? category.slug : '';
-    };
+    // const getCategorySlug = (categoryId) => {
+    //     const category = categories.find((category) => categoryId === category.id);
+    //     return category ? category.slug : '';
+    // };
 
     if (error) {
         const errorMessage = error.response ? error.response.data.message : 'Network Error';
@@ -76,17 +76,17 @@ const Experience = () => {
         return <LoadingScreen isLoading={loading} />;
     }
 
-    const filteredExperienceItems = experienceItems
-        .filter((item) => {
-            if (selectedSuggestion === 0) {
-                return item.isFeatured;
-            }
-            if (selectedSuggestion === 1) {
-                return item.views > 10;
-            }
-            return true;
-        })
-        .slice(0, 5);
+    // const filteredExperienceItems = experienceItems
+    //     .filter((item) => {
+    //         if (selectedSuggestion === 0) {
+    //             return item.isFeatured;
+    //         }
+    //         if (selectedSuggestion === 1) {
+    //             return item.views > 10;
+    //         }
+    //         return true;
+    //     })
+    //     .slice(0, 5);
 
     return (
         <article className={cx('wrapper')}>
@@ -100,13 +100,13 @@ const Experience = () => {
             </Helmet>
             <div className={cx('experience-section')}>
                 <div className={cx('experience-column')}>
-                    <h2 className={cx('experience-title')}>Dịch Vụ</h2>
+                    <h2 className={cx('experience-title')}>Khu Vực Trải Nghiệm</h2>
                     {categories.map((category) => {
-                        const slides = groupedExperience[category.id] || []; 
+                        const slides = groupedExperience[category.id] || [];
                         const shouldLoop = slides.length > 3;
 
                         if (slides.length === 0) {
-                            return null; 
+                            return null;
                         }
 
                         return (
@@ -151,12 +151,15 @@ const Experience = () => {
                         );
                     })}
                 </div>
-                <div className={cx('suggest')}>
+                {/* <div className={cx('suggest')}>
                     <h2 className={cx('suggest-title')}>Có thể bạn quan tâm</h2>
                     <ButtonGroup buttons={['Nổi bật', 'Xem nhiều']} onButtonClick={handleButtonClick} />
                     <div className={cx('suggest-items')}>
                         {filteredExperienceItems.map((item, index) => (
-                            <Link key={index} to={`${routes.experiences}/${getCategorySlug(item.categoryId)}/${item.id}`}>
+                            <Link
+                                key={index}
+                                to={`${routes.experiences}/${getCategorySlug(item.categoryId)}/${item.id}`}
+                            >
                                 <SuggestCard
                                     title={item.title}
                                     summary={item.summary}
@@ -167,7 +170,7 @@ const Experience = () => {
                             </Link>
                         ))}
                     </div>
-                </div>
+                </div> */}
             </div>
         </article>
     );

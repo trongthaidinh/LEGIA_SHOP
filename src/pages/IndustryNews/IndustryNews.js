@@ -106,10 +106,10 @@ function NewsCategory() {
         }
     };
 
-    const handleRangeChange = (dates) => {
-        setFilterDates(dates);
-        setCurrentPage(1);
-    };
+    // const handleRangeChange = (dates) => {
+    //     setFilterDates(dates);
+    //     setCurrentPage(1);
+    // };
 
     const renderNewsCategory = () => {
         if (news.length === 0) {
@@ -172,13 +172,16 @@ function NewsCategory() {
         <div className={cx('container')}>
             <Helmet>
                 <title>{categoryName} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
-                <meta name="description" content={`Xem các tin tức liên quan đến ${categoryName} trên HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn.`} />
+                <meta
+                    name="description"
+                    content={`Xem các tin tức liên quan đến ${categoryName} trên HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn.`}
+                />
                 <meta name="keywords" content={`${categoryName}, tin tức, takatech`} />
             </Helmet>
 
             <Title text={categoryName} />
 
-            <div className={cx('filter')}>
+            {/* <div className={cx('filter')}>
                 <Space direction="vertical" size={12}>
                     <RangePicker
                         value={filterDates}
@@ -200,7 +203,7 @@ function NewsCategory() {
                 >
                     Lọc
                 </Button>
-            </div>
+            </div> */}
 
             <div className={cx('newsGrid')}>{renderNewsCategory()}</div>
             {renderPagination()}

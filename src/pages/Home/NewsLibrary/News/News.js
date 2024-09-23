@@ -49,7 +49,7 @@ function News() {
     const filteredNews = (() => {
         switch (activeIndex) {
             case 0:
-                return [...newsArr].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 3);
+                return [...newsArr].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 3);
             case 1:
                 return newsArr.filter((news) => news.isFeatured).slice(0, 3);
             case 2:

@@ -49,11 +49,11 @@ function News() {
     const filteredNews = (() => {
         switch (activeIndex) {
             case 0:
-                return [...newsArr].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 4);
+                return [...newsArr].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 3);
             case 1:
-                return newsArr.filter((news) => news.isFeatured).slice(0, 4);
+                return newsArr.filter((news) => news.isFeatured).slice(0, 3);
             case 2:
-                return [...newsArr].sort(() => Math.random() - 0.5).slice(0, 4);
+                return [...newsArr].sort(() => Math.random() - 0.5).slice(0, 3);
             default:
                 return newsArr;
         }

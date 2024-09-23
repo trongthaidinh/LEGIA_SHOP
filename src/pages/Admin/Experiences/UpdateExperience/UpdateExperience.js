@@ -25,7 +25,6 @@ const UpdateExperience = () => {
         image: Yup.mixed().required('Hình ảnh là bắt buộc'),
         categoryId: Yup.string().required('Danh mục là bắt buộc'),
         content: Yup.string().required('Nội dung là bắt buộc'),
-        isFeatured: Yup.boolean(),
     });
 
     useEffect(() => {
@@ -42,12 +41,11 @@ const UpdateExperience = () => {
             try {
                 const experience = await getExperienceById(id);
                 setInitialValues({
-                    title: experience.title,
+                    title: experience.name,
                     summary: experience.summary,
-                    image: experience.images,
-                    categoryId: experience.categoryId,
+                    image: experience.images[0],
+                    categoryId: experience.child_nav_id,
                     content: experience.content,
-                    isFeatured: experience.isFeatured,
                 });
             } catch (error) {
                 console.error('Lỗi khi tải trải nghiệm:', error);
@@ -65,18 +63,17 @@ const UpdateExperience = () => {
     const handleSubmit = async (values, { resetForm }) => {
         const formData = new FormData();
 
-        formData.append('title', values.title);
+        formData.append('name', values.title);
         formData.append('summary', values.summary);
 
         if (values.image) {
-            formData.append('images', values.image);
+            formData.append('images[]', values.image);
         } else {
-            formData.append('images', initialValues.image);
+            formData.append('images[]', initialValues.image);
         }
 
-        formData.append('categoryId', values.categoryId);
+        formData.append('child_nav_id', values.categoryId);
         formData.append('content', values.content);
-        formData.append('isFeatured', values.isFeatured);
 
         try {
             await updateExperience(id, formData);
@@ -139,8 +136,8 @@ const UpdateExperience = () => {
                             <Field as="select" name="categoryId" className={styles.input}>
                                 <option value="">Chọn danh mục</option>
                                 {categories.map((category) => (
-                                    <option key={category._id} value={category._id}>
-                                        {category.name}
+                                    <option key={category.id} value={category.id}>
+                                        {category.title}
                                     </option>
                                 ))}
                             </Field>
@@ -153,12 +150,6 @@ const UpdateExperience = () => {
                                 initialValue={values.content}
                             />
                             <ErrorMessage name="content" component="div" className={styles.error} />
-                        </div>
-                        <div className={styles.formGroup}>
-                            <label>
-                                <Field type="checkbox" name="isFeatured" />
-                                Đánh dấu là nổi bật
-                            </label>
                         </div>
                         <button type="submit" disabled={isSubmitting} className={styles.submitButton}>
                             {isSubmitting ? <Spin size="small" /> : 'Cập nhật'}

@@ -122,9 +122,12 @@ export const createService = async (experienceData) => {
 // Update service and refresh sessionStorage for that service item
 export const updateService = async (id, serviceData) => {
     try {
-        const response = await httpRequest.patch(`/services/${id}`, serviceData);
+        const response = await httpRequest.post(`/services/${id}`, serviceData);
 
-        // Update sessionStorage with the new service data
+        sessionStorage.removeItem(`service_${id}`);
+        sessionStorage.removeItem(`allServices`);
+        const updatedServices = await getServices();
+        saveToSessionStorage('allServices', updatedServices);
         saveToSessionStorage(`service_${id}`, response.data.data);
 
         return response.data.data;

@@ -184,6 +184,8 @@ export const createNews = async (newsData) => {
         const response = await httpRequest.post('/news', newsData);
 
         sessionStorage.removeItem('allNews');
+        const updatedNews = await getNews();
+        saveToSessionStorage('allNews', updatedNews);
 
         return response.data.data;
     } catch (error) {
@@ -195,9 +197,13 @@ export const createNews = async (newsData) => {
 // Update news and refresh sessionStorage for that news item
 export const updateNews = async (id, newsData) => {
     try {
-        const response = await httpRequest.patch(`/news/${id}`, newsData);
+        const response = await httpRequest.post(`/news/${id}`, newsData);
 
-        // Update sessionStorage with the new news data
+        // Update sessionStorage with the new news dat
+        sessionStorage.removeItem('allNews');
+        sessionStorage.removeItem(`news_${id}`);
+        const updatedNews = await getNews();
+        saveToSessionStorage('allNews', updatedNews);
         saveToSessionStorage(`news_${id}`, response.data.data);
 
         return response.data.data;
@@ -215,6 +221,8 @@ export const deleteNews = async (id) => {
         // Remove the deleted news from sessionStorage
         sessionStorage.removeItem('allNews');
         sessionStorage.removeItem(`news_${id}`);
+        const updatedNews = await getNews();
+        saveToSessionStorage('allNews', updatedNews);
     } catch (error) {
         console.error(`Error deleting news with id ${id}`, error);
         throw error;

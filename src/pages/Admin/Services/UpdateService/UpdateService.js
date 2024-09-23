@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { getServiceById, updateService } from '~/services/serviceService';
-import { getCategoriesByType } from '~/services/categoryService';
+import { getCategoriesBySlug } from '~/services/categoryService';
 import CustomEditor from '~/components/CustomEditor';
 import PushNotification from '~/components/PushNotification';
 import styles from './UpdateService.module.scss';
@@ -25,13 +25,12 @@ const UpdateService = () => {
         image: Yup.mixed().required('Hình ảnh là bắt buộc'),
         categoryId: Yup.string().required('Danh mục là bắt buộc'),
         content: Yup.string().required('Nội dung là bắt buộc'),
-        isFeatured: Yup.boolean(),
     });
 
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const fetchedCategories = await getCategoriesByType(3);
+                const fetchedCategories = await getCategoriesBySlug('dich-vu');
                 setCategories(fetchedCategories);
             } catch (error) {
                 console.error('Lỗi khi tải danh mục:', error);
@@ -42,12 +41,11 @@ const UpdateService = () => {
             try {
                 const service = await getServiceById(id);
                 setInitialValues({
-                    title: service.title,
+                    title: service.name,
                     summary: service.summary,
-                    image: service.images,
-                    categoryId: service.categoryId,
+                    image: service.images[0],
+                    categoryId: service.child_nav_id,
                     content: service.content,
-                    isFeatured: service.isFeatured,
                 });
             } catch (error) {
                 console.error('Lỗi khi tải dịch vụ:', error);
@@ -65,16 +63,16 @@ const UpdateService = () => {
     const handleSubmit = async (values, { resetForm }) => {
         const formData = new FormData();
 
-        formData.append('title', values.title);
+        formData.append('name', values.title);
         formData.append('summary', values.summary);
 
         if (values.image) {
-            formData.append('images', values.image);
+            formData.append('images[]', values.image);
         } else {
-            formData.append('images', initialValues.image);
+            formData.append('images[]', initialValues.image);
         }
 
-        formData.append('categoryId', values.categoryId);
+        formData.append('child_nav_id', values.categoryId);
         formData.append('content', values.content);
         formData.append('isFeatured', values.isFeatured);
 
@@ -139,8 +137,8 @@ const UpdateService = () => {
                             <Field as="select" name="categoryId" className={styles.input}>
                                 <option value="">Chọn danh mục</option>
                                 {categories.map((category) => (
-                                    <option key={category._id} value={category._id}>
-                                        {category.name}
+                                    <option key={category.id} value={category.id}>
+                                        {category.title}
                                     </option>
                                 ))}
                             </Field>
@@ -153,12 +151,6 @@ const UpdateService = () => {
                                 initialValue={values.content}
                             />
                             <ErrorMessage name="content" component="div" className={styles.error} />
-                        </div>
-                        <div className={styles.formGroup}>
-                            <label>
-                                <Field type="checkbox" name="isFeatured" />
-                                Đánh dấu là nổi bật
-                            </label>
                         </div>
                         <button type="submit" disabled={isSubmitting} className={styles.submitButton}>
                             {isSubmitting ? <Spin size="small" /> : 'Cập nhật'}

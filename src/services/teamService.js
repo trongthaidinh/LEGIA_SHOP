@@ -52,16 +52,14 @@ export const addMember = async (memberData) => {
 
 export const updateMember = async (memberId, memberData) => {
     try {
-        const response = await httpRequest.patch(`/members/${memberId}`, memberData);
+        const response = await httpRequest.post(`/teams/${memberId}`, memberData);
 
-        sessionStorage.removeItem(`allMembers`);
         sessionStorage.removeItem(`member_${memberId}`);
+        sessionStorage.removeItem(`allMembers`);
 
         // Refresh sessionStorage for all services list
         const updateMember = await getMembers();
-        const updateMemberId = await getMemberById(memberId);
         saveToSessionStorage('allMembers', updateMember);
-        saveToSessionStorage(`member_${memberId}`, updateMemberId);
 
         return response.data;
     } catch (error) {

@@ -70,14 +70,14 @@ const UpdateNews = () => {
         formData.append('summary', values.summary);
 
         if (values.image) {
-            formData.append('images', values.image);
+            formData.append('images[]', values.image);
         } else {
-            formData.append('images', initialValues.images);
+            formData.append('images[]', initialValues.images);
         }
 
-        formData.append('categoryId', values.categoryId);
+        formData.append('child_nav_id', values.categoryId);
         formData.append('content', values.content);
-        formData.append('isFeatured', values.isFeatured);
+        formData.append('isFeatured', values.isFeatured ? 1 : 0);
 
         try {
             await updateNews(id, formData);

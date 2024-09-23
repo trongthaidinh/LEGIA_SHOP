@@ -139,12 +139,14 @@ export const createExperience = async (experienceData) => {
 
 export const updateExperience = async (id, experienceData) => {
     try {
-        const response = await httpRequest.patch(`/experiences/${id}`, experienceData);
+        const response = await httpRequest.post(`/experiences/${id}`, experienceData);
 
         // Refresh sessionStorage for the specific experience and all experiences list
         sessionStorage.removeItem(`experience_${id}`);
+        sessionStorage.removeItem(`allExperiences`);
         const updatedExperiences = await getExperiences();
         saveToSessionStorage('allExperiences', updatedExperiences);
+        saveToSessionStorage(`experience_${id}`, response.data.data);
 
         return response.data.data;
     } catch (error) {

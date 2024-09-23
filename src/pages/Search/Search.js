@@ -173,7 +173,13 @@ const Search = () => {
             <>
                 {renderCategoryResults('Sản phẩm', products, 'products', productPage, productTotalPages)}
                 {renderCategoryResults('Dịch vụ du lịch', services, 'services', servicePage, serviceTotalPages)}
-                {renderCategoryResults('Trải nghiệm', experiences, 'experiences', experiencePage, experienceTotalPages)}
+                {renderCategoryResults(
+                    'Khu vực trải nghiệm',
+                    experiences,
+                    'experiences',
+                    experiencePage,
+                    experienceTotalPages,
+                )}
             </>
         );
     };

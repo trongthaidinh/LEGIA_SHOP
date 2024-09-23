@@ -87,7 +87,7 @@ const ProductDetail = () => {
             <Helmet>
                 <title>{productDetail.name} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta name="description" content={`Chi tiết về sản phẩm: ${productDetail.name}.`} />
-                <meta name="keywords" content={`sản phẩm, ${productDetail.name}, takatech`} />
+                <meta name="keywords" content={`sản phẩm, ${productDetail.name}, phunongbuondon`} />
             </Helmet>
 
             <div className={cx('product-section')}>

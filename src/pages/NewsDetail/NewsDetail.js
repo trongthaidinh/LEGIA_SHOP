@@ -53,7 +53,8 @@ const NewsDetail = () => {
             <Helmet>
                 <title>{newsDetail.title} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta name="description" content={newsDetail.summary} />
-                <meta name="keywords" content="tin tức, takatech, chi tiết tin tức" />
+                <meta name="keywords" content="tin tức, phunongbuondon, chi tiết tin tức" />
+                <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn" />
             </Helmet>
             <div className={cx('header')}>
                 <Title text={newsDetail.title} className={cx('title')} />

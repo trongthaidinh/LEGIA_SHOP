@@ -94,9 +94,13 @@ const Experience = () => {
                 <title>Trải Nghiệm | HTX NÔNG NGHIỆP - DU LỊCH PHÚ NÔNG BUÔN ĐÔN </title>
                 <meta
                     name="description"
-                    content="Công ty TNHH Công nghệ TakaTech cung cấp sản phẩm, dịch vụ xây dựng, phát triển phần mềm, ứng dụng di động - mobile app, website."
+                    content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn hoạt động đa ngành nghề, trong đó tiêu biểu có thể kể đến là nuôi cá lồng, cải tạo nâng cấp vườn cây quanh các hồ thủy điện, phát triển về du lịch sinh thái, du lịch nông nghiệp. Ngoài ra còn thực hiện sản xuất các loại thực phẩm như chả cá, trái cây thực phẩm sấy khô và sấy dẻo, các loại tinh dầu tự nhiên,…"
                 />
-                <meta name="keywords" content="dịch vụ thiết kế website, lập trình website, mobile-app, Takatech" />
+                <meta
+                    name="keywords"
+                    content="dịch vụ nông nghiệp du lịch, hợp tác xã, sản phẩm nông nghiệp, phunongbuondon"
+                />
+                <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn" />
             </Helmet>
             <div className={cx('experience-section')}>
                 <div className={cx('experience-column')}>

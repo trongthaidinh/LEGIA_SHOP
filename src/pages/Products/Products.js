@@ -122,7 +122,6 @@ function ProductCategory() {
         }
     };
 
-
     const renderProductCategory = () => {
         if (currentProductCategory.length === 0) {
             return (
@@ -172,8 +171,15 @@ function ProductCategory() {
         <div className={cx('container')}>
             <Helmet>
                 <title>{categoryName} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
-                <meta name="description" content={`Xem các dịch vụ liên quan đến ${categoryName} trên Taktech.`} />
-                <meta name="keywords" content={`${categoryName}, dịch vụ, takatech`} />
+                <meta
+                    name="description"
+                    content={`Xem các dịch vụ du lịch liên quan đến ${categoryName} trên HTX Nông Nghiệp - Du Lịch Phú Nông Buôn.`}
+                />
+                <meta
+                    name="keywords"
+                    content="dịch vụ nông nghiệp du lịch, hợp tác xã, sản phẩm nông nghiệp, phunongbuondon"
+                />
+                <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn" />
             </Helmet>
             <Title text={categoryName} />
             <div className={cx('productGrid')}>{renderProductCategory()}</div>

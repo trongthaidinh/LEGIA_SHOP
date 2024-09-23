@@ -67,7 +67,7 @@ const ContactPage = () => {
             <Helmet>
                 <title>Liên Hệ | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
                 <meta name="description" content="Hãy gửi tin nhắn cho chúng tôi nếu bạn có bất kỳ câu hỏi nào." />
-                <meta name="keywords" content="liên hệ, takatech, gửi tin nhắn" />
+                <meta name="keywords" content="liên hệ, phunongbuondon, gửi tin nhắn" />
                 <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn" />
             </Helmet>
             <div className={cx('mapContainer')}>

@@ -35,7 +35,7 @@ function ServiceCategory() {
     useEffect(() => {
         async function fetchCategory() {
             try {
-                const categories = await getCategoriesBySlug("dich-vu");
+                const categories = await getCategoriesBySlug('dich-vu');
                 const category = categories.find((cat) => cat.slug === slug);
                 if (category) {
                     setCategoryId(category.id);
@@ -130,8 +130,12 @@ function ServiceCategory() {
         <div className={cx('container')}>
             <Helmet>
                 <title>{categoryName} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
-                <meta name="description" content={`Xem các dịch vụ liên quan đến ${categoryName} trên Taktech.`} />
-                <meta name="keywords" content={`${categoryName}, dịch vụ, takatech`} />
+                <meta
+                    name="description"
+                    content={`Xem các dịch vụ du lịch liên quan đến ${categoryName} trên HTX Nông Nghiệp - Du Lịch Phú Nông Buôn.`}
+                />
+                <meta name="keywords" content={`${categoryName}, dịch vụ, phunongbuondon`} />
+                <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn" />
             </Helmet>
             {loading ? (
                 <LoadingScreen isLoading={loading} />

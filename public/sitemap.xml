@@ -6,48 +6,38 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
             
     <url>
-        <loc>https://takatech.com.vn</loc>
-        <lastmod>2024-08-30T16:53:08+00:00</lastmod>
+        <loc>https://phunongbuondon.com</loc>
+        <lastmod>2024-09-22T16:53:08+00:00</lastmod>
     </url>
     
     <url>
-        <loc>https://takatech.com.vn/gioi-thieu/tong-quan</loc>
-        <lastmod>2024-08-30T16:53:08+00:00</lastmod>
+        <loc>https://phunongbuondon.com/gioi-thieu/ve-chung-toi</loc>
+        <lastmod>2024-09-22T16:53:08+00:00</lastmod>
     </url>
 
     <url>
-        <loc>https://www.takatech.com.vn/gioi-thieu/tam-nhin-su-menh-gia-tri</loc>
-        <lastmod>2024-08-30T16:53:08+00:00</lastmod>
-    </url>
-    
-        <url>
-        <loc>https://www.takatech.com.vn/gioi-thieu/so-do-to-chuc</loc>
-        <lastmod>2024-08-30T16:53:08+00:00</lastmod>
-    </url>
-
-    <url>
-        <loc>https://takatech.com.vn/san-pham</loc>
-        <lastmod>2024-08-30T16:53:08+00:00</lastmod>
+        <loc>https://www.phunongbuondon.com/gioi-thieu/lich-su</loc>
+        <lastmod>2024-09-22T16:53:08+00:00</lastmod>
     </url>
     
     <url>
-        <loc>https://takatech.com.vn/dich-vu</loc>
-        <lastmod>2024-08-30T16:53:08+00:00</lastmod>
+        <loc>https://phunongbuondon.com/san-pham</loc>
+        <lastmod>2024-09-22T16:53:08+00:00</lastmod>
     </url>
     
     <url>
-        <loc>https://takatech.com.vn/tin-tuc</loc>
-        <lastmod>2024-08-30T16:53:08+00:00</lastmod>
+        <loc>https://phunongbuondon.com/dich-vu</loc>
+        <lastmod>2024-09-22T16:53:08+00:00</lastmod>
     </url>
     
     <url>
-        <loc>https://takatech.com.vn/tuyen-dung</loc>
-        <lastmod>2024-08-30T16:53:08+00:00</lastmod>
+        <loc>https://phunongbuondon.com/tin-tuc</loc>
+        <lastmod>2024-09-22T16:53:08+00:00</lastmod>
     </url>
     
     <url>
-        <loc>https://takatech.com.vn/lien-he</loc>
-        <lastmod>2024-08-30T16:53:08+00:00</lastmod>
+        <loc>https://phunongbuondon.com/lien-he</loc>
+        <lastmod>2024-09-22T16:53:08+00:00</lastmod>
     </url>
     
 </urlset>

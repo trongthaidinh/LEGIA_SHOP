@@ -5,8 +5,6 @@ import Products from './Products';
 import Services from './Services';
 import NewsLibrary from './NewsLibrary';
 import Banner from './Banner';
-// import Partners from './Partners';
-import FAQs from './FAQs';
 import Experiences from './Experiences';
 import Teams from './Teams';
 
@@ -20,17 +18,16 @@ const Home = () => (
             />
             <meta
                 name="keywords"
-                content="sản phẩm, dịch vụ phần mềm, thiết kế website, tin tức ngành công nghệ thông tin, takatech"
+                content="dịch vụ nông nghiệp du lịch, hợp tác xã, sản phẩm nông nghiệp, phunongbuondon"
             />
-            <meta name="author" content="CÔNG TY TNHH CÔNG NGHỆ HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn" />
+            <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn" />
         </Helmet>
         <Banner />
         <Overview />
         <Products />
         <Services />
         <Experiences />
-         <NewsLibrary />
-        {/*<FAQs /> */}
+        <NewsLibrary />
         <Teams />
     </article>
 );

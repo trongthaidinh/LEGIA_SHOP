@@ -13,7 +13,7 @@ import Search from '~/pages/Search';
 import Products from '~/pages/Products';
 import Error404 from '~/pages/Error404';
 import Contact from '~/pages/Contact';
-import Recruitment from '~/pages/Recruitment';
+// import Recruitment from '~/pages/Recruitment';
 import IndustryNews from '~/pages/IndustryNews';
 import NewsDetail from '~/pages/NewsDetail';
 import ProductDetail from '~/pages/ProductDetail';
@@ -52,11 +52,11 @@ import AddPage from '~/pages/Admin/PagesAbout/AddPage';
 import UpdatePage from '~/pages/Admin/PagesAbout/UpdatePage';
 import CategoryList from '~/pages/Admin/Category/CategoryList';
 import AddCategory from '~/pages/Admin/Category/AddCategory';
-import RecruitmentCategory from '~/pages/RecruitmentCategory';
-import RecruitmentDetail from '~/pages/RecruitmentDetail';
-import RecruitmentList from '~/pages/Admin/Recruitment/RecruitmentList';
-import AddRecruitment from '~/pages/Admin/Recruitment/AddRecruitment';
-import UpdateRecruitment from '~/pages/Admin/Recruitment/UpdateRecruitment';
+// import RecruitmentCategory from '~/pages/RecruitmentCategory';
+// import RecruitmentDetail from '~/pages/RecruitmentDetail';
+// import RecruitmentList from '~/pages/Admin/Recruitment/RecruitmentList';
+// import AddRecruitment from '~/pages/Admin/Recruitment/AddRecruitment';
+// import UpdateRecruitment from '~/pages/Admin/Recruitment/UpdateRecruitment';
 import UpdateCategory from '~/pages/Admin/Category/UpdateCategory';
 import ExperienceDetail from '~/pages/ExperienceDetail';
 import ExperienceCategory from '~/pages/ExperienceCategory';
@@ -132,21 +132,21 @@ const publicRoutes = [
     { path: config.routes.search, component: Search, layout: OnlyHeaderLayout },
     { path: config.routes.error404, component: Error404, layout: NothingLayout },
     { path: config.routes.contact, component: Contact, layout: OnlyHeaderLayout },
-    {
-        path: config.routes.recruitment,
-        component: Recruitment,
-        layout: OnlyHeaderLayout,
-    },
-    {
-        path: config.routes.recruitmentCategory,
-        component: RecruitmentCategory,
-        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.recruitment} categoryType={4} />,
-    },
-    {
-        path: config.routes.recruitmentDetail,
-        component: RecruitmentDetail,
-        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.recruitment} categoryType={4} />,
-    },
+    // {
+    //     path: config.routes.recruitment,
+    //     component: Recruitment,
+    //     layout: OnlyHeaderLayout,
+    // },
+    // {
+    //     path: config.routes.recruitmentCategory,
+    //     component: RecruitmentCategory,
+    //     layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.recruitment} categoryType={4} />,
+    // },
+    // {
+    //     path: config.routes.recruitmentDetail,
+    //     component: RecruitmentDetail,
+    //     layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.recruitment} categoryType={4} />,
+    // },
 ];
 
 // Private Routes
@@ -163,9 +163,9 @@ const privateRoutes = [
     { path: config.routes.newsList, component: NewsList, layout: AdminLayout },
     { path: config.routes.addNews, component: AddNews, layout: AdminLayout },
     { path: config.routes.updateNews, component: UpdateNews, layout: AdminLayout },
-    { path: config.routes.recruitmentList, component: RecruitmentList, layout: AdminLayout },
-    { path: config.routes.addRecruitment, component: AddRecruitment, layout: AdminLayout },
-    { path: config.routes.updateRecruitment, component: UpdateRecruitment, layout: AdminLayout },
+    // { path: config.routes.recruitmentList, component: RecruitmentList, layout: AdminLayout },
+    // { path: config.routes.addRecruitment, component: AddRecruitment, layout: AdminLayout },
+    // { path: config.routes.updateRecruitment, component: UpdateRecruitment, layout: AdminLayout },
     { path: config.routes.serviceList, component: ServiceList, layout: AdminLayout },
     { path: config.routes.addService, component: AddService, layout: AdminLayout },
     { path: config.routes.updateService, component: UpdateService, layout: AdminLayout },

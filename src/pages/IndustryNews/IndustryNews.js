@@ -176,7 +176,11 @@ function NewsCategory() {
                     name="description"
                     content={`Xem các tin tức liên quan đến ${categoryName} trên HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn.`}
                 />
-                <meta name="keywords" content={`${categoryName}, tin tức, takatech`} />
+                <meta
+                    name="keywords"
+                    content={`${categoryName}, tin hợp tác xã, tin nông nghiệp - du lịch, tin tức, phunongbuondon`}
+                />
+                <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn" />
             </Helmet>
 
             <Title text={categoryName} />

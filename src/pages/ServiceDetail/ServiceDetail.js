@@ -47,18 +47,14 @@ const ServiceDetail = () => {
             <Helmet>
                 <title>{`${serviceDetail.title} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn`}</title>
                 <meta name="description" content={serviceDetail.summary} />
-                <meta name="keywords" content={`dịch vụ, ${serviceDetail.title}, takatech`} />
+                <meta name="keywords" content={`dịch vụ du lịch, ${serviceDetail.title}, phunongbuondon`} />
+                <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn" />
             </Helmet>
             <div className={cx('header')}>
                 <Title text={`${serviceDetail.name}`} className={cx('title')} />
             </div>
             <div className={cx('content')} dangerouslySetInnerHTML={{ __html: serviceDetail.content }} />
-            <DateTime
-                timestamp={serviceDetail.created_at}
-                showDate={true}
-                showTime={true}
-                showViews={false}
-            />
+            <DateTime timestamp={serviceDetail.created_at} showDate={true} showTime={true} showViews={false} />
         </article>
     );
 };

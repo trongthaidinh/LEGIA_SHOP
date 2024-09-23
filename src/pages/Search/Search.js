@@ -109,7 +109,7 @@ const Search = () => {
                             <Card
                                 title={item.name}
                                 summary={item.summary}
-                                image={item.images}
+                                image={item.images[0]}
                                 createdAt={new Date(item.created_at).getTime()}
                                 showViews={false}
                             />

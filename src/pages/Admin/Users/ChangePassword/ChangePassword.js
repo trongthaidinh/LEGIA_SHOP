@@ -2,33 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import { changePassword, getUserByEmail } from '~/services/userService';
+import { changePassword } from '~/services/userService';
 import styles from './ChangePassword.module.scss';
-import PushNotification from '~/components/PushNotification'; // Import component PushNotification
+import PushNotification from '~/components/PushNotification';
 import routes from '~/config/routes';
 import { Spin } from 'antd';
 
 const ChangePassword = () => {
     const navigate = useNavigate();
-    const [userInfo, setUserInfo] = useState(null);
     const [loading, setLoading] = useState(false);
     const [notification, setNotification] = useState({ message: '', type: '' });
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const userEmail = localStorage.getItem('userEmail');
-                if (userEmail) {
-                    const userData = await getUserByEmail(userEmail);
-                    setUserInfo(userData);
-                }
-            } catch (error) {
-                console.error('Error fetching user info:', error);
-            }
-        };
-
-        fetchUser();
-    }, []);
 
     const initialValues = {
         oldPassword: '',
@@ -47,16 +30,12 @@ const ChangePassword = () => {
     const handleSubmit = async (values, { resetForm }) => {
         setLoading(true);
         try {
-            if (userInfo) {
-                await changePassword(values.oldPassword, values.newPassword, userInfo._id);
-                setNotification({ message: 'Đổi mật khẩu thành công!', type: 'success' });
-                resetForm();
-                setTimeout(() => {
-                    navigate(routes.admin);
-                }, 1000);
-            } else {
-                setNotification({ message: 'Không thể lấy thông tin người dùng.', type: 'error' });
-            }
+            await changePassword(values.oldPassword, values.newPassword);
+            setNotification({ message: 'Đổi mật khẩu thành công!', type: 'success' });
+            resetForm();
+            setTimeout(() => {
+                navigate(routes.admin);
+            }, 1000);
         } catch (error) {
             console.error('Error changing password:', error);
             setNotification({ message: 'Lỗi khi đổi mật khẩu.', type: 'error' });
@@ -89,7 +68,6 @@ const ChangePassword = () => {
                         <button type="submit" disabled={isSubmitting || loading} className={styles.submitButton}>
                             {loading ? <Spin size="small" /> : 'Đổi Mật Khẩu'}
                         </button>
-                        {loading && <div className={styles.loader} />}
                     </Form>
                 )}
             </Formik>

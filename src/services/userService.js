@@ -62,9 +62,9 @@ export const deleteUser = async (accDelId, userId) => {
     }
 };
 
-export const changePassword = async (oldPassword, newPassword, userId) => {
+export const changePassword = async (oldPassword, newPassword) => {
     try {
-        const response = await httpRequest.patch(`${API_URL}/${userId}`, { oldPassword, newPassword });
+        const response = await httpRequest.post(`/user/update-password`, { oldPassword, newPassword });
         return response.data.data;
     } catch (error) {
         console.error('Error changing password', error);

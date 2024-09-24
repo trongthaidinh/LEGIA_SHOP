@@ -50,16 +50,6 @@
             }
         }
 
-        a {
-            width: 100%;
-        }
-
-        em {
-            display: block;
-            margin: -32px 0 16px 0;
-            text-align: center;
-        }
-
         h1 {
             @include respond-to(sm) {
                 font-size: 2.4rem;

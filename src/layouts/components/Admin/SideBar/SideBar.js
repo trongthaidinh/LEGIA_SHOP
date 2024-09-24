@@ -307,7 +307,6 @@ const SideBar = () => {
                         </li>
                     </ul>
                 </li>
-                {/* 
                 <li>
                     <NavLink to={routes.settings} className={styles.menuItem}>
                         <div>
@@ -315,7 +314,7 @@ const SideBar = () => {
                             <span className={styles.menuText}>{!isCollapsed && 'Cài đặt'}</span>
                         </div>
                     </NavLink>
-                </li> */}
+                </li>
             </ul>
         </div>
     );

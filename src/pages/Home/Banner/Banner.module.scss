@@ -28,7 +28,11 @@
 
         .slide {
             @include respond-to(lg) {
-                height: 200px;
+                height: 300px;
+            }
+
+            @include respond-to(md) {
+                height: 260px;
             }
 
             @include respond-to(sm) {

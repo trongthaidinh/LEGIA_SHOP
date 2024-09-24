@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getConfiguration, updateConfiguration } from '~/services/configurationService';
+import { getConfiguration, updateConfiguration, getConfigurationMobile } from '~/services/configurationService';
+import { Spin } from 'antd';
 import PushNotification from '~/components/PushNotification';
 import styles from './Settings.module.scss';
 import Title from '~/components/Title';
@@ -15,18 +16,24 @@ const Settings = () => {
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [saving, setSaving] = useState(false);
     const [notification, setNotification] = useState({ message: '', type: '' });
+    const [configurationType, setConfigurationType] = useState('desktop');
 
     useEffect(() => {
         const fetchSettings = async () => {
             try {
-                const data = await getConfiguration();
+                const data =
+                    configurationType === 'desktop' ? await getConfiguration() : await getConfigurationMobile();
+
                 if (data) {
-                    const parsedSlider = JSON.parse(data.homepage_slider);
                     setSettings({
                         ...data,
-                        id: data._id,
-                        homepage_slider: parsedSlider,
+                        id: data.id,
+                        homepage_slider: data.homepage_slider.map((slide) => ({
+                            image_url: slide,
+                            file: null,
+                        })),
                     });
                 } else {
                     setError('Failed to fetch settings.');
@@ -38,7 +45,7 @@ const Settings = () => {
         };
 
         fetchSettings();
-    }, []);
+    }, [configurationType]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -49,10 +56,14 @@ const Settings = () => {
     };
 
     const handleSliderChange = (index, e) => {
-        const { name, value } = e.target;
-        const updatedSlider = settings.homepage_slider.map((slide, i) =>
-            i === index ? { ...slide, [name]: value } : slide,
-        );
+        const file = e.target.files[0];
+        const updatedSlider = [...settings.homepage_slider];
+
+        if (file) {
+            const previewUrl = URL.createObjectURL(file); // Tạo URL tạm thời cho file
+            updatedSlider[index] = { image_url: previewUrl, file }; // Cập nhật image_url với URL tạm thời
+        }
+
         setSettings((prevSettings) => ({
             ...prevSettings,
             homepage_slider: updatedSlider,
@@ -62,7 +73,7 @@ const Settings = () => {
     const handleAddSlide = () => {
         setSettings((prevSettings) => ({
             ...prevSettings,
-            homepage_slider: [...prevSettings.homepage_slider, { title: '', image_url: '', position: '' }],
+            homepage_slider: [...prevSettings.homepage_slider, { image_url: '', file: null }],
         }));
     };
 
@@ -76,27 +87,31 @@ const Settings = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setSaving(true);
         try {
-            const { homepage_slider, id, ...restSettings } = settings;
+            const formData = new FormData();
 
-            const title = homepage_slider.map((slide) => slide.title);
-            const image = homepage_slider.map((slide) => slide.image_url);
-            const position = homepage_slider.map((slide) => slide.position);
+            formData.append('name', settings.name);
+            formData.append('contact_email', settings.contact_email);
+            formData.append('phone_number', settings.phone_number);
 
-            const updatedSettings = {
-                ...restSettings,
-                id,
-                title,
-                image,
-                position,
-            };
+            settings.homepage_slider.forEach((slide, index) => {
+                if (slide.file) {
+                    formData.append(`homepage_slider[${index}]`, slide.file);
+                }
+            });
 
-            await updateConfiguration(updatedSettings);
+            await updateConfiguration(formData, settings.id);
             setNotification({ message: 'Cài đặt đã được cập nhật thành công!', type: 'success' });
         } catch (error) {
             console.error('Error updating settings:', error);
             setNotification({ message: 'Đã xảy ra lỗi khi cập nhật cài đặt.', type: 'error' });
         }
+        setSaving(false);
+    };
+
+    const handleConfigurationTypeChange = (e) => {
+        setConfigurationType(e.target.value);
     };
 
     if (loading) return <div>Loading...</div>;
@@ -106,7 +121,20 @@ const Settings = () => {
         <div className={styles.settingsContainer}>
             <Title className={styles.pageTitle} text="Cài đặt chung" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
-            <form onSubmit={handleSubmit} className={styles.settingsForm}>
+            <form onSubmit={handleSubmit} className={styles.settingsForm} encType="multipart/form-data">
+                <div className={styles.formGroup}>
+                    <label htmlFor="configurationType">Chọn loại cấu hình</label>
+                    <select
+                        id="configurationType"
+                        value={configurationType}
+                        onChange={handleConfigurationTypeChange}
+                        className={styles.formControl}
+                    >
+                        <option value="desktop">Desktop</option>
+                        <option value="mobile">Mobile</option>
+                    </select>
+                </div>
+
                 <div className={styles.formGroup}>
                     <label htmlFor="name">Tên công ty</label>
                     <input
@@ -120,40 +148,19 @@ const Settings = () => {
                 </div>
 
                 <div className={styles.formGroup}>
-                    <label>Slider Trang chủ</label>
+                    <label style={{ display: 'block', marginBottom: '12px' }}>Slider Trang chủ</label>
                     {settings.homepage_slider.map((slide, index) => (
                         <div key={index} className={styles.slideItem}>
                             <div className={styles.formGroup}>
-                                <label htmlFor={`title-${index}`}>Tiêu đề</label>
+                                <label htmlFor={`image_url-${index}`}>Chọn hình ảnh</label>
+                                {slide.image_url && (
+                                    <img src={slide.image_url} alt={`Slide ${index}`} className={styles.previewImage} />
+                                )}
                                 <input
-                                    type="text"
-                                    id={`title-${index}`}
-                                    name="title"
-                                    value={slide.title}
-                                    onChange={(e) => handleSliderChange(index, e)}
-                                    className={styles.formControl}
-                                />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label htmlFor={`image_url-${index}`}>URL hình ảnh</label>
-                                <input
-                                    type="text"
+                                    type="file"
                                     id={`image_url-${index}`}
-                                    name="image_url"
-                                    value={slide.image_url}
-                                    onChange={(e) => handleSliderChange(index, e)}
-                                    className={styles.formControl}
-                                />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label htmlFor={`position-${index}`}>Vị trí</label>
-                                <input
-                                    type="text"
-                                    id={`position-${index}`}
-                                    name="position"
-                                    value={slide.position}
+                                    name="homepage_slider"
+                                    accept="image/*"
                                     onChange={(e) => handleSliderChange(index, e)}
                                     className={styles.formControl}
                                 />
@@ -197,8 +204,17 @@ const Settings = () => {
                     />
                 </div>
 
-                <button type="submit" className={styles.submitButton}>
-                    Lưu thay đổi
+                <button
+                    type="submit"
+                    className={styles.submitButton}
+                    disabled={saving}
+                    style={{
+                        backgroundColor: saving ? 'transparent' : '#097829',
+                        color: saving ? '#097829' : '#fff',
+                        border: saving ? '1px solid #097829' : 'none',
+                    }}
+                >
+                    {saving ? <Spin /> : 'Lưu thay đổi'}
                 </button>
             </form>
         </div>

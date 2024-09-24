@@ -1,11 +1,9 @@
 import httpRequest from '~/utils/httpRequest';
 
-// Hàm lưu trữ dữ liệu vào sessionStorage với khóa và giá trị
 const saveToSessionStorage = (key, data) => {
     sessionStorage.setItem(key, JSON.stringify(data));
 };
 
-// Hàm lấy dữ liệu từ sessionStorage
 const getFromSessionStorage = (key) => {
     const storedData = sessionStorage.getItem(key);
     return storedData ? JSON.parse(storedData) : null;
@@ -14,18 +12,15 @@ const getFromSessionStorage = (key) => {
 export const getConfiguration = async () => {
     const sessionKey = 'configurationDesktop'; // Khóa để lưu vào sessionStorage
 
-    // Kiểm tra sessionStorage trước khi gọi API
     const cachedData = getFromSessionStorage(sessionKey);
     if (cachedData) {
         return cachedData;
     }
 
-    // Nếu không có trong sessionStorage thì gọi API
     try {
         const response = await httpRequest.get('/configuration');
         const configData = response.data.data[0];
 
-        // Lưu kết quả vào sessionStorage
         saveToSessionStorage(sessionKey, configData);
 
         return configData;
@@ -36,20 +31,17 @@ export const getConfiguration = async () => {
 };
 
 export const getConfigurationMobile = async () => {
-    const sessionKey = 'configurationMobile'; // Khóa để lưu vào sessionStorage
+    const sessionKey = 'configurationMobile';
 
-    // Kiểm tra sessionStorage trước khi gọi API
     const cachedData = getFromSessionStorage(sessionKey);
     if (cachedData) {
         return cachedData;
     }
 
-    // Nếu không có trong sessionStorage thì gọi API
     try {
         const response = await httpRequest.get('/configuration');
         const configData = response.data.data[1];
 
-        // Lưu kết quả vào sessionStorage
         saveToSessionStorage(sessionKey, configData);
 
         return configData;
@@ -59,13 +51,16 @@ export const getConfigurationMobile = async () => {
     }
 };
 
-export const updateConfiguration = async (data) => {
+export const updateConfiguration = async (data, id) => {
     try {
-        const response = await httpRequest.patch(`/configuration/${data.id}`, data);
+        const response = await httpRequest.post(`/configuration/${id}`, data);
 
-        // Sau khi cập nhật, làm mới dữ liệu trong sessionStorage
-        saveToSessionStorage('configurationDesktop', response.data.data); // Nếu cập nhật desktop config
-        saveToSessionStorage('configurationMobile', response.data.data);  // Nếu cập nhật mobile config
+        sessionStorage.removeItem(`configurationDesktop`);
+        sessionStorage.removeItem(`configurationMobile`);
+        const updateConfDesk = await getConfiguration();
+        const updateConfMobile = await getConfigurationMobile();
+        saveToSessionStorage('configurationDesktop', updateConfDesk);
+        saveToSessionStorage('configurationMobile', updateConfMobile);
 
         return response.data.data;
     } catch (error) {

@@ -23,7 +23,7 @@ const Banner = () => {
         try {
             const isMobile = window.innerWidth < 768;
             const configData = isMobile ? await getConfigurationMobile() : await getConfiguration();
-            const sliderData = JSON.parse(configData.homepage_slider);
+            const sliderData = configData.homepage_slider;
             setSlides(sliderData);
             setIsLoading(false);
         } catch (error) {
@@ -69,7 +69,7 @@ const Banner = () => {
                             {slides.map((slide, index) => (
                                 <SwiperSlide key={index} className={cx('slide')}>
                                     <div className={cx('image-card')}>
-                                        <img src={slide.image_url} alt={slide.title} className={cx('image')} />
+                                        <img src={slide} alt={`slider-${index + 1}`} className={cx('image')} />
                                         {slide.title && (
                                             <div className={cx('contentContainer', slide.position)}>
                                                 <div className={cx('textWrapper')}>

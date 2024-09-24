@@ -10,7 +10,7 @@ import {
     faLayerGroup,
     // faHandshake,
     faBookOpen,
-    // faCogs,
+    faCogs,
     faInfoCircle,
     faEarthAsia,
     faUserFriends,
@@ -31,7 +31,7 @@ const sidebarItems = [
     { title: 'Quản lý thư viện', icon: faBookOpen, count: 0, route: routes.videosList },
     { title: 'Quản lý trang', icon: faInfoCircle, count: 0, route: routes.pageList },
     { title: 'Quản lý thành viên', icon: faUserFriends, count: 0, route: routes.memberList },
-    // { title: 'Cài đặt', icon: faCogs, count: 0, route: routes.settings },
+    { title: 'Cài đặt', icon: faCogs, count: 0, route: routes.settings },
 ];
 
 const Dashboard = () => {

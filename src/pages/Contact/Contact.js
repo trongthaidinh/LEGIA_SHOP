@@ -65,14 +65,14 @@ const ContactPage = () => {
     return (
         <div className={cx('contactPage')}>
             <Helmet>
-                <title>Liên Hệ | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
+                <title>Liên Hệ | Yến Sào LeGia Nest </title>
                 <meta name="description" content="Hãy gửi tin nhắn cho chúng tôi nếu bạn có bất kỳ câu hỏi nào." />
                 <meta name="keywords" content="liên hệ, phunongbuondon, gửi tin nhắn" />
-                <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn" />
+                <meta name="author" content="Yến Sào LeGia Nest " />
             </Helmet>
             <div className={cx('mapContainer')}>
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31131.235937264762!2d107.91724!3d12.752223!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31720586d0dfc317%3A0x7dc659b440c4ab2c!2zSFRYIFBow7ogTsO0bmcgLUJ1w7RuIMSQw7RuIEZhcm0!5e0!3m2!1sen!2sus!4v1726550851161!5m2!1sen!2sus"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3892.1974919759023!2d108.05976667454256!3d12.700529320764453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3171f7e82916a097%3A0xf624f682171e01ef!2zNjIgTmd1eeG7hW4gSOG7r3UgVGjhu40sIFTDom4gQW4sIEJ1w7RuIE1hIFRodeG7mXQsIMSQ4bqvayBM4bqvaywgVmlldG5hbQ!5e0!3m2!1sen!2s!4v1727944007225!5m2!1sen!2s"
                     width="100%"
                     height="600"
                     style={{ border: 0 }}
@@ -92,18 +92,18 @@ const ContactPage = () => {
                             <div className={cx('infoItem')}>
                                 <FontAwesomeIcon icon={faPhone} className={cx('icon')} />
                                 <a href="tel:0961862450">
-                                    Mobile/Zalo: <span>0961 862 450</span>
+                                    Mobile/Zalo: <span>077 233 2255</span>
                                 </a>
                             </div>
                             <div className={cx('infoItem')}>
                                 <FontAwesomeIcon icon={faEnvelope} className={cx('icon')} />
                                 <a href="mailto:htxphunong.buondon@gmail.com">
-                                    Email: <span>htxphunong.buondon@gmail.com</span>
+                                    Email: <span>lxchinh@gmail.com</span>
                                 </a>
                             </div>
                             <div className={cx('infoItem')}>
                                 <FontAwesomeIcon icon={faMapMarkerAlt} className={cx('icon')} />
-                                <span>Địa chỉ: Thôn Tân phú , Xã Ea Nuôl , Huyện Buôn Đôn , Đắk Lắk</span>
+                                <span>Địa chỉ: 62 Nguyễn Hữu Thọ, Phường Tân An, TP. Buôn Ma Thuột, Tỉnh Đăk Lăk</span>
                             </div>
                         </div>
 
@@ -149,7 +149,7 @@ const ContactPage = () => {
                                             <ErrorMessage name="phoneNumber" component="div" className={cx('error')} />
                                         </div>
                                     </div>
-                                    <div className={cx('formGroup')}>
+                                    {/* <div className={cx('formGroup')}>
                                         <label>Chủ đề</label>
                                         <div className={cx('subject')}>
                                             <Field
@@ -194,9 +194,9 @@ const ContactPage = () => {
                                             </label>
                                         </div>
                                         <ErrorMessage name="subject" component="div" className={cx('error')} />
-                                    </div>
+                                    </div> */}
                                     <div className={cx('formGroup')}>
-                                        <label htmlFor="message">Nội dung</label>
+                                        <label htmlFor="message">Nội dung lời nhắn</label>
                                         <Field
                                             as="textarea"
                                             id="message"

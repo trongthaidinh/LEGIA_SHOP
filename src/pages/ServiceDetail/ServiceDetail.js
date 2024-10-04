@@ -45,10 +45,10 @@ const ServiceDetail = () => {
     return (
         <article className={cx('wrapper')}>
             <Helmet>
-                <title>{`${serviceDetail.title} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn`}</title>
+                <title>{`${serviceDetail.title} | Yến Sào LeGia Nest `}</title>
                 <meta name="description" content={serviceDetail.summary} />
                 <meta name="keywords" content={`dịch vụ du lịch, ${serviceDetail.title}, phunongbuondon`} />
-                <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn" />
+                <meta name="author" content="Yến Sào LeGia Nest " />
             </Helmet>
             <div className={cx('header')}>
                 <Title text={`${serviceDetail.name}`} className={cx('title')} />

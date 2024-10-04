@@ -1,8 +1,8 @@
 import classNames from 'classnames/bind';
 import React, { useEffect, useState } from 'react';
 import Product from '~/components/Product';
-import { getProducts } from 'services/productService';
-import { getCategoriesBySlug } from 'services/categoryService';
+// import { getProducts } from 'services/productService';
+// import { getCategoriesBySlug } from 'services/categoryService';
 import styles from './Products.module.scss';
 import Title from '~/components/Title';
 import LoadingScreen from '~/components/LoadingScreen';
@@ -16,31 +16,78 @@ import routes from '~/config/routes';
 const cx = classNames.bind(styles);
 
 function Products() {
-    const [products, setProducts] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(true);
+    // Commented out API calls
+    // const [products, setProducts] = useState([]);
+    // const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchProductsAndCategories = async () => {
-            try {
-                const [categoriesData, productsData] = await Promise.all([
-                    getCategoriesBySlug('san-pham'),
-                    getProducts(),
-                ]);
+    // Sample data for categories
+    const categories = [
+        { id: 1, slug: 'yen-chung' },
+        { id: 2, slug: 'yen-to' },
+        { id: 3, slug: 'set-qua-tang' },
+    ];
 
-                setCategories(categoriesData);
-                setProducts(productsData);
-            } catch (err) {
-                setError(err);
-                console.error('Error fetching data:', err);
-            } finally {
-                setLoading(false);
-            }
-        };
+    // Sample data for products
+    const products = [
+        {
+            id: 101,
+            name: 'Yến Chưng Táo Đỏ Hạt Sen',
+            images: ['https://lagianest.com/wp-content/uploads/2022/12/yen-chung-tao-do-hat-sen-LAGIA-NEST.jpg'],
+            child_nav_id: 1,
+            price: 50000,
+        },
+        {
+            id: 102,
+            name: 'Yến Chưng Saffron',
+            images: ['https://lagianest.com/wp-content/uploads/2022/12/yen-chung-saffron-LAGIA-NEST.jpg'],
+            child_nav_id: 1,
+            price: 50000,
+        },
+        {
+            id: 103,
+            name: 'Yến Chưng Đông Trùng Hạ Thảo',
+            images: ['https://lagianest.com/wp-content/uploads/2022/11/yen-chung-dong-trung-ha-thao-LAGIA-NEST.jpg'],
+            child_nav_id: 2,
+            price: 50000,
+        },
+        {
+            id: 104,
+            name: 'Yến Chưng Nhân Sâm',
+            images: ['https://lagianest.com/wp-content/uploads/2022/11/yen-chung-nhan-sam-LAGIA-NEST.jpg'],
+            child_nav_id: 3,
+            price: 50000,
+        },
+        {
+            id: 105,
+            name: 'Yến Chưng Collagen Saffron',
+            images: ['https://lagianest.com/wp-content/uploads/2022/10/yen-chung-collagen-saffron-LAGIA-NEST.jpg'],
+            child_nav_id: 3,
+            price: 50000,
+        },
+    ];
 
-        fetchProductsAndCategories();
-    }, []);
+    // useEffect(() => {
+    //     const fetchProductsAndCategories = async () => {
+    //         try {
+    //             const [categoriesData, productsData] = await Promise.all([
+    //                 getCategoriesBySlug('san-pham'),
+    //                 getProducts(),
+    //             ]);
+
+    //             setCategories(categoriesData);
+    //             setProducts(productsData);
+    //         } catch (err) {
+    //             setError(err);
+    //             console.error('Error fetching data:', err);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+
+    //     fetchProductsAndCategories();
+    // }, []);
 
     const getCategorySlug = (categoryId) => {
         const category = categories.find((cat) => cat.id == categoryId);
@@ -58,13 +105,19 @@ function Products() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Title text="Sản phẩm" showSeeAll={true} slug={`${routes.products}`} />
+                <Title
+                    text="Sản phẩm"
+                    subText="Yến chưng thượng hạng
+"
+                    showSeeAll={true}
+                    slug={`${routes.products}`}
+                />
                 <Swiper
                     spaceBetween={10}
-                    slidesPerView={3}
+                    slidesPerView={4}
                     breakpoints={{
-                        1280: { slidesPerView: 3 },
-                        1024: { slidesPerView: 2 },
+                        1280: { slidesPerView: 4 },
+                        1024: { slidesPerView: 3 },
                         768: { slidesPerView: 2 },
                         0: { slidesPerView: 1 },
                     }}
@@ -84,6 +137,7 @@ function Products() {
                                     productId={product.id}
                                     category={getCategorySlug(product.child_nav_id)}
                                     link={`${routes.products}/${getCategorySlug(product.child_nav_id)}/${product.id}`}
+                                    price={product.price}
                                 />
                             </SwiperSlide>
                         );

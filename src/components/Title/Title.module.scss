@@ -5,17 +5,22 @@
     width: 100%;
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
     z-index: 1;
 }
 
+.text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .title {
     color: var(--primary);
-    font-size: 2.2rem;
+    font-size: 1.6rem;
     font-weight: 800;
     text-transform: capitalize;
-    text-transform: uppercase;
     text-align: center;
 
     @include respond-to(lg) {
@@ -25,6 +30,12 @@
     @include respond-to(sm) {
         font-size: 1.8rem;
     }
+}
+
+.sub-title {
+    color: #10ab4e;
+    font-size: 3.4rem;
+    font-weight: 800;
 }
 
 .line {
@@ -50,8 +61,8 @@
 // }
 
 .see-all {
-    border: 1px solid var(--primary);
-    border-radius: 20px;
+    border: none;
+    outline: none;
     background-color: var(--white);
     color: var(--primary);
     font-size: 1.4rem;
@@ -59,12 +70,21 @@
     text-transform: capitalize;
     font-weight: 600;
     padding: 6px 8px;
-    margin-left: 10px;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
+
+    &-icon {
+        color: var(--primary);
+        font-size: 1.2rem;
+        transition: all 0.3s ease-in-out;
+    }
 
     &:hover {
-        background-color: var(--primary);
-        color: var(--white);
+        color: var(--secondary);
+
+        .see-all-icon {
+            color: var(--secondary);
+            margin-left: 10px;
+        }
     }
 
     @include respond-to(sm) {

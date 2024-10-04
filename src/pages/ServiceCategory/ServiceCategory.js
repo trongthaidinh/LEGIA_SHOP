@@ -129,13 +129,13 @@ function ServiceCategory() {
     return (
         <div className={cx('container')}>
             <Helmet>
-                <title>{categoryName} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
+                <title>{categoryName} | Yến Sào LeGia Nest </title>
                 <meta
                     name="description"
-                    content={`Xem các dịch vụ du lịch liên quan đến ${categoryName} trên HTX Nông Nghiệp - Du Lịch Phú Nông Buôn.`}
+                    content={`Xem các dịch vụ du lịch liên quan đến ${categoryName} trên Yến Sào LeGia Nest .`}
                 />
                 <meta name="keywords" content={`${categoryName}, dịch vụ, phunongbuondon`} />
-                <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn" />
+                <meta name="author" content="Yến Sào LeGia Nest " />
             </Helmet>
             {loading ? (
                 <LoadingScreen isLoading={loading} />

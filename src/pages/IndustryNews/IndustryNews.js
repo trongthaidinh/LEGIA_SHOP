@@ -171,16 +171,16 @@ function NewsCategory() {
     return (
         <div className={cx('container')}>
             <Helmet>
-                <title>{categoryName} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
+                <title>{categoryName} | Yến Sào LeGia Nest </title>
                 <meta
                     name="description"
-                    content={`Xem các tin tức liên quan đến ${categoryName} trên HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn.`}
+                    content={`Xem các tin tức liên quan đến ${categoryName} trên Yến Sào LeGia Nest .`}
                 />
                 <meta
                     name="keywords"
                     content={`${categoryName}, tin hợp tác xã, tin nông nghiệp - du lịch, tin tức, phunongbuondon`}
                 />
-                <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn" />
+                <meta name="author" content="Yến Sào LeGia Nest " />
             </Helmet>
 
             <Title text={categoryName} />

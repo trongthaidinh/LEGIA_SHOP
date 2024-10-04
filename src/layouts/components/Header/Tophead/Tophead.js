@@ -14,32 +14,19 @@ const Tophead = () => {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div className={cx('hotline-container')}>
-                    <div className={cx('hotline')}>
-                        <span className={cx('hotline-label')}>
-                            <FontAwesomeIcon icon={faPhone} className={cx('phone-icon')} />
-                            Hotline:
-                        </span>
-                        <div className={cx('hotline-numbers')}>
-                            {hotlines.map((hotline, index) => (
-                                <React.Fragment key={index}>
-                                    {index > 0 && <span className={cx('separator')}> - </span>}
-                                    <a className={cx('hotline-number')} href={`tel:${hotline.number}`}>
-                                        {hotline.number} {hotline.name && `(${hotline.name})`}
-                                    </a>
-                                </React.Fragment>
-                            ))}
-                        </div>
-                    </div>
+                <div className={cx('discount-shipping')}>
+                    <span className={cx('discount-label')}>
+                        Giảm <strong>25.000đ</strong> phí ship cho đơn hàng trên <strong>500.000đ</strong>
+                    </span>
                 </div>
-                <div className={cx('social-icons')}>
+                {/* <div className={cx('social-icons')}>
                     <Link to="https://www.facebook.com/profile.php?id=100069322668251">
                         <FontAwesomeIcon icon={faFacebookF} />
                     </Link>
                     <Link to="https://www.youtube.com/@HtxPhunongbuondon">
                         <FontAwesomeIcon icon={faYoutube} />
                     </Link>
-                </div>
+                </div> */}
             </div>
         </div>
     );

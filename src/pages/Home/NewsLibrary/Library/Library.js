@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
-import { getImages, getVideos } from '~/services/libraryService';
 import Title from '~/components/Title';
 import Modal from './ModalLibrary';
 import Slider from 'react-slick';
@@ -8,8 +7,35 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styles from './Library.module.scss';
 import ButtonGroup from '~/components/ButtonGroup';
-// import { motion } from 'framer-motion';
 import LoadingScreen from '~/components/LoadingScreen';
+
+// Dữ liệu mẫu
+const mockData = {
+    videos: [
+        { url: 'https://www.youtube.com/watch?v=2qwl0b0V5cg', title: 'Video 1' },
+        { url: 'https://www.youtube.com/watch?v=NwXpQsqgwwI', title: 'Video 2' },
+        { url: 'https://www.youtube.com/watch?v=TC7ADuq5jHs', title: 'Video 3' },
+        { url: 'https://www.youtube.com/watch?v=Ji7zMUwvgfM', title: 'Video 4' },
+        { url: 'https://www.youtube.com/watch?v=SjuUXYJS2Hs', title: 'Video 5' },
+    ],
+    images: [
+        {
+            url: 'https://res.cloudinary.com/drioug4df/image/upload/v1727949944/459308648_922517279897374_3737888819875963803_n_x0apml.jpg',
+        },
+        {
+            url: 'https://res.cloudinary.com/drioug4df/image/upload/v1727949944/458088060_916907960458306_2913117309935623470_n_k31udu.jpg',
+        },
+        {
+            url: 'https://res.cloudinary.com/drioug4df/image/upload/v1727949944/386550265_710226451126459_3412908169742757295_n_wpmohi.jpg',
+        },
+        {
+            url: 'https://res.cloudinary.com/drioug4df/image/upload/v1727949945/405201279_739047324911038_7266107287639205966_n_ddvict.jpg',
+        },
+        {
+            url: 'https://res.cloudinary.com/drioug4df/image/upload/v1727949945/368007736_678468484302256_5115575071258065358_n_jt0sv5.jpg',
+        },
+    ],
+};
 
 const cx = classNames.bind(styles);
 
@@ -29,21 +55,20 @@ function Library() {
 
     useEffect(() => {
         const loadLibrary = async () => {
-            try {
-                const [videoData, imageData] = await Promise.all([getVideos(), getImages()]);
-                const updatedVideos = videoData.map((item) => ({
-                    ...item,
-                    url: extractVideoId(item.url),
-                }));
-                setVideos(updatedVideos);
-                setImages(imageData);
-                setActiveVideo(updatedVideos[0]?.url);
-                setActiveImage(imageData[0]?.url);
-            } catch (error) {
-                console.error('Failed to load library data', error);
-            } finally {
-                setIsLoading(false);
-            }
+            // Sử dụng dữ liệu mẫu
+            const videoData = mockData.videos;
+            const imageData = mockData.images;
+
+            const updatedVideos = videoData.map((item) => ({
+                ...item,
+                url: extractVideoId(item.url),
+            }));
+
+            setVideos(updatedVideos);
+            setImages(imageData);
+            setActiveVideo(updatedVideos[0]?.url);
+            setActiveImage(imageData[0]?.url);
+            setIsLoading(false);
         };
 
         loadLibrary();
@@ -90,10 +115,9 @@ function Library() {
                 <LoadingScreen isLoading={isLoading} />
             ) : (
                 <div className={cx('inner')}>
-                    <Title text="Thư viện" />
+                    <Title text="Thư viện" subText="Hình ảnh & Video" />
                     <div className={cx('library-wrapper')}>
                         <div className={cx('library-videos')}>
-                            <ButtonGroup buttons={['Video']} isStatic={true} />
                             <div className={cx('library')}>
                                 {activeVideo && (
                                     <div className={cx('main-video')}>
@@ -125,7 +149,6 @@ function Library() {
                         </div>
 
                         <div className={cx('library-images')}>
-                            <ButtonGroup buttons={['Hình ảnh']} isStatic={true} />
                             <div className={cx('library')}>
                                 {activeImage && (
                                     <div className={cx('main-image')}>

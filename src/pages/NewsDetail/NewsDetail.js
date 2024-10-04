@@ -51,10 +51,10 @@ const NewsDetail = () => {
     return (
         <article className={cx('wrapper')}>
             <Helmet>
-                <title>{newsDetail.title} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
+                <title>{newsDetail.title} | Yến Sào LeGia Nest </title>
                 <meta name="description" content={newsDetail.summary} />
                 <meta name="keywords" content="tin tức, phunongbuondon, chi tiết tin tức" />
-                <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn" />
+                <meta name="author" content="Yến Sào LeGia Nest " />
             </Helmet>
             <div className={cx('header')}>
                 <Title text={newsDetail.title} className={cx('title')} />

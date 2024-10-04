@@ -170,16 +170,16 @@ function ProductCategory() {
     return (
         <div className={cx('container')}>
             <Helmet>
-                <title>{categoryName} | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
+                <title>{categoryName} | Yến Sào LeGia Nest </title>
                 <meta
                     name="description"
-                    content={`Xem các dịch vụ du lịch liên quan đến ${categoryName} trên HTX Nông Nghiệp - Du Lịch Phú Nông Buôn.`}
+                    content={`Xem các dịch vụ du lịch liên quan đến ${categoryName} trên Yến Sào LeGia Nest .`}
                 />
                 <meta
                     name="keywords"
                     content="dịch vụ nông nghiệp du lịch, hợp tác xã, sản phẩm nông nghiệp, phunongbuondon"
                 />
-                <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn" />
+                <meta name="author" content="Yến Sào LeGia Nest " />
             </Helmet>
             <Title text={categoryName} />
             <div className={cx('productGrid')}>{renderProductCategory()}</div>

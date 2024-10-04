@@ -1,5 +1,5 @@
 const images = {
-    logo: `${process.env.PUBLIC_URL}/static/media/phunong-logo.2cc97a3f2c8bce83a729.png`,
+    logo: `${process.env.PUBLIC_URL}/static/media/nest-logo.027fb6d2c50fb9376d2c.png`,
 };
 
 export default images;

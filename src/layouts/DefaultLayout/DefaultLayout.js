@@ -46,7 +46,7 @@ function DefaultLayout({ children, baseRoute, categoryType }) {
                     <div className={cx('content')}>{children}</div>
                 </div>
                 <Footer />
-                <div className={cx('contact-buttons')}>
+                {/* <div className={cx('contact-buttons')}>
                     <div className={cx('button', 'hotline')} onClick={() => (window.location.href = 'tel:0961862450')}>
                         <FontAwesomeIcon icon={faPhone} />
                     </div>
@@ -60,7 +60,7 @@ function DefaultLayout({ children, baseRoute, categoryType }) {
                     >
                         <FontAwesomeIcon icon={faFacebookF} />
                     </div>
-                </div>
+                </div> */}
 
                 {isVisible && (
                     <div className={cx('scroll-to-top')} onClick={scrollToTop}>

@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { getConfiguration, getConfigurationMobile } from '~/services/configurationService';
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, EffectFade } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/navigation';
@@ -16,29 +15,34 @@ import LoadingScreen from '~/components/LoadingScreen';
 const cx = classNames.bind(styles);
 
 const Banner = () => {
-    const [slides, setSlides] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    // Commented out API fetch and sample data
+    // const [slides, setSlides] = useState([]);
+    // const [isLoading, setIsLoading] = useState(true);
 
-    const fetchSlides = useCallback(async () => {
-        try {
-            const isMobile = window.innerWidth < 768;
-            const configData = isMobile ? await getConfigurationMobile() : await getConfiguration();
-            const sliderData = configData.homepage_slider;
-            setSlides(sliderData);
-            setIsLoading(false);
-        } catch (error) {
-            console.error('Error fetching slides:', error);
-            setIsLoading(false);
-        }
-    }, []);
+    // useEffect(() => {
+    //     const fetchSlides = async () => {
+    //         try {
+    //             // Simulating data fetch
+    //             const sliderData = [
+    //                 'https://example.com/image1.jpg',
+    //                 'https://example.com/image2.jpg',
+    //                 'https://example.com/image3.jpg',
+    //             ];
+    //             setSlides(sliderData);
+    //             setIsLoading(false);
+    //         } catch (error) {
+    //             console.error('Error fetching slides:', error);
+    //             setIsLoading(false);
+    //         }
+    //     };
+    //     fetchSlides();
+    // }, []);
 
-    useEffect(() => {
-        fetchSlides();
-        window.addEventListener('resize', fetchSlides);
-        return () => {
-            window.removeEventListener('resize', fetchSlides);
-        };
-    }, [fetchSlides]);
+    // Replace slides and isLoading with sample data
+    const slides = [
+        'https://lagianest.com/wp-content/uploads/2023/08/363347677_250355207761478_7903203873910556729_n.jpg',
+    ];
+    const isLoading = false; // Set isLoading to false as we have sample data
 
     return (
         <>
@@ -50,9 +54,7 @@ const Banner = () => {
                             spaceBetween={0}
                             slidesPerView={1}
                             loop={true}
-                            modules={[Autoplay, Navigation, EffectFade]}
-                            effect="fade"
-                            fadeEffect={{ crossFade: true }}
+                            modules={[Autoplay, Navigation]}
                             autoplay={{
                                 delay: 5000,
                                 disableOnInteraction: false,
@@ -70,13 +72,6 @@ const Banner = () => {
                                 <SwiperSlide key={index} className={cx('slide')}>
                                     <div className={cx('image-card')}>
                                         <img src={slide} alt={`slider-${index + 1}`} className={cx('image')} />
-                                        {slide.title && (
-                                            <div className={cx('contentContainer', slide.position)}>
-                                                <div className={cx('textWrapper')}>
-                                                    <span className={cx('text')}>{slide.title}</span>
-                                                </div>
-                                            </div>
-                                        )}
                                     </div>
                                 </SwiperSlide>
                             ))}

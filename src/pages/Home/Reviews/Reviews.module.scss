@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.inner {
+    width: var(--default-layout-width);
+}
+
+.swiper {
+    margin-top: 40px;
+}

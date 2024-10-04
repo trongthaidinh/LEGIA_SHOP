@@ -1,139 +1,256 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
-import { getProductsByCategory } from '~/services/productService';
 import styles from './Product.module.scss';
 import Title from '~/components/Title';
 import PushNotification from '~/components/PushNotification';
 import LoadingScreen from '~/components/LoadingScreen';
 import routes from '~/config/routes';
-import { getCategoriesBySlug } from 'services/categoryService';
 import Product from '~/components/Product';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/autoplay';
 import { Helmet } from 'react-helmet';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
+const sampleProducts = [
+    {
+        id: 101,
+        name: 'Yến Chưng Táo Đỏ Hạt Sen',
+        images: ['https://lagianest.com/wp-content/uploads/2022/12/yen-chung-tao-do-hat-sen-LAGIA-NEST.jpg'],
+        child_nav_id: 1,
+        price: 50000,
+    },
+    {
+        id: 102,
+        name: 'Yến Chưng Saffron',
+        images: ['https://lagianest.com/wp-content/uploads/2022/12/yen-chung-saffron-LAGIA-NEST.jpg'],
+        child_nav_id: 1,
+        price: 50000,
+    },
+    {
+        id: 103,
+        name: 'Yến Chưng Đông Trùng Hạ Thảo',
+        images: ['https://lagianest.com/wp-content/uploads/2022/11/yen-chung-dong-trung-ha-thao-LAGIA-NEST.jpg'],
+        child_nav_id: 2,
+        price: 50000,
+    },
+    {
+        id: 104,
+        name: 'Yến Chưng Nhân Sâm',
+        images: ['https://lagianest.com/wp-content/uploads/2022/11/yen-chung-nhan-sam-LAGIA-NEST.jpg'],
+        child_nav_id: 3,
+        price: 50000,
+    },
+    {
+        id: 105,
+        name: 'Yến Chưng Collagen Saffron',
+        images: ['https://lagianest.com/wp-content/uploads/2022/10/yen-chung-collagen-saffron-LAGIA-NEST.jpg'],
+        child_nav_id: 3,
+        price: 50000,
+    },
+    {
+        id: 106,
+        name: 'Yến Chưng Táo Đỏ Hạt Sen',
+        images: ['https://lagianest.com/wp-content/uploads/2022/12/yen-chung-tao-do-hat-sen-LAGIA-NEST.jpg'],
+        child_nav_id: 1,
+        price: 50000,
+    },
+    {
+        id: 107,
+        name: 'Yến Chưng Saffron',
+        images: ['https://lagianest.com/wp-content/uploads/2022/12/yen-chung-saffron-LAGIA-NEST.jpg'],
+        child_nav_id: 1,
+        price: 50000,
+    },
+    {
+        id: 108,
+        name: 'Yến Chưng Đông Trùng Hạ Thảo',
+        images: ['https://lagianest.com/wp-content/uploads/2022/11/yen-chung-dong-trung-ha-thao-LAGIA-NEST.jpg'],
+        child_nav_id: 2,
+        price: 50000,
+    },
+    {
+        id: 109,
+        name: 'Yến Chưng Nhân Sâm',
+        images: ['https://lagianest.com/wp-content/uploads/2022/11/yen-chung-nhan-sam-LAGIA-NEST.jpg'],
+        child_nav_id: 3,
+        price: 50000,
+    },
+    {
+        id: 110,
+        name: 'Yến Chưng Collagen Saffron',
+        images: ['https://lagianest.com/wp-content/uploads/2022/10/yen-chung-collagen-saffron-LAGIA-NEST.jpg'],
+        child_nav_id: 3,
+        price: 50000,
+    },
+    {
+        id: 111,
+        name: 'Yến Chưng Táo Đỏ Hạt Sen',
+        images: ['https://lagianest.com/wp-content/uploads/2022/12/yen-chung-tao-do-hat-sen-LAGIA-NEST.jpg'],
+        child_nav_id: 1,
+        price: 50000,
+    },
+    {
+        id: 112,
+        name: 'Yến Chưng Saffron',
+        images: ['https://lagianest.com/wp-content/uploads/2022/12/yen-chung-saffron-LAGIA-NEST.jpg'],
+        child_nav_id: 1,
+        price: 50000,
+    },
+    {
+        id: 113,
+        name: 'Yến Chưng Đông Trùng Hạ Thảo',
+        images: ['https://lagianest.com/wp-content/uploads/2022/11/yen-chung-dong-trung-ha-thao-LAGIA-NEST.jpg'],
+        child_nav_id: 2,
+        price: 50000,
+    },
+    {
+        id: 114,
+        name: 'Yến Chưng Nhân Sâm',
+        images: ['https://lagianest.com/wp-content/uploads/2022/11/yen-chung-nhan-sam-LAGIA-NEST.jpg'],
+        child_nav_id: 3,
+        price: 50000,
+    },
+    {
+        id: 115,
+        name: 'Yến Chưng Collagen Saffron',
+        images: ['https://lagianest.com/wp-content/uploads/2022/10/yen-chung-collagen-saffron-LAGIA-NEST.jpg'],
+        child_nav_id: 3,
+        price: 50000,
+    },
+];
+
+const sampleCategories = [
+    { id: 1, slug: 'yen-chung', title: 'Yến Chưng' },
+    { id: 2, slug: 'yen-to', title: 'Yến Tổ' },
+    { id: 3, slug: 'qua-tang', title: 'Quà Tặng' },
+];
+
+const getCategorySlug = (categoryId) => {
+    const category = sampleCategories.find((cat) => cat.id == categoryId);
+    return category ? category.slug : 'unknown';
+};
+
 const Products = () => {
-    const [, setProducts] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [groupedProducts, setGroupedProducts] = useState({});
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [filteredProducts, setFilteredProducts] = useState(sampleProducts);
+    const [priceRange, setPriceRange] = useState([0, 100000]);
+    const [categoryFilter, setCategoryFilter] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 9;
 
-    useEffect(() => {
-        const fetchCategoriesAndProducts = async () => {
-            try {
-                const categoriesData = await getCategoriesBySlug('san-pham');
-                setCategories(categoriesData);
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-                const groupedProductsMap = {};
-
-                await Promise.all(
-                    categoriesData.map(async (category) => {
-                        const productsData = await getProductsByCategory(category.id);
-                        groupedProductsMap[category.id] = productsData.map((item) => ({
-                            ...item,
-                        }));
-                    }),
-                );
-
-                setGroupedProducts(groupedProductsMap);
-                setProducts(Object.values(groupedProductsMap).flat());
-            } catch (error) {
-                setError(error);
-                console.error('Error fetching products:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchCategoriesAndProducts();
-    }, []);
-
-    const getCategorySlug = (categoryId) => {
-        const category = categories.find((cat) => cat.id === categoryId);
-        return category ? category.slug : 'unknown';
+    // Phân trang
+    const paginateProducts = () => {
+        const startIndex = (currentPage - 1) * productsPerPage;
+        const endIndex = startIndex + productsPerPage;
+        return filteredProducts.slice(startIndex, endIndex);
     };
 
-    if (error) {
-        const errorMessage = error.response ? error.response.data.message : 'Network Error';
-        return <PushNotification message={errorMessage} />;
-    }
+    const handlePriceChange = (event) => {
+        setPriceRange([0, event.target.value]);
+    };
 
-    if (loading) {
-        return <LoadingScreen isLoading={loading} />;
-    }
+    const handleCategoryChange = (event) => {
+        const { value, checked } = event.target;
+        if (checked) {
+            setCategoryFilter((prev) => [...prev, value]);
+        } else {
+            setCategoryFilter((prev) => prev.filter((catId) => catId !== value));
+        }
+    };
+
+    const handleFilterReset = () => {
+        setPriceRange([0, 100000]);
+        setCategoryFilter([]);
+        setFilteredProducts(sampleProducts);
+        setCurrentPage(1);
+    };
+
+    const handleFilterSubmit = () => {
+        const filtered = sampleProducts.filter((product) => {
+            const isPriceInRange = product.price >= priceRange[0] && product.price <= priceRange[1];
+            const isCategorySelected = categoryFilter.length
+                ? categoryFilter.includes(product.child_nav_id.toString())
+                : true;
+
+            return isPriceInRange && isCategorySelected;
+        });
+        setFilteredProducts(filtered);
+        setCurrentPage(1); // Reset trang về 1 sau khi lọc
+    };
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
 
     return (
         <article className={cx('wrapper')}>
             <Helmet>
-                <title>Sản Phẩm | HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</title>
-                <meta
-                    name="description"
-                    content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn hoạt động đa ngành nghề, trong đó tiêu biểu có thể kể đến là nuôi cá lồng, cải tạo nâng cấp vườn cây quanh các hồ thủy điện, phát triển về du lịch sinh thái, du lịch nông nghiệp. Ngoài ra còn thực hiện sản xuất các loại thực phẩm như chả cá, trái cây thực phẩm sấy khô và sấy dẻo, các loại tinh dầu tự nhiên,…"
-                />
-                <meta
-                    name="keywords"
-                    content="dịch vụ nông nghiệp du lịch, hợp tác xã, sản phẩm nông nghiệp, phunongbuondon"
-                />
-                <meta name="author" content="HTX Nông Nghiệp - Du Lịch Phú Nông Buôn" />
+                <title>Sản Phẩm | Yến Sào LeGia'Nest </title>
             </Helmet>
-            <div className={cx('products-section')}>
-                <div className={cx('products-column')}>
-                    <h2 className={cx('products-title')}>Sản Phẩm</h2>
-                    {categories.map((category) => {
-                        const productsInCategory = groupedProducts[category.id];
+            <div className={cx('content')}>
+                <div className={cx('filter')}>
+                    <h3>
+                        <FontAwesomeIcon className={cx('icon-filter')} icon={faFilter} />
+                        Lọc sản phẩm
+                    </h3>
+                    <div className={cx('filter-item')}>
+                        <label>Khoảng giá</label>
+                        <input type="range" min="0" max="100000" value={priceRange[1]} onChange={handlePriceChange} />
+                        <span>
+                            Giá: {priceRange[0]} - {priceRange[1]} VND
+                        </span>
+                    </div>
+                    <div className={cx('filter-item')}>
+                        <label>Loại sản phẩm</label>
+                        <div className={cx('checkbox-group')}>
+                            {sampleCategories.map((category) => (
+                                <div className={cx('checkbox-item')} key={category.id}>
+                                    <input
+                                        type="checkbox"
+                                        id={`category-${category.id}`}
+                                        value={category.id}
+                                        onChange={handleCategoryChange}
+                                    />
+                                    <label htmlFor={`category-${category.id}`}>{category.title}</label>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <button className={cx('filter-button')} onClick={handleFilterSubmit}>
+                        Lọc sản phẩm
+                    </button>
+                    <button className={cx('reset-button')} onClick={handleFilterReset}>
+                        Đặt lại
+                    </button>
+                </div>
 
-                        if (!productsInCategory || productsInCategory.length === 0) {
-                            return null;
-                        }
-
-                        const shouldLoop = productsInCategory.length > 3;
-
-                        return (
-                            <div key={category.id} className={cx('products-category')}>
-                                <Title
-                                    text={category.title || 'Loading...'}
-                                    showSeeAll={true}
-                                    slug={`${routes.products}/${category.slug}`}
-                                    categoryId={category.id}
-                                />
-                                <Swiper
-                                    spaceBetween={10}
-                                    slidesPerView={4}
-                                    breakpoints={{
-                                        1280: { slidesPerView: 3 },
-                                        1024: { slidesPerView: 3 },
-                                        768: { slidesPerView: 2 },
-                                        0: { slidesPerView: 1 },
-                                    }}
-                                    loop={shouldLoop}
-                                    modules={[Autoplay]}
-                                    autoplay={{
-                                        delay: 2000,
-                                        disableOnInteraction: false,
-                                    }}
-                                >
-                                    {productsInCategory.slice(0, 6).map((item) => (
-                                        <SwiperSlide key={item.id} className={cx('slide')}>
-                                            <Product
-                                                name={item.name}
-                                                image={item.images[0]}
-                                                price={item.price}
-                                                views={item.views}
-                                                productId={item.id}
-                                                category={getCategorySlug(item.categoryid)}
-                                                link={`${routes.products}/${getCategorySlug(item)}/${item.id}`}
-                                            />
-                                        </SwiperSlide>
-                                    ))}
-                                </Swiper>
-                            </div>
-                        );
-                    })}
+                {/* Sản phẩm */}
+                <div className={cx('products-section')}>
+                    {paginateProducts().map((product) => (
+                        <Product
+                            key={product.id}
+                            name={product.name}
+                            image={product.images[0]}
+                            price={product.price}
+                            productId={product.id}
+                            category={sampleCategories.find((cat) => cat.id === product.child_nav_id).slug}
+                            link={`${routes.products}/${getCategorySlug(product.child_nav_id)}/${product.id}`}
+                        />
+                    ))}
+                    {/* Phân trang */}
+                    <div className={cx('pagination')}>
+                        {Array.from({ length: totalPages }, (_, index) => (
+                            <button
+                                key={index + 1}
+                                className={cx('page-button', { active: currentPage === index + 1 })}
+                                onClick={() => handlePageChange(index + 1)}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </div>
         </article>

@@ -12,6 +12,8 @@
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform: translateY(0);
     z-index: 1000;
+    margin: 10px 0;
+
     @include respond-to(xl) {
         padding: 0 20px;
     }
@@ -35,6 +37,7 @@
         transform: translateY(-100%);
         opacity: 0;
         animation: slideDown 0.3s forwards ease-in-out;
+        margin: 0;
     }
 
     @keyframes slideDown {
@@ -47,11 +50,11 @@
     .inner {
         width: var(--default-layout-width);
         display: flex;
-        justify-content: space-between;
+        gap: 20px;
         align-items: center;
 
         .logo {
-            height: 60px;
+            height: 100px;
 
             @include respond-to(sm) {
                 height: 40px;
@@ -69,15 +72,71 @@
             }
         }
 
+        .navigation-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .navigation-utilities {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+
+            .left-section {
+                width: calc(50% - 20px);
+                flex-shrink: 0;
+            }
+
+            .right-section {
+                width: calc(50% - 20px);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .hotline,
+                .account,
+                .cart {
+                    display: flex;
+                    align-items: center;
+                    margin-right: 20px;
+                    cursor: pointer;
+
+                    .text {
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    .icon {
+                        margin-right: 5px;
+                        padding: 12px;
+                        color: var(--white);
+                        background-color: var(--primary);
+                        border-radius: 50%;
+                    }
+
+                    .phone-number,
+                    .username,
+                    .cart-items {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
         .navigation-links {
             display: flex;
+            align-items: center;
+            justify-content: space-between;
             list-style-type: none;
             padding: 0;
             margin: 0;
 
-            li {
+            > li {
                 position: relative;
-                height: var(--nav-height);
                 min-width: 100px;
                 z-index: 1000;
                 justify-content: center;
@@ -86,12 +145,56 @@
                 flex-direction: column;
                 transition: all 0.2s ease-in-out;
                 text-align: center;
-
-                &:hover {
-                    background-color: var(--primary);
+                border-top: 2px solid transparent;
+                border-bottom: 2px solid transparent;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    width: 0;
+                    height: 3px;
+                    background-color: transparent;
+                    transform: scaleX(1);
+                    transform-origin: left;
+                    transition: all 0.3s ease-in-out;
+                    z-index: 9999;
+                }
+                .active-link {
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        left: 0%;
+                        width: 100%;
+                        height: 3px;
+                        background-color: var(--primary);
+                        transform: scaleX(1);
+                        transform-origin: left;
+                        z-index: 9999;
+                    }
 
                     a {
-                        color: var(--white);
+                        color: var(--primary);
+                    }
+                }
+
+                &:hover {
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 3px;
+                        background-color: var(--primary);
+                        transform: scaleX(1);
+                        transform-origin: left;
+                        z-index: 9999;
+                    }
+
+                    a {
+                        color: var(--primary);
                     }
                 }
 
@@ -147,20 +250,20 @@
                     text-decoration: none;
                     color: var(--primary);
                     font-weight: 700;
-                    font-size: 1.6rem;
+                    font-size: 1.8rem;
                     padding: 10px;
                     transition: color 0.3s ease;
                     display: flex;
                     align-items: center;
                     height: 100%;
-                    text-transform: uppercase;
+                    text-transform: capitalize;
 
                     @include respond-to(xl) {
                         color: var(--white);
                     }
 
                     &:hover {
-                        color: var(--white);
+                        color: var(--primary);
                     }
                 }
 
@@ -183,6 +286,7 @@
                         white-space: nowrap;
                         position: relative;
                         background-color: white;
+                        transition: all 0.3s ease-in-out;
 
                         a {
                             width: 100%;
@@ -191,7 +295,7 @@
                             color: black;
                             display: flex;
                             transition: all ease-in-out 0.2s;
-                            text-transform: uppercase;
+                            text-transform: capitalize;
 
                             &:hover {
                                 color: var(--white);
@@ -244,9 +348,23 @@
                             display: flex;
                             flex-direction: column;
                             background-color: var(--primary);
-                            transform: translateY(-12px);
+                            transform: translateY(12px);
                             opacity: 0;
                             animation: slideDown 0.3s forwards ease-in-out;
+                            list-style: none;
+                            &::after {
+                                content: '';
+                                position: absolute;
+                                bottom: 0;
+                                left: 25%;
+                                width: 0;
+                                height: 3px;
+                                background-color: transparent;
+                                transform: scaleX(1);
+                                transform-origin: left;
+                                transition: all 0.3s ease-in-out;
+                                z-index: 9999;
+                            }
                         }
                     }
                 }
@@ -329,6 +447,7 @@
         height: 40px;
         margin: 0;
         white-space: nowrap;
+        list-style: none;
 
         a {
             width: 100%;
@@ -381,7 +500,7 @@
             display: flex;
             flex-direction: column;
             background-color: var(--primary);
-            transform: translateY(-12px);
+            transform: translateY(12px);
             opacity: 0;
             animation: slideDown 0.3s forwards ease-in-out;
         }

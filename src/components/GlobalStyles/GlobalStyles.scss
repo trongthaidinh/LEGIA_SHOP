@@ -1,15 +1,16 @@
 @import url('normalize.css');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import '../../styles/variables';
 @import '../../styles/mixins';
 
 :root {
-    --primary: #097829;
-    --secondary: #f55c2d;
+    --primary: #18723c;
+    --primary-fade: #d3ffe5;
+    --secondary: #e0a500;
     --white: #fff;
     --black: #000;
     --text-color: #000;
-    --font-family: 'Roboto', sans-serif;
+    --font-family: 'Nunito', sans-serif;
     --default-layout-header-height: 200px;
     --default-layout-width: 1200px;
     --default-layout-horizontal-spacer: 20px;
@@ -19,7 +20,7 @@
     --slider-height-lg: 400;
     --slider-height-md: 300px;
     --slider-height-sm: 200px;
-    --nav-height: 80px;
+    --nav-height: 120px;
     --slides-per-view: 4;
     --admin--background: #eff3f9;
     @include respond-to(lg) {
@@ -46,7 +47,7 @@ html {
 }
 
 body {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;

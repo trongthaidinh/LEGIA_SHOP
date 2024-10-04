@@ -15,24 +15,27 @@ function Overview() {
         <div className={cx('wrapper')}>
             <div className={cx('inner')} style={{ perspective: '1000px' }}>
                 <div className={cx('content')}>
-                    <h2 className={cx('title')}>HỢP TÁC XÃ NÔNG NGHIỆP - DU LỊCH</h2>
-                    <h3 className={cx('sub-title')}>PHÚ NÔNG BUÔN ĐÔN</h3>
+                    <h2 className={cx('title')}>YẾN SÀO LEGIA'NEST</h2>
+                    <h3 className={cx('sub-title')}>CHẤT LƯỢNG ĐỈNH CAO - VỊ NGON TINH KHIẾT</h3>
                     <p className={cx('text')}>
-                        Ngày 27/05/2019 Hợp tác xã Nông nghiệp và Du lịch Phú Nông – Buôn Đôn chính thức được thành lập
-                        và ra đời nhằm mục đích khai thác thế mạnh của thiên nhiên, điều kiện tự nhiên, văn hóa, xã hội
-                        để phát triển du lịch và nông nghiệp – sinh thái cộng đồng. Ngoài ra Hợp tác xã Nông nghiệp và
-                        Du lịch Phú Nông còn mang trong mình trọng trách thúc đẩy nền kinh tế địa phương, tạo công ăn
-                        việc làm, góp phần bảo vệ môi trường và một số vấn đề quan trọng trên địa bàn tỉnh Đắk Lăk và
-                        huyện Buôn Đôn.
+                        Yến Sào LeGia'Nest là thương hiệu hàng đầu trong lĩnh vực cung cấp yến sào chất lượng cao tại
+                        Việt Nam. Với cam kết mang lại những sản phẩm yến nguyên chất, giàu dinh dưỡng từ thiên nhiên,
+                        LeGia'Nest không chỉ là sự lựa chọn tin cậy cho sức khỏe, mà còn là biểu tượng của sự tinh tế và
+                        phong cách sống đẳng cấp.
                     </p>
                     <p className={cx('text')}>
-                        <strong>PHÁT TRIỂN LÀM GIÀU BỀN VỮNG</strong>
+                        <strong>SỨ MỆNH CHĂM SÓC SỨC KHỎE</strong>
                     </p>
                     <p className={cx('text')}>
-                        Sau quá trình nghiên cứu và chuẩn bị chúng tôi đã nhận ra rằng những khu vực trên địa bàn như
-                        thôn Tân Phú là nơi có tiềm năng phát triển nguồn tài nguyên thiên nhiên có sẵn phù hợp trong
-                        việc khai thác và canh tác nông nghiệp. Hiện nay có hơn 200 hộ dân từ khắp mọi miền đất nước tập
-                        trung về đây sinh sống, chủ yếu người dân sống bằng nghề truyền thống là sản xuất nông nghiệp.
+                        Với mục tiêu nâng cao chất lượng cuộc sống cho người tiêu dùng, LeGia'Nest luôn đề cao việc bảo
+                        tồn giá trị thiên nhiên, khai thác bền vững nguồn tài nguyên từ yến sào. Sản phẩm của chúng tôi
+                        trải qua quy trình kiểm định nghiêm ngặt, đảm bảo độ tinh khiết và hàm lượng dinh dưỡng cao,
+                        giúp bạn duy trì sức khỏe toàn diện.
+                    </p>
+                    <p className={cx('text')}>
+                        Tại LeGia'Nest, chúng tôi hiểu rằng sức khỏe là tài sản quý giá nhất của mỗi người. Chính vì
+                        thế, chúng tôi luôn nỗ lực không ngừng để mang lại sản phẩm tốt nhất, giúp bạn và gia đình tận
+                        hưởng những giá trị sức khỏe tốt đẹp nhất từ thiên nhiên.
                     </p>
                     <Link to={`${routes.about}/ve-chung-toi`}>
                         <Button

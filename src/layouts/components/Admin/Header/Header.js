@@ -90,7 +90,7 @@ const Header = () => {
 
     return (
         <div className={styles.header}>
-            <div className={styles.companyName}>HTX Nông Nghiệp - Du Lịch Phú Nông Buôn Đôn</div>
+            <div className={styles.companyName}>Yến Sào LeGia Nest </div>
             <div
                 className={styles.iconWrapper}
                 ref={emailDropdownRef}

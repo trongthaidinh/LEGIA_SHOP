@@ -26,6 +26,7 @@ import {
     // faEnvelope,
 } from '@fortawesome/free-solid-svg-icons';
 import images from '~/assets/images';
+import routes from 'config/routes';
 
 // const iconsData = [
 //     { position: 1, icon: faInfoCircle },
@@ -262,10 +263,10 @@ function Navigation({ isFixed }) {
                             </div>
                             <div className={cx('cart')}>
                                 <FontAwesomeIcon icon={faShoppingCart} className={cx('icon')} />
-                                <Link to="/gio-hang" className={cx('cart-link')}>
+                                <Link to={routes.cart} className={cx('cart-link')}>
                                     <div className={cx('text')}>
                                         <span>Giỏ hàng</span>
-                                        <span className={cx('cart-items')}>02 sản phẩm</span>
+                                        <span className={cx('cart-items')}>03 sản phẩm</span>
                                     </div>
                                 </Link>
                             </div>

@@ -4,6 +4,8 @@ import styles from './Cart.module.scss';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from 'components/Button';
+import { Link } from 'react-router-dom';
+import routes from 'config/routes';
 
 const cx = classNames.bind(styles);
 
@@ -125,9 +127,11 @@ const Cart = () => {
                     <span className={cx('cart-summary-label')}>Tổng cộng:</span>
                     <span className={cx('cart-summary-number')}>{calculateTotalPrice().toLocaleString()}₫</span>
                 </div>
-                <Button primary rounded large>
-                    Đặt hàng
-                </Button>
+                <Link to={routes.checkout}>
+                    <Button primary rounded large>
+                        Đặt hàng
+                    </Button>
+                </Link>
             </div>
         </div>
     );

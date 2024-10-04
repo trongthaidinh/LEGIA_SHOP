@@ -67,6 +67,7 @@ const routes = {
     error404: '/404',
     contact: '/lien-he',
     privacy: '/dieu-khoan-chinh-sach',
+    cart: '/gio-hang',
 };
 
 export default routes;

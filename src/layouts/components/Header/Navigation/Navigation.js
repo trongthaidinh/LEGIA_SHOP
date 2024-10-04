@@ -262,10 +262,12 @@ function Navigation({ isFixed }) {
                             </div>
                             <div className={cx('cart')}>
                                 <FontAwesomeIcon icon={faShoppingCart} className={cx('icon')} />
-                                <div className={cx('text')}>
-                                    <span>Giỏ hàng</span>
-                                    <span className={cx('cart-items')}>02 sản phẩm</span>
-                                </div>
+                                <Link to="/gio-hang" className={cx('cart-link')}>
+                                    <div className={cx('text')}>
+                                        <span>Giỏ hàng</span>
+                                        <span className={cx('cart-items')}>02 sản phẩm</span>
+                                    </div>
+                                </Link>
                             </div>
                         </div>
                     </div>

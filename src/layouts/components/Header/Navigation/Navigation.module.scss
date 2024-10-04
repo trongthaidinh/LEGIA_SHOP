@@ -105,6 +105,10 @@
                     margin-right: 20px;
                     cursor: pointer;
 
+                    &-link {
+                        color: var(--text-color);
+                    }
+
                     .text {
                         display: flex;
                         flex-direction: column;

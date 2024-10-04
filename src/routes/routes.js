@@ -67,6 +67,7 @@ import UpdateExperience from '~/pages/Admin/Experiences/UpdateExperience';
 import MemberList from '~/pages/Admin/Team/MemberList';
 import AddMember from '~/pages/Admin/Team/AddMember';
 import UpdateMember from '~/pages/Admin/Team/UpdateMember';
+import Cart from '~/pages/Cart';
 
 // Public Routes
 const publicRoutes = [
@@ -132,6 +133,7 @@ const publicRoutes = [
     { path: config.routes.search, component: Search, layout: OnlyHeaderLayout },
     { path: config.routes.error404, component: Error404, layout: NothingLayout },
     { path: config.routes.contact, component: Contact, layout: OnlyHeaderLayout },
+    { path: config.routes.cart, component: Cart, layout: OnlyHeaderLayout },
     // {
     //     path: config.routes.recruitment,
     //     component: Recruitment,

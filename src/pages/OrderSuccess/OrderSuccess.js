@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import styles from './OrderSuccess.module.scss'; // Giả định bạn có file SCSS module cho styles
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import routes from 'config/routes';
 
 const cx = classNames.bind(styles);
 
@@ -11,13 +12,12 @@ const OrderSuccess = () => {
     const paymentMethod = 'bank';
     const orderDetails = {
         orderId: 'ORD123456',
-        orderDate: '2024-10-04',
-        totalAmount: '2,000,000 VND',
-        bankImage: 'https://example.com/bank-logo.png',
-        bankName: 'Ngân hàng XYZ',
-        accountHolder: 'Nguyễn Văn A',
-        accountNumber: '0123456789',
-        qrCode: 'https://example.com/qr-code.png',
+        orderDate: '04-10-2024',
+        totalAmount: '2,000,000đ',
+        bankName: 'VIETCOMBANK',
+        accountHolder: "LeGia'Nest",
+        accountNumber: '0772332255',
+        qrCode: 'https://res.cloudinary.com/drioug4df/image/upload/v1728045474/QRLeGia_Nest_efimz5.png',
     };
 
     return (
@@ -38,7 +38,7 @@ const OrderSuccess = () => {
                     </div>
 
                     <div className={cx('col', 'continue-shopping')}>
-                        <Link to="/shop">
+                        <Link to={routes.products}>
                             <button className={cx('continue-button')}>Tiếp tục mua sắm</button>
                         </Link>
                     </div>
@@ -46,41 +46,61 @@ const OrderSuccess = () => {
 
                 <div className={cx('row', 'order-summary')}>
                     <div className={cx('col', 'order-info')}>
-                        <h3>Tóm tắt đơn hàng</h3>
+                        <h3 className={cx('order-info-title')}>Tóm tắt đơn hàng</h3>
                         <div className={cx('order-details')}>
-                            <p>
-                                <strong>Mã đơn hàng:</strong> {orderDetails.orderId}
+                            <p className={cx('order-details-text')}>
+                                <span className={cx('order-details-label')}>Mã đơn hàng</span>{' '}
+                                <span className={cx('order-details-value')}>{orderDetails.orderId}</span>
                             </p>
-                            <p>
-                                <strong>Ngày mua hàng:</strong> {orderDetails.orderDate}
+                            <p className={cx('order-details-text')}>
+                                <span className={cx('order-details-label')}>Ngày mua hàng</span>{' '}
+                                <span className={cx('order-details-value')}>{orderDetails.orderDate}</span>
                             </p>
-                            <p>
-                                <strong>Tổng cộng:</strong> {orderDetails.totalAmount}
+                            <p className={cx('order-details-text')}>
+                                <span className={cx('order-details-label')}>Tổng cộng</span>{' '}
+                                <span className={cx('order-details-value')}>{orderDetails.totalAmount}</span>
                             </p>
-                            <p>
-                                <strong>Hình thức thanh toán:</strong>{' '}
-                                {paymentMethod === 'cod' ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản'}
+                        </div>
+                        <div className={cx('order-details')}>
+                            <p className={cx('order-details-text')}>
+                                <span className={cx('order-details-label')}>Hình thức thanh toán</span>{' '}
+                                <span className={cx('order-details-value')}>
+                                    {paymentMethod === 'cod' ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản'}
+                                </span>
                             </p>
                         </div>
                     </div>
 
                     {paymentMethod === 'bank' && (
                         <div className={cx('col', 'bank-info')}>
-                            <h3>Thông tin chuyển khoản</h3>
+                            <h3 className={cx('bank-info-title')}>Thông tin chuyển khoản</h3>
                             <div className={cx('bank-details')}>
-                                <img src={orderDetails.bankImage} alt="Bank Logo" className={cx('bank-logo')} />
-                                <p>
-                                    <strong>Tên ngân hàng:</strong> {orderDetails.bankName}
+                                <img
+                                    src={
+                                        'https://res.cloudinary.com/drioug4df/image/upload/v1728044778/vietcombank_uculs2.png'
+                                    }
+                                    alt="Bank Logo"
+                                    className={cx('bank-logo')}
+                                />
+                                <p className={cx('bank-details-text')}>
+                                    <span className={cx('bank-details-label')}>Tên ngân hàng:</span>
+                                    <span className={cx('bank-details-value')}>{orderDetails.bankName}</span>
                                 </p>
-                                <p>
-                                    <strong>Chủ tài khoản:</strong> {orderDetails.accountHolder}
+                                <p className={cx('bank-details-text')}>
+                                    <span className={cx('bank-details-label')}>Chủ tài khoản:</span>
+                                    <span className={cx('bank-details-value')}>{orderDetails.accountHolder}</span>
                                 </p>
-                                <p>
-                                    <strong>Số tài khoản:</strong> {orderDetails.accountNumber}
+                                <p className={cx('bank-details-text')}>
+                                    <span className={cx('bank-details-label')}>Số tài khoản:</span>
+                                    <span className={cx('bank-details-value')}>{orderDetails.accountNumber}</span>
                                 </p>
-                                <div className={cx('qr-code')}>
-                                    <img src={orderDetails.qrCode} alt="QR Code Chuyển khoản" />
-                                </div>
+                            </div>
+                        </div>
+                    )}
+                    {paymentMethod === 'bank' && (
+                        <div className={cx('col', 'qr-bank')}>
+                            <div className={cx('qr-code')}>
+                                <img src={orderDetails.qrCode} alt="QR Code Chuyển khoản" />
                             </div>
                         </div>
                     )}

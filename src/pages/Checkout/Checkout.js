@@ -139,11 +139,14 @@ const Checkout = () => {
                 .every(([, value]) => value.trim() !== '')
         );
     };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isFormValid()) {
-            alert('Form is valid, processing payment...');
+            const orderId = 950;
+            const orderKey = 'wc_order_TN357ttLic2fQ';
+            const redirectUrl = `/thanh-toan/order-received/${orderId}/?key=${orderKey}`;
+
+            window.location.href = redirectUrl;
         } else {
             alert('Please fill in all required fields.');
         }

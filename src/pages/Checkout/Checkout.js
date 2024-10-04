@@ -1,0 +1,244 @@
+import React, { useState } from 'react';
+import classNames from 'classnames/bind';
+import styles from './Checkout.module.scss';
+import Button from 'components/Button';
+import atmImage from '~/assets/atm.png';
+import codImage from '~/assets/cash.png';
+
+const cx = classNames.bind(styles);
+
+const Checkout = () => {
+    // Dữ liệu mẫu
+    const cartItems = [
+        {
+            id: 1,
+            name: 'Yến Chưng Nhân Sâm',
+            quantity: 2,
+            price: 200000,
+            images: [
+                'https://lagianest.com/wp-content/uploads/2022/11/yen-chung-nhan-sam-LAGIA-NEST.jpg',
+                '~/assets/productA2.png',
+            ],
+        },
+        {
+            id: 2,
+            name: 'Chân Yến Rút Lông Cao Cấp',
+            quantity: 1,
+            price: 200000,
+            images: [
+                'https://lagianest.com/wp-content/uploads/2023/03/chan-yen-rut-long-1.jpg',
+                '~/assets/productB2.png',
+            ],
+        },
+        {
+            id: 3,
+            name: 'Yến Chưng Saffron',
+            quantity: 1,
+            price: 50000,
+            images: [
+                'https://lagianest.com/wp-content/uploads/2022/12/yen-chung-saffron-LAGIA-NEST.jpg',
+                '~/assets/productB2.png',
+            ],
+        },
+    ];
+
+    const shippingFee = 30000;
+
+    const [paymentMethod, setPaymentMethod] = useState('atm');
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        note: '',
+        city: '',
+        district: '',
+        address: '',
+    });
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const calculateSubtotal = () => {
+        return cartItems.reduce((total, item) => {
+            const price = item.price || item.originalPrice;
+            return total + price * item.quantity;
+        }, 0);
+    };
+
+    const calculateTotal = () => {
+        return calculateSubtotal() + shippingFee;
+    };
+
+    return (
+        <div className={cx('wrapper')}>
+            <div className={cx('inner')}>
+                <div className={cx('checkout-left')}>
+                    <h2 className={cx('checkout-left-title')}>Thông tin thanh toán</h2>
+                    <form className={cx('checkout-form')}>
+                        <div className={cx('form-row')}>
+                            <div className={cx('form-group')}>
+                                <label>
+                                    Họ<span className={cx('required')}>*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="lastName"
+                                    value={formData.lastName}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                            <div className={cx('form-group')}>
+                                <label>
+                                    Tên<span className={cx('required')}>*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="firstName"
+                                    value={formData.firstName}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div className={cx('form-group')}>
+                            <label>
+                                Email<span className={cx('required')}>*</span>
+                            </label>
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+                        <div className={cx('form-group')}>
+                            <label>
+                                Số điện thoại<span className={cx('required')}>*</span>
+                            </label>
+                            <input
+                                type="tel"
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+                        <div className={cx('form-group')}>
+                            <label>Ghi chú đơn hàng (tùy chọn)</label>
+                            <textarea name="note" value={formData.note} onChange={handleInputChange} rows="4" />
+                        </div>
+                        <div className={cx('form-row')}>
+                            <div className={cx('form-group')}>
+                                <label>
+                                    Tỉnh/Thành phố<span className={cx('required')}>*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="city"
+                                    value={formData.city}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                            <div className={cx('form-group')}>
+                                <label>
+                                    Quận/Huyện<span className={cx('required')}>*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="district"
+                                    value={formData.district}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div className={cx('form-group')}>
+                            <label>
+                                Địa chỉ<span className={cx('required')}>*</span>
+                            </label>
+                            <input
+                                type="text"
+                                name="address"
+                                value={formData.address}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+
+                        <h3>Phương thức thanh toán</h3>
+                        <div className={cx('payment-method')}>
+                            <div className={cx('payment-option')}>
+                                <img src={atmImage} alt="ATM" className={cx('payment-image')} />
+                                <input
+                                    type="radio"
+                                    name="paymentMethod"
+                                    value="atm"
+                                    checked={paymentMethod === 'atm'}
+                                    onChange={() => setPaymentMethod('atm')}
+                                />
+                                <label>Chuyển khoản ngân hàng (ATM)</label>
+                            </div>
+                            <div className={cx('payment-option')}>
+                                <img src={codImage} alt="COD" className={cx('payment-image')} />
+                                <input
+                                    type="radio"
+                                    name="paymentMethod"
+                                    value="cod"
+                                    checked={paymentMethod === 'cod'}
+                                    onChange={() => setPaymentMethod('cod')}
+                                />
+                                <label>Thanh toán khi nhận hàng (COD)</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div className={cx('checkout-right')}>
+                    <h3 className={cx('checkout-right-title')}>Tóm tắt đơn hàng</h3>
+                    <ul className={cx('cart-summary')}>
+                        {cartItems.map((item) => (
+                            <li key={item.id} className={cx('cart-item')}>
+                                <div className={cx('cart-item-info')}>
+                                    <img src={item.images[0]} alt={item.name} className={cx('cart-item-image')} />
+                                    <div className={cx('cart-item-name-quantity')}>
+                                        <span className={cx('cart-item-name')}>{item.name}</span>
+                                        <span className={cx('cart-item-quantity')}>Số lượng: {item.quantity}</span>
+                                    </div>
+                                </div>
+                                <span className={cx('cart-item-price')}>
+                                    {((item.price || item.originalPrice) * item.quantity).toLocaleString()}₫
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                    <div className={cx('summary-detail')}>
+                        <span>Tạm tính:</span>
+                        <span>{calculateSubtotal().toLocaleString()}₫</span>
+                    </div>
+                    <div className={cx('summary-detail')}>
+                        <span>Phí giao hàng:</span>
+                        <span>{shippingFee.toLocaleString()}₫</span>
+                    </div>
+                    <div className={cx('summary-detail', 'total')}>
+                        <span>Tổng cộng:</span>
+                        <span>{calculateTotal().toLocaleString()}₫</span>
+                    </div>
+                    <Button rounded large className={cx('checkout-btn')}>
+                        Thanh Toán
+                    </Button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Checkout;

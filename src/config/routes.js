@@ -68,6 +68,7 @@ const routes = {
     contact: '/lien-he',
     privacy: '/dieu-khoan-chinh-sach',
     cart: '/gio-hang',
+    checkout: '/thanh-toan',
 };
 
 export default routes;

@@ -76,9 +76,6 @@ const Footer = () => {
                     <Link to="#">
                         <FontAwesomeIcon icon={faTwitter} />
                     </Link>
-                    <Link to="#">
-                        <FontAwesomeIcon icon={faLinkedinIn} />
-                    </Link>
                 </div>
             </div>
             <div className={cx('bottomBar')}>

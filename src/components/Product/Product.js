@@ -8,7 +8,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
-function Product({ image, name, price, link }) {
+function Product({ image, name, price, link, original_price }) {
     const formatPrice = (price) => {
         return price.toLocaleString('vi-VN');
     };
@@ -16,13 +16,21 @@ function Product({ image, name, price, link }) {
     return (
         <Link to={link}>
             <div className={cx('product-item')}>
-                <img className={cx('product-item-image')} src={image} alt={name} />
+                <div className={cx('product-item-image-wrapper')}>
+                    <img className={cx('product-item-image')} src={image} alt={name} />
+                </div>
                 <div className={cx('product-item-details')}>
                     <h2 className={cx('product-item-name')}>{name}</h2>
                     <div className={cx('product-item-price-wrapper')}>
                         <p className={cx('product-item-price')}>
                             {formatPrice(price)}
                             <span className={cx('product-item-currency')}>đ</span>
+                            {original_price > price && (
+                                <span className={cx('product-item-original-price')}>
+                                    {formatPrice(original_price)}
+                                    <span className={cx('product-item-currency')}>đ</span>
+                                </span>
+                            )}
                         </p>
                         <span>
                             <FontAwesomeIcon icon={faPlus} className={cx('product-item-icon')} />

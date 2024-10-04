@@ -69,6 +69,7 @@ const routes = {
     privacy: '/dieu-khoan-chinh-sach',
     cart: '/gio-hang',
     checkout: '/thanh-toan',
+    orderReceived: '/thanh-toan/order-received/:id',
 };
 
 export default routes;

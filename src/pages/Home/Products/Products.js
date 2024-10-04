@@ -34,35 +34,37 @@ function Products() {
         {
             id: 101,
             name: 'Yến Chưng Táo Đỏ Hạt Sen',
-            images: ['https://lagianest.com/wp-content/uploads/2022/12/yen-chung-tao-do-hat-sen-LAGIA-NEST.jpg'],
+            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
             child_nav_id: 1,
             price: 50000,
+            original_price: 60000,
         },
         {
             id: 102,
             name: 'Yến Chưng Saffron',
-            images: ['https://lagianest.com/wp-content/uploads/2022/12/yen-chung-saffron-LAGIA-NEST.jpg'],
+            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
             child_nav_id: 1,
             price: 50000,
+            original_price: 60000,
         },
         {
             id: 103,
             name: 'Yến Chưng Đông Trùng Hạ Thảo',
-            images: ['https://lagianest.com/wp-content/uploads/2022/11/yen-chung-dong-trung-ha-thao-LAGIA-NEST.jpg'],
+            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
             child_nav_id: 2,
             price: 50000,
         },
         {
             id: 104,
             name: 'Yến Chưng Nhân Sâm',
-            images: ['https://lagianest.com/wp-content/uploads/2022/11/yen-chung-nhan-sam-LAGIA-NEST.jpg'],
+            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
             child_nav_id: 3,
             price: 50000,
         },
         {
             id: 105,
             name: 'Yến Chưng Collagen Saffron',
-            images: ['https://lagianest.com/wp-content/uploads/2022/10/yen-chung-collagen-saffron-LAGIA-NEST.jpg'],
+            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
             child_nav_id: 3,
             price: 50000,
         },
@@ -138,6 +140,7 @@ function Products() {
                                     category={getCategorySlug(product.child_nav_id)}
                                     link={`${routes.products}/${getCategorySlug(product.child_nav_id)}/${product.id}`}
                                     price={product.price}
+                                    original_price={product.original_price}
                                 />
                             </SwiperSlide>
                         );

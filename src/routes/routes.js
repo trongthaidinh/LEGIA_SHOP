@@ -69,6 +69,7 @@ import AddMember from '~/pages/Admin/Team/AddMember';
 import UpdateMember from '~/pages/Admin/Team/UpdateMember';
 import Cart from '~/pages/Cart';
 import Checkout from '~/pages/Checkout';
+import OrderSuccess from '~/pages/OrderSuccess';
 
 // Public Routes
 const publicRoutes = [
@@ -136,6 +137,7 @@ const publicRoutes = [
     { path: config.routes.contact, component: Contact, layout: OnlyHeaderLayout },
     { path: config.routes.cart, component: Cart, layout: OnlyHeaderLayout },
     { path: config.routes.checkout, component: Checkout, layout: OnlyHeaderLayout },
+    { path: config.routes.orderReceived, component: OrderSuccess, layout: OnlyHeaderLayout },
     // {
     //     path: config.routes.recruitment,
     //     component: Recruitment,

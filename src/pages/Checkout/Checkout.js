@@ -232,7 +232,7 @@ const Checkout = () => {
                         <span>Tổng cộng:</span>
                         <span>{calculateTotal().toLocaleString()}₫</span>
                     </div>
-                    <Button rounded large className={cx('checkout-btn')}>
+                    <Button type="submit" rounded large className={cx('checkout-btn')}>
                         Thanh Toán
                     </Button>
                 </div>

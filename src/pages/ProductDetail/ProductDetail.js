@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './ProductDetail.module.scss';
 import LoadingScreen from '~/components/LoadingScreen';
@@ -15,6 +15,7 @@ import {
     faPlus,
     faCamera,
     faPaperPlane,
+    faPhoneVolume,
 } from '@fortawesome/free-solid-svg-icons';
 import Button from 'components/Button';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -23,6 +24,7 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
+import routes from 'config/routes';
 
 const cx = classNames.bind(styles);
 
@@ -262,14 +264,31 @@ const ProductDetail = () => {
                     </div>
 
                     <div className={cx('button-container')}>
-                        <Button className={cx('cart-button')} primary>
-                            <FontAwesomeIcon icon={faShoppingCart} className={cx('icon')} />
-                            Thêm vào giỏ hàng
-                        </Button>
-                        <Button className={cx('checkout-button')} outline>
-                            <FontAwesomeIcon icon={faCreditCard} className={cx('icon')} />
-                            Thanh Toán
-                        </Button>
+                        <Link className={cx('button-link')}>
+                            <Button className={cx('cart-button')} primary>
+                                <FontAwesomeIcon icon={faShoppingCart} className={cx('icon')} />
+                                Thêm vào giỏ hàng
+                            </Button>
+                        </Link>
+                        <Link className={cx('button-link')} to={routes.checkout}>
+                            <Button className={cx('checkout-button')} outline>
+                                <FontAwesomeIcon icon={faCreditCard} className={cx('icon')} />
+                                Mua ngay
+                            </Button>
+                        </Link>
+                    </div>
+                    <div className={cx('button-container')}>
+                        <Link className={cx('button-link')} to="tel:0772332255">
+                            <Button className={cx('phone-button')} outline>
+                                <FontAwesomeIcon icon={faPhoneVolume} className={cx('icon')} />
+                                077 233 2255
+                            </Button>
+                        </Link>
+                        <Link className={cx('button-link')} to="https://zalo.me/0772332255">
+                            <Button className={cx('zalo-button')} outline>
+                                ZALO
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>

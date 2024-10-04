@@ -3,11 +3,14 @@
 
 .product-item {
     width: 100%;
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
     text-align: start;
     transition: box-shadow 0.3s ease-in-out;
     border: 1px solid #ccc;
+    @include respond-to(lg) {
+        border-radius: 8px;
+    }
 
     &:hover {
         .product-item-image {
@@ -16,8 +19,8 @@
     }
 
     &-image-wrapper {
-        width: 292px;
-        height: 292px;
+        width: 100%;
+        height: 100%;
         overflow: hidden;
         margin-bottom: 12px;
     }

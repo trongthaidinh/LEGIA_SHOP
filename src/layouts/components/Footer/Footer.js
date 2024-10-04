@@ -84,7 +84,7 @@ const Footer = () => {
             <div className={cx('bottomBar')}>
                 <p>
                     Copyright 2024 &copy;{' '}
-                    <a href="https://phunongbuondon.com/" className={cx('company-name')}>
+                    <a href="#" className={cx('company-name')}>
                         Yến Sào LeGia'Nest
                     </a>
                     . All Rights Reserved. Thiết kế bởi{' '}

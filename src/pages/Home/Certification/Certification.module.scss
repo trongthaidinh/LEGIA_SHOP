@@ -1,0 +1,47 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+
+    .inner {
+        width: var(--default-layout-width);
+        .title {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .certificates {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+
+            .certificate {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                max-width: 200px;
+                max-height: 400px;
+                text-align: center;
+
+                .certificate-image {
+                    width: auto;
+                    height: 100%;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    object-fit: cover;
+                }
+
+                .certificate-title {
+                    margin-top: 10px;
+                    font-size: 16px;
+                    color: #333;
+                }
+            }
+        }
+    }
+}

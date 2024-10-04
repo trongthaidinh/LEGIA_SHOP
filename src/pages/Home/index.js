@@ -10,6 +10,7 @@ import Teams from './Teams';
 import Gifts from './Gifts';
 import Products2 from './Products2';
 import Reviews from './Reviews';
+import Certification from './Certification/Certification';
 
 const Home = () => (
     <article>
@@ -31,6 +32,7 @@ const Home = () => (
         <Products2 />
         <Gifts />
         <Reviews />
+        <Certification />
         <NewsLibrary />
         {/*<Teams /> */}
     </article>

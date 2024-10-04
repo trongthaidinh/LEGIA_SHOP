@@ -8,7 +8,6 @@ import codImage from '~/assets/cash.png';
 const cx = classNames.bind(styles);
 
 const Checkout = () => {
-    // Dữ liệu mẫu
     const cartItems = [
         {
             id: 1,
@@ -56,12 +55,69 @@ const Checkout = () => {
         address: '',
     });
 
+    const [formErrors, setFormErrors] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        city: '',
+        district: '',
+        address: '',
+    });
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
+        validateField(name, value);
+    };
+
+    const validateField = (name, value) => {
+        let error = '';
+
+        switch (name) {
+            case 'firstName':
+            case 'lastName':
+                if (!value.trim()) {
+                    error = 'Trường này là bắt buộc.';
+                }
+                break;
+            case 'email':
+                if (!value.trim()) {
+                    error = 'Email không được để trống.';
+                } else if (!/\S+@\S+\.\S+/.test(value)) {
+                    error = 'Email không hợp lệ.';
+                }
+                break;
+            case 'phone':
+                if (!value.trim()) {
+                    error = 'Số điện thoại không được để trống.';
+                } else if (!/^\d{10,11}$/.test(value)) {
+                    error = 'Số điện thoại không hợp lệ (10-11 số).';
+                }
+                break;
+            case 'city':
+            case 'district':
+            case 'address':
+                if (!value.trim()) {
+                    error = 'Trường này là bắt buộc.';
+                }
+                break;
+            default:
+                break;
+        }
+
+        setFormErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: error,
+        }));
+    };
+
+    const handleBlur = (e) => {
+        const { name, value } = e.target;
+        validateField(name, value);
     };
 
     const calculateSubtotal = () => {
@@ -73,6 +129,24 @@ const Checkout = () => {
 
     const calculateTotal = () => {
         return calculateSubtotal() + shippingFee;
+    };
+
+    const isFormValid = () => {
+        return (
+            Object.values(formErrors).every((error) => !error) &&
+            Object.entries(formData)
+                .filter(([name]) => name !== 'note')
+                .every(([, value]) => value.trim() !== '')
+        );
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (isFormValid()) {
+            alert('Form is valid, processing payment...');
+        } else {
+            alert('Please fill in all required fields.');
+        }
     };
 
     return (
@@ -91,8 +165,10 @@ const Checkout = () => {
                                     name="lastName"
                                     value={formData.lastName}
                                     onChange={handleInputChange}
+                                    onBlur={handleBlur}
                                     required
                                 />
+                                {formErrors.lastName && <span className={cx('error')}>{formErrors.lastName}</span>}
                             </div>
                             <div className={cx('form-group')}>
                                 <label>
@@ -103,8 +179,10 @@ const Checkout = () => {
                                     name="firstName"
                                     value={formData.firstName}
                                     onChange={handleInputChange}
+                                    onBlur={handleBlur}
                                     required
                                 />
+                                {formErrors.firstName && <span className={cx('error')}>{formErrors.firstName}</span>}
                             </div>
                         </div>
                         <div className={cx('form-group')}>
@@ -116,8 +194,10 @@ const Checkout = () => {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleInputChange}
+                                onBlur={handleBlur}
                                 required
                             />
+                            {formErrors.email && <span className={cx('error')}>{formErrors.email}</span>}
                         </div>
                         <div className={cx('form-group')}>
                             <label>
@@ -128,8 +208,10 @@ const Checkout = () => {
                                 name="phone"
                                 value={formData.phone}
                                 onChange={handleInputChange}
+                                onBlur={handleBlur}
                                 required
                             />
+                            {formErrors.phone && <span className={cx('error')}>{formErrors.phone}</span>}
                         </div>
                         <div className={cx('form-group')}>
                             <label>Ghi chú đơn hàng (tùy chọn)</label>
@@ -145,8 +227,10 @@ const Checkout = () => {
                                     name="city"
                                     value={formData.city}
                                     onChange={handleInputChange}
+                                    onBlur={handleBlur}
                                     required
                                 />
+                                {formErrors.city && <span className={cx('error')}>{formErrors.city}</span>}
                             </div>
                             <div className={cx('form-group')}>
                                 <label>
@@ -157,8 +241,10 @@ const Checkout = () => {
                                     name="district"
                                     value={formData.district}
                                     onChange={handleInputChange}
+                                    onBlur={handleBlur}
                                     required
                                 />
+                                {formErrors.district && <span className={cx('error')}>{formErrors.district}</span>}
                             </div>
                         </div>
                         <div className={cx('form-group')}>
@@ -170,10 +256,11 @@ const Checkout = () => {
                                 name="address"
                                 value={formData.address}
                                 onChange={handleInputChange}
+                                onBlur={handleBlur}
                                 required
                             />
+                            {formErrors.address && <span className={cx('error')}>{formErrors.address}</span>}
                         </div>
-
                         <h3>Phương thức thanh toán</h3>
                         <div className={cx('payment-method')}>
                             <div className={cx('payment-option')}>
@@ -188,7 +275,7 @@ const Checkout = () => {
                                 <label>Chuyển khoản ngân hàng (ATM)</label>
                             </div>
                             <div className={cx('payment-option')}>
-                                <img src={codImage} alt="COD" className={cx('payment-image')} />
+                                <img src={codImage} alt="Cash on Delivery" className={cx('payment-image')} />
                                 <input
                                     type="radio"
                                     name="paymentMethod"
@@ -232,7 +319,14 @@ const Checkout = () => {
                         <span>Tổng cộng:</span>
                         <span>{calculateTotal().toLocaleString()}₫</span>
                     </div>
-                    <Button type="submit" rounded large className={cx('checkout-btn')}>
+                    <Button
+                        type="submit"
+                        rounded
+                        large
+                        className={cx('checkout-btn', { disabled: !isFormValid() })}
+                        disabled={!isFormValid()}
+                        onClick={handleSubmit}
+                    >
                         Thanh Toán
                     </Button>
                 </div>

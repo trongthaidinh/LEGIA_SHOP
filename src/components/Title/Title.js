@@ -12,7 +12,7 @@ function Title({ text, subText, showSeeAll = false, slug, categoryId }) {
     return (
         <div className={cx('header')}>
             <div className={cx('text-wrapper')}>
-                <span className={cx('title')}>{text}</span>
+                {/* <span className={cx('title')}>{text}</span> */}
                 {subText && <span className={cx('sub-title')}>{subText}</span>}
             </div>
             {showSeeAll && (

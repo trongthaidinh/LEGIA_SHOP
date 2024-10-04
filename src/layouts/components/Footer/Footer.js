@@ -22,7 +22,7 @@ const Footer = () => {
                     <div className={cx('contactInfo')}>
                         <div className={cx('contactItem')}>
                             <FontAwesomeIcon icon={faMapMarkerAlt} />
-                            <span>62 Nguyễn Hữu Thọ, Phường Tân An, TP. Buôn Ma Thuột, Tỉnh Đăk Lăk</span>
+                            <span>60 - 62 Nguyễn Hữu Thọ, Phường Tân An, TP. Buôn Ma Thuột, Tỉnh Đăk Lăk</span>
                         </div>
                         <div className={cx('contactItem')}>
                             <FontAwesomeIcon icon={faPhone} />

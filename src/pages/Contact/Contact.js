@@ -103,7 +103,9 @@ const ContactPage = () => {
                             </div>
                             <div className={cx('infoItem')}>
                                 <FontAwesomeIcon icon={faMapMarkerAlt} className={cx('icon')} />
-                                <span>Địa chỉ: 62 Nguyễn Hữu Thọ, Phường Tân An, TP. Buôn Ma Thuột, Tỉnh Đăk Lăk</span>
+                                <span>
+                                    Địa chỉ: 60 - 62 Nguyễn Hữu Thọ, Phường Tân An, TP. Buôn Ma Thuột, Tỉnh Đăk Lăk
+                                </span>
                             </div>
                         </div>
 

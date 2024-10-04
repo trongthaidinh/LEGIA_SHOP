@@ -101,7 +101,7 @@ function Products() {
                 <Title text="Sản phẩm" subText="Quà tặng cao cấp" showSeeAll={true} slug={`${routes.products}`} />
                 <img
                     className={cx('gift-intro-img')}
-                    src="https://lagianest.com/wp-content/uploads/2022/11/mokup-hop-yen-to-vang-2048x1448.jpg"
+                    src="https://res.cloudinary.com/drioug4df/image/upload/v1728011829/f9500f84-3e74-486c-a508-0e7c8057189d.jpg"
                     alt="gift"
                 />
                 <Swiper

@@ -11,11 +11,11 @@ const Checkout = () => {
     const cartItems = [
         {
             id: 1,
-            name: 'Yến Chưng Nhân Sâm',
+            name: 'Yến Chưng Đường Phèn',
             quantity: 2,
             price: 200000,
             images: [
-                'https://lagianest.com/wp-content/uploads/2022/11/yen-chung-nhan-sam-LAGIA-NEST.jpg',
+                'https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png',
                 '~/assets/productA2.png',
             ],
         },
@@ -24,10 +24,7 @@ const Checkout = () => {
             name: 'Chân Yến Rút Lông Cao Cấp',
             quantity: 1,
             price: 200000,
-            images: [
-                'https://lagianest.com/wp-content/uploads/2023/03/chan-yen-rut-long-1.jpg',
-                '~/assets/productB2.png',
-            ],
+            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_yen_to_bdz2za.png'],
         },
         {
             id: 3,
@@ -35,7 +32,7 @@ const Checkout = () => {
             quantity: 1,
             price: 50000,
             images: [
-                'https://lagianest.com/wp-content/uploads/2022/12/yen-chung-saffron-LAGIA-NEST.jpg',
+                'https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_set_qua_tang-01_njhh9e.png',
                 '~/assets/productB2.png',
             ],
         },

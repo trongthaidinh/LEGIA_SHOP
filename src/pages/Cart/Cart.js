@@ -12,8 +12,8 @@ const cx = classNames.bind(styles);
 const initialCartItems = [
     {
         id: 1,
-        name: 'Yến Chưng Nhân Sâm',
-        image: 'https://lagianest.com/wp-content/uploads/2022/11/yen-chung-nhan-sam-LAGIA-NEST.jpg',
+        name: 'Yến Chưng Đường Phèn',
+        image: 'https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png',
         price: 200000,
         originalPrice: 300000,
         quantity: 2,
@@ -21,14 +21,14 @@ const initialCartItems = [
     {
         id: 2,
         name: 'Chân Yến Rút Lông Cao Cấp',
-        image: 'https://lagianest.com/wp-content/uploads/2023/03/chan-yen-rut-long-1.jpg',
+        image: 'https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_yen_to_bdz2za.png',
         originalPrice: 200000,
         quantity: 1,
     },
     {
         id: 3,
         name: 'Yến Chưng Saffron',
-        image: 'https://lagianest.com/wp-content/uploads/2022/12/yen-chung-saffron-LAGIA-NEST.jpg',
+        image: 'https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_set_qua_tang-01_njhh9e.png',
         price: 50000,
         originalPrice: 200000,
         quantity: 1,

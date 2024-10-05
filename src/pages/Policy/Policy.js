@@ -38,25 +38,25 @@ const Policy = () => {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Mật ong</td>
-                                            <td>Mật ong rừng, mật ong nuôi,…</td>
+                                            <td>Yến chưng</td>
+                                            <td>Yến chưng 1, Yến chưng 2,…</td>
                                             <td>48h (2 ngày)<br/>Kể từ lúc nhận hàng</td>
                                         </tr>
                                         <tr>
-                                            <td>Các loại khác</td>
-                                            <td>Phấn hoa, sữa ong chúa,…</td>
-                                            <td>168h (7 ngày)<br/>Kể từ lúc nhận hàng</td>
+                                            <td>Yến tổ</td>
+                                            <td>Yến tổ 1, Yến tổ 2,…</td>
+                                            <td>72h (3 ngày)<br/>Kể từ lúc nhận hàng</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <p>Thời gian đổi trả có thể linh động tuỳ vào tính chất của từng loại trái cây và mùa vụ trong mỗi thời điểm.</p>
-                                <p><em>Ví dụ:</em> Vào mùa mưa, trái đu đủ lâu chín hơn mùa nắng (7-10 ngày), nên thời hạn bảo hành có thể kéo dài hơn so với bình thường.</p>
+                                <p>Thời gian đổi trả có thể linh động tuỳ vào tính chất của từng loại yến.</p>
+                                
 
                                 <h3>Kênh tiếp nhận đổi trả</h3>
                                 <ul>
                                     <li>Tại cửa hàng đã mua sản phẩm</li>
                                     <li>Tại trang Facebook hoặc Instagram</li>
-                                    <li>Thông qua Hotline: <strong>0313728397</strong> (8:00 – 22:00)</li>
+                                    <li>Thông qua Hotline: <strong>0772332255</strong> (8:00 – 22:00)</li>
                                 </ul>
 
                                 <h3>Phương thức đổi trả</h3>
@@ -65,7 +65,7 @@ const Policy = () => {
                                     <li>Tặng voucher</li>
                                     <li>Hoàn tiền</li>
                                 </ul>
-                                <p>Phương thức đổi trả có thể linh động dựa vào mức độ lỗi của trái cây và nguyện vọng của khách hàng.</p>
+                                <p>Phương thức đổi trả có thể linh động dựa vào mức độ lỗi của sản phẩm và nguyện vọng của khách hàng.</p>
 
                                 <h3>Các trường hợp được đổi trả</h3>
                                 <ul>
@@ -77,8 +77,8 @@ const Policy = () => {
 
                                 <h3>Điều kiện đổi trả sản phẩm</h3>
                                 <ul>
-                                    <li>Sản phẩm được mua tại các hệ thống chính thức của Mona Honey (Khách hàng cung cấp số điện thoại có lịch sử mua hàng trên hệ thống)</li>
-                                    <li>Sản phẩm được bảo quản đúng cách, theo khuyến cáo của Mona Honey</li>
+                                    <li>Sản phẩm được mua tại của hàng chính thức của Yến Sào LeGia'Nest (Khách hàng cung cấp số điện thoại có lịch sử mua hàng trên hệ thống)</li>
+                                    <li>Sản phẩm được bảo quản đúng cách, theo khuyến cáo của Yến Sào LeGia'Nest</li>
                                 </ul>
 
                         `,

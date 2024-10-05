@@ -154,7 +154,7 @@ function News() {
                         const isNew = dayjs().diff(dayjs(news.created_at), 'day') <= 3;
 
                         return (
-                            <Link key={index} to={`${routes.news}/${getCategorySlug(news.child_nav_id)}/${news.id}`}>
+                            <Link key={index} to={`${routes.news}/${news.id}`}>
                                 <CardContent
                                     title={news.title}
                                     summary={news.summary}

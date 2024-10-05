@@ -3,171 +3,219 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import Card from '~/components/CardContent';
 import SuggestCard from '~/components/SuggestCard';
-import { getNewsByCategory } from '~/services/newsService';
 import styles from './News.module.scss';
 import Title from '~/components/Title';
 import ButtonGroup from '~/components/ButtonGroup';
 import PushNotification from '~/components/PushNotification';
 import LoadingScreen from '~/components/LoadingScreen';
 import routes from '~/config/routes';
-import { getCategoriesBySlug } from '~/services/categoryService';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
 import { Helmet } from 'react-helmet';
 import dayjs from 'dayjs';
-import 'swiper/css';
-import 'swiper/css/autoplay';
 
 const cx = classNames.bind(styles);
 
+const sampleNewsData = [
+    {
+        id: 1,
+        title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+        summary:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        images: ['https://lagianest.com/wp-content/uploads/2023/08/to-yen-kho-de-tu-lanh-duoc-bao-lau.jpg'],
+        slug: 'tin-tuc-1',
+        created_at: '2024-09-30',
+        views: 123,
+        isFeatured: true,
+        child_nav_id: 1,
+    },
+    {
+        id: 2,
+        title: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        summary:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        images: ['https://lagianest.com/wp-content/uploads/2023/08/nguoi-cao-huyet-ap-co-an-yen-duoc-khong.jpg'],
+        slug: 'tin-tuc-2',
+        created_at: '2024-10-01',
+        views: 234,
+        isFeatured: false,
+        child_nav_id: 2,
+    },
+    {
+        id: 3,
+        title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        summary:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        images: ['https://lagianest.com/wp-content/uploads/2023/08/yen-chung-xong-de-ngoai-duoc-bao-lau-avt.jpg'],
+        slug: 'tin-tuc-3',
+        created_at: '2024-09-28',
+        views: 345,
+        isFeatured: true,
+        child_nav_id: 1,
+    },
+    {
+        id: 4,
+        title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        summary:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        images: ['https://lagianest.com/wp-content/uploads/2023/08/yen-chung-xong-de-ngoai-duoc-bao-lau-avt.jpg'],
+        slug: 'tin-tuc-3',
+        created_at: '2024-09-28',
+        views: 345,
+        isFeatured: true,
+        child_nav_id: 1,
+    },
+    {
+        id: 1,
+        title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+        summary:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        images: ['https://lagianest.com/wp-content/uploads/2023/08/to-yen-kho-de-tu-lanh-duoc-bao-lau.jpg'],
+        slug: 'tin-tuc-1',
+        created_at: '2024-09-30',
+        views: 123,
+        isFeatured: true,
+        child_nav_id: 1,
+    },
+    {
+        id: 2,
+        title: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        summary:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        images: ['https://lagianest.com/wp-content/uploads/2023/08/nguoi-cao-huyet-ap-co-an-yen-duoc-khong.jpg'],
+        slug: 'tin-tuc-2',
+        created_at: '2024-10-01',
+        views: 234,
+        isFeatured: false,
+        child_nav_id: 2,
+    },
+    {
+        id: 3,
+        title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        summary:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        images: ['https://lagianest.com/wp-content/uploads/2023/08/yen-chung-xong-de-ngoai-duoc-bao-lau-avt.jpg'],
+        slug: 'tin-tuc-3',
+        created_at: '2024-09-28',
+        views: 345,
+        isFeatured: true,
+        child_nav_id: 1,
+    },
+    {
+        id: 4,
+        title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        summary:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        images: ['https://lagianest.com/wp-content/uploads/2023/08/yen-chung-xong-de-ngoai-duoc-bao-lau-avt.jpg'],
+        slug: 'tin-tuc-3',
+        created_at: '2024-09-28',
+        views: 345,
+        isFeatured: true,
+        child_nav_id: 1,
+    },
+    {
+        id: 1,
+        title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+        summary:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        images: ['https://lagianest.com/wp-content/uploads/2023/08/to-yen-kho-de-tu-lanh-duoc-bao-lau.jpg'],
+        slug: 'tin-tuc-1',
+        created_at: '2024-09-30',
+        views: 123,
+        isFeatured: true,
+        child_nav_id: 1,
+    },
+    {
+        id: 2,
+        title: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        summary:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        images: ['https://lagianest.com/wp-content/uploads/2023/08/nguoi-cao-huyet-ap-co-an-yen-duoc-khong.jpg'],
+        slug: 'tin-tuc-2',
+        created_at: '2024-10-01',
+        views: 234,
+        isFeatured: false,
+        child_nav_id: 2,
+    },
+    {
+        id: 3,
+        title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        summary:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        images: ['https://lagianest.com/wp-content/uploads/2023/08/yen-chung-xong-de-ngoai-duoc-bao-lau-avt.jpg'],
+        slug: 'tin-tuc-3',
+        created_at: '2024-09-28',
+        views: 345,
+        isFeatured: true,
+        child_nav_id: 1,
+    },
+    {
+        id: 4,
+        title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        summary:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        images: ['https://lagianest.com/wp-content/uploads/2023/08/yen-chung-xong-de-ngoai-duoc-bao-lau-avt.jpg'],
+        slug: 'tin-tuc-3',
+        created_at: '2024-09-28',
+        views: 345,
+        isFeatured: true,
+        child_nav_id: 1,
+    },
+];
+
 const News = () => {
     const [newsItems, setNewsItems] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [groupedNews, setGroupedNews] = useState({});
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [selectedSuggestion, setSelectedSuggestion] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 8;
 
     useEffect(() => {
-        const fetchCategoriesAndNews = async () => {
-            try {
-                const categoriesData = await getCategoriesBySlug('tin-tuc');
-                setCategories(categoriesData);
-
-                const groupedNewsMap = {};
-
-                await Promise.all(
-                    categoriesData.map(async (category) => {
-                        const newsData = await getNewsByCategory(category.id);
-                        groupedNewsMap[category.id] = newsData.map((item) => ({
-                            ...item,
-                            image: item.images,
-                            isNew: dayjs().diff(dayjs(item.createdAt), 'day') <= 3,
-                        }));
-                    }),
-                );
-
-                setGroupedNews(groupedNewsMap);
-                setNewsItems(Object.values(groupedNewsMap).flat());
-            } catch (error) {
-                setError(error);
-                console.error('Error fetching news:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchCategoriesAndNews();
+        setNewsItems(sampleNewsData);
     }, []);
 
-    const handleButtonClick = (index) => {
-        setSelectedSuggestion(index);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentNewsItems = newsItems.slice(indexOfFirstItem, indexOfLastItem);
+
+    const totalPages = Math.ceil(newsItems.length / itemsPerPage);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
     };
-
-    const getCategorySlug = (categoryId) => {
-        const category = categories.find((category) => categoryId === category.id);
-        return category ? category.slug : '';
-    };
-
-    if (error) {
-        const errorMessage = error.response ? error.response.data.message : 'Network Error';
-        return <PushNotification message={errorMessage} />;
-    }
-
-    if (loading) {
-        return <LoadingScreen isLoading={loading} />;
-    }
-
-    const filteredNewsItems = newsItems
-        .filter((item) => {
-            if (selectedSuggestion === 0) {
-                return item.isFeatured;
-            }
-            if (selectedSuggestion === 1) {
-                return item.views > 10;
-            }
-            return true;
-        })
-        .slice(0, 5);
 
     return (
         <article className={cx('wrapper')}>
             <Helmet>
                 <title>Tin Tức | Yến Sào LeGia Nest </title>
-                <meta
-                    name="description"
-                    content="Yến Sào LeGia Nest  hoạt động đa ngành nghề, trong đó tiêu biểu có thể kể đến là nuôi cá lồng, cải tạo nâng cấp vườn cây quanh các hồ thủy điện, phát triển về du lịch sinh thái, du lịch nông nghiệp. Ngoài ra còn thực hiện sản xuất các loại thực phẩm như chả cá, trái cây thực phẩm sấy khô và sấy dẻo, các loại tinh dầu tự nhiên,…"
-                />
-                <meta name="keywords" content="tin tức, cập nhật, phunongbuondon" />
             </Helmet>
             <div className={cx('news-section')}>
                 <div className={cx('news-column')}>
-                    <h2 className={cx('news-title')}>Tin Tức</h2>
-                    {categories.map((category) => {
-                        const slides = groupedNews[category.id]?.slice(0, 6) || [];
-                        const shouldLoop = slides.length > 3;
-
-                        return (
-                            <div key={category.id} className={cx('news-category')}>
-                                <Title
-                                    text={category.title || 'Loading...'}
-                                    showSeeAll={true}
-                                    slug={`${routes.news}/${category.slug}`}
-                                    categoryId={category.id}
-                                />
-                                <Swiper
-                                    spaceBetween={10}
-                                    slidesPerView={3}
-                                    breakpoints={{
-                                        1280: { slidesPerView: 3 },
-                                        1024: { slidesPerView: 3 },
-                                        768: { slidesPerView: 2 },
-                                        0: { slidesPerView: 1 },
-                                    }}
-                                    loop={shouldLoop}
-                                    modules={[Autoplay]}
-                                    autoplay={{
-                                        delay: 2000,
-                                        disableOnInteraction: false,
-                                    }}
-                                >
-                                    {groupedNews[category.id]?.slice(0, 6).map((item, index) => (
-                                        <SwiperSlide key={index} className={cx('slide')}>
-                                            <Link to={`${routes.news}/${category.slug}/${item.id}`}>
-                                                <Card
-                                                    title={item.title}
-                                                    summary={item.summary}
-                                                    image={item.images}
-                                                    createdAt={item.createdAt}
-                                                    views={item.views}
-                                                    isNew={item.isNew}
-                                                />
-                                            </Link>
-                                        </SwiperSlide>
-                                    ))}
-                                </Swiper>
-                            </div>
-                        );
-                    })}
-                </div>
-                <div className={cx('suggest')}>
-                    <h2 className={cx('suggest-title')}>Có thể bạn quan tâm</h2>
-                    <ButtonGroup buttons={['Nổi bật', 'Xem nhiều']} onButtonClick={handleButtonClick} />
-                    <div className={cx('suggest-items')}>
-                        {filteredNewsItems.map((item, index) => (
-                            <Link key={index} to={`${routes.news}/${getCategorySlug(item.child_nav_id)}/${item.id}`}>
-                                <SuggestCard
+                    <Title subText={'Tin Tức'} />
+                    <div className={cx('news-grid')}>
+                        {currentNewsItems.map((item, index) => (
+                            <Link to={`${routes.news}/${item.id}`} key={index}>
+                                <Card
                                     title={item.title}
                                     summary={item.summary}
                                     image={item.images}
-                                    createdAt={item.createdAt}
+                                    createdAt={item.created_at}
                                     views={item.views}
-                                    isNew={item.isNew}
+                                    isNew={dayjs().diff(dayjs(item.created_at), 'day') <= 3}
                                 />
                             </Link>
                         ))}
                     </div>
                 </div>
+                {totalPages > 1 && (
+                    <div className={cx('pagination')}>
+                        {Array.from({ length: totalPages }, (_, i) => (
+                            <button
+                                key={i + 1}
+                                onClick={() => handlePageChange(i + 1)}
+                                className={cx({ active: currentPage === i + 1 })}
+                            >
+                                {i + 1}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
         </article>
     );

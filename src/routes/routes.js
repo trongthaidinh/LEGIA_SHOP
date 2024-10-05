@@ -103,7 +103,7 @@ const publicRoutes = [
     {
         path: config.routes.newsDetail,
         component: NewsDetail,
-        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.news} categoryType={'tin-tuc'} />,
+        layout: (props) => <OnlyHeaderLayout {...props} baseRoute={config.routes.news} categoryType={'tin-tuc'} />,
     },
     { path: config.routes.news, component: News, layout: OnlyHeaderLayout },
     { path: config.routes.services, component: Service, layout: OnlyHeaderLayout },

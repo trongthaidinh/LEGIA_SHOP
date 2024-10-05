@@ -70,6 +70,7 @@ import UpdateMember from '~/pages/Admin/Team/UpdateMember';
 import Cart from '~/pages/Cart';
 import Checkout from '~/pages/Checkout';
 import OrderSuccess from '~/pages/OrderSuccess';
+import BuyingGuide from '~/pages/BuyingGuide';
 
 // Public Routes
 const publicRoutes = [
@@ -93,6 +94,11 @@ const publicRoutes = [
     {
         path: config.routes.introduction,
         component: Introduction,
+        layout: OnlyHeaderLayout,
+    },
+    {
+        path: config.routes.buyingGuide,
+        component: BuyingGuide,
         layout: OnlyHeaderLayout,
     },
     {

@@ -70,6 +70,7 @@ const routes = {
     cart: '/gio-hang',
     checkout: '/thanh-toan',
     orderReceived: '/thanh-toan/order-received/:id',
+    buyingGuide: '/:slug',
 };
 
 export default routes;

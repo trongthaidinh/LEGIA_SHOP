@@ -69,15 +69,15 @@ const ProductDetail = () => {
         const mockData = {
             id: 101,
             name: "Yến Sào Cao Cấp LeGia'Nest",
-            price: 500000,
-            original_price: 700000,
+            price: 50000,
+            original_price: 70000,
             images: [
                 'https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg',
-                'https://lagianest.com/wp-content/uploads/2022/11/hop-yen-chung-nhan-sam-247x247.jpg',
+                'https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png',
                 'https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg',
-                'https://lagianest.com/wp-content/uploads/2022/11/yen-chung-nhan-sam-LAGIA-NEST.jpg',
+                'https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png',
                 'https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg',
-                'https://lagianest.com/wp-content/uploads/2022/11/3-1-247x247.png',
+                'https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png',
             ],
             features: JSON.stringify(['Giá trị dinh dưỡng cao', 'Yến sào 100% tự nhiên', 'Không chất bảo quản']),
             phone_number: '123456789',
@@ -87,7 +87,7 @@ const ProductDetail = () => {
                     <p>Yến Sào Cao Cấp LeGia'Nest là sản phẩm yến sào chất lượng cao, được chế biến từ những tổ yến tự nhiên, đảm bảo sự tinh khiết và an toàn cho sức khỏe người tiêu dùng.</p>
                     <h3>Thông Tin Sản Phẩm</h3>
                     <ul>
-                        <li><strong>Giá:</strong> 500,000 VNĐ (Giá gốc: 700,000 VNĐ)</li>
+                        <li><strong>Giá:</strong> 50,000 VNĐ (Giá gốc: 70,000 VNĐ)</li>
                         <li><strong>Khối lượng:</strong> 100g</li>
                         <li><strong>Xuất xứ:</strong> Việt Nam</li>
                     </ul>
@@ -99,7 +99,7 @@ const ProductDetail = () => {
                         <li>Được sản xuất theo quy trình khép kín, đảm bảo vệ sinh an toàn thực phẩm.</li>
                     </ul>
                     <h3>Cách Sử Dụng</h3>
-                    <p>Để tận hưởng trọn vẹn hương vị và lợi ích dinh dưỡng từ Yến Sào Cao Cấp LeGia Nest, bạn có thể chế biến theo các cách sau:</p>
+                    <p>Để tận hưởng trọn vẹn hương vị và lợi ích dinh dưỡng từ Yến Sào Cao Cấp LeGia'Nest, bạn có thể chế biến theo các cách sau:</p>
                     <ol>
                         <li>Ngâm yến trong nước ấm khoảng 30 phút trước khi chế biến.</li>
                         <li>Chế biến yến cùng với đường phèn và nước dừa để tạo ra món ăn thơm ngon.</li>

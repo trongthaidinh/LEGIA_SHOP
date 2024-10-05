@@ -33,8 +33,8 @@ function Products() {
     const products = [
         {
             id: 101,
-            name: 'Chân Yến Thô (Còn Lông)',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039225/3ANH-02_ck64qc.jpg'],
+            name: 'Yến Tinh Chế Baby Vụn',
+            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_yen_to_bdz2za.png'],
             child_nav_id: 1,
             price: 50000,
         },
@@ -47,8 +47,8 @@ function Products() {
         },
         {
             id: 103,
-            name: 'Tổ Yến Tinh Chế Viên Baby',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039225/3ANH-02_ck64qc.jpg'],
+            name: 'Yến Tinh Chế Baby Vụn',
+            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_yen_to_bdz2za.png'],
             child_nav_id: 2,
             price: 50000,
         },
@@ -61,6 +61,13 @@ function Products() {
         },
         {
             id: 105,
+            name: 'Yến Tinh Chế Baby Vụn',
+            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_yen_to_bdz2za.png'],
+            child_nav_id: 3,
+            price: 50000,
+        },
+        {
+            id: 106,
             name: 'Tổ Yến Thô Cao Cấp (Loại 2)',
             images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039225/3ANH-02_ck64qc.jpg'],
             child_nav_id: 3,

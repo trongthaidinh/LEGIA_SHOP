@@ -33,6 +33,14 @@ function Products() {
     const products = [
         {
             id: 101,
+            name: 'Yến Chưng Đường Phèn',
+            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png'],
+            child_nav_id: 1,
+            price: 50000,
+            original_price: 60000,
+        },
+        {
+            id: 102,
             name: 'Yến Chưng Táo Đỏ Hạt Sen',
             images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
             child_nav_id: 1,
@@ -40,17 +48,9 @@ function Products() {
             original_price: 60000,
         },
         {
-            id: 102,
-            name: 'Yến Chưng Saffron',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
-            child_nav_id: 1,
-            price: 50000,
-            original_price: 60000,
-        },
-        {
             id: 103,
-            name: 'Yến Chưng Đông Trùng Hạ Thảo',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
+            name: 'Yến Chưng Đường Phèn',
+            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png'],
             child_nav_id: 2,
             price: 50000,
         },
@@ -63,6 +63,13 @@ function Products() {
         },
         {
             id: 105,
+            name: 'Yến Chưng Đường Phèn',
+            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png'],
+            child_nav_id: 2,
+            price: 50000,
+        },
+        {
+            id: 106,
             name: 'Yến Chưng Collagen Saffron',
             images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
             child_nav_id: 3,

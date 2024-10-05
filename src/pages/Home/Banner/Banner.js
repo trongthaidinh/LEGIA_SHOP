@@ -40,10 +40,9 @@ const Banner = () => {
 
     // Replace slides and isLoading with sample data
     const slides = [
-        'https://res.cloudinary.com/drioug4df/image/upload/v1728039221/%E1%BA%A3nh_slide-01_l6sjou.jpg',
-        'https://res.cloudinary.com/drioug4df/image/upload/v1728039229/%E1%BA%A3nh_slide-02_o6zwt6.jpg',
-        'https://res.cloudinary.com/drioug4df/image/upload/v1728039224/%E1%BA%A3nh_slide-03_wzg58x.jpg',
-        'https://res.cloudinary.com/drioug4df/image/upload/v1728039235/%E1%BA%A3nh_slide-04_yiiq4r.jpg',
+        'https://res.cloudinary.com/drioug4df/image/upload/v1728104353/4_slide_LE_GIA_nest-01_tfoeel.png',
+        'https://res.cloudinary.com/drioug4df/image/upload/v1728104353/4_slide_LE_GIA_nest-02_rmn16p.png',
+        'https://res.cloudinary.com/drioug4df/image/upload/v1728104359/4_slide_LE_GIA_nest-03_ka6fbr.png',
     ];
     const isLoading = false; // Set isLoading to false as we have sample data
 

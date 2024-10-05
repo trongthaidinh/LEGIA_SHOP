@@ -34,7 +34,7 @@ function Products() {
         {
             id: 101,
             name: 'Set Quà Combo 6 Hũ Yến Chưng Cao Cấp',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039222/3ANH-03_kxbobh.jpg'],
+            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_set_qua_tang-01_njhh9e.png'],
             child_nav_id: 1,
             price: 50000,
         },
@@ -47,8 +47,8 @@ function Products() {
         },
         {
             id: 103,
-            name: 'Mật Ong Ngâm Saffron Đông Trùng Hạ Thảo',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039222/3ANH-03_kxbobh.jpg'],
+            name: 'Set Quà Combo 6 Hũ Yến Chưng Cao Cấp',
+            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_set_qua_tang-01_njhh9e.png'],
             child_nav_id: 2,
             price: 50000,
         },

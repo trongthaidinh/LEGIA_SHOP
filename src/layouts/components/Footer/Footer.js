@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faEnvelope, faChevronRight, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPhone, faEnvelope, faChevronRight, faMapMarkerAlt, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube, faFacebook, faInstagram, faTwitter, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import companyLogo from '~/assets/images/nest-logo.png';
 import styles from './Footer.module.scss';
@@ -20,6 +20,16 @@ const Footer = () => {
                     </Link>
                     <h5>Yến Sào LeGia'Nest </h5>
                     <div className={cx('contactInfo')}>
+                        <div className={cx('onlineStatus')}>
+                            <div className={cx('onlineStatusToday')}>
+                                <FontAwesomeIcon className={cx('footer-icon-dot')} icon={faCircle} />
+                                Truy cập hôm nay: <span className={cx('online-number')}> 452</span>
+                            </div>
+                            <div className={cx('onlineStatusTotal')}>
+                                <FontAwesomeIcon className={cx('footer-icon-dot')} icon={faCircle} />
+                                Tổng số lượt truy cập: <span className={cx('online-access')}>123423</span>
+                            </div>
+                        </div>
                         <div className={cx('contactItem')}>
                             <FontAwesomeIcon icon={faMapMarkerAlt} />
                             <span>60 - 62 Nguyễn Hữu Thọ, Phường Tân An, TP. Buôn Ma Thuột, Tỉnh Đăk Lăk</span>

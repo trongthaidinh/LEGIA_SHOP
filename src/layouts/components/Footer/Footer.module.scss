@@ -64,9 +64,19 @@
         }
 
         .onlineStatus {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             margin-top: 10px;
             font-size: 14px;
             color: var(--black);
+            margin-bottom: 8px;
+
+            .onlineStatusToday,
+            .onlineStatusTotal {
+                display: flex;
+                align-items: center;
+            }
 
             .footer-icon-dot {
                 color: green;
@@ -76,7 +86,8 @@
 
             .online-number,
             .online-access {
-                color: var(--secondary);
+                margin-left: 4px;
+                color: orangered;
             }
         }
 

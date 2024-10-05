@@ -70,7 +70,9 @@ const routes = {
     cart: '/gio-hang',
     checkout: '/thanh-toan',
     orderReceived: '/thanh-toan/order-received/:id',
-    buyingGuide: '/:slug',
+    buyingGuide: '/huong-dan-mua-hang',
+    policyCom: '/:slug',
+    policy: '/chinh-sach/:slug',
 };
 
 export default routes;

@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Title from '~/components/Title';
 import styles from './BuyingGuide.module.scss';
@@ -11,8 +10,7 @@ import LoadingScreen from '~/components/LoadingScreen';
 const cx = classNames.bind(styles);
 
 const BuyingGuide = () => {
-    const { slug } = useParams();
-    console.log(slug);
+    const slug = 'huong-dan-mua-hang';
     const [pageContent, setPageContent] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -20,6 +18,7 @@ const BuyingGuide = () => {
     useEffect(() => {
         const fetchPageContent = async () => {
             try {
+                // Giả lập việc lấy dữ liệu từ API bằng slug
                 if (slug) {
                     // const data = await getPageBySlug(slug); // Comment phần gọi API
                     // Sử dụng dữ liệu mẫu (mock data)
@@ -53,7 +52,6 @@ const BuyingGuide = () => {
 
                             <p>Sau khi điền đầy đủ thông tin và kiểm tra đơn hàng, giá tiền, bạn bấm vào nút <strong>HOÀN TẤT ĐƠN HÀNG</strong> gửi về cho Yến Sào LeGia'Nest.</p>
                             <p>Yến Sào LeGia'Nest sẽ gửi cho bạn email hoặc gọi điện xác nhận đơn hàng.</p>
-
                         `,
                     };
                     setPageContent(mockData);

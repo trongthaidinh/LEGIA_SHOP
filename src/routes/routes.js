@@ -71,6 +71,7 @@ import Cart from '~/pages/Cart';
 import Checkout from '~/pages/Checkout';
 import OrderSuccess from '~/pages/OrderSuccess';
 import BuyingGuide from '~/pages/BuyingGuide';
+import Policy from '~/pages/Policy';
 
 // Public Routes
 const publicRoutes = [
@@ -99,6 +100,16 @@ const publicRoutes = [
     {
         path: config.routes.buyingGuide,
         component: BuyingGuide,
+        layout: OnlyHeaderLayout,
+    },
+    {
+        path: config.routes.policy,
+        component: Policy,
+        layout: OnlyHeaderLayout,
+    },
+    {
+        path: config.routes.policyCom,
+        component: Policy,
         layout: OnlyHeaderLayout,
     },
     {

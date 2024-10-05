@@ -125,7 +125,22 @@ function Navigation({ isFixed }) {
             title: 'Chính sách',
             slug: 'chinh-sach',
             position: 4,
-            children: [],
+            children: [
+                {
+                    id: 1,
+                    title: 'Chính sách bảo hành',
+                    slug: 'chinh-sach-bao-hanh',
+                    position: 1,
+                    children: [],
+                },
+                {
+                    id: 2,
+                    title: 'Chính sách thanh toán',
+                    slug: 'chinh-sach-thanh-toan',
+                    position: 2,
+                    children: [],
+                },
+            ],
         },
         {
             id: 6,
@@ -338,8 +353,8 @@ function Navigation({ isFixed }) {
                                                     >
                                                         <div className={cx('sub-link-wrapper')}>
                                                             <NavLink
-                                                                // to={`/${link.slug}/${childLink.slug}`}
-                                                                to={`/${link.slug}`}
+                                                                to={`/${link.slug}/${childLink.slug}`}
+                                                                // to={`/${link.slug}`}
                                                                 className={({ isActive }) =>
                                                                     cx({ 'active-lin-sub': isActive })
                                                                 }

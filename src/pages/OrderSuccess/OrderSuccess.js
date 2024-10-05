@@ -76,9 +76,7 @@ const OrderSuccess = () => {
                             <h3 className={cx('bank-info-title')}>Thông tin chuyển khoản</h3>
                             <div className={cx('bank-details')}>
                                 <img
-                                    src={
-                                        'https://res.cloudinary.com/drioug4df/image/upload/v1728044778/vietcombank_uculs2.png'
-                                    }
+                                    src={'https://cdn.haitrieu.com/wp-content/uploads/2022/02/Logo-Vietcombank-Sl.png'}
                                     alt="Bank Logo"
                                     className={cx('bank-logo')}
                                 />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Product.module.scss';
 import Title from '~/components/Title';
@@ -8,7 +8,7 @@ import routes from '~/config/routes';
 import Product from '~/components/Product';
 import { Helmet } from 'react-helmet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -136,6 +136,8 @@ const Products = () => {
     const [priceRange, setPriceRange] = useState([0, 100000]);
     const [categoryFilter, setCategoryFilter] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
+    const filterRef = useRef(null);
     const productsPerPage = 9;
 
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
@@ -184,17 +186,47 @@ const Products = () => {
         setCurrentPage(page);
     };
 
+    const toggleFilter = () => {
+        setIsFilterOpen((prev) => !prev);
+    };
+
+    const closeFilter = () => {
+        setIsFilterOpen(false);
+    };
+
+    const handleClickOutside = (event) => {
+        if (filterRef.current && !filterRef.current.contains(event.target)) {
+            closeFilter();
+        }
+    };
+
+    useEffect(() => {
+        if (isFilterOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isFilterOpen]);
+
     return (
         <article className={cx('wrapper')}>
             <Helmet>
                 <title>Sản Phẩm | Yến Sào LeGia'Nest </title>
             </Helmet>
             <div className={cx('content')}>
-                <div className={cx('filter')}>
-                    <h3>
-                        <FontAwesomeIcon className={cx('icon-filter')} icon={faFilter} />
-                        Lọc sản phẩm
-                    </h3>
+                <div className={cx('filter-toggle-btn')} onClick={toggleFilter}>
+                    <FontAwesomeIcon className={cx('icon-filter')} icon={faFilter} />
+                    Bộ lọc sản phẩm
+                </div>
+                <div ref={filterRef} className={cx('filter', { 'filter-open': isFilterOpen })}>
+                    <div className={cx('filter-header')}>
+                        <h3>Lọc sản phẩm</h3>
+                        <FontAwesomeIcon className={cx('icon-close')} icon={faTimes} onClick={closeFilter} />
+                    </div>
                     <div className={cx('filter-item')}>
                         <label>Khoảng giá</label>
                         <input type="range" min="0" max="100000" value={priceRange[1]} onChange={handlePriceChange} />
@@ -228,17 +260,19 @@ const Products = () => {
 
                 {/* Sản phẩm */}
                 <div className={cx('products-section')}>
-                    {paginateProducts().map((product) => (
-                        <Product
-                            key={product.id}
-                            name={product.name}
-                            image={product.images[0]}
-                            price={product.price}
-                            productId={product.id}
-                            category={sampleCategories.find((cat) => cat.id === product.child_nav_id).slug}
-                            link={`${routes.products}/${getCategorySlug(product.child_nav_id)}/${product.id}`}
-                        />
-                    ))}
+                    <div className={cx('products-list')}>
+                        {paginateProducts().map((product) => (
+                            <Product
+                                key={product.id}
+                                name={product.name}
+                                image={product.images[0]}
+                                price={product.price}
+                                productId={product.id}
+                                category={sampleCategories.find((cat) => cat.id === product.child_nav_id).slug}
+                                link={`${routes.products}/${getCategorySlug(product.child_nav_id)}/${product.id}`}
+                            />
+                        ))}
+                    </div>
                     {/* Phân trang */}
                     <div className={cx('pagination')}>
                         {Array.from({ length: totalPages }, (_, index) => (

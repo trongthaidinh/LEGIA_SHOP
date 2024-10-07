@@ -18,12 +18,6 @@
     overflow: hidden;
     border-radius: 20px;
     transition: all 0.3s ease-in-out;
-    @include respond-to(lg) {
-        height: 320px;
-    }
-    @include respond-to(sm) {
-        height: 360px;
-    }
 }
 
 .card_image {

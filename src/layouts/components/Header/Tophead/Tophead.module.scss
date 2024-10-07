@@ -15,7 +15,7 @@
     border-bottom-right-radius: 30px;
     @include respond-to(sm) {
         height: 30px;
-        margin-top: var(--nav-height);
+        // margin-top: var(--nav-height);
     }
 
     .inner {
@@ -34,6 +34,9 @@
 
             .discount-label {
                 font-size: 1.5rem;
+                @include respond-to(sm) {
+                    font-size: 1.2rem;
+                }
             }
         }
 

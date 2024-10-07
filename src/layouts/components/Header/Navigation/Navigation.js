@@ -16,6 +16,7 @@ import {
     faUser,
     faPhone,
     faPhoneVolume,
+    faSearch,
     // faHome,
     // faInfoCircle,
     // faBox,
@@ -250,10 +251,7 @@ function Navigation({ isFixed }) {
     return (
         <div className={cx('wrapper', { fixed: isFixed })}>
             <div className={cx('inner')}>
-                <div className={cx('mobile-menu-icon')} onClick={toggleMenu}>
-                    <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
-                </div>
-                <Link to="/">
+                <Link to="/" className={cx('logo-link')}>
                     <img src={images.logo} alt="Logo" className={cx('logo')} />
                 </Link>
                 <div className={cx('navigation-wrapper')}>
@@ -262,23 +260,31 @@ function Navigation({ isFixed }) {
                             <Search />
                         </div>
                         <div className={cx('right-section')}>
-                            <div className={cx('hotline')}>
-                                <FontAwesomeIcon icon={faPhoneVolume} className={cx('icon')} />
-                                <div className={cx('text')}>
-                                    <span>Hotline</span>
-                                    <span className={cx('phone-number')}>0901234567</span>
-                                </div>
+                            <div className={cx('search')}>
+                                <FontAwesomeIcon icon={faSearch} className={cx('icon')} />
                             </div>
+                            <div className={cx('hotline')}>
+                                <Link to="tel:0772332255" className={cx('cart-link')}>
+                                    <FontAwesomeIcon icon={faPhoneVolume} className={cx('icon')} />
+                                    <div className={cx('text')}>
+                                        <span>Hotline</span>
+                                        <span className={cx('phone-number')}>0772332255</span>
+                                    </div>
+                                </Link>
+                            </div>
+
                             <div className={cx('account')}>
-                                <FontAwesomeIcon icon={faUser} className={cx('icon')} />
-                                <div className={cx('text')}>
-                                    <span>Tài khoản</span>
-                                    <span className={cx('username')}>Nguyễn Văn A</span>
-                                </div>
+                                <Link to={routes.login} className={cx('cart-link')}>
+                                    <FontAwesomeIcon icon={faUser} className={cx('icon')} />
+                                    <div className={cx('text')}>
+                                        <span>Tài khoản</span>
+                                        <span className={cx('username')}>Đăng nhập</span>
+                                    </div>
+                                </Link>
                             </div>
                             <div className={cx('cart')}>
-                                <FontAwesomeIcon icon={faShoppingCart} className={cx('icon')} />
                                 <Link to={routes.cart} className={cx('cart-link')}>
+                                    <FontAwesomeIcon icon={faShoppingCart} className={cx('icon')} />
                                     <div className={cx('text')}>
                                         <span>Giỏ hàng</span>
                                         <span className={cx('cart-items')}>03 sản phẩm</span>
@@ -411,6 +417,9 @@ function Navigation({ isFixed }) {
                             );
                         })}
                     </ul>
+                </div>
+                <div className={cx('mobile-menu-icon')} onClick={toggleMenu}>
+                    <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
                 </div>
             </div>
         </div>

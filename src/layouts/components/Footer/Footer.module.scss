@@ -49,7 +49,7 @@
             margin: 10px 0;
             color: var(--primary);
             @include respond-to(sm) {
-                font-size: 1.8rem;
+                font-size: 3.2rem;
             }
         }
 
@@ -68,10 +68,16 @@
             align-items: center;
             gap: 8px;
             margin-top: 10px;
-            font-size: 14px;
+            font-size: 1.4rem;
             color: var(--black);
             margin-bottom: 8px;
             margin-left: 3px;
+
+            @include respond-to(sm) {
+                flex-direction: column;
+                align-items: flex-start;
+                font-size: 1.8rem;
+            }
 
             .onlineStatusToday,
             .onlineStatusTotal {
@@ -83,6 +89,9 @@
                 color: green;
                 font-size: 8px;
                 margin-right: 11px;
+                @include respond-to(sm) {
+                    margin-right: 16px;
+                }
             }
 
             .online-number,
@@ -115,10 +124,11 @@
 
                 svg {
                     margin-right: 10px;
-                    font-size: 16px;
+                    font-size: 1.6rem;
                     color: var(--black);
                     @include respond-to(sm) {
                         font-size: 2rem;
+                        min-width: 18px;
                     }
                 }
             }

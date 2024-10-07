@@ -16,18 +16,9 @@
 
     @include respond-to(xl) {
         padding: 0 20px;
+        margin: 0;
     }
 
-    @include respond-to(sm) {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-        box-shadow: 0 2px 4px rgba(8, 116, 54, 0.1);
-        transform: translateY(-100%);
-        opacity: 0;
-        animation: slideDown 0.3s forwards ease-in-out;
-    }
     &.fixed {
         position: fixed;
         top: 0;
@@ -38,6 +29,19 @@
         opacity: 0;
         animation: slideDown 0.3s forwards ease-in-out;
         margin: 0;
+    }
+
+    @include respond-to(lg) {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--white);
+        height: var(--nav-height);
+        width: 100%;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        transform: translateY(0);
+        z-index: 1000;
     }
 
     @keyframes slideDown {
@@ -57,14 +61,20 @@
             height: 100px;
 
             @include respond-to(sm) {
-                height: 40px;
+                height: 80px;
             }
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
         }
 
         .mobile-menu-icon {
             display: none;
             cursor: pointer;
-            font-size: 24px;
+            font-size: 2.4rem;
+            width: 32px;
             color: var(--primary);
 
             @include respond-to(xl) {
@@ -89,6 +99,10 @@
             .left-section {
                 width: calc(50% - 20px);
                 flex-shrink: 0;
+
+                @include respond-to(lg) {
+                    display: none;
+                }
             }
 
             .right-section {
@@ -96,6 +110,29 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+
+                @include respond-to(lg) {
+                    width: 100%;
+                    justify-content: center;
+                }
+
+                .search {
+                    display: none;
+                    @include respond-to(lg) {
+                        display: flex;
+                        align-items: center;
+                        margin-right: 20px;
+                        cursor: pointer;
+                    }
+
+                    .icon {
+                        margin-right: 5px;
+                        padding: 12px;
+                        color: var(--white);
+                        background-color: var(--primary);
+                        border-radius: 50%;
+                    }
+                }
 
                 .hotline,
                 .account,
@@ -106,12 +143,18 @@
                     cursor: pointer;
 
                     &-link {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                         color: var(--text-color);
                     }
 
                     .text {
                         display: flex;
                         flex-direction: column;
+                        @include respond-to(lg) {
+                            display: none;
+                        }
                     }
 
                     .icon {
@@ -126,6 +169,12 @@
                     .username,
                     .cart-items {
                         font-weight: bold;
+                    }
+                }
+
+                .hotline {
+                    @include respond-to(lg) {
+                        display: none;
                     }
                 }
             }
@@ -163,6 +212,13 @@
                     transform-origin: left;
                     transition: all 0.3s ease-in-out;
                     z-index: 9999;
+
+                    @include respond-to(xl) {
+                        background-color: transparent;
+                        height: 100%;
+                        width: 3px;
+                        left: 0;
+                    }
                 }
                 .active-link {
                     &::after {
@@ -176,6 +232,11 @@
                         transform: scaleX(1);
                         transform-origin: left;
                         z-index: 9999;
+                        @include respond-to(xl) {
+                            background-color: var(--secondary);
+                            height: 100%;
+                            width: 5px;
+                        }
                     }
 
                     a {
@@ -195,10 +256,19 @@
                         transform: scaleX(1);
                         transform-origin: left;
                         z-index: 9999;
+
+                        @include respond-to(xl) {
+                            background-color: var(--secondary);
+                            height: 100%;
+                            width: 4px;
+                        }
                     }
 
                     a {
                         color: var(--primary);
+                        @include respond-to(xl) {
+                            color: var(--white);
+                        }
                     }
                 }
 
@@ -268,6 +338,9 @@
 
                     &:hover {
                         color: var(--primary);
+                        @include respond-to(xl) {
+                            color: var(--white);
+                        }
                     }
                 }
 
@@ -329,7 +402,7 @@
                                 height: auto;
 
                                 &:hover {
-                                    background-color: var(--primary);
+                                    background-color: var(--secondary);
                                 }
 
                                 a {
@@ -410,7 +483,12 @@
                     height: auto;
                     align-items: flex-start;
 
+                    &:hover {
+                        background-color: var(--secondary);
+                    }
+
                     a {
+                        color: white;
                         height: auto;
                         font-size: 18px;
                     }

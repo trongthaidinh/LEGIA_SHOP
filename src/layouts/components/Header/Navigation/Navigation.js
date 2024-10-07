@@ -251,7 +251,7 @@ function Navigation({ isFixed }) {
     return (
         <div className={cx('wrapper', { fixed: isFixed })}>
             <div className={cx('inner')}>
-                <Link to="/" className={cx('logo-link')}>
+                <Link to="/">
                     <img src={images.logo} alt="Logo" className={cx('logo')} />
                 </Link>
                 <div className={cx('navigation-wrapper')}>
@@ -272,19 +272,16 @@ function Navigation({ isFixed }) {
                                     </div>
                                 </Link>
                             </div>
-
                             <div className={cx('account')}>
-                                <Link to={routes.login} className={cx('cart-link')}>
-                                    <FontAwesomeIcon icon={faUser} className={cx('icon')} />
-                                    <div className={cx('text')}>
-                                        <span>Tài khoản</span>
-                                        <span className={cx('username')}>Đăng nhập</span>
-                                    </div>
-                                </Link>
+                                <FontAwesomeIcon icon={faUser} className={cx('icon')} />
+                                <div className={cx('text')}>
+                                    <span>Tài khoản</span>
+                                    <span className={cx('username')}>Đăng nhập</span>
+                                </div>
                             </div>
                             <div className={cx('cart')}>
+                                <FontAwesomeIcon icon={faShoppingCart} className={cx('icon')} />
                                 <Link to={routes.cart} className={cx('cart-link')}>
-                                    <FontAwesomeIcon icon={faShoppingCart} className={cx('icon')} />
                                     <div className={cx('text')}>
                                         <span>Giỏ hàng</span>
                                         <span className={cx('cart-items')}>03 sản phẩm</span>

@@ -73,6 +73,7 @@ const routes = {
     buyingGuide: '/huong-dan-mua-hang',
     policyCom: '/:slug',
     policy: '/chinh-sach/:slug',
+    customerLogin: '/dang-nhap',
 };
 
 export default routes;

@@ -32,9 +32,9 @@ function Header() {
 
     return (
         <header className={cx('wrapper')}>
-            <div className={cx('tophead-wrapper')}>
+            {/* <div className={cx('tophead-wrapper')}>
                 <Tophead />
-            </div>
+            </div> */}
             <div className={cx('navigation-wrapper')}>
                 <Navigation isFixed={isFixed} />
             </div>

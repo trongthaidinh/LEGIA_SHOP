@@ -72,6 +72,7 @@ import Checkout from '~/pages/Checkout';
 import OrderSuccess from '~/pages/OrderSuccess';
 import BuyingGuide from '~/pages/BuyingGuide';
 import Policy from '~/pages/Policy';
+import CustomerLogin from '~/pages/CustomerLogin';
 
 // Public Routes
 const publicRoutes = [
@@ -155,6 +156,7 @@ const publicRoutes = [
     { path: config.routes.cart, component: Cart, layout: OnlyHeaderLayout },
     { path: config.routes.checkout, component: Checkout, layout: OnlyHeaderLayout },
     { path: config.routes.orderReceived, component: OrderSuccess, layout: OnlyHeaderLayout },
+    { path: config.routes.customerLogin, component: CustomerLogin, layout: OnlyHeaderLayout },
     // {
     //     path: config.routes.recruitment,
     //     component: Recruitment,

@@ -28,27 +28,7 @@ const Policy = () => {
                         description: 'Đây là trang hướng dẫn mua hàng dành cho khách hàng của Yến Sào LeGia Nest.',
                         content: `
                                 <h3>Thời hạn đổi trả</h3>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Loại sản phẩm</th>
-                                            <th>Ví dụ</th>
-                                            <th>Thời hạn đổi trả</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Yến chưng</td>
-                                            <td>Yến chưng 1, Yến chưng 2,…</td>
-                                            <td>48h (2 ngày)<br/>Kể từ lúc nhận hàng</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Yến tổ</td>
-                                            <td>Yến tổ 1, Yến tổ 2,…</td>
-                                            <td>72h (3 ngày)<br/>Kể từ lúc nhận hàng</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                
                                 <p>Thời gian đổi trả có thể linh động tuỳ vào tính chất của từng loại yến.</p>
                                 
 

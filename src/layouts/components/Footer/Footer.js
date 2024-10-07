@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faChevronRight, faMapMarkerAlt, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube, faFacebook, faInstagram, faTwitter, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
-import companyLogo from '~/assets/images/nest-logo.png';
+import companyLogo from '~/assets/images/legia-logo.png';
 import styles from './Footer.module.scss';
 import classNames from 'classnames/bind';
 import routes from '~/config/routes';

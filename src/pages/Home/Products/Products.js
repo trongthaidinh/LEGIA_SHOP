@@ -34,7 +34,9 @@ function Products() {
         {
             id: 101,
             name: 'Yến Chưng Đường Phèn',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png'],
+            images: [
+                'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
+            ],
             child_nav_id: 1,
             price: 50000,
             original_price: 60000,
@@ -42,7 +44,9 @@ function Products() {
         {
             id: 102,
             name: 'Yến Chưng Táo Đỏ Hạt Sen',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
+            images: [
+                'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
+            ],
             child_nav_id: 1,
             price: 50000,
             original_price: 60000,
@@ -50,28 +54,36 @@ function Products() {
         {
             id: 103,
             name: 'Yến Chưng Đường Phèn',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png'],
+            images: [
+                'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
+            ],
             child_nav_id: 2,
             price: 50000,
         },
         {
             id: 104,
             name: 'Yến Chưng Nhân Sâm',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
+            images: [
+                'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
+            ],
             child_nav_id: 3,
             price: 50000,
         },
         {
             id: 105,
             name: 'Yến Chưng Đường Phèn',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png'],
+            images: [
+                'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
+            ],
             child_nav_id: 2,
             price: 50000,
         },
         {
             id: 106,
             name: 'Yến Chưng Collagen Saffron',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
+            images: [
+                'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
+            ],
             child_nav_id: 3,
             price: 50000,
         },

@@ -57,7 +57,7 @@ const ProductDetail = () => {
             name: 'Nguyen Van B',
             content: 'Hàng chất lượng',
             images: [
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg',
+                'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
                 'https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg',
             ],
             date: '2024-10-03 11:00',
@@ -72,7 +72,7 @@ const ProductDetail = () => {
             price: 50000,
             original_price: 70000,
             images: [
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg',
+                'https://res.cloudinary.com/drioug4df/image/upload/v1728299308/23aa341b-d735-4e4d-8677-473a80dcfc9d_epuh8i.jpg',
                 'https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png',
                 'https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg',
                 'https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png',

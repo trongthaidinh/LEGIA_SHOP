@@ -267,23 +267,25 @@ const Checkout = () => {
                                 <img src={atmImage} alt="ATM" className={cx('payment-image')} />
                                 <input
                                     type="radio"
+                                    id="payATMmentMethod"
                                     name="paymentMethod"
                                     value="atm"
                                     checked={paymentMethod === 'atm'}
                                     onChange={() => setPaymentMethod('atm')}
                                 />
-                                <label>Chuyển khoản ngân hàng (ATM)</label>
+                                <label htmlFor="payATMmentMethod">Chuyển khoản ngân hàng (ATM)</label>
                             </div>
                             <div className={cx('payment-option')}>
                                 <img src={codImage} alt="Cash on Delivery" className={cx('payment-image')} />
                                 <input
                                     type="radio"
+                                    id="paymentCodMethod"
                                     name="paymentMethod"
                                     value="cod"
                                     checked={paymentMethod === 'cod'}
                                     onChange={() => setPaymentMethod('cod')}
                                 />
-                                <label>Thanh toán khi nhận hàng (COD)</label>
+                                <label htmlFor="paymentCodMethod">Thanh toán khi nhận hàng (COD)</label>
                             </div>
                         </div>
                     </form>

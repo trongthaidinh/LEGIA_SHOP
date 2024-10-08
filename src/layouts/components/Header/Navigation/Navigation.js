@@ -121,35 +121,35 @@ function Navigation({ isFixed }) {
             position: 3,
             children: [],
         },
-        {
-            id: 4,
-            title: 'Chính sách',
-            slug: 'chinh-sach',
-            position: 4,
-            children: [
-                {
-                    id: 1,
-                    title: 'Chính sách bảo hành',
-                    slug: 'chinh-sach-bao-hanh',
-                    position: 1,
-                    children: [],
-                },
-                {
-                    id: 2,
-                    title: 'Chính sách thanh toán',
-                    slug: 'chinh-sach-thanh-toan',
-                    position: 2,
-                    children: [],
-                },
-            ],
-        },
-        {
-            id: 6,
-            title: 'Hướng dẫn mua hàng',
-            slug: 'huong-dan-mua-hang',
-            position: 5,
-            children: [],
-        },
+        // {
+        //     id: 4,
+        //     title: 'Chính sách',
+        //     slug: 'chinh-sach',
+        //     position: 4,
+        //     children: [
+        //         {
+        //             id: 1,
+        //             title: 'Chính sách bảo hành',
+        //             slug: 'chinh-sach-bao-hanh',
+        //             position: 1,
+        //             children: [],
+        //         },
+        //         {
+        //             id: 2,
+        //             title: 'Chính sách thanh toán',
+        //             slug: 'chinh-sach-thanh-toan',
+        //             position: 2,
+        //             children: [],
+        //         },
+        //     ],
+        // },
+        // {
+        //     id: 6,
+        //     title: 'Hướng dẫn mua hàng',
+        //     slug: 'huong-dan-mua-hang',
+        //     position: 5,
+        //     children: [],
+        // },
         {
             id: 7,
             title: 'Liên Hệ',
@@ -251,6 +251,9 @@ function Navigation({ isFixed }) {
     return (
         <div className={cx('wrapper', { fixed: isFixed })}>
             <div className={cx('inner')}>
+                <div className={cx('mobile-menu-icon')} onClick={toggleMenu}>
+                    <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
+                </div>
                 <Link to="/">
                     <img src={images.logo} alt="Logo" className={cx('logo')} />
                 </Link>
@@ -272,13 +275,13 @@ function Navigation({ isFixed }) {
                                     </div>
                                 </Link>
                             </div>
-                            <div className={cx('account')}>
+                            {/* <div className={cx('account')}>
                                 <FontAwesomeIcon icon={faUser} className={cx('icon')} />
                                 <div className={cx('text')}>
                                     <span>Tài khoản</span>
                                     <span className={cx('username')}>Đăng nhập</span>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className={cx('cart')}>
                                 <Link to={routes.cart} className={cx('cart-link')}>
                                     <FontAwesomeIcon icon={faShoppingCart} className={cx('icon')} />
@@ -414,9 +417,6 @@ function Navigation({ isFixed }) {
                             );
                         })}
                     </ul>
-                </div>
-                <div className={cx('mobile-menu-icon')} onClick={toggleMenu}>
-                    <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
                 </div>
             </div>
         </div>

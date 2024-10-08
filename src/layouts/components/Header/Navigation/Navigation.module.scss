@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--primary);
+    background-color: #27914a;
     width: 100%;
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform: translateY(0);
@@ -57,6 +57,7 @@
         align-items: center;
 
         @include respond-to(sm) {
+            justify-content: space-between;
             gap: 10px;
         }
 
@@ -89,7 +90,11 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 12px;
+
+            @include respond-to(sm) {
+                width: auto;
+            }
         }
 
         .navigation-utilities {
@@ -100,7 +105,7 @@
             gap: 20px;
 
             .left-section {
-                width: calc(50% - 20px);
+                width: calc(60% - 20px);
                 flex-shrink: 0;
 
                 @include respond-to(lg) {
@@ -109,10 +114,11 @@
             }
 
             .right-section {
-                width: calc(50% - 20px);
+                width: calc(40% - 20px);
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
+                justify-content: flex-start;
+                gap: 20px;
 
                 @include respond-to(lg) {
                     width: 100%;
@@ -121,12 +127,12 @@
 
                 .search {
                     display: none;
-                    @include respond-to(lg) {
-                        display: flex;
-                        align-items: center;
-                        margin-right: 10px;
-                        cursor: pointer;
-                    }
+                    // @include respond-to(lg) {
+                    //     display: flex;
+                    //     align-items: center;
+                    //     margin-right: 10px;
+                    //     cursor: pointer;
+                    // }
 
                     .icon {
                         margin-right: 5px;
@@ -146,7 +152,7 @@
                     cursor: pointer;
 
                     @include respond-to(lg) {
-                        margin-right: 10px;
+                        margin-right: 0;
                     }
 
                     &:hover {
@@ -183,6 +189,10 @@
                         background-color: var(--secondary-fade);
                         border-radius: 50%;
                         transition: 0.3s ease-in-out all;
+
+                        @include respond-to(lg) {
+                            margin: 0;
+                        }
                     }
 
                     .phone-number,
@@ -203,10 +213,17 @@
         .navigation-links {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
             list-style-type: none;
+            gap: 40px;
             padding: 0;
             margin: 0;
+            margin-left: 10px;
+
+            @include respond-to(lg) {
+                margin-left: 0;
+                gap: 0;
+            }
 
             > li {
                 position: relative;
@@ -347,7 +364,7 @@
                     display: flex;
                     align-items: center;
                     height: 100%;
-                    text-transform: capitalize;
+                    text-transform: uppercase;
 
                     @include respond-to(xl) {
                         color: var(--white);
@@ -389,7 +406,7 @@
                             color: gray;
                             display: flex;
                             transition: all ease-in-out 0.2s;
-                            text-transform: capitalize;
+                            text-transform: uppercase;
                             font-size: 1.6rem;
 
                             &:hover {
@@ -513,7 +530,7 @@
 
                 &.open {
                     display: flex;
-                    max-height: calc(100vh - var(--nav-height));
+                    max-height: calc(100vh);
                     overflow-y: auto;
                     transition: max-height 0.3s ease;
                     &::-webkit-scrollbar {

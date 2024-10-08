@@ -73,9 +73,13 @@
             margin-bottom: 8px;
             margin-left: 3px;
 
-            @include respond-to(sm) {
+            @include respond-to(lg) {
                 flex-direction: column;
                 align-items: flex-start;
+                font-size: 1.4rem;
+            }
+
+            @include respond-to(sm) {
                 font-size: 1.8rem;
             }
 

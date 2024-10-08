@@ -18,7 +18,7 @@ const Footer = () => {
                     <Link to="/">
                         <img src={companyLogo} alt="Company Logo" className={cx('logo')} />
                     </Link>
-                    <h5>Yến Sào LeGia'Nest </h5>
+                    {/* <h5>Yến Sào LeGia'Nest </h5> */}
                     <div className={cx('contactInfo')}>
                         <div className={cx('onlineStatus')}>
                             <div className={cx('onlineStatusToday')}>

@@ -3,9 +3,9 @@
 
 .wrapper {
     width: 100%;
-    background: var(--white);
-    color: var(--black);
-    border-top: 3px solid var(--primary);
+    background: var(--primary);
+    color: var(--white);
+    border-top: 3px solid var(--secondary);
     margin-top: 60px;
     .inner {
         display: flex;
@@ -47,14 +47,14 @@
         h5 {
             font-size: 2.4rem;
             margin: 10px 0;
-            color: var(--primary);
+            color: var(--white);
             @include respond-to(sm) {
                 font-size: 3.2rem;
             }
         }
 
         p {
-            color: var(--black);
+            color: var(--white);
             font-size: 1.4rem;
             max-width: 300px;
             line-height: 1.6;
@@ -69,7 +69,7 @@
             gap: 8px;
             margin-top: 10px;
             font-size: 1.4rem;
-            color: var(--black);
+            color: var(--white);
             margin-bottom: 8px;
             margin-left: 3px;
 
@@ -86,7 +86,7 @@
             }
 
             .footer-icon-dot {
-                color: green;
+                color: rgb(70, 255, 70);
                 font-size: 8px;
                 margin-right: 11px;
                 @include respond-to(sm) {
@@ -97,7 +97,7 @@
             .online-number,
             .online-access {
                 margin-left: 4px;
-                color: orangered;
+                color: var(--secondary-hover);
             }
         }
 
@@ -125,7 +125,7 @@
                 svg {
                     margin-right: 10px;
                     font-size: 1.6rem;
-                    color: var(--black);
+                    color: var(--white);
                     @include respond-to(sm) {
                         font-size: 2rem;
                         min-width: 18px;
@@ -136,7 +136,7 @@
 
         .socialIcons {
             a {
-                color: var(--primary);
+                color: var(--white);
                 font-size: 2.8rem;
                 margin-right: 28px;
                 transition: color 0.3s ease;
@@ -146,16 +146,16 @@
                 }
 
                 &:hover {
-                    color: var(--primary);
+                    color: var(--secondary);
                 }
             }
         }
 
         h4 {
-            color: var(--primary);
+            color: var(--white);
             font-size: 1.8rem;
             margin: 44px 0 20px;
-            border-bottom: 2px solid var(--primary);
+            border-bottom: 2px solid var(--white);
             padding-bottom: 4px;
             @include respond-to(sm) {
                 font-size: 2rem;
@@ -170,7 +170,7 @@
 
             li {
                 a {
-                    color: var(--black);
+                    color: var(--white);
                     text-decoration: none;
                     transition: color 0.3s ease;
                     font-size: 1.4rem;
@@ -188,14 +188,14 @@
                     }
 
                     &:hover {
-                        color: var(--primary);
+                        color: var(--secondary);
                     }
                 }
             }
         }
     }
     .bottomBar {
-        background-color: var(--primary);
+        background-color: var(--secondary);
         padding: 10px 0;
         text-align: center;
         font-size: 14px;
@@ -203,7 +203,7 @@
         p {
             font-size: 1.4rem;
             margin: 5px 0;
-            color: var(--white);
+            color: var(--black);
             font-size: 16px;
             font-weight: 600;
             @include respond-to(sm) {
@@ -212,14 +212,16 @@
         }
 
         .company-name {
-            color: var(--white);
+            color: var(--primary);
+            font-weight: 800;
             &:hover {
                 text-decoration: underline;
             }
         }
 
         .company-design-name {
-            color: var(--secondary);
+            color: var(--primary);
+            font-weight: 800;
             &:hover {
                 text-decoration: underline;
             }

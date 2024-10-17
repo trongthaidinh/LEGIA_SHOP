@@ -33,8 +33,30 @@ export const getImagesPagination = async (page = 1, limit = 9) => {
     }
 };
 
-export const getImages = async () => {
+export const getPublicImages = async () => {
     const sessionKey = 'allImages';
+
+    const cachedData = getFromSessionStorage(sessionKey);
+    if (cachedData) {
+        return cachedData;
+    }
+
+    try {
+        const response = await httpRequest.get('/images/public');
+        const imagesData = response.data.data;
+
+        // Save to sessionStorage
+        saveToSessionStorage(sessionKey, imagesData);
+
+        return imagesData;
+    } catch (error) {
+        console.error('Error fetching images', error);
+        throw error;
+    }
+};
+
+export const getAllImages = async () => {
+    const sessionKey = 'allPublicPrivateImages';
 
     const cachedData = getFromSessionStorage(sessionKey);
     if (cachedData) {
@@ -61,7 +83,7 @@ export const createImage = async (imageData) => {
 
         sessionStorage.removeItem('allImages');
         // Refresh sessionStorage for all images list
-        const updatedImages = await getImages();
+        const updatedImages = await getPublicImages();
         saveToSessionStorage('allImages', updatedImages);
 
         return response.data.data;
@@ -77,7 +99,7 @@ export const updateImage = async (imageId, updatedData) => {
 
         // Refresh sessionStorage for the specific image and all images list
         sessionStorage.removeItem(`image_${imageId}`);
-        const updatedImages = await getImages();
+        const updatedImages = await getPublicImages();
         saveToSessionStorage('allImages', updatedImages);
 
         return response.data.data;
@@ -96,7 +118,7 @@ export const deleteImage = async (imageId) => {
         sessionStorage.removeItem('allImages');
 
         // Refresh sessionStorage for all images list
-        const updatedImages = await getImages();
+        const updatedImages = await getPublicImages();
         saveToSessionStorage('allImages', updatedImages);
     } catch (error) {
         console.error('Error deleting image', error);

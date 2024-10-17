@@ -36,6 +36,16 @@
             flex: calc(35% - 20px);
         }
 
+        .logoLink {
+            @include respond-to(sm) {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+        }
+
         .logo {
             width: 120px;
             height: auto;
@@ -145,8 +155,8 @@
                 margin-right: 28px;
                 transition: color 0.3s ease;
                 @include respond-to(sm) {
-                    font-size: 2.4rem;
-                    margin-right: 20px;
+                    font-size: 3.8rem;
+                    margin-right: 40px;
                 }
 
                 &:hover {

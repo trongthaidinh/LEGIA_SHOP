@@ -1,12 +1,14 @@
 .sidebar {
     width: 300px;
-    background-color: white;
-    color: var(--text-color);
+    background-color: var(--primary);
+    color: var(--white);
     min-height: 100vh;
     height: auto;
     transition: width 0.3s;
     position: relative;
     box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
+    font-weight: 600;
+    font-size: 1.6rem;
 
     &.collapsed {
         width: 80px;
@@ -55,11 +57,11 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    background-color: var(--white);
+    background-color: var(--primary);
     font-size: 1.6rem;
 
     .logo {
-        width: 200px;
+        width: 160px;
     }
 
     span {
@@ -84,14 +86,15 @@
         padding: 15px 20px;
 
         a {
-            color: var(--text-color);
+            color: var(--white);
+            transition: all ease-in-out 0.2s;
             &:hover {
                 background-color: var(--primary-bg-hover);
-                color: var(--primary);
+                color: var(--secondary);
 
                 .menuIcon,
                 .chevronIcon {
-                    color: var(--primary);
+                    color: var(--secondary);
                 }
             }
         }
@@ -103,11 +106,11 @@
             transition: background-color 0.3s, color 0.3s;
             &:hover {
                 background-color: var(--primary-bg-hover);
-                color: var(--primary);
+                color: var(--secondary);
 
                 .menuIcon,
                 .chevronIcon {
-                    color: var(--primary);
+                    color: var(--secondary);
                 }
             }
         }

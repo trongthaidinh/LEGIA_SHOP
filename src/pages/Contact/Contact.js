@@ -39,7 +39,6 @@ const ContactPage = () => {
         fullName: '',
         email: '',
         phoneNumber: '',
-        subject: '',
         message: '',
     };
 
@@ -47,7 +46,6 @@ const ContactPage = () => {
         fullName: Yup.string().required('Vui lòng nhập Họ và Tên của bạn!'),
         email: Yup.string().email('Email không hợp lệ').required('Vui lòng nhập Email!'),
         phoneNumber: Yup.string().required('Vui lòng nhập số điện thoại'),
-        subject: Yup.string().required('Vui lòng chọn chủ đề!'),
         message: Yup.string().required('Vui lòng nhập nội dung tin nhắn!'),
     });
 

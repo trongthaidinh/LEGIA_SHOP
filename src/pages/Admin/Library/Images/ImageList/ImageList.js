@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faAngleLeft, faAngleRight, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { deleteImage, getImages } from '~/services/libraryService';
+import { deleteImage } from '~/services/libraryService';
 import styles from './ImageList.module.scss';
 import Title from '~/components/Title';
 import { Link } from 'react-router-dom';
 import routes from '~/config/routes';
 import PushNotification from '~/components/PushNotification';
+import { getAllImages } from 'services/libraryService';
 
 const ImageList = () => {
     const [images, setImages] = useState([]);
@@ -21,7 +22,7 @@ const ImageList = () => {
 
     const fetchImages = async () => {
         try {
-            const data = await getImages();
+            const data = await getAllImages();
             if (data) {
                 setImages(data);
             } else {

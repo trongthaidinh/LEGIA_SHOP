@@ -97,7 +97,7 @@ const UpdateCategory = () => {
 
     return (
         <div className={styles.updateCategory}>
-            <Title text="Chỉnh sửa Danh Mục"></Title>
+            <Title subText="Chỉnh sửa Danh Mục"></Title>
             {notificationMessage && (
                 <PushNotification message={notificationMessage} type={isError ? 'error' : 'success'} />
             )}

@@ -57,7 +57,7 @@ const AddPartner = () => {
 
     return (
         <div className={styles.addPartner}>
-            <Title text="Thêm đối tác" />
+            <Title subText="Thêm đối tác" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting }) => (

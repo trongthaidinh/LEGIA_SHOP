@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames/bind';
-import Card from '~/components/CardSearch';
 import { searchItems } from '~/services/searchService';
 import styles from './Search.module.scss';
 import PushNotification from '~/components/PushNotification';
@@ -11,13 +10,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Empty } from 'antd';
 import Title from 'components/Title';
+import Product from 'components/Product';
 
 const cx = classNames.bind(styles);
 
 const Search = () => {
     const [products, setProducts] = useState([]);
-    const [services, setServices] = useState([]);
-    const [experiences, setExperiences] = useState([]);
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -25,34 +23,22 @@ const Search = () => {
     // Tạo các trạng thái riêng cho phân trang từng mục
     const [productPage, setProductPage] = useState(1);
     const [productTotalPages, setProductTotalPages] = useState(1);
-    const [servicePage, setServicePage] = useState(1);
-    const [serviceTotalPages, setServiceTotalPages] = useState(1);
-    const [experiencePage, setExperiencePage] = useState(1);
-    const [experienceTotalPages, setExperienceTotalPages] = useState(1);
 
     const location = useLocation();
     const query = new URLSearchParams(location.search).get('q');
-    const resultsPerPage = 6;
+    const resultsPerPage = 8;
 
     useEffect(() => {
         const fetchSearchResults = async () => {
             try {
                 setLoading(true);
-                const searchData = await searchItems(query, resultsPerPage, productPage, servicePage, experiencePage);
+                const searchData = await searchItems(query, resultsPerPage, productPage);
 
                 setProducts(searchData.products.data);
-                setServices(searchData.services.data);
-                setExperiences(searchData.experiences.data);
 
                 // Cập nhật số trang cho từng mục
                 setProductPage(searchData.products.current_page);
                 setProductTotalPages(searchData.products.last_page);
-
-                setServicePage(searchData.services.current_page);
-                setServiceTotalPages(searchData.services.last_page);
-
-                setExperiencePage(searchData.experiences.current_page);
-                setExperienceTotalPages(searchData.experiences.last_page);
             } catch (error) {
                 setError(error);
                 console.error('Error fetching search results:', error);
@@ -64,15 +50,11 @@ const Search = () => {
         if (query) {
             fetchSearchResults();
         }
-    }, [query, productPage, servicePage, experiencePage]);
+    }, [query, productPage]);
 
     const handlePageChange = (category, pageNumber) => {
         if (category === 'products' && pageNumber >= 1 && pageNumber <= productTotalPages) {
             setProductPage(pageNumber);
-        } else if (category === 'services' && pageNumber >= 1 && pageNumber <= serviceTotalPages) {
-            setServicePage(pageNumber);
-        } else if (category === 'experiences' && pageNumber >= 1 && pageNumber <= experienceTotalPages) {
-            setExperiencePage(pageNumber);
         }
     };
 
@@ -80,10 +62,6 @@ const Search = () => {
         switch (type) {
             case 'products':
                 return `${routes.products}/${item.slug}/${item.id}`;
-            case 'services':
-                return `${routes.services}/${item.slug}/${item.id}`;
-            case 'experiences':
-                return `${routes.experiences}/${item.slug}/${item.id}`;
             default:
                 return '#';
         }
@@ -106,12 +84,12 @@ const Search = () => {
                 <div className={cx('search-items')}>
                     {items.map((item, index) => (
                         <Link key={index} to={getLinkByType(item, type)}>
-                            <Card
-                                title={item.name}
-                                summary={item.summary}
+                            <Product
+                                name={item.name}
                                 image={item.images[0]}
-                                createdAt={new Date(item.created_at).getTime()}
-                                showViews={false}
+                                original_price={item.original_price}
+                                price={item.price}
+                                link={getLinkByType(item, type)}
                             />
                         </Link>
                     ))}
@@ -157,7 +135,7 @@ const Search = () => {
     };
 
     const renderSearchResults = () => {
-        if (products.length === 0 && services.length === 0 && experiences.length === 0) {
+        if (products.length === 0) {
             return (
                 <Empty
                     description={
@@ -169,19 +147,7 @@ const Search = () => {
             );
         }
 
-        return (
-            <>
-                {renderCategoryResults('Sản phẩm', products, 'products', productPage, productTotalPages)}
-                {renderCategoryResults('Dịch vụ du lịch', services, 'services', servicePage, serviceTotalPages)}
-                {renderCategoryResults(
-                    'Khu vực trải nghiệm',
-                    experiences,
-                    'experiences',
-                    experiencePage,
-                    experienceTotalPages,
-                )}
-            </>
-        );
+        return <>{renderCategoryResults('Sản phẩm', products, 'products', productPage, productTotalPages)}</>;
     };
 
     return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faChevronRight, faMapMarkerAlt, faCircle } from '@fortawesome/free-solid-svg-icons';
@@ -7,15 +7,33 @@ import companyLogo from '~/assets/images/legia-logo.png';
 import styles from './Footer.module.scss';
 import classNames from 'classnames/bind';
 import routes from '~/config/routes';
+import { getVisitStats } from 'services/visitService';
 
 const cx = classNames.bind(styles);
 
 const Footer = () => {
+    const [visitToday, setVisitToday] = useState(0);
+    const [totalVisits, setTotalVisits] = useState(0);
+
+    useEffect(() => {
+        const fetchVisitStats = async () => {
+            try {
+                const { today_visits, total_visits } = await getVisitStats();
+                setVisitToday(today_visits);
+                setTotalVisits(total_visits);
+            } catch (error) {
+                console.error('Failed to fetch visit stats:', error);
+            }
+        };
+
+        fetchVisitStats();
+    }, []);
+
     return (
         <footer className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('footerLeft', 'footerColumnWide')}>
-                    <Link to="/">
+                    <Link to="/" className={cx('logoLink')}>
                         <img src={companyLogo} alt="Company Logo" className={cx('logo')} />
                     </Link>
                     {/* <h5>Yến Sào LeGia'Nest </h5> */}
@@ -23,11 +41,11 @@ const Footer = () => {
                         <div className={cx('onlineStatus')}>
                             <div className={cx('onlineStatusToday')}>
                                 <FontAwesomeIcon className={cx('footer-icon-dot')} icon={faCircle} />
-                                Truy cập hôm nay: <span className={cx('online-number')}> 452</span>
+                                Truy cập hôm nay: <span className={cx('online-number')}>{visitToday}</span>
                             </div>
                             <div className={cx('onlineStatusTotal')}>
                                 <FontAwesomeIcon className={cx('footer-icon-dot')} icon={faCircle} />
-                                Tổng số lượt truy cập: <span className={cx('online-access')}>123423</span>
+                                Tổng số lượt truy cập: <span className={cx('online-access')}>{totalVisits}</span>
                             </div>
                         </div>
                         <div className={cx('contactItem')}>
@@ -48,16 +66,16 @@ const Footer = () => {
                     <h4>Chính sách</h4>
                     <ul>
                         <li>
-                            <Link to={`#`}>Chính sách quy định chung</Link>
+                            <Link to={`/chinh-sach-quy-dinh-chung`}>Chính sách quy định chung</Link>
                         </li>
                         <li>
-                            <Link to={`#`}>Chính sách bảo mật</Link>
+                            <Link to={`/chinh-sach-bao-mat`}>Chính sách bảo mật</Link>
                         </li>
                         <li>
-                            <Link to={`#`}>Chính sách bảo hành</Link>
+                            <Link to={`/chinh-sach-bao-hanh`}>Chính sách bảo hành</Link>
                         </li>
                         <li>
-                            <Link to={`#`}>Chính sách đổi trả hàng</Link>
+                            <Link to={`/chinh-sach-doi-tra-hang`}>Chính sách đổi trả hàng</Link>
                         </li>
                     </ul>
                 </div>
@@ -65,13 +83,13 @@ const Footer = () => {
                     <h4>Hỗ trợ khách hàng</h4>
                     <ul>
                         <li>
-                            <Link to={'#'}>Chính sách đặt hàng - thanh toán</Link>
+                            <Link to={'/chinh-sach-dat-hang-thanh-toan'}>Chính sách đặt hàng - thanh toán</Link>
                         </li>
                         <li>
-                            <Link to={'#'}>Chính sách vận chuyển - kiểm hàng</Link>
+                            <Link to={'/chinh-sach-van-chuyen-kiem-hang'}>Chính sách vận chuyển - kiểm hàng</Link>
                         </li>
                         <li>
-                            <Link to={'#'}>Câu hỏi thường gặp</Link>
+                            <Link to={'/cau-hoi-thuong-gap'}>Câu hỏi thường gặp</Link>
                         </li>
                     </ul>
                 </div>

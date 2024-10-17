@@ -8,6 +8,8 @@ import Login from '~/pages/Admin/Login';
 import ScrollToTop from '~/components/ScrollToTop';
 import Error404 from './pages/Error404';
 import usePageTracking from './hooks/usePageTracking';
+import SessionHandler from 'components/SessionHandler';
+import VisitTracker from '~/components/VisitTracker';
 
 function PageTracker() {
     usePageTracking();
@@ -19,8 +21,10 @@ function App() {
         <Router>
             <AuthProvider>
                 <div className="App">
+                    <VisitTracker />
                     <PageTracker />
                     <ScrollToTop />
+                    <SessionHandler />
                     <Routes>
                         {publicRoutes.map((route, index) => {
                             const Page = route.component;

@@ -64,7 +64,7 @@ const AddMember = () => {
 
     return (
         <div className={styles.addMember}>
-            <Title text="Thêm thành viên" />
+            <Title subText="Thêm thành viên" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting }) => (

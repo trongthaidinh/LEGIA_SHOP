@@ -79,7 +79,7 @@ const AddCategory = () => {
 
     return (
         <div className={styles.addCategory}>
-            <Title text="Thêm Danh Mục"></Title>
+            <Title subText="Thêm Danh Mục"></Title>
             {notificationMessage && (
                 <PushNotification message={notificationMessage} type={isError ? 'error' : 'success'} />
             )}

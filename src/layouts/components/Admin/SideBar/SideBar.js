@@ -56,7 +56,7 @@ const SideBar = () => {
     return (
         <div className={cx('sidebar', { collapsed: isCollapsed, expanded: !isCollapsed })}>
             <div className={cx('logoWrapper')}>
-                <Link to={routes.admin}>
+                <Link to={routes.home}>
                     <img src={images.logo} alt="Company Logo" className={cx('logo')} />
                 </Link>
                 <FontAwesomeIcon
@@ -180,30 +180,27 @@ const SideBar = () => {
                 </li>
 
                 <li>
-                    <div className={cx('menuItem')} onClick={() => toggleMenu('serviceManagement')}>
+                    <div className={cx('menuItem')} onClick={() => toggleMenu('orderManagement')}>
                         <div>
                             <FontAwesomeIcon icon={faLayerGroup} className={cx('menuIcon')} />
-                            <span className={cx('menuText')}>Quản lý dịch vụ</span>
+                            <span className={cx('menuText')}>Quản lý đơn hàng</span>
                         </div>
                         {!isCollapsed && (
                             <>
                                 <FontAwesomeIcon
-                                    icon={openMenus.serviceManagement ? faChevronDown : faChevronRight}
+                                    icon={openMenus.orderManagement ? faChevronDown : faChevronRight}
                                     className={cx('chevronIcon')}
                                 />
                             </>
                         )}
                     </div>
-                    <ul className={cx('subMenu', { open: openMenus.serviceManagement })}>
+                    <ul className={cx('subMenu', { open: openMenus.orderManagement })}>
                         <li>
-                            <NavLink to={routes.serviceList}>Danh sách dịch vụ</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={routes.addService}>Thêm dịch vụ</NavLink>
+                            <NavLink to={routes.orderList}>Danh sách đơn hàng</NavLink>
                         </li>
                     </ul>
                 </li>
-
+                {/* 
                 <li>
                     <div className={cx('menuItem')} onClick={() => toggleMenu('experienceManagement')}>
                         <div>
@@ -227,7 +224,7 @@ const SideBar = () => {
                             <NavLink to={routes.addExperience}>Thêm mục trải nghiệm</NavLink>
                         </li>
                     </ul>
-                </li>
+                </li> */}
                 <li>
                     <div className={styles.menuItem} onClick={() => toggleMenu('libraryManagement')}>
                         <div>
@@ -283,7 +280,7 @@ const SideBar = () => {
                         </li>
                     </ul>
                 </li>
-                <li>
+                {/* <li>
                     <div className={styles.menuItem} onClick={() => toggleMenu('teamManagement')}>
                         <div>
                             <FontAwesomeIcon icon={faUserFriends} className={styles.menuIcon} />
@@ -306,7 +303,7 @@ const SideBar = () => {
                             <NavLink to={routes.addMember}>Thêm thành viên</NavLink>
                         </li>
                     </ul>
-                </li>
+                </li> */}
                 <li>
                     <NavLink to={routes.settings} className={styles.menuItem}>
                         <div>

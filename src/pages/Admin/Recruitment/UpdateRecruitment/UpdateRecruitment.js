@@ -98,7 +98,7 @@ const UpdateRecruitment = () => {
 
     return (
         <div className={styles.editRecruitment}>
-            <Title text="Cập nhật tuyển dụng" />
+            <Title subText="Cập nhật tuyển dụng" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting, setFieldValue, values }) => (

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom'; // Import useParams
 import classNames from 'classnames/bind';
 import styles from './Product.module.scss';
 import Title from '~/components/Title';
@@ -9,140 +10,91 @@ import Product from '~/components/Product';
 import { Helmet } from 'react-helmet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { getProducts, getProductListBySlug } from '~/services/productService';
+import { getCategoriesBySlug } from '~/services/categoryService';
 
 const cx = classNames.bind(styles);
 
-const sampleProducts = [
-    {
-        id: 101,
-        name: 'Yến Chưng Táo Đỏ Hạt Sen',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png'],
-        child_nav_id: 1,
-        price: 50000,
-    },
-    {
-        id: 102,
-        name: 'Yến Chưng Saffron',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
-        child_nav_id: 1,
-        price: 50000,
-    },
-    {
-        id: 103,
-        name: 'Yến Chưng Đông Trùng Hạ Thảo',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_yen_to_bdz2za.png'],
-        child_nav_id: 2,
-        price: 50000,
-    },
-    {
-        id: 104,
-        name: 'Yến Chưng Nhân Sâm',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039222/3ANH-03_kxbobh.jpg'],
-        child_nav_id: 3,
-        price: 50000,
-    },
-    {
-        id: 105,
-        name: 'Yến Chưng Collagen Saffron',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_set_qua_tang-01_njhh9e.png'],
-        child_nav_id: 3,
-        price: 50000,
-    },
-    {
-        id: 106,
-        name: 'Yến Chưng Táo Đỏ Hạt Sen',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png'],
-        child_nav_id: 1,
-        price: 50000,
-    },
-    {
-        id: 107,
-        name: 'Yến Chưng Saffron',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
-        child_nav_id: 1,
-        price: 50000,
-    },
-    {
-        id: 108,
-        name: 'Yến Chưng Đông Trùng Hạ Thảo',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039225/3ANH-02_ck64qc.jpg'],
-        child_nav_id: 2,
-        price: 50000,
-    },
-    {
-        id: 109,
-        name: 'Yến Chưng Nhân Sâm',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039222/3ANH-03_kxbobh.jpg'],
-        child_nav_id: 3,
-        price: 50000,
-    },
-    {
-        id: 110,
-        name: 'Yến Chưng Collagen Saffron',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_set_qua_tang-01_njhh9e.png'],
-        child_nav_id: 3,
-        price: 50000,
-    },
-    {
-        id: 111,
-        name: 'Yến Chưng Táo Đỏ Hạt Sen',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png'],
-        child_nav_id: 1,
-        price: 50000,
-    },
-    {
-        id: 112,
-        name: 'Yến Chưng Saffron',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg'],
-        child_nav_id: 1,
-        price: 50000,
-    },
-    {
-        id: 113,
-        name: 'Yến Chưng Đông Trùng Hạ Thảo',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_yen_to_bdz2za.png'],
-        child_nav_id: 2,
-        price: 50000,
-    },
-    {
-        id: 114,
-        name: 'Yến Chưng Nhân Sâm',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039222/3ANH-03_kxbobh.jpg'],
-        child_nav_id: 3,
-        price: 50000,
-    },
-    {
-        id: 115,
-        name: 'Yến Chưng Collagen Saffron',
-        images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_set_qua_tang-01_njhh9e.png'],
-        child_nav_id: 3,
-        price: 50000,
-    },
-];
-
-const sampleCategories = [
-    { id: 1, slug: 'yen-chung', title: 'Yến Chưng' },
-    { id: 2, slug: 'yen-to', title: 'Yến Tổ' },
-    { id: 3, slug: 'qua-tang', title: 'Quà Tặng' },
-];
-
-const getCategorySlug = (categoryId) => {
-    const category = sampleCategories.find((cat) => cat.id == categoryId);
-    return category ? category.slug : 'unknown';
-};
-
 const Products = () => {
-    const [filteredProducts, setFilteredProducts] = useState(sampleProducts);
+    const { slug } = useParams();
+    const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
     const [priceRange, setPriceRange] = useState([0, 100000]);
     const [categoryFilter, setCategoryFilter] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [isFilterOpen, setIsFilterOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
     const filterRef = useRef(null);
     const productsPerPage = 9;
 
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-    // Phân trang
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setIsLoading(true);
+
+                if (slug) {
+                    const [fetchedProducts, fetchedCategories] = await Promise.all([
+                        getProductListBySlug(slug),
+                        getCategoriesBySlug('san-pham'),
+                    ]);
+                    setProducts(fetchedProducts);
+                    setFilteredProducts(fetchedProducts);
+                    setCategories(fetchedCategories);
+                } else {
+                    // Nếu không có slug, gọi API lấy tất cả sản phẩm
+                    const [fetchedProducts, fetchedCategories] = await Promise.all([
+                        getProducts(),
+                        getCategoriesBySlug('san-pham'),
+                    ]);
+                    setProducts(fetchedProducts);
+                    setFilteredProducts(fetchedProducts);
+                    setCategories(fetchedCategories);
+                }
+            } catch (err) {
+                setError('Failed to fetch data.');
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [slug]); // Thêm slug vào dependency để reload khi slug thay đổi
+
+    const handleFilterSubmit = async () => {
+        try {
+            setIsLoading(true);
+
+            const fetchedProducts = await getProducts();
+
+            const filtered = fetchedProducts.filter((product) => {
+                const isPriceInRange = product.price >= priceRange[0] && product.price <= priceRange[1];
+                const isCategorySelected = categoryFilter.length
+                    ? categoryFilter.includes(product.child_nav_id.toString())
+                    : true;
+
+                return isPriceInRange && isCategorySelected;
+            });
+
+            setFilteredProducts(filtered);
+            setCurrentPage(1);
+        } catch (err) {
+            setError('Failed to fetch filtered products.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleFilterReset = () => {
+        setPriceRange([0, 100000]);
+        setCategoryFilter([]);
+        setFilteredProducts(products);
+        setCurrentPage(1);
+    };
+
     const paginateProducts = () => {
         const startIndex = (currentPage - 1) * productsPerPage;
         const endIndex = startIndex + productsPerPage;
@@ -160,26 +112,6 @@ const Products = () => {
         } else {
             setCategoryFilter((prev) => prev.filter((catId) => catId !== value));
         }
-    };
-
-    const handleFilterReset = () => {
-        setPriceRange([0, 100000]);
-        setCategoryFilter([]);
-        setFilteredProducts(sampleProducts);
-        setCurrentPage(1);
-    };
-
-    const handleFilterSubmit = () => {
-        const filtered = sampleProducts.filter((product) => {
-            const isPriceInRange = product.price >= priceRange[0] && product.price <= priceRange[1];
-            const isCategorySelected = categoryFilter.length
-                ? categoryFilter.includes(product.child_nav_id.toString())
-                : true;
-
-            return isPriceInRange && isCategorySelected;
-        });
-        setFilteredProducts(filtered);
-        setCurrentPage(1); // Reset trang về 1 sau khi lọc
     };
 
     const handlePageChange = (page) => {
@@ -212,6 +144,14 @@ const Products = () => {
         };
     }, [isFilterOpen]);
 
+    if (isLoading) {
+        return <LoadingScreen isLoading={isLoading} />;
+    }
+
+    if (error) {
+        return <PushNotification message={error.message} />;
+    }
+
     return (
         <article className={cx('wrapper')}>
             <Helmet>
@@ -229,20 +169,21 @@ const Products = () => {
                     </div>
                     <div className={cx('filter-item')}>
                         <label>Khoảng giá</label>
-                        <input type="range" min="0" max="100000" value={priceRange[1]} onChange={handlePriceChange} />
+                        <input type="range" min="0" max="1000000" value={priceRange[1]} onChange={handlePriceChange} />
                         <span>
-                            Giá: {priceRange[0]} - {priceRange[1]} VND
+                            Giá: {Number(priceRange[0]).toLocaleString()} - {Number(priceRange[1]).toLocaleString()}đ
                         </span>
                     </div>
                     <div className={cx('filter-item')}>
                         <label>Loại sản phẩm</label>
                         <div className={cx('checkbox-group')}>
-                            {sampleCategories.map((category) => (
+                            {categories.map((category) => (
                                 <div className={cx('checkbox-item')} key={category.id}>
                                     <input
                                         type="checkbox"
                                         id={`category-${category.id}`}
                                         value={category.id}
+                                        checked={categoryFilter.includes(category.id.toString())}
                                         onChange={handleCategoryChange}
                                     />
                                     <label htmlFor={`category-${category.id}`}>{category.title}</label>
@@ -268,8 +209,10 @@ const Products = () => {
                                 image={product.images[0]}
                                 price={product.price}
                                 productId={product.id}
-                                category={sampleCategories.find((cat) => cat.id === product.child_nav_id).slug}
-                                link={`${routes.products}/${getCategorySlug(product.child_nav_id)}/${product.id}`}
+                                category={categories.find((cat) => cat.id === product.child_nav_id)?.slug || 'unknown'}
+                                link={`${routes.products}/${
+                                    categories.find((cat) => cat.id === product.child_nav_id)?.slug || 'unknown'
+                                }/${product.id}`}
                             />
                         ))}
                     </div>

@@ -94,7 +94,7 @@ const UpdateExperience = () => {
 
     return (
         <div className={styles.editExperience}>
-            <Title text="Cập nhật trải nghiệm" />
+            <Title subText="Cập nhật trải nghiệm" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting, setFieldValue, values }) => (

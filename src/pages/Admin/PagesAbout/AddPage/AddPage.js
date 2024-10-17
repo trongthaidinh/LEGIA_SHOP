@@ -41,7 +41,7 @@ const AddPage = () => {
 
     return (
         <div className={styles.addPage}>
-            <Title text="Thêm mới trang" />
+            <Title subText="Thêm mới trang" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting, setFieldValue, values }) => (

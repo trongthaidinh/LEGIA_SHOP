@@ -1,8 +1,8 @@
 import classNames from 'classnames/bind';
 import React, { useEffect, useState } from 'react';
 import Product from '~/components/Product';
-// import { getProducts } from 'services/productService';
-// import { getCategoriesBySlug } from 'services/categoryService';
+import { getProductsByCategory } from 'services/productService';
+import { getCategoriesBySlug } from 'services/categoryService';
 import styles from './Products.module.scss';
 import Title from '~/components/Title';
 import LoadingScreen from '~/components/LoadingScreen';
@@ -16,71 +16,70 @@ import routes from '~/config/routes';
 const cx = classNames.bind(styles);
 
 function Products() {
-    // Commented out API calls
-    // const [products, setProducts] = useState([]);
-    // const [categories, setCategories] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Sample data for categories
-    const categories = [
-        { id: 1, slug: 'yen-chung' },
-        { id: 2, slug: 'yen-to' },
-        { id: 3, slug: 'set-qua-tang' },
-    ];
+    // // Sample data for categories
+    // const categories = [
+    //     { id: 1, slug: 'yen-chung' },
+    //     { id: 2, slug: 'yen-to' },
+    //     { id: 3, slug: 'set-qua-tang' },
+    // ];
 
-    // Sample data for products
-    const products = [
-        {
-            id: 101,
-            name: 'Set Quà Combo 6 Hũ Yến Chưng Cao Cấp',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_set_qua_tang-01_njhh9e.png'],
-            child_nav_id: 1,
-            price: 50000,
-        },
-        {
-            id: 102,
-            name: 'Set Quà Combo 10 Hũ Yến Chưng Cao Cấp',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039222/3ANH-03_kxbobh.jpg'],
-            child_nav_id: 1,
-            price: 50000,
-        },
-        {
-            id: 103,
-            name: 'Set Quà Combo 6 Hũ Yến Chưng Cao Cấp',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_set_qua_tang-01_njhh9e.png'],
-            child_nav_id: 2,
-            price: 50000,
-        },
-        {
-            id: 104,
-            name: 'Mật Ong Ngâm Saffron Đông Trùng Hạ Thảo',
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039222/3ANH-03_kxbobh.jpg'],
-            child_nav_id: 2,
-            price: 50000,
-        },
-    ];
+    // // Sample data for products
+    // const products = [
+    //     {
+    //         id: 101,
+    //         name: 'Set Quà Combo 6 Hũ Yến Chưng Cao Cấp',
+    //         images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_set_qua_tang-01_njhh9e.png'],
+    //         child_nav_id: 1,
+    //         price: 50000,
+    //     },
+    //     {
+    //         id: 102,
+    //         name: 'Set Quà Combo 10 Hũ Yến Chưng Cao Cấp',
+    //         images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039222/3ANH-03_kxbobh.jpg'],
+    //         child_nav_id: 1,
+    //         price: 50000,
+    //     },
+    //     {
+    //         id: 103,
+    //         name: 'Set Quà Combo 6 Hũ Yến Chưng Cao Cấp',
+    //         images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_set_qua_tang-01_njhh9e.png'],
+    //         child_nav_id: 2,
+    //         price: 50000,
+    //     },
+    //     {
+    //         id: 104,
+    //         name: 'Mật Ong Ngâm Saffron Đông Trùng Hạ Thảo',
+    //         images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728039222/3ANH-03_kxbobh.jpg'],
+    //         child_nav_id: 2,
+    //         price: 50000,
+    //     },
+    // ];
 
-    // useEffect(() => {
-    //     const fetchProductsAndCategories = async () => {
-    //         try {
-    //             const [categoriesData, productsData] = await Promise.all([
-    //                 getCategoriesBySlug('san-pham'),
-    //                 getProducts(),
-    //             ]);
+    useEffect(() => {
+        const fetchProductsAndCategories = async () => {
+            try {
+                const [categoriesData, productsData] = await Promise.all([
+                    getCategoriesBySlug('san-pham'),
+                    getProductsByCategory(3),
+                ]);
 
-    //             setCategories(categoriesData);
-    //             setProducts(productsData);
-    //         } catch (err) {
-    //             setError(err);
-    //             console.error('Error fetching data:', err);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
+                setCategories(categoriesData);
+                setProducts(productsData);
+            } catch (err) {
+                setError(err);
+                console.error('Error fetching data:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    //     fetchProductsAndCategories();
-    // }, []);
+        fetchProductsAndCategories();
+    }, []);
 
     const getCategorySlug = (categoryId) => {
         const category = categories.find((cat) => cat.id == categoryId);
@@ -98,7 +97,7 @@ function Products() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Title text="Sản phẩm" subText="Quà tặng cao cấp" showSeeAll={true} slug={`${routes.products}`} />
+                <Title subText="Sản phẩm" subText="Quà tặng cao cấp" showSeeAll={true} slug={`${routes.products}`} />
                 <img
                     className={cx('gift-intro-img')}
                     src="https://res.cloudinary.com/drioug4df/image/upload/v1728011829/f9500f84-3e74-486c-a508-0e7c8057189d.jpg"

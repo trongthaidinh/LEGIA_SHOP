@@ -98,7 +98,7 @@ const UpdateNews = () => {
 
     return (
         <div className={styles.editNews}>
-            <Title text="Cập nhật tin tức" />
+            <Title subText="Cập nhật tin tức" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting, setFieldValue, values }) => (

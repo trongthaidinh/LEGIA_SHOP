@@ -1,24 +1,48 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames/bind';
-import styles from './OrderSuccess.module.scss'; // Giả định bạn có file SCSS module cho styles
+import styles from './OrderSuccess.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { getOrderByKey } from '~/services/orderService';
 import routes from 'config/routes';
+import PushNotification from 'components/PushNotification';
+import LoadingScreen from 'components/LoadingScreen';
 
 const cx = classNames.bind(styles);
 
 const OrderSuccess = () => {
-    const paymentMethod = 'bank';
-    const orderDetails = {
-        orderId: 'ORD123456',
-        orderDate: '04-10-2024',
-        totalAmount: '2,000,000đ',
-        bankName: 'VIETCOMBANK',
-        accountHolder: "LeGia'Nest",
-        accountNumber: '0772332255',
-        qrCode: 'https://res.cloudinary.com/drioug4df/image/upload/v1728045474/QRLeGia_Nest_efimz5.png',
-    };
+    const location = useLocation();
+
+    const searchParams = new URLSearchParams(location.search);
+    const orderKey = searchParams.get('key');
+
+    const [orderDetails, setOrderDetails] = useState(null);
+    const [paymentMethod, setPaymentMethod] = useState('atm');
+
+    useEffect(() => {
+        const fetchOrderDetails = async () => {
+            try {
+                const orderData = await getOrderByKey(orderKey);
+                setOrderDetails(orderData);
+                setPaymentMethod(orderData.payment_method);
+            } catch (error) {
+                console.error('Failed to fetch order details:', error);
+            }
+        };
+
+        fetchOrderDetails();
+    }, [orderKey]);
+
+    if (!orderDetails) {
+        return <LoadingScreen isLoading={true} />;
+    }
+
+    const formattedDate = new Date(orderDetails.created_at).toLocaleDateString('vi-VN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+    });
 
     return (
         <div className={cx('wrapper')}>
@@ -50,15 +74,17 @@ const OrderSuccess = () => {
                         <div className={cx('order-details')}>
                             <p className={cx('order-details-text')}>
                                 <span className={cx('order-details-label')}>Mã đơn hàng</span>{' '}
-                                <span className={cx('order-details-value')}>{orderDetails.orderId}</span>
+                                <span className={cx('order-details-value')}>{orderDetails.id}</span>
                             </p>
                             <p className={cx('order-details-text')}>
                                 <span className={cx('order-details-label')}>Ngày mua hàng</span>{' '}
-                                <span className={cx('order-details-value')}>{orderDetails.orderDate}</span>
+                                <span className={cx('order-details-value')}>{formattedDate}</span>
                             </p>
                             <p className={cx('order-details-text')}>
                                 <span className={cx('order-details-label')}>Tổng cộng</span>{' '}
-                                <span className={cx('order-details-value')}>{orderDetails.totalAmount}</span>
+                                <span className={cx('order-details-value')}>
+                                    {Number(orderDetails.total).toLocaleString()}đ
+                                </span>
                             </p>
                         </div>
                         <div className={cx('order-details')}>
@@ -71,7 +97,7 @@ const OrderSuccess = () => {
                         </div>
                     </div>
 
-                    {paymentMethod === 'bank' && (
+                    {paymentMethod === 'atm' && (
                         <div className={cx('col', 'bank-info')}>
                             <h3 className={cx('bank-info-title')}>Thông tin chuyển khoản</h3>
                             <div className={cx('bank-details')}>
@@ -82,23 +108,28 @@ const OrderSuccess = () => {
                                 />
                                 <p className={cx('bank-details-text')}>
                                     <span className={cx('bank-details-label')}>Tên ngân hàng:</span>
-                                    <span className={cx('bank-details-value')}>{orderDetails.bankName}</span>
+                                    <span className={cx('bank-details-value')}>VIETCOMBANK</span>
                                 </p>
                                 <p className={cx('bank-details-text')}>
                                     <span className={cx('bank-details-label')}>Chủ tài khoản:</span>
-                                    <span className={cx('bank-details-value')}>{orderDetails.accountHolder}</span>
+                                    <span className={cx('bank-details-value')}>LeGia'Nest</span>
                                 </p>
                                 <p className={cx('bank-details-text')}>
                                     <span className={cx('bank-details-label')}>Số tài khoản:</span>
-                                    <span className={cx('bank-details-value')}>{orderDetails.accountNumber}</span>
+                                    <span className={cx('bank-details-value')}>0772332255</span>
                                 </p>
                             </div>
                         </div>
                     )}
-                    {paymentMethod === 'bank' && (
+                    {paymentMethod === 'atm' && (
                         <div className={cx('col', 'qr-bank')}>
                             <div className={cx('qr-code')}>
-                                <img src={orderDetails.qrCode} alt="QR Code Chuyển khoản" />
+                                <img
+                                    src={
+                                        'https://res.cloudinary.com/drioug4df/image/upload/v1728045474/QRLeGia_Nest_efimz5.png'
+                                    }
+                                    alt="QR Code Chuyển khoản"
+                                />
                             </div>
                         </div>
                     )}

@@ -72,7 +72,8 @@ import Checkout from '~/pages/Checkout';
 import OrderSuccess from '~/pages/OrderSuccess';
 import BuyingGuide from '~/pages/BuyingGuide';
 import Policy from '~/pages/Policy';
-import CustomerLogin from '~/pages/CustomerLogin';
+import OrderList from '~/pages/Admin/Orders/OrderList';
+// import CustomerLogin from '~/pages/CustomerLogin';
 
 // Public Routes
 const publicRoutes = [
@@ -83,13 +84,13 @@ const publicRoutes = [
     },
     {
         path: config.routes.about,
-        component: About,
+        component: Policy,
         layout: OnlyHeaderLayout,
     },
     {
         path: config.routes.productCategory,
-        component: Products,
-        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.products} categoryType={'san-pham'} />,
+        component: Product,
+        layout: OnlyHeaderLayout,
     },
     { path: config.routes.products, component: Product, layout: OnlyHeaderLayout },
     { path: config.routes.productDetail, component: ProductDetail, layout: OnlyHeaderLayout },
@@ -116,7 +117,7 @@ const publicRoutes = [
     {
         path: config.routes.newsCategory,
         component: IndustryNews,
-        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.news} categoryType={'tin-tuc'} />,
+        layout: (props) => <DefaultLayout {...props} baseRoute={config.routes.news} categoryType={'bai-viet'} />,
     },
     {
         path: config.routes.newsDetail,
@@ -156,7 +157,7 @@ const publicRoutes = [
     { path: config.routes.cart, component: Cart, layout: OnlyHeaderLayout },
     { path: config.routes.checkout, component: Checkout, layout: OnlyHeaderLayout },
     { path: config.routes.orderReceived, component: OrderSuccess, layout: OnlyHeaderLayout },
-    { path: config.routes.customerLogin, component: CustomerLogin, layout: OnlyHeaderLayout },
+    // { path: config.routes.customerLogin, component: CustomerLogin, layout: OnlyHeaderLayout },
     // {
     //     path: config.routes.recruitment,
     //     component: Recruitment,
@@ -218,6 +219,7 @@ const privateRoutes = [
     { path: config.routes.memberList, component: MemberList, layout: AdminLayout },
     { path: config.routes.addMember, component: AddMember, layout: AdminLayout },
     { path: config.routes.updateMember, component: UpdateMember, layout: AdminLayout },
+    { path: config.routes.orderList, component: OrderList, layout: AdminLayout },
 ];
 
 export { publicRoutes, privateRoutes };

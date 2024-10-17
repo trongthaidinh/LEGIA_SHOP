@@ -25,7 +25,7 @@ const ProductList = () => {
                     setNotification({ message: 'Có lỗi khi tải dữ liệu sản phẩm!', type: 'error' });
                 }
             } catch (error) {
-                setNotification({ message: 'Lỗi khi tải dữ liệu sản phẩm!.', type: 'error' });
+                setNotification({ message: 'Lỗi khi tải dữ liệu sản phẩm!', type: 'error' });
                 console.error('Error fetching products:', error);
             }
         };
@@ -76,8 +76,8 @@ const ProductList = () => {
                         <tr>
                             <th>Hình ảnh</th>
                             <th>Tên sản phẩm</th>
-                            <th>Tóm tắt</th>
-                            <th>Ngày tạo</th>
+                            <th>Giá bán</th>
+                            <th>Giá gốc</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -89,8 +89,8 @@ const ProductList = () => {
                                         <img src={prod.images[0]} alt={prod.name} className={styles.productImage} />
                                     </td>
                                     <td>{prod.name}</td>
-                                    <td>{prod.summary}</td>
-                                    <td>{new Date(prod.created_at).toLocaleDateString()}</td>
+                                    <td>{Number(prod.price).toLocaleString('vi-VN')}đ</td>
+                                    <td>{Number(prod.original_price).toLocaleString('vi-VN')}đ</td>
                                     <td>
                                         <Link to={`/admin/edit-product/${prod.id}`} className={styles.editButton}>
                                             <FontAwesomeIcon icon={faEdit} /> Sửa

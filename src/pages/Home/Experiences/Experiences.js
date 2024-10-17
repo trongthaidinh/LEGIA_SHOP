@@ -58,7 +58,7 @@ function Experiences() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Title text="Khu Vực Trải Nghiệm" showSeeAll={true} slug={`${routes.experiences}`} />
+                <Title subText="Khu Vực Trải Nghiệm" showSeeAll={true} slug={`${routes.experiences}`} />
                 <Swiper
                     spaceBetween={10}
                     slidesPerView={3}

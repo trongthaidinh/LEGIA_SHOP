@@ -26,21 +26,25 @@ const AddProduct = () => {
     const initialValues = {
         name: '',
         images: [],
+        price: '',
+        original_price: '',
+        available_stock: '',
         content: '',
-        summary: '',
         child_nav_id: '',
         features: [],
-        phone_number: '', // Added phone number field
+        phone_number: '',
     };
 
     const validationSchema = Yup.object({
         name: Yup.string().required('Tên sản phẩm là bắt buộc'),
         images: Yup.array().required('Hình ảnh là bắt buộc'),
+        price: Yup.number().required('Giá là bắt buộc'),
+        original_price: Yup.number().required('Giá gốc là bắt buộc'),
+        available_stock: Yup.number().required('Số lượng là bắt buộc'),
         content: Yup.string().required('Nội dung là bắt buộc'),
-        summary: Yup.string().required('Tóm tắt là bắt buộc'),
         child_nav_id: Yup.string().required('Danh mục là bắt buộc'),
         features: Yup.array().of(Yup.string().required('Chức năng không được bỏ trống')),
-        phone_number: Yup.string().required('Số điện thoại là bắt buộc'), // Validation for phone number
+        phone_number: Yup.string().required('Số điện thoại là bắt buộc'),
     });
 
     useEffect(() => {
@@ -67,14 +71,16 @@ const AddProduct = () => {
         const formData = new FormData();
 
         formData.append('name', values.name);
+        formData.append('price', values.price);
+        formData.append('original_price', values.original_price);
+        formData.append('available_stock', values.available_stock);
         files.forEach((image) => {
             formData.append('images[]', image);
         });
         formData.append('content', values.content);
-        formData.append('summary', values.summary);
         formData.append('child_nav_id', values.child_nav_id);
         formData.append('features', JSON.stringify(features));
-        formData.append('phone_number', values.phone_number); // Include phone number in submission
+        formData.append('phone_number', values.phone_number);
 
         try {
             await createProduct(formData);
@@ -109,7 +115,7 @@ const AddProduct = () => {
 
     return (
         <div className={styles.addProduct}>
-            <Title text="Thêm sản phẩm mới" />
+            <Title subText="Thêm sản phẩm mới" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting, setFieldValue, values }) => (
@@ -146,6 +152,21 @@ const AddProduct = () => {
                             ))}
                         </div>
                         <div className={styles.formGroup}>
+                            <label htmlFor="price">Giá</label>
+                            <Field name="price" type="number" className={styles.input} />
+                            <ErrorMessage name="price" component="div" className={styles.error} />
+                        </div>
+                        <div className={styles.formGroup}>
+                            <label htmlFor="original_price">Giá Gốc</label>
+                            <Field name="original_price" type="number" className={styles.input} />
+                            <ErrorMessage name="original_price" component="div" className={styles.error} />
+                        </div>
+                        <div className={styles.formGroup}>
+                            <label htmlFor="available_stock">Số Lượng Tồn Kho</label>
+                            <Field name="available_stock" type="number" className={styles.input} />
+                            <ErrorMessage name="available_stock" component="div" className={styles.error} />
+                        </div>
+                        <div className={styles.formGroup}>
                             <label htmlFor="child_nav_id">Danh Mục</label>
                             <Field as="select" name="child_nav_id" className={styles.input}>
                                 <option value="">Chọn danh mục</option>
@@ -156,11 +177,6 @@ const AddProduct = () => {
                                 ))}
                             </Field>
                             <ErrorMessage name="child_nav_id" component="div" className={styles.error} />
-                        </div>
-                        <div className={styles.formGroup}>
-                            <label htmlFor="summary">Tóm Tắt</label>
-                            <Field name="summary" type="text" className={styles.input} />
-                            <ErrorMessage name="summary" component="div" className={styles.error} />
                         </div>
                         <div className={styles.formGroup}>
                             <label htmlFor="phone_number">Số Điện Thoại</label>
@@ -202,14 +218,19 @@ const AddProduct = () => {
                         <div className={styles.formGroup}>
                             <label htmlFor="content">Nội Dung</label>
                             <CustomEditor
-                                onChange={(content) => setFieldValue('content', content)}
-                                initialValue={values.content}
+                                value={values.content}
+                                onChange={(value) => setFieldValue('content', value)}
                             />
                             <ErrorMessage name="content" component="div" className={styles.error} />
                         </div>
-                        <button type="submit" disabled={isSubmitting} className={styles.submitButton}>
-                            {isSubmitting ? <Spin /> : 'Thêm sản phẩm'}
-                        </button>
+                        <div className={styles.buttonGroup}>
+                            <Button primary type="submit" disabled={isSubmitting}>
+                                {isSubmitting ? <Spin size="small" /> : 'Thêm Sản Phẩm'}
+                            </Button>
+                            <Button secondary type="button" onClick={() => navigate(routes.productList)}>
+                                Hủy
+                            </Button>
+                        </div>
                     </Form>
                 )}
             </Formik>

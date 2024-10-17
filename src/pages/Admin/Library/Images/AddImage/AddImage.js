@@ -63,7 +63,7 @@ const AddImage = () => {
 
     return (
         <div className={styles.addImage}>
-            <Title text="Thêm hình ảnh" />
+            <Title subText="Thêm hình ảnh" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting }) => (

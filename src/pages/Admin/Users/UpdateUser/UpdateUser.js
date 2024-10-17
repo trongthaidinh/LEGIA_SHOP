@@ -58,7 +58,7 @@ const UpdateUser = () => {
 
     return (
         <div className={styles.updateUser}>
-            <Title text="Chỉnh sửa thông tin người dùng" />
+            <Title subText="Chỉnh sửa thông tin người dùng" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting }) => (

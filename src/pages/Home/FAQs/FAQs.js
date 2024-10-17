@@ -126,7 +126,7 @@ function FAQs() {
                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.5 }}
             >
-                <Title text="FAQs" />
+                <Title subText="FAQs" />
                 <div className={cx('section-grid')}>
                     <div className={cx('faqs')}>
                         {faqsData.map((faq, titleIndex) => (

@@ -44,7 +44,7 @@ function NewsCategory() {
         async function fetchCategory() {
             try {
                 setLoading(true);
-                const categories = await getCategoriesBySlug('tin-tuc');
+                const categories = await getCategoriesBySlug('bai-viet');
                 const category = categories.find((cat) => cat.slug === slug);
                 if (category) {
                     setCategoryId(category.id);
@@ -71,7 +71,7 @@ function NewsCategory() {
                     const data = await getNewsByCategory(categoryId, startDate, endDate, currentPage, newsPerPage);
 
                     setNews(
-                        data.map((newsItem) => ({
+                        data.news.map((newsItem) => ({
                             ...newsItem,
                             isNew: dayjs().diff(dayjs(newsItem.createdAt), 'day') <= 3,
                         })),
@@ -183,7 +183,7 @@ function NewsCategory() {
                 <meta name="author" content="Yến Sào LeGia Nest " />
             </Helmet>
 
-            <Title text={categoryName} />
+            <Title subText={categoryName} />
 
             {/* <div className={cx('filter')}>
                 <Space direction="vertical" size={12}>

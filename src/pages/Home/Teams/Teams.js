@@ -78,7 +78,7 @@ function Teams() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Title text="Thành Viên Hợp Tác Xã" />
+                <Title subText="Thành Viên Hợp Tác Xã" />
                 <div className={cx('slide-wrapper')}>
                     <Swiper
                         spaceBetween={20}

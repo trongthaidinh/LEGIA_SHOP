@@ -70,7 +70,7 @@ const UpdateMember = () => {
 
     return (
         <div className={styles.updateMember}>
-            <Title text="Cập nhật thành viên" />
+            <Title subText="Cập nhật thành viên" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting, setFieldValue, values }) => (

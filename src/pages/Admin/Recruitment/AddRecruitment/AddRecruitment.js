@@ -88,7 +88,7 @@ const AddRecruitment = () => {
 
     return (
         <div className={cx('addRecruitment')}>
-            <Title text="Thêm mới tuyển dụng" />
+            <Title subText="Thêm mới tuyển dụng" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting, setFieldValue, values }) => (

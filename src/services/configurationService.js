@@ -10,7 +10,7 @@ const getFromSessionStorage = (key) => {
 };
 
 export const getConfiguration = async () => {
-    const sessionKey = 'configurationDesktop'; // Khóa để lưu vào sessionStorage
+    const sessionKey = 'configurationDesktop';
 
     const cachedData = getFromSessionStorage(sessionKey);
     if (cachedData) {
@@ -40,7 +40,7 @@ export const getConfigurationMobile = async () => {
 
     try {
         const response = await httpRequest.get('/configuration');
-        const configData = response.data.data[1];
+        const configData = response.data.data[0];
 
         saveToSessionStorage(sessionKey, configData);
 

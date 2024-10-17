@@ -4,46 +4,21 @@ import styles from './Checkout.module.scss';
 import Button from 'components/Button';
 import atmImage from '~/assets/atm.png';
 import codImage from '~/assets/cash.png';
+import { createOrder } from '~/services/orderService';
+import { Spin } from 'antd';
 
 const cx = classNames.bind(styles);
 
 const Checkout = () => {
-    const cartItems = [
-        {
-            id: 1,
-            name: 'Yến Chưng Đường Phèn',
-            quantity: 2,
-            price: 200000,
-            images: [
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png',
-                '~/assets/productA2.png',
-            ],
-        },
-        {
-            id: 2,
-            name: 'Chân Yến Rút Lông Cao Cấp',
-            quantity: 1,
-            price: 200000,
-            images: ['https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_yen_to_bdz2za.png'],
-        },
-        {
-            id: 3,
-            name: 'Yến Chưng Saffron',
-            quantity: 1,
-            price: 50000,
-            images: [
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728104350/hinh_set_qua_tang-01_njhh9e.png',
-                '~/assets/productB2.png',
-            ],
-        },
-    ];
-
+    const selectedProduct = JSON.parse(sessionStorage.getItem('selectedProduct'));
+    const cartItems = selectedProduct ? [selectedProduct] : JSON.parse(localStorage.getItem('cart')) || [];
+    const [loading, setLoading] = useState(false);
     const shippingFee = 30000;
 
     const [paymentMethod, setPaymentMethod] = useState('atm');
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         email: '',
         phone: '',
         note: '',
@@ -53,8 +28,8 @@ const Checkout = () => {
     });
 
     const [formErrors, setFormErrors] = useState({
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         email: '',
         phone: '',
         city: '',
@@ -75,8 +50,8 @@ const Checkout = () => {
         let error = '';
 
         switch (name) {
-            case 'firstName':
-            case 'lastName':
+            case 'first_name':
+            case 'last_name':
                 if (!value.trim()) {
                     error = 'Trường này là bắt buộc.';
                 }
@@ -136,14 +111,41 @@ const Checkout = () => {
                 .every(([, value]) => value.trim() !== '')
         );
     };
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (isFormValid()) {
-            const orderId = 950;
-            const orderKey = 'wc_order_TN357ttLic2fQ';
-            const redirectUrl = `/thanh-toan/order-received/${orderId}/?key=${orderKey}`;
+            setLoading(true);
+            const subtotal = calculateSubtotal();
+            const total = calculateTotal();
+            const orderData = {
+                ...formData,
+                payment_method: paymentMethod,
+                items: cartItems,
+                subtotal,
+                shipping_fee: shippingFee,
+                total: total,
+            };
 
-            window.location.href = redirectUrl;
+            try {
+                const orderResponse = await createOrder(orderData);
+                const orderId = orderResponse.order.id;
+                const orderKey = orderResponse.order_key;
+                const redirectUrl = `/thanh-toan/order-received/${orderId}/?key=${orderKey}`;
+
+                if (selectedProduct) {
+                    sessionStorage.removeItem('selectedProduct');
+                } else {
+                    localStorage.removeItem('cart');
+                }
+                const cartUpdateEvent = new CustomEvent('cartUpdated');
+                window.dispatchEvent(cartUpdateEvent);
+                window.location.href = redirectUrl;
+            } catch (error) {
+                console.error('Order creation error:', error);
+            } finally {
+                setLoading(false);
+            }
         } else {
             alert('Please fill in all required fields.');
         }
@@ -162,13 +164,13 @@ const Checkout = () => {
                                 </label>
                                 <input
                                     type="text"
-                                    name="lastName"
-                                    value={formData.lastName}
+                                    name="last_name"
+                                    value={formData.last_name}
                                     onChange={handleInputChange}
                                     onBlur={handleBlur}
                                     required
                                 />
-                                {formErrors.lastName && <span className={cx('error')}>{formErrors.lastName}</span>}
+                                {formErrors.last_name && <span className={cx('error')}>{formErrors.last_name}</span>}
                             </div>
                             <div className={cx('form-group')}>
                                 <label>
@@ -176,15 +178,16 @@ const Checkout = () => {
                                 </label>
                                 <input
                                     type="text"
-                                    name="firstName"
-                                    value={formData.firstName}
+                                    name="first_name"
+                                    value={formData.first_name}
                                     onChange={handleInputChange}
                                     onBlur={handleBlur}
                                     required
                                 />
-                                {formErrors.firstName && <span className={cx('error')}>{formErrors.firstName}</span>}
+                                {formErrors.first_name && <span className={cx('error')}>{formErrors.first_name}</span>}
                             </div>
                         </div>
+                        {/* Remaining fields for email, phone, note, city, district, address */}
                         <div className={cx('form-group')}>
                             <label>
                                 Email<span className={cx('required')}>*</span>
@@ -297,7 +300,7 @@ const Checkout = () => {
                         {cartItems.map((item) => (
                             <li key={item.id} className={cx('cart-item')}>
                                 <div className={cx('cart-item-info')}>
-                                    <img src={item.images[0]} alt={item.name} className={cx('cart-item-image')} />
+                                    <img src={item.image} alt={item.name} className={cx('cart-item-image')} />
                                     <div className={cx('cart-item-name-quantity')}>
                                         <span className={cx('cart-item-name')}>{item.name}</span>
                                         <span className={cx('cart-item-quantity')}>Số lượng: {item.quantity}</span>
@@ -326,10 +329,10 @@ const Checkout = () => {
                         rounded
                         large
                         className={cx('checkout-btn', { disabled: !isFormValid() })}
-                        disabled={!isFormValid()}
+                        disabled={!isFormValid() || loading}
                         onClick={handleSubmit}
                     >
-                        Thanh Toán
+                        {loading ? <Spin size="small" /> : 'Thanh Toán'}
                     </Button>
                 </div>
             </div>

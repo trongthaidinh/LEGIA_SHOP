@@ -85,7 +85,7 @@ const UpdateProject = () => {
 
     return (
         <div className={styles.updateProject}>
-            <Title text="Cập nhật dự án" />
+            <Title subText="Cập nhật dự án" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting, setFieldValue, values }) => (

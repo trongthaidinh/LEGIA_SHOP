@@ -6,7 +6,7 @@ import LoadingScreen from '~/components/LoadingScreen';
 import PushNotification from '~/components/PushNotification';
 import DateTime from '~/components/DateTime';
 import Title from '~/components/Title';
-// import { getNewsById } from '~/services/newsService';
+import { getNewsById } from '~/services/newsService';
 import { Helmet } from 'react-helmet';
 
 const cx = classNames.bind(styles);
@@ -124,15 +124,25 @@ const NewsDetail = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const fetchNewsDetail = async (id) => {
+        try {
+            setLoading(true);
+            const data = await getNewsById(id);
+            setNewsDetail(data);
+            setError(null);
+        } catch (error) {
+            setError(error);
+            console.error('Error fetching news detail:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
         if (id) {
-            const detail = sampleNewsDetail;
-            setNewsDetail(detail);
-            setLoading(false);
-            setError(null);
+            fetchNewsDetail(id);
         } else {
             setError(new Error('Invalid news ID'));
-            setLoading(false);
         }
     }, [id]);
 

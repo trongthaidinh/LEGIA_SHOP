@@ -47,7 +47,7 @@ const AddVideo = () => {
 
     return (
         <div className={styles.addVideo}>
-            <Title text="Thêm Video" />
+            <Title subText="Thêm Video" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting }) => (

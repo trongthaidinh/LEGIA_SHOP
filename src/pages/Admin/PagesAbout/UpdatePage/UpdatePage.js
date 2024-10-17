@@ -60,7 +60,7 @@ const UpdatePage = () => {
 
     return (
         <div className={styles.updatePage}>
-            <Title text="Cập nhật trang" />
+            <Title subText="Cập nhật trang" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik
                 initialValues={initialValues}

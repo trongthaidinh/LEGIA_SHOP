@@ -1,8 +1,8 @@
 import classNames from 'classnames/bind';
 import React, { useEffect, useState } from 'react';
 import Product from '~/components/Product';
-// import { getProducts } from 'services/productService';
-// import { getCategoriesBySlug } from 'services/categoryService';
+import { getProductsByCategory } from 'services/productService';
+import { getCategoriesBySlug } from 'services/categoryService';
 import styles from './Products.module.scss';
 import Title from '~/components/Title';
 import LoadingScreen from '~/components/LoadingScreen';
@@ -17,98 +17,98 @@ const cx = classNames.bind(styles);
 
 function Products() {
     // Commented out API calls
-    // const [products, setProducts] = useState([]);
-    // const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Sample data for categories
-    const categories = [
-        { id: 1, slug: 'yen-chung' },
-        { id: 2, slug: 'yen-to' },
-        { id: 3, slug: 'set-qua-tang' },
-    ];
+    // // Sample data for categories
+    // const categories = [
+    //     { id: 1, slug: 'yen-chung' },
+    //     { id: 2, slug: 'yen-to' },
+    //     { id: 3, slug: 'set-qua-tang' },
+    // ];
 
-    // Sample data for products
-    const products = [
-        {
-            id: 101,
-            name: 'Yến Chưng Đường Phèn',
-            images: [
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
-            ],
-            child_nav_id: 1,
-            price: 50000,
-            original_price: 60000,
-        },
-        {
-            id: 102,
-            name: 'Yến Chưng Táo Đỏ Hạt Sen',
-            images: [
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
-            ],
-            child_nav_id: 1,
-            price: 50000,
-            original_price: 60000,
-        },
-        {
-            id: 103,
-            name: 'Yến Chưng Đường Phèn',
-            images: [
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
-            ],
-            child_nav_id: 2,
-            price: 50000,
-        },
-        {
-            id: 104,
-            name: 'Yến Chưng Nhân Sâm',
-            images: [
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
-            ],
-            child_nav_id: 3,
-            price: 50000,
-        },
-        {
-            id: 105,
-            name: 'Yến Chưng Đường Phèn',
-            images: [
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
-            ],
-            child_nav_id: 2,
-            price: 50000,
-        },
-        {
-            id: 106,
-            name: 'Yến Chưng Collagen Saffron',
-            images: [
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
-            ],
-            child_nav_id: 3,
-            price: 50000,
-        },
-    ];
+    // // Sample data for products
+    // const products = [
+    //     {
+    //         id: 101,
+    //         name: 'Yến Chưng Đường Phèn',
+    //         images: [
+    //             'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
+    //         ],
+    //         child_nav_id: 1,
+    //         price: 50000,
+    //         original_price: 60000,
+    //     },
+    //     {
+    //         id: 102,
+    //         name: 'Yến Chưng Táo Đỏ Hạt Sen',
+    //         images: [
+    //             'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
+    //         ],
+    //         child_nav_id: 1,
+    //         price: 50000,
+    //         original_price: 60000,
+    //     },
+    //     {
+    //         id: 103,
+    //         name: 'Yến Chưng Đường Phèn',
+    //         images: [
+    //             'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
+    //         ],
+    //         child_nav_id: 2,
+    //         price: 50000,
+    //     },
+    //     {
+    //         id: 104,
+    //         name: 'Yến Chưng Nhân Sâm',
+    //         images: [
+    //             'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
+    //         ],
+    //         child_nav_id: 3,
+    //         price: 50000,
+    //     },
+    //     {
+    //         id: 105,
+    //         name: 'Yến Chưng Đường Phèn',
+    //         images: [
+    //             'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
+    //         ],
+    //         child_nav_id: 2,
+    //         price: 50000,
+    //     },
+    //     {
+    //         id: 106,
+    //         name: 'Yến Chưng Collagen Saffron',
+    //         images: [
+    //             'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
+    //         ],
+    //         child_nav_id: 3,
+    //         price: 50000,
+    //     },
+    // ];
 
-    // useEffect(() => {
-    //     const fetchProductsAndCategories = async () => {
-    //         try {
-    //             const [categoriesData, productsData] = await Promise.all([
-    //                 getCategoriesBySlug('san-pham'),
-    //                 getProducts(),
-    //             ]);
+    useEffect(() => {
+        const fetchProductsAndCategories = async () => {
+            try {
+                const [categoriesData, productsData] = await Promise.all([
+                    getCategoriesBySlug('san-pham'),
+                    getProductsByCategory(1),
+                ]);
 
-    //             setCategories(categoriesData);
-    //             setProducts(productsData);
-    //         } catch (err) {
-    //             setError(err);
-    //             console.error('Error fetching data:', err);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
+                setCategories(categoriesData);
+                setProducts(productsData);
+            } catch (err) {
+                setError(err);
+                console.error('Error fetching data:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    //     fetchProductsAndCategories();
-    // }, []);
+        fetchProductsAndCategories();
+    }, []);
 
     const getCategorySlug = (categoryId) => {
         const category = categories.find((cat) => cat.id == categoryId);
@@ -126,13 +126,7 @@ function Products() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Title
-                    text="Sản phẩm"
-                    subText="Yến chưng thượng hạng
-"
-                    showSeeAll={true}
-                    slug={`${routes.products}`}
-                />
+                <Title subText="Yến chưng thượng hạng" showSeeAll={true} slug={`${routes.products}`} />
                 <Swiper
                     spaceBetween={10}
                     slidesPerView={4}

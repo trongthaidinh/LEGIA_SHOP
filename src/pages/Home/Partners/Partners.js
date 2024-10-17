@@ -44,7 +44,7 @@ function Partners() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Title text="Đối tác" />
+                <Title subText="Đối tác" />
 
                 <Swiper
                     spaceBetween={20}

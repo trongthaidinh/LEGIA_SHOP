@@ -65,7 +65,7 @@ const Introduction = () => {
                 <meta name="author" content="Yến Sào LeGia Nest " />
             </Helmet>
             <div className={cx('inner')}>
-                <Title text={pageContent.name} />
+                <Title subText={pageContent.name} />
                 <div className={cx('content')} dangerouslySetInnerHTML={{ __html: pageContent.content }} />
             </div>
         </article>

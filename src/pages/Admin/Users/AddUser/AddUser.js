@@ -53,7 +53,7 @@ const AddUser = () => {
 
     return (
         <div className={styles.addUser}>
-            <Title text="Thêm mới người dùng"></Title>
+            <Title subText="Thêm mới người dùng"></Title>
             {notificationMessage && (
                 <PushNotification message={notificationMessage} type={isError ? 'error' : 'success'} />
             )}

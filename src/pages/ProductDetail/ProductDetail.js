@@ -25,95 +25,99 @@ import 'swiper/css/autoplay';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import routes from 'config/routes';
+import { getProductById } from 'services/productService';
+import { message, Spin } from 'antd';
+import { createComment, getCommentsByProductId } from 'services/commentService';
 
 const cx = classNames.bind(styles);
 
 const ProductDetail = () => {
     const { id } = useParams();
     const [productDetail, setProductDetail] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [comments, setComments] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [notification, setNotification] = useState(null);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [quantity, setQuantity] = useState(1);
-    const availableStock = 10;
+    const [availableStock, setAvailableStock] = useState(0);
     const [activeTab, setActiveTab] = useState('info');
     const [imagePreviews, setImagePreviews] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [commentForm, setCommentForm] = useState({
         content: '',
         image: null,
         name: '',
         email: '',
     });
-    const [comments, setComments] = useState([
-        // Bình luận mẫu
-        {
-            name: 'Nguyen Van A',
-            content: 'Sản phẩm tốt',
-            image: null,
-            date: '2024-10-03 10:00',
-            email: 'email@example.com',
-        },
-        {
-            name: 'Nguyen Van B',
-            content: 'Hàng chất lượng',
-            images: [
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg',
-            ],
-            date: '2024-10-03 11:00',
-            email: 'email2@example.com',
-        },
-    ]);
 
     useEffect(() => {
-        const mockData = {
-            id: 101,
-            name: "Yến Sào Cao Cấp LeGia'Nest",
-            price: 50000,
-            original_price: 70000,
-            images: [
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728299308/23aa341b-d735-4e4d-8677-473a80dcfc9d_epuh8i.jpg',
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png',
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg',
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png',
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728039223/3ANH-01_waz0f8.jpg',
-                'https://res.cloudinary.com/drioug4df/image/upload/v1728104352/hinh_yen_chung_qhlzho.png',
-            ],
-            features: JSON.stringify(['Giá trị dinh dưỡng cao', 'Yến sào 100% tự nhiên', 'Không chất bảo quản']),
-            phone_number: '123456789',
-            content: `
-                <div>
-                    <h2 style="text-align: center;">Yến Sào Cao Cấp LeGia Nest</h2>
-                    <p>Yến Sào Cao Cấp LeGia'Nest là sản phẩm yến sào chất lượng cao, được chế biến từ những tổ yến tự nhiên, đảm bảo sự tinh khiết và an toàn cho sức khỏe người tiêu dùng.</p>
-                    <h3>Thông Tin Sản Phẩm</h3>
-                    <ul>
-                        <li><strong>Giá:</strong> 50,000 VNĐ (Giá gốc: 70,000 VNĐ)</li>
-                        <li><strong>Khối lượng:</strong> 100g</li>
-                        <li><strong>Xuất xứ:</strong> Việt Nam</li>
-                    </ul>
-                    <h3>Đặc Điểm Nổi Bật</h3>
-                    <p>Yến sào LeGia Nest không chỉ là món ăn ngon mà còn là thực phẩm bổ dưỡng cho sức khỏe. Một số lợi ích nổi bật của sản phẩm bao gồm:</p>
-                    <ul>
-                        <li>Giàu dinh dưỡng, hỗ trợ tăng cường sức đề kháng.</li>
-                        <li>Thích hợp cho mọi đối tượng, đặc biệt là trẻ em và người cao tuổi.</li>
-                        <li>Được sản xuất theo quy trình khép kín, đảm bảo vệ sinh an toàn thực phẩm.</li>
-                    </ul>
-                    <h3>Cách Sử Dụng</h3>
-                    <p>Để tận hưởng trọn vẹn hương vị và lợi ích dinh dưỡng từ Yến Sào Cao Cấp LeGia'Nest, bạn có thể chế biến theo các cách sau:</p>
-                    <ol>
-                        <li>Ngâm yến trong nước ấm khoảng 30 phút trước khi chế biến.</li>
-                        <li>Chế biến yến cùng với đường phèn và nước dừa để tạo ra món ăn thơm ngon.</li>
-                        <li>Thêm yến vào các món cháo hoặc súp để tăng cường dinh dưỡng.</li>
-                    </ol>
-
-                </div>
-            `,
-            comments: ['Bình luận 1', 'Bình luận 2', 'Bình luận 3'],
+        const fetchProductDetail = async () => {
+            try {
+                const data = await getProductById(id);
+                setProductDetail(data);
+                setAvailableStock(data.available_stock);
+            } catch (error) {
+                setNotification({ message: error.message, type: 'error' });
+                console.error('Error fetching product detail:', error);
+            } finally {
+                setLoading(false);
+            }
         };
 
-        setProductDetail(mockData);
-        setLoading(false);
-    }, [id]);
+        const fetchComments = async () => {
+            try {
+                const commentsData = await getCommentsByProductId(id);
+                setComments(commentsData);
+            } catch (error) {
+                setNotification({ message: 'Failed to load comments', type: 'error' });
+                console.error('Error fetching comments:', error);
+            }
+        };
+
+        fetchProductDetail();
+        fetchComments();
+    }, [id, notification]);
+
+    const handleAddToCart = () => {
+        const productToAdd = {
+            id: productDetail.id,
+            name: productDetail.name,
+            price: productDetail.price,
+            original_price: productDetail.original_price,
+            quantity: quantity,
+            image: productDetail.images[0],
+        };
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        const existingProductIndex = cart.findIndex((item) => item.id === productToAdd.id);
+
+        if (existingProductIndex !== -1) {
+            cart[existingProductIndex].quantity += quantity;
+        } else {
+            cart.push(productToAdd);
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        const cartUpdateEvent = new CustomEvent('cartUpdated');
+        window.dispatchEvent(cartUpdateEvent);
+
+        setNotification({ message: 'Thêm sản phẩm vào giỏ hàng thành công!', type: 'success' });
+    };
+
+    const handleBuyNow = () => {
+        const productToBuy = {
+            id: productDetail.id,
+            name: productDetail.name,
+            price: productDetail.price,
+            original_price: productDetail.original_price,
+            quantity: quantity,
+            image: productDetail.images[0],
+        };
+
+        sessionStorage.setItem('selectedProduct', JSON.stringify(productToBuy));
+    };
 
     const handleIncrease = () => {
         if (quantity < availableStock) {
@@ -131,6 +135,10 @@ const ProductDetail = () => {
         const { name, value, files } = e.target;
 
         if (name === 'image' && files.length > 0) {
+            setCommentForm((prev) => ({
+                ...prev,
+                image: files,
+            }));
             const previewUrls = Array.from(files).map((file) => URL.createObjectURL(file));
             setImagePreviews(previewUrls);
         } else {
@@ -141,29 +149,50 @@ const ProductDetail = () => {
         }
     };
 
-    const handleSubmitComment = (e) => {
+    const handleSubmitComment = async (e) => {
         e.preventDefault();
-        const newComment = {
-            name: commentForm.name,
-            content: commentForm.content,
-            image: commentForm.image ? URL.createObjectURL(commentForm.image) : null,
-            date: new Date().toLocaleString(),
-            email: commentForm.email,
-        };
 
-        setComments((prevComments) => [newComment, ...prevComments]);
-        setCommentForm({
-            content: '',
-            image: null,
-            name: '',
-            email: '',
-        });
+        setIsSubmitting(true);
+
+        // Prepare comment data
+        const formData = new FormData();
+        formData.append('name', commentForm.name);
+        formData.append('email', commentForm.email);
+        formData.append('content', commentForm.content);
+        formData.append('product_id', productDetail.id); // Sử dụng productDetail.id
+
+        console.log(commentForm);
+        // Append image if uploaded
+        if (commentForm.image) {
+            for (const file of commentForm.image) {
+                formData.append('images[]', file);
+            }
+        }
+
+        try {
+            // Send the comment to the server
+            const response = await createComment(formData);
+
+            // Reset the form after successful submission
+            setCommentForm({
+                content: '',
+                image: null,
+                name: '',
+                email: '',
+            });
+
+            // Fetch updated comments
+            const updatedComments = await getCommentsByProductId(productDetail.id); // Sử dụng productDetail.id
+            setComments(updatedComments);
+
+            setNotification({ message: 'Bình luận đã được gửi thành công!', type: 'success' });
+        } catch (error) {
+            console.error('Error submitting comment:', error);
+            setNotification({ message: 'Gửi bình luận thất bại.', type: 'error' });
+        } finally {
+            setIsSubmitting(false);
+        }
     };
-
-    if (error) {
-        const errorMessage = error.response ? error.response.data.message : 'Network Error';
-        return <PushNotification message={errorMessage} />;
-    }
 
     if (loading || !productDetail) {
         return <LoadingScreen isLoading={loading} />;
@@ -171,7 +200,6 @@ const ProductDetail = () => {
 
     const features = productDetail?.features ? JSON.parse(productDetail.features) : [];
 
-    // Calculate discount percentage
     const discountPercentage =
         productDetail.original_price > productDetail.price
             ? Math.round(((productDetail.original_price - productDetail.price) / productDetail.original_price) * 100)
@@ -184,7 +212,7 @@ const ProductDetail = () => {
                 <meta name="description" content={`Chi tiết về sản phẩm: ${productDetail.name}.`} />
                 <meta name="keywords" content={`sản phẩm, ${productDetail.name}, phunongbuondon`} />
             </Helmet>
-
+            {notification && <PushNotification message={notification.message} type={notification.type} />}
             <div className={cx('product-section')}>
                 <div className={cx('product-image')}>
                     <Swiper
@@ -231,11 +259,11 @@ const ProductDetail = () => {
                     <h2 className={cx('product-name')}>{productDetail.name}</h2>
 
                     <p className={cx('product-price')}>
-                        {productDetail.price.toLocaleString()}
+                        {Number(productDetail.price).toLocaleString()}
                         <span className={cx('product-price-currency')}>đ</span>
                         {productDetail.original_price > productDetail.price && (
                             <span className={cx('original-price')}>
-                                {productDetail?.original_price?.toLocaleString()}
+                                {Number(productDetail?.original_price).toLocaleString()}
                                 <span className={cx('product-price-currency')}>đ</span>
                             </span>
                         )}
@@ -265,13 +293,13 @@ const ProductDetail = () => {
 
                     <div className={cx('button-container')}>
                         <Link className={cx('button-link')}>
-                            <Button className={cx('cart-button')} primary>
+                            <Button className={cx('cart-button')} primary onClick={handleAddToCart}>
                                 <FontAwesomeIcon icon={faShoppingCart} className={cx('icon')} />
                                 Thêm vào giỏ hàng
                             </Button>
                         </Link>
                         <Link className={cx('button-link')} to={routes.checkout}>
-                            <Button className={cx('checkout-button')} outline>
+                            <Button className={cx('checkout-button')} outline onClick={handleBuyNow}>
                                 <FontAwesomeIcon icon={faCreditCard} className={cx('icon')} />
                                 Mua ngay
                             </Button>
@@ -375,7 +403,7 @@ const ProductDetail = () => {
                                 />
                             </div>
                             <Button type="submit" primary>
-                                Gửi bình luận
+                                {isSubmitting ? <Spin size="small" /> : 'Gửi bình luận'}
                             </Button>
                         </form>
 

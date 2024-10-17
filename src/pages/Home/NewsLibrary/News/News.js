@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './News.module.scss';
 import classNames from 'classnames/bind';
-// import { getNews } from 'services/newsService';
-// import { getCategoriesBySlug } from 'services/categoryService';
+import { getNews } from 'services/newsService';
+import { getCategoriesBySlug } from 'services/categoryService';
 import CardContent from '~/components/CardContent';
 import ButtonGroup from '~/components/ButtonGroup';
 import Title from '~/components/Title';
@@ -22,12 +22,10 @@ function News() {
     const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
-        // Comment phần gọi API
-        /*
         const loadData = async () => {
             try {
-                const [newsData, categoryData] = await Promise.all([getNews(), getCategoriesBySlug('tin-tuc')]);
-                setNews(newsData);
+                const [newsData, categoryData] = await Promise.all([getNews(), getCategoriesBySlug('bai-viet')]);
+                setNews(newsData.news);
                 setCategories(categoryData);
             } catch (error) {
                 setError(error);
@@ -37,74 +35,6 @@ function News() {
         };
 
         loadData();
-        */
-
-        // Dữ liệu mẫu
-        const sampleNewsData = [
-            {
-                id: 1,
-                title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                summary:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                images: ['https://lagianest.com/wp-content/uploads/2023/08/to-yen-kho-de-tu-lanh-duoc-bao-lau.jpg'],
-                link: '/tin-tuc/tin-tuc-1',
-                created_at: '2024-09-30',
-                views: 123,
-                isFeatured: true,
-                child_nav_id: 1,
-            },
-            {
-                id: 2,
-                title: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                summary:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                images: [
-                    'https://lagianest.com/wp-content/uploads/2023/08/nguoi-cao-huyet-ap-co-an-yen-duoc-khong.jpg',
-                ],
-                link: '/tin-tuc/tin-tuc-2',
-                created_at: '2024-10-01',
-                views: 234,
-                isFeatured: false,
-                child_nav_id: 2,
-            },
-            {
-                id: 3,
-                title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                summary:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                images: [
-                    'https://lagianest.com/wp-content/uploads/2023/08/yen-chung-xong-de-ngoai-duoc-bao-lau-avt.jpg',
-                ],
-                link: '/tin-tuc/tin-tuc-3',
-                created_at: '2024-09-28',
-                views: 345,
-                isFeatured: true,
-                child_nav_id: 1,
-            },
-            {
-                id: 4,
-                title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                summary:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                images: [
-                    'https://lagianest.com/wp-content/uploads/2023/08/yen-chung-xong-de-ngoai-duoc-bao-lau-avt.jpg',
-                ],
-                link: '/tin-tuc/tin-tuc-3',
-                created_at: '2024-09-28',
-                views: 345,
-                isFeatured: true,
-                child_nav_id: 1,
-            },
-        ];
-
-        const sampleCategoriesData = [
-            { id: 1, slug: 'tin-tuc' },
-            { id: 2, slug: 'su-kien' },
-        ];
-
-        setNews(sampleNewsData);
-        setCategories(sampleCategoriesData);
-        setLoading(false);
     }, []);
 
     if (error) {
@@ -142,7 +72,7 @@ function News() {
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('title-container')}>
-                    <Title text="Tin tức" subText="Bài viết mới nhất" showSeeAll={true} slug={`${routes.news}`} />
+                    <Title subText="Bài viết mới nhất" showSeeAll={true} slug={`${routes.news}`} />
                 </div>
                 {/* <ButtonGroup
                     buttons={['Mới nhất', 'Nổi bật', 'Ngẫu nhiên']}
@@ -154,7 +84,7 @@ function News() {
                         const isNew = dayjs().diff(dayjs(news.created_at), 'day') <= 3;
 
                         return (
-                            <Link key={index} to={`${routes.news}/${news.id}`}>
+                            <Link key={index} to={`${routes.news}/${getCategorySlug(news.child_nav_id)}/${news.id}`}>
                                 <CardContent
                                     title={news.title}
                                     summary={news.summary}

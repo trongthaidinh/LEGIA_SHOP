@@ -48,122 +48,122 @@ function Navigation({ isFixed }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [openSubMenus, setOpenSubMenus] = useState({});
     const [openSubSubMenus, setOpenSubSubMenus] = useState({});
+    const [cartQuantity, setCartQuantity] = useState(0);
 
-    const mockNavigationLinks = [
-        {
-            id: 1,
-            title: 'Giới Thiệu',
-            slug: 'gioi-thieu',
-            position: 1,
-            children: [
-                {
-                    id: 11,
-                    title: 'Về Chúng Tôi',
-                    slug: 've-chung-toi',
-                    position: 1,
-                    children: [],
-                },
-                {
-                    id: 12,
-                    title: 'Tầm Nhìn & Sứ Mệnh',
-                    slug: 'tam-nhin-su-menh',
-                    position: 1,
-                    children: [],
-                },
-            ],
-        },
-        {
-            id: 2,
-            title: 'Sản Phẩm',
-            slug: 'san-pham',
-            position: 2,
-            children: [
-                {
-                    id: 21,
-                    title: 'Yến Chưng',
-                    slug: 'yen-chung',
-                    position: 1,
-                    children: [
-                        // {
-                        //     id: 211,
-                        //     title: 'Chi Tiết Sản Phẩm A1',
-                        //     slug: 'chi-tiet-san-pham-a1',
-                        //     position: 1,
-                        // },
-                        // {
-                        //     id: 212,
-                        //     title: 'Chi Tiết Sản Phẩm A2',
-                        //     slug: 'chi-tiet-san-pham-a2',
-                        //     position: 2,
-                        // },
-                    ],
-                },
-                {
-                    id: 22,
-                    title: 'Yến Tổ',
-                    slug: 'san-pham-b',
-                    position: 2,
-                    children: [],
-                },
-                {
-                    id: 23,
-                    title: 'Set Quà Tặng',
-                    slug: 'set-qua-tang',
-                    position: 3,
-                    children: [],
-                },
-            ],
-        },
-        {
-            id: 3,
-            title: 'Tin Tức',
-            slug: 'tin-tuc',
-            position: 3,
-            children: [],
-        },
-        // {
-        //     id: 4,
-        //     title: 'Chính sách',
-        //     slug: 'chinh-sach',
-        //     position: 4,
-        //     children: [
-        //         {
-        //             id: 1,
-        //             title: 'Chính sách bảo hành',
-        //             slug: 'chinh-sach-bao-hanh',
-        //             position: 1,
-        //             children: [],
-        //         },
-        //         {
-        //             id: 2,
-        //             title: 'Chính sách thanh toán',
-        //             slug: 'chinh-sach-thanh-toan',
-        //             position: 2,
-        //             children: [],
-        //         },
-        //     ],
-        // },
-        // {
-        //     id: 6,
-        //     title: 'Hướng dẫn mua hàng',
-        //     slug: 'huong-dan-mua-hang',
-        //     position: 5,
-        //     children: [],
-        // },
-        {
-            id: 7,
-            title: 'Liên Hệ',
-            slug: 'lien-he',
-            position: 5,
-            children: [],
-        },
-    ];
+    // const mockNavigationLinks = [
+    //     {
+    //         id: 1,
+    //         title: 'Giới Thiệu',
+    //         slug: 'gioi-thieu',
+    //         position: 1,
+    //         children: [
+    //             {
+    //                 id: 11,
+    //                 title: 'Về Chúng Tôi',
+    //                 slug: 've-chung-toi',
+    //                 position: 1,
+    //                 children: [],
+    //             },
+    //             {
+    //                 id: 12,
+    //                 title: 'Tầm Nhìn & Sứ Mệnh',
+    //                 slug: 'tam-nhin-su-menh',
+    //                 position: 1,
+    //                 children: [],
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         id: 2,
+    //         title: 'Sản Phẩm',
+    //         slug: 'san-pham',
+    //         position: 2,
+    //         children: [
+    //             {
+    //                 id: 21,
+    //                 title: 'Yến Chưng',
+    //                 slug: 'yen-chung',
+    //                 position: 1,
+    //                 children: [
+    //                     // {
+    //                     //     id: 211,
+    //                     //     title: 'Chi Tiết Sản Phẩm A1',
+    //                     //     slug: 'chi-tiet-san-pham-a1',
+    //                     //     position: 1,
+    //                     // },
+    //                     // {
+    //                     //     id: 212,
+    //                     //     title: 'Chi Tiết Sản Phẩm A2',
+    //                     //     slug: 'chi-tiet-san-pham-a2',
+    //                     //     position: 2,
+    //                     // },
+    //                 ],
+    //             },
+    //             {
+    //                 id: 22,
+    //                 title: 'Yến Tổ',
+    //                 slug: 'san-pham-b',
+    //                 position: 2,
+    //                 children: [],
+    //             },
+    //             {
+    //                 id: 23,
+    //                 title: 'Set Quà Tặng',
+    //                 slug: 'set-qua-tang',
+    //                 position: 3,
+    //                 children: [],
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         id: 3,
+    //         title: 'Tin Tức',
+    //         slug: 'tin-tuc',
+    //         position: 3,
+    //         children: [],
+    //     },
+    //     // {
+    //     //     id: 4,
+    //     //     title: 'Chính sách',
+    //     //     slug: 'chinh-sach',
+    //     //     position: 4,
+    //     //     children: [
+    //     //         {
+    //     //             id: 1,
+    //     //             title: 'Chính sách bảo hành',
+    //     //             slug: 'chinh-sach-bao-hanh',
+    //     //             position: 1,
+    //     //             children: [],
+    //     //         },
+    //     //         {
+    //     //             id: 2,
+    //     //             title: 'Chính sách thanh toán',
+    //     //             slug: 'chinh-sach-thanh-toan',
+    //     //             position: 2,
+    //     //             children: [],
+    //     //         },
+    //     //     ],
+    //     // },
+    //     // {
+    //     //     id: 6,
+    //     //     title: 'Hướng dẫn mua hàng',
+    //     //     slug: 'huong-dan-mua-hang',
+    //     //     position: 5,
+    //     //     children: [],
+    //     // },
+    //     {
+    //         id: 7,
+    //         title: 'Liên Hệ',
+    //         slug: 'lien-he',
+    //         position: 5,
+    //         children: [],
+    //     },
+    // ];
 
     useEffect(() => {
         const fetchNavigationLinks = async () => {
             try {
-                // Thay thế API call bằng dữ liệu mẫu
-                const links = mockNavigationLinks;
+                const links = await getNavigationLinks();
                 const sortedLinks = links.sort((a, b) => a.position - b.position);
                 setNavigationLinks(sortedLinks);
             } catch (error) {
@@ -173,8 +173,34 @@ function Navigation({ isFixed }) {
                 setLoading(false);
             }
         };
+        const calculateCartQuantity = () => {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalQuantity = cart.reduce((sum, product) => sum + product.quantity, 0);
+            setCartQuantity(totalQuantity);
+        };
 
         fetchNavigationLinks();
+        calculateCartQuantity();
+    }, []);
+
+    useEffect(() => {
+        const calculateCartQuantity = () => {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalQuantity = cart.reduce((sum, product) => sum + product.quantity, 0);
+            setCartQuantity(totalQuantity);
+        };
+
+        calculateCartQuantity();
+
+        const handleCartUpdate = () => {
+            calculateCartQuantity();
+        };
+
+        window.addEventListener('cartUpdated', handleCartUpdate);
+
+        return () => {
+            window.removeEventListener('cartUpdated', handleCartUpdate);
+        };
     }, []);
 
     const toggleMenu = () => {
@@ -287,7 +313,7 @@ function Navigation({ isFixed }) {
                                     <FontAwesomeIcon icon={faShoppingCart} className={cx('icon')} />
                                     <div className={cx('text')}>
                                         <span>Giỏ hàng</span>
-                                        <span className={cx('cart-items')}>03 sản phẩm</span>
+                                        <span className={cx('cart-items')}>{cartQuantity} sản phẩm</span>
                                     </div>
                                 </Link>
                             </div>

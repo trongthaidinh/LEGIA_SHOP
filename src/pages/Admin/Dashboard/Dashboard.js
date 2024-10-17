@@ -26,11 +26,11 @@ const sidebarItems = [
     // { title: 'Quản lý người dùng', icon: faUsers, count: 0, route: routes.userList },
     { title: 'Quản lý sản phẩm', icon: faBox, count: 0, route: routes.productList },
     { title: 'Quản lý tin tức', icon: faNewspaper, count: 0, route: routes.newsList },
-    { title: 'Quản lý dịch vụ', icon: faLayerGroup, count: 0, route: routes.serviceList },
-    { title: 'Quản lý trải nghiệm', icon: faEarthAsia, count: 0, route: routes.experienceList },
+    { title: 'Quản lý đơn hàng', icon: faLayerGroup, count: 0, route: routes.orderList },
+    // { title: 'Quản lý trải nghiệm', icon: faEarthAsia, count: 0, route: routes.experienceList },
     { title: 'Quản lý thư viện', icon: faBookOpen, count: 0, route: routes.videosList },
     { title: 'Quản lý trang', icon: faInfoCircle, count: 0, route: routes.pageList },
-    { title: 'Quản lý thành viên', icon: faUserFriends, count: 0, route: routes.memberList },
+    // { title: 'Quản lý thành viên', icon: faUserFriends, count: 0, route: routes.memberList },
     { title: 'Cài đặt', icon: faCogs, count: 0, route: routes.settings },
 ];
 

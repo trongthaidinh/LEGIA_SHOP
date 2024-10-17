@@ -2,14 +2,13 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin: 20px;
-    padding: 10px 20px;
-    background-color: white;
-    border-radius: 4px;
+    padding: 10px 40px;
+    background-color: var(--primary);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: var(--white);
 
     .companyName {
-        color: var(--primary);
+        color: var(--white);
         font-weight: bold;
         font-size: 2.4rem;
         margin-right: auto;
@@ -24,11 +23,11 @@
 
     .icon,
     .chevronIcon {
-        color: var(--text-color);
+        color: var(--white);
         transition: color 0.3s;
 
         &:hover {
-            color: var(--primary);
+            color: var(--white);
         }
     }
 
@@ -71,12 +70,16 @@
         padding: 10px;
         color: var(--text-color);
         cursor: pointer;
-        transition: background-color 0.3s;
+        transition: all 0.3s ease-in-out;
         overflow: hidden;
 
         &:hover {
-            background-color: var(--primary-bg-hover);
             color: var(--primary);
+            font-weight: 700;
+
+            .icon {
+                color: var(--primary);
+            }
         }
 
         .icon {
@@ -117,7 +120,7 @@
         padding: 10px;
         border-top: 1px solid var(--border-color);
         cursor: pointer;
-        color: var(--primary);
+        color: var(--white);
         font-weight: bold;
         transition: background-color 0.3s;
 

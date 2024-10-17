@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -11,40 +11,38 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import LoadingScreen from '~/components/LoadingScreen';
+import { getConfiguration } from 'services/configurationService';
 
 const cx = classNames.bind(styles);
 
 const Banner = () => {
     // Commented out API fetch and sample data
-    // const [slides, setSlides] = useState([]);
-    // const [isLoading, setIsLoading] = useState(true);
+    const [slides, setSlides] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    console.log(slides);
 
-    // useEffect(() => {
-    //     const fetchSlides = async () => {
-    //         try {
-    //             // Simulating data fetch
-    //             const sliderData = [
-    //                 'https://example.com/image1.jpg',
-    //                 'https://example.com/image2.jpg',
-    //                 'https://example.com/image3.jpg',
-    //             ];
-    //             setSlides(sliderData);
-    //             setIsLoading(false);
-    //         } catch (error) {
-    //             console.error('Error fetching slides:', error);
-    //             setIsLoading(false);
-    //         }
-    //     };
-    //     fetchSlides();
-    // }, []);
+    useEffect(() => {
+        const fetchSlides = async () => {
+            try {
+                const sliderData = await getConfiguration();
+                console.log(sliderData);
+                setSlides(sliderData.homepage_slider);
+            } catch (error) {
+                console.error('Error fetching slides:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchSlides();
+    }, []);
 
-    // Replace slides and isLoading with sample data
-    const slides = [
-        'https://res.cloudinary.com/drioug4df/image/upload/v1728104353/4_slide_LE_GIA_nest-01_tfoeel.png',
-        'https://res.cloudinary.com/drioug4df/image/upload/v1728104353/4_slide_LE_GIA_nest-02_rmn16p.png',
-        'https://res.cloudinary.com/drioug4df/image/upload/v1728104359/4_slide_LE_GIA_nest-03_ka6fbr.png',
-    ];
-    const isLoading = false; // Set isLoading to false as we have sample data
+    // // Replace slides and isLoading with sample data
+    // const slides = [
+    //     'https://res.cloudinary.com/drioug4df/image/upload/v1728104353/4_slide_LE_GIA_nest-01_tfoeel.png',
+    //     'https://res.cloudinary.com/drioug4df/image/upload/v1728104353/4_slide_LE_GIA_nest-02_rmn16p.png',
+    //     'https://res.cloudinary.com/drioug4df/image/upload/v1728104359/4_slide_LE_GIA_nest-03_ka6fbr.png',
+    // ];
+    // const isLoading = false; // Set isLoading to false as we have sample data
 
     return (
         <>

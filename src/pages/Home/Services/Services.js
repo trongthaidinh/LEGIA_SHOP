@@ -62,7 +62,7 @@ function Services() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Title text="Dịch vụ du lịch" showSeeAll={true} slug={`${routes.services}`} />
+                <Title subText="Dịch vụ du lịch" showSeeAll={true} slug={`${routes.services}`} />
                 <Swiper
                     spaceBetween={10}
                     slidesPerView={3}

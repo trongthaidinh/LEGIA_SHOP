@@ -25,22 +25,15 @@ const EditProduct = () => {
     const [features, setFeatures] = useState([]);
     const [files, setFiles] = useState([]);
 
-    const [initialValues] = useState({
-        updateName: '',
-        content: '',
-        updateCate: '',
-        summary: '',
-        images: [],
-        phone_number: '',
-    });
-
     const validationSchema = Yup.object({
         updateName: Yup.string().required('Tên sản phẩm là bắt buộc'),
         content: Yup.string().required('Nội dung là bắt buộc'),
         updateCate: Yup.string().required('Danh mục là bắt buộc'),
-        summary: Yup.string().required('Tóm tắt là bắt buộc'),
-        features: Yup.array().of(Yup.string().required('Thông tin tổng quan không được bỏ trống')),
         phone_number: Yup.string().required('Số điện thoại là bắt buộc'),
+        price: Yup.number().required('Giá bán là bắt buộc'),
+        original_price: Yup.number(),
+        available_stock: Yup.number().required('Số lượng hàng có sẵn là bắt buộc'),
+        features: Yup.array().of(Yup.string().required('Thông tin tổng quan không được bỏ trống')),
     });
 
     useEffect(() => {
@@ -59,13 +52,6 @@ const EditProduct = () => {
                 setProduct(productData);
                 setFeatures(JSON.parse(productData.features) || []);
                 setFiles(productData.images || []);
-
-                initialValues.updateName = productData.name;
-                initialValues.content = productData.content;
-                initialValues.updateCate = productData.child_nav_id;
-                initialValues.summary = productData.summary;
-                initialValues.phone_number = productData.phone_number;
-                setFiles(productData.images || []);
             } catch (error) {
                 console.error('Lỗi khi tải sản phẩm:', error);
             }
@@ -73,7 +59,7 @@ const EditProduct = () => {
 
         fetchCategories();
         fetchProduct();
-    }, [id, initialValues]);
+    }, [id]);
 
     const { getRootProps, getInputProps } = useDropzone({
         onDrop: (acceptedFiles) => {
@@ -87,22 +73,20 @@ const EditProduct = () => {
 
         formData.append('name', values.updateName);
         formData.append('content', values.content);
-        formData.append('summary', values.summary);
         formData.append('phone_number', values.phone_number);
         formData.append('child_nav_id', values.updateCate);
+        formData.append('price', values.price);
+        formData.append('original_price', values.original_price);
+        formData.append('available_stock', values.available_stock);
         formData.append('features', JSON.stringify(features));
 
-        if (files.length > 0) {
-            files.forEach((file) => {
-                if (typeof file === 'string') {
-                    formData.append('images[]', file);
-                } else {
-                    formData.append('images[]', file);
-                }
-            });
-        } else {
-            formData.append('images[]', product.images);
-        }
+        files.forEach((file) => {
+            if (typeof file === 'string') {
+                formData.append('images[]', file);
+            } else {
+                formData.append('images[]', file);
+            }
+        });
 
         try {
             await updateProduct(id, formData);
@@ -136,16 +120,18 @@ const EditProduct = () => {
 
     return (
         <div className={styles.editProduct}>
-            <Title text="Cập nhật sản phẩm" />
+            <Title subText="Cập nhật sản phẩm" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             {product && (
                 <Formik
                     initialValues={{
-                        updateName: product ? product.name : '',
-                        content: product ? product.content : '',
-                        updateCate: product ? product.child_nav_id : '',
-                        summary: product ? product.summary : '',
-                        phone_number: product ? product.phone_number : '',
+                        updateName: product.name || '',
+                        content: product.content || '',
+                        updateCate: product.child_nav_id || '',
+                        phone_number: product.phone_number || '',
+                        price: product.price || 0,
+                        original_price: product.original_price || 0,
+                        available_stock: product.available_stock || 0,
                     }}
                     validationSchema={validationSchema}
                     onSubmit={handleSubmit}
@@ -163,12 +149,26 @@ const EditProduct = () => {
                                 <ErrorMessage name="phone_number" component="div" className={styles.error} />
                             </div>
                             <div className={styles.formGroup}>
+                                <label htmlFor="price">Giá Bán</label>
+                                <Field name="price" type="number" className={styles.input} />
+                                <ErrorMessage name="price" component="div" className={styles.error} />
+                            </div>
+                            <div className={styles.formGroup}>
+                                <label htmlFor="original_price">Giá Gốc</label>
+                                <Field name="original_price" type="number" className={styles.input} />
+                                <ErrorMessage name="original_price" component="div" className={styles.error} />
+                            </div>
+                            <div className={styles.formGroup}>
+                                <label htmlFor="available_stock">Số Lượng Tồn Kho</label>
+                                <Field name="available_stock" type="number" className={styles.input} />
+                                <ErrorMessage name="available_stock" component="div" className={styles.error} />
+                            </div>
+                            <div className={styles.formGroup}>
                                 <label>Chọn Hình Ảnh</label>
                                 <div {...getRootProps()} className={styles.dropzone}>
                                     <input {...getInputProps()} />
                                     <p>Kéo thả file vào đây, hoặc nhấn để chọn file</p>
                                 </div>
-                                <ErrorMessage name="updateImage" component="div" className={styles.error} />
                             </div>
                             <div className={styles.imagesPreview}>
                                 {files.map((img, index) => (
@@ -201,11 +201,6 @@ const EditProduct = () => {
                                 <ErrorMessage name="updateCate" component="div" className={styles.error} />
                             </div>
                             <div className={styles.formGroup}>
-                                <label htmlFor="summary">Tóm Tắt</label>
-                                <Field name="summary" type="text" className={styles.input} />
-                                <ErrorMessage name="summary" component="div" className={styles.error} />
-                            </div>
-                            <div className={styles.formGroup}>
                                 <label>Thông tin tổng quan</label>
                                 <div className={styles.featuresInput}>
                                     <input
@@ -226,7 +221,6 @@ const EditProduct = () => {
                                                 {index + 1}. {feature}
                                             </span>
                                             <button
-                                                primary
                                                 type="button"
                                                 onClick={() => removeFeature(index)}
                                                 className={styles.removeButtonFeat}
@@ -240,14 +234,14 @@ const EditProduct = () => {
                             <div className={styles.formGroup}>
                                 <label htmlFor="content">Nội Dung</label>
                                 <CustomEditor
+                                    initialValue={product.content || ''}
                                     onChange={(content) => setFieldValue('content', content)}
-                                    initialValue={values.content}
                                 />
                                 <ErrorMessage name="content" component="div" className={styles.error} />
                             </div>
-                            <button type="submit" disabled={isSubmitting} className={styles.submitButton}>
-                                {isSubmitting ? <Spin size="small" /> : 'Cập Nhật'}
-                            </button>
+                            <Button type="submit" disabled={isSubmitting} className={styles.submitButton}>
+                                {isSubmitting ? <Spin /> : 'Cập Nhật Sản Phẩm'}
+                            </Button>
                         </Form>
                     )}
                 </Formik>

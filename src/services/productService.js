@@ -102,6 +102,29 @@ export const getProductsByCategory = async (categoryId) => {
     }
 };
 
+// Get products by slug and cache them
+export const getProductListBySlug = async (slugCategory) => {
+    const sessionKey = `products_slug_${slugCategory}`;
+
+    const cachedData = getFromSessionStorage(sessionKey);
+    if (cachedData) {
+        return cachedData;
+    }
+
+    try {
+        const response = await httpRequest.get(`/products/by-category/${slugCategory}`);
+        const products = response.data.data;
+
+        // Save to sessionStorage
+        saveToSessionStorage(sessionKey, products);
+
+        return products;
+    } catch (error) {
+        console.error(`Error fetching products for child nav slug -> ${slugCategory}:`, error);
+        throw error;
+    }
+};
+
 // Get product by slug and cache it
 export const getProductBySlug = async (slug) => {
     const sessionKey = `product_slug_${slug}`;

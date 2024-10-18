@@ -16,78 +16,10 @@ import routes from '~/config/routes';
 const cx = classNames.bind(styles);
 
 function Products() {
-    // Commented out API calls
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
-    // // Sample data for categories
-    // const categories = [
-    //     { id: 1, slug: 'yen-chung' },
-    //     { id: 2, slug: 'yen-to' },
-    //     { id: 3, slug: 'set-qua-tang' },
-    // ];
-
-    // // Sample data for products
-    // const products = [
-    //     {
-    //         id: 101,
-    //         name: 'Yến Chưng Đường Phèn',
-    //         images: [
-    //             'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
-    //         ],
-    //         child_nav_id: 1,
-    //         price: 50000,
-    //         original_price: 60000,
-    //     },
-    //     {
-    //         id: 102,
-    //         name: 'Yến Chưng Táo Đỏ Hạt Sen',
-    //         images: [
-    //             'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
-    //         ],
-    //         child_nav_id: 1,
-    //         price: 50000,
-    //         original_price: 60000,
-    //     },
-    //     {
-    //         id: 103,
-    //         name: 'Yến Chưng Đường Phèn',
-    //         images: [
-    //             'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
-    //         ],
-    //         child_nav_id: 2,
-    //         price: 50000,
-    //     },
-    //     {
-    //         id: 104,
-    //         name: 'Yến Chưng Nhân Sâm',
-    //         images: [
-    //             'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
-    //         ],
-    //         child_nav_id: 3,
-    //         price: 50000,
-    //     },
-    //     {
-    //         id: 105,
-    //         name: 'Yến Chưng Đường Phèn',
-    //         images: [
-    //             'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
-    //         ],
-    //         child_nav_id: 2,
-    //         price: 50000,
-    //     },
-    //     {
-    //         id: 106,
-    //         name: 'Yến Chưng Collagen Saffron',
-    //         images: [
-    //             'https://res.cloudinary.com/drioug4df/image/upload/v1728299145/23aa341b-d735-4e4d-8677-473a80dcfc9d_meernb.jpg',
-    //         ],
-    //         child_nav_id: 3,
-    //         price: 50000,
-    //     },
-    // ];
 
     useEffect(() => {
         const fetchProductsAndCategories = async () => {

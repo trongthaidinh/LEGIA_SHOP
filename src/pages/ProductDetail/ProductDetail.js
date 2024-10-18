@@ -154,15 +154,13 @@ const ProductDetail = () => {
 
         setIsSubmitting(true);
 
-        // Prepare comment data
         const formData = new FormData();
         formData.append('name', commentForm.name);
         formData.append('email', commentForm.email);
         formData.append('content', commentForm.content);
-        formData.append('product_id', productDetail.id); // Sử dụng productDetail.id
+        formData.append('product_id', productDetail.id);
 
         console.log(commentForm);
-        // Append image if uploaded
         if (commentForm.image) {
             for (const file of commentForm.image) {
                 formData.append('images[]', file);
@@ -170,10 +168,6 @@ const ProductDetail = () => {
         }
 
         try {
-            // Send the comment to the server
-            const response = await createComment(formData);
-
-            // Reset the form after successful submission
             setCommentForm({
                 content: '',
                 image: null,
@@ -181,8 +175,7 @@ const ProductDetail = () => {
                 email: '',
             });
 
-            // Fetch updated comments
-            const updatedComments = await getCommentsByProductId(productDetail.id); // Sử dụng productDetail.id
+            const updatedComments = await getCommentsByProductId(productDetail.id);
             setComments(updatedComments);
 
             setNotification({ message: 'Bình luận đã được gửi thành công!', type: 'success' });

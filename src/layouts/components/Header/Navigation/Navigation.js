@@ -280,7 +280,7 @@ function Navigation({ isFixed }) {
                 <div className={cx('mobile-menu-icon')} onClick={toggleMenu}>
                     <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
                 </div>
-                <Link to="/">
+                <Link to="/" rel="canonical">
                     <img src={images.logo} alt="Logo" className={cx('logo')} />
                 </Link>
                 <div className={cx('navigation-wrapper')}>

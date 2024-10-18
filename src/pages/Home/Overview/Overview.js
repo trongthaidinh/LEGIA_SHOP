@@ -26,7 +26,7 @@ function Overview() {
                         <strong> Legia'Nest</strong> luôn đặt chất lượng sản phẩm lên hàng đầu, đặc biệt{' '}
                         <strong>Yến sào Legia'Nest</strong> đảm bảo giữ nguyên vị thuần túy 100% từ tổ Yến tự nhiên.
                     </p>
-                    <Link to={`${routes.about}/ve-chung-toi`}>
+                    <Link to={`gioi-thieu/ve-chung-toi`}>
                         <Button
                             className={cx('button')}
                             rounded

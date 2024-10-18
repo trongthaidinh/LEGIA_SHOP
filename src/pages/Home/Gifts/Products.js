@@ -4,7 +4,6 @@ import Product from '~/components/Product';
 import { getProductsByCategory } from 'services/productService';
 import { getCategoriesBySlug } from 'services/categoryService';
 import styles from './Products.module.scss';
-import Title from '~/components/Title';
 import LoadingScreen from '~/components/LoadingScreen';
 import PushNotification from '~/components/PushNotification';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,6 +11,7 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import routes from '~/config/routes';
+import Title from 'components/TitleSub';
 
 const cx = classNames.bind(styles);
 
@@ -97,7 +97,7 @@ function Products() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Title subText="Sản phẩm" subText="Quà tặng cao cấp" showSeeAll={true} slug={`${routes.products}`} />
+                <Title subText="Quà tặng cao cấp" showSeeAll={true} slug={`${routes.products}`} />
                 <img
                     className={cx('gift-intro-img')}
                     src="https://res.cloudinary.com/drioug4df/image/upload/v1728011829/f9500f84-3e74-486c-a508-0e7c8057189d.jpg"

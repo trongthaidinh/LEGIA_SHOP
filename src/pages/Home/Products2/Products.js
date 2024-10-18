@@ -4,7 +4,6 @@ import Product from '~/components/Product';
 import { getProductsByCategory } from 'services/productService';
 import { getCategoriesBySlug } from 'services/categoryService';
 import styles from './Products.module.scss';
-import Title from '~/components/Title';
 import LoadingScreen from '~/components/LoadingScreen';
 import PushNotification from '~/components/PushNotification';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,6 +11,7 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import routes from '~/config/routes';
+import Title from 'components/TitleSub';
 
 const cx = classNames.bind(styles);
 

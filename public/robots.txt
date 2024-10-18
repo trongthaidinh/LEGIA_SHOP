@@ -2,6 +2,6 @@
 User-agent: *
 Disallow: /private/
 Allow: /
-Sitemap: https://phunongbuondon.com/sitemap.xml
+Sitemap: https://LegiaNest.com/sitemap.xml
 
 

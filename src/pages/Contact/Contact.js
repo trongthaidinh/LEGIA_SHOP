@@ -65,7 +65,7 @@ const ContactPage = () => {
             <Helmet>
                 <title>Liên Hệ | Yến Sào LeGia Nest </title>
                 <meta name="description" content="Hãy gửi tin nhắn cho chúng tôi nếu bạn có bất kỳ câu hỏi nào." />
-                <meta name="keywords" content="liên hệ, phunongbuondon, gửi tin nhắn" />
+                <meta name="keywords" content="liên hệ, LegiaNest, gửi tin nhắn" />
                 <meta name="author" content="Yến Sào LeGia Nest " />
             </Helmet>
             <div className={cx('mapContainer')}>
@@ -95,7 +95,7 @@ const ContactPage = () => {
                             </div>
                             <div className={cx('infoItem')}>
                                 <FontAwesomeIcon icon={faEnvelope} className={cx('icon')} />
-                                <a href="mailto:htxphunong.buondon@gmail.com">
+                                <a href="mailto:lxchinh@gmail.com">
                                     Email: <span>lxchinh@gmail.com</span>
                                 </a>
                             </div>
@@ -108,13 +108,13 @@ const ContactPage = () => {
                         </div>
 
                         <div className={cx('socialLinks')}>
-                            <Link to="https://www.facebook.com/takatechsoft/">
+                            <Link to="https://www.facebook.com/profile.php?id=100064173304425">
                                 <FontAwesomeIcon icon={faFacebook} className={cx('socialIcon')} />
                             </Link>
-                            <Link to="https://www.instagram.com/dinhtuan.le/">
+                            <Link to="https://www.instagram.com">
                                 <FontAwesomeIcon icon={faInstagram} className={cx('socialIcon')} />
                             </Link>
-                            <Link to="https://x.com/takatech_bmt">
+                            <Link to="https://x.com">
                                 <FontAwesomeIcon icon={faTwitter} className={cx('socialIcon')} />
                             </Link>
                         </div>

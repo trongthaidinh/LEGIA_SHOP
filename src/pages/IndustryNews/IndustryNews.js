@@ -176,10 +176,7 @@ function NewsCategory() {
                     name="description"
                     content={`Xem các tin tức liên quan đến ${categoryName} trên Yến Sào LeGia Nest .`}
                 />
-                <meta
-                    name="keywords"
-                    content={`${categoryName}, tin hợp tác xã, tin nông nghiệp - du lịch, tin tức, phunongbuondon`}
-                />
+                <meta name="keywords" content={`${categoryName}, yến sào nguyên chất, yến sào LeGia'Nest, legiaNest`} />
                 <meta name="author" content="Yến Sào LeGia Nest " />
             </Helmet>
 

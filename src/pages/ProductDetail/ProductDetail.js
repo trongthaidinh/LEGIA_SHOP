@@ -210,7 +210,7 @@ const ProductDetail = () => {
             <Helmet>
                 <title>{productDetail.name} | Yến Sào LeGia Nest</title>
                 <meta name="description" content={`Chi tiết về sản phẩm: ${productDetail.name}.`} />
-                <meta name="keywords" content={`sản phẩm, ${productDetail.name}, phunongbuondon`} />
+                <meta name="keywords" content={`sản phẩm, ${productDetail.name}, LegiaNest`} />
             </Helmet>
             {notification && <PushNotification message={notification.message} type={notification.type} />}
             <div className={cx('product-section')}>

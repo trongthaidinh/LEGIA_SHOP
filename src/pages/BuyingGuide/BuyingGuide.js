@@ -93,7 +93,7 @@ const BuyingGuide = () => {
                         'Yến Sào LeGia Nest  hoạt động đa ngành nghề, trong đó tiêu biểu có thể kể đến là nuôi cá lồng, cải tạo nâng cấp vườn cây quanh các hồ thủy điện, phát triển về du lịch sinh thái, du lịch nông nghiệp. Ngoài ra còn thực hiện sản xuất các loại thực phẩm như chả cá, yến, set quà tặng thực phẩm sấy khô và sấy dẻo, các loại tinh dầu tự nhiên,…'
                     }
                 />
-                <meta name="keywords" content="giới thiệu, phunongbuondon, thông tin hợp tác xã" />
+                <meta name="keywords" content="giới thiệu, LegiaNest, thông tin hợp tác xã" />
                 <meta name="author" content="Yến Sào LeGia Nest " />
             </Helmet>
             <div className={cx('inner')}>

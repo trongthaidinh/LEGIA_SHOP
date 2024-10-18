@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom'; // Import useParams
+import { useParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './Product.module.scss';
 import Title from '~/components/Title';
@@ -45,7 +45,6 @@ const Products = () => {
                     setFilteredProducts(fetchedProducts);
                     setCategories(fetchedCategories);
                 } else {
-                    // Nếu không có slug, gọi API lấy tất cả sản phẩm
                     const [fetchedProducts, fetchedCategories] = await Promise.all([
                         getProducts(),
                         getCategoriesBySlug('san-pham'),
@@ -62,7 +61,7 @@ const Products = () => {
         };
 
         fetchData();
-    }, [slug]); // Thêm slug vào dependency để reload khi slug thay đổi
+    }, [slug]);
 
     const handleFilterSubmit = async () => {
         try {

@@ -202,7 +202,10 @@ const ProductDetail = () => {
         <article className={cx('wrapper')}>
             <Helmet>
                 <title>{productDetail.name} | Yến Sào LeGia Nest</title>
-                <meta name="description" content={`Chi tiết về sản phẩm: ${productDetail.name}.`} />
+                <meta
+                    name="description"
+                    content={`Chi tiết về sản phẩm: ${productDetail.name}. Yến Sào Legia'Nest được chế biến từ những tổ yến tự nhiên, đảm bảo sự tinh khiết và an toàn cho sức khỏe người tiêu dùng.`}
+                />
                 <meta name="keywords" content={`sản phẩm, ${productDetail.name}, LegiaNest`} />
             </Helmet>
             {notification && <PushNotification message={notification.message} type={notification.type} />}

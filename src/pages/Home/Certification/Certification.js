@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Certification.module.scss';
-import Title from 'components/Title';
+import Title from 'components/TitleSub';
 
 const cx = classNames.bind(styles);
 
-// Dữ liệu chứng nhận mẫu
 const mockCertificates = [
     { id: 1, url: 'https://lagianest.com/wp-content/uploads/2022/11/quang-cao-yen-1.2.jpg', title: 'Chứng nhận 2' },
     {
@@ -19,7 +18,6 @@ function Certification() {
     const [certificates, setCertificates] = useState([]);
 
     useEffect(() => {
-        // Bạn có thể thay thế phần này bằng việc gọi API thực tế để lấy dữ liệu chứng nhận
         setCertificates(mockCertificates);
     }, []);
 

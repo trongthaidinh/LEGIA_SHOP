@@ -5,12 +5,12 @@ import { getNews } from 'services/newsService';
 import { getCategoriesBySlug } from 'services/categoryService';
 import CardContent from '~/components/CardContent';
 import ButtonGroup from '~/components/ButtonGroup';
-import Title from '~/components/Title';
 import PushNotification from '~/components/PushNotification';
 import LoadingScreen from '~/components/LoadingScreen';
 import { Link } from 'react-router-dom';
 import routes from '~/config/routes';
 import dayjs from 'dayjs';
+import Title from 'components/TitleSub';
 
 const cx = classNames.bind(styles);
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
-import Title from '~/components/Title';
 import Modal from './ModalLibrary';
 import { getPublicImages, getVideos } from '~/services/libraryService';
 import Slider from 'react-slick';
@@ -9,6 +8,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import styles from './Library.module.scss';
 // import ButtonGroup from '~/components/ButtonGroup';
 import LoadingScreen from '~/components/LoadingScreen';
+import Title from 'components/TitleSub';
 
 // Dữ liệu mẫu
 // const mockData = {
@@ -117,7 +117,7 @@ function Library() {
                 <LoadingScreen isLoading={isLoading} />
             ) : (
                 <div className={cx('inner')}>
-                    <Title subText="Thư viện" subText="Hình ảnh & Video" />
+                    <Title subText="Hình ảnh & Video" />
                     <div className={cx('library-wrapper')}>
                         <div className={cx('library-videos')}>
                             <div className={cx('library')}>

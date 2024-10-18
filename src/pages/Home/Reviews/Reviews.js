@@ -6,10 +6,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
-import Title from 'components/Title';
 import { getReviews } from 'services/reviewService';
 import LoadingScreen from '~/components/LoadingScreen';
 import PushNotification from '~/components/PushNotification';
+import Title from 'components/TitleSub';
 
 const cx = classNames.bind(styles);
 
@@ -77,7 +77,7 @@ const Reviews = () => {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Title subText="Cảm nhận" subText="Đánh giá của khách hàng" />
+                <Title subText="Đánh giá của khách hàng" />
                 <Swiper
                     spaceBetween={10} // Khoảng cách giữa các slide
                     slidesPerView={1} // Hiển thị 1 slide mỗi lần

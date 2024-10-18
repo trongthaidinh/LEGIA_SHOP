@@ -16,7 +16,7 @@ const Home = () => (
                 name="description"
                 content="Yến Sào LeGia Nest chuyên phân phối tổ yến tươi, yến sào, yến chưng nguyên chất 100%, cam kết CHẤT LƯỢNG – KHÔNG PHA TRỘN để đảm bảo giữ nguyên vị thuần túy 100% từ tổ Yến tự nhiên."
             />
-            <meta name="keywords" content="yến tươi, yến sào, yến chưng, set quà tặng, LegiaNest" />
+            <meta name="keywords" content="yến, yến tươi, yến sào, yến chưng, set quà tặng, LegiaNest" />
             <meta name="author" content="Yến Sào LeGia'Nest" />
         </Helmet>
         <Banner />

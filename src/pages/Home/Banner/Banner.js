@@ -19,13 +19,11 @@ const Banner = () => {
     // Commented out API fetch and sample data
     const [slides, setSlides] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    console.log(slides);
 
     useEffect(() => {
         const fetchSlides = async () => {
             try {
                 const sliderData = await getConfiguration();
-                console.log(sliderData);
                 setSlides(sliderData.homepage_slider);
             } catch (error) {
                 console.error('Error fetching slides:', error);
@@ -35,14 +33,6 @@ const Banner = () => {
         };
         fetchSlides();
     }, []);
-
-    // // Replace slides and isLoading with sample data
-    // const slides = [
-    //     'https://res.cloudinary.com/drioug4df/image/upload/v1728104353/4_slide_LE_GIA_nest-01_tfoeel.png',
-    //     'https://res.cloudinary.com/drioug4df/image/upload/v1728104353/4_slide_LE_GIA_nest-02_rmn16p.png',
-    //     'https://res.cloudinary.com/drioug4df/image/upload/v1728104359/4_slide_LE_GIA_nest-03_ka6fbr.png',
-    // ];
-    // const isLoading = false; // Set isLoading to false as we have sample data
 
     return (
         <>

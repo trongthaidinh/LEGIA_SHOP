@@ -249,7 +249,7 @@ const ProductDetail = () => {
                 <div className={cx('product-details')}>
                     {discountPercentage > 0 && <div className={cx('discount-tag')}>-{discountPercentage}%</div>}
 
-                    <h2 className={cx('product-name')}>{productDetail.name}</h2>
+                    <h1 className={cx('product-name')}>{productDetail.name}</h1>
 
                     <p className={cx('product-price')}>
                         {Number(productDetail.price).toLocaleString()}

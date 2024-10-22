@@ -2,6 +2,6 @@
 User-agent: *
 Disallow: /private/
 Allow: /
-Sitemap: https://LegiaNest.com/sitemap.xml
+Sitemap: https://legia-shop.vercel.app/sitemap.xml
 
 

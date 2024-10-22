@@ -1,43 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-            
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap-image/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap-image/1.1 http://www.sitemaps.org/schemas/sitemap-image/1.1/sitemap-image.xsd">
     <url>
-        <loc>https://LegiaNest.com</loc>
-        <lastmod>2024-09-22T16:53:08+00:00</lastmod>
+        <loc>https://legia-shop.vercel.app/</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
     </url>
-    
     <url>
-        <loc>https://LegiaNest.com/gioi-thieu/ve-chung-toi</loc>
-        <lastmod>2024-09-22T16:53:08+00:00</lastmod>
+        <loc>https://legia-shop.vercel.app/gioi-thieu/ve-chung-toi</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
     </url>
-
     <url>
-        <loc>https://www.LegiaNest.com/gioi-thieu/lich-su</loc>
-        <lastmod>2024-09-22T16:53:08+00:00</lastmod>
+        <loc>https://legia-shop.vercel.app/gioi-thieu/tam-nhin-gia-tri-su-menh</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
     </url>
-    
     <url>
-        <loc>https://LegiaNest.com/san-pham</loc>
-        <lastmod>2024-09-22T16:53:08+00:00</lastmod>
+        <loc>https://legia-shop.vercel.app/san-pham</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
-    
     <url>
-        <loc>https://LegiaNest.com/dich-vu</loc>
-        <lastmod>2024-09-22T16:53:08+00:00</lastmod>
+        <loc>https://legia-shop.vercel.app/san-pham/yen-chung</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
     </url>
-    
     <url>
-        <loc>https://LegiaNest.com/tin-tuc</loc>
-        <lastmod>2024-09-22T16:53:08+00:00</lastmod>
+        <loc>https://legia-shop.vercel.app/san-pham/yen-to</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
     </url>
-    
     <url>
-        <loc>https://LegiaNest.com/lien-he</loc>
-        <lastmod>2024-09-22T16:53:08+00:00</lastmod>
+        <loc>https://legia-shop.vercel.app/san-pham/set-qua-tang</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
     </url>
-    
+    <url>
+        <loc>https://legia-shop.vercel.app/san-pham/yen-chung/yen-chung-gung</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://legia-shop.vercel.app/san-pham/yen-chung/yen-chung-tao-do</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://legia-shop.vercel.app/san-pham/yen-chung/yen-chung-nam-dong-trung</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://legia-shop.vercel.app/bai-viet</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://legia-shop.vercel.app/bai-viet/chia-se</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+        <url>
+        <loc>https://legia-shop.vercel.app/bai-viet/tin-tuc</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+            <url>
+        <loc>https://legia-shop.vercel.app/bai-viet/chuong-trinh-khuyen-mai</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+                <url>
+        <loc>https://legia-shop.vercel.app/bai-viet/cam-nhan-khach-hang</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://legia-shop.vercel.app/lien-he</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://legia-shop.vercel.app/dieu-khoan-chinh-sach</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+        <url>
+        <loc>https://legia-shop.vercel.app/chinh-sach-bao-mat</loc>
+        <lastmod>2024-10-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
 </urlset>

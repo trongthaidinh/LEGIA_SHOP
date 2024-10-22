@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './Product.module.scss';
-import Title from '~/components/Title';
 import PushNotification from '~/components/PushNotification';
 import LoadingScreen from '~/components/LoadingScreen';
 import routes from '~/config/routes';
@@ -155,6 +154,12 @@ const Products = () => {
         <article className={cx('wrapper')}>
             <Helmet>
                 <title>Sản Phẩm | Yến Sào LeGia'Nest </title>
+                <meta
+                    name="description"
+                    content="Yến Sào LeGia Nest chuyên phân phối tổ yến tươi, yến sào, yến chưng nguyên chất 100%, cam kết CHẤT LƯỢNG – KHÔNG PHA TRỘN để đảm bảo giữ nguyên vị thuần túy 100% từ tổ Yến tự nhiên."
+                />
+                <meta name="keywords" content="yến, yến tươi, yến sào, yến chưng, set quà tặng, LegiaNest" />
+                <meta name="author" content="Yến Sào LeGia'Nest" />
             </Helmet>
             <div className={cx('content')}>
                 <div className={cx('filter-toggle-btn')} onClick={toggleFilter}>

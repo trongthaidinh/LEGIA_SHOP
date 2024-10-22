@@ -174,37 +174,16 @@ function NewsCategory() {
                 <title>{categoryName} | Yến Sào LeGia Nest </title>
                 <meta
                     name="description"
-                    content={`Xem các tin tức liên quan đến ${categoryName} trên Yến Sào LeGia Nest .`}
+                    content={`Xem các tin tức liên quan đến ${categoryName} trên Yến Sào LeGia Nest.`}
                 />
-                <meta name="keywords" content={`${categoryName}, yến sào nguyên chất, yến sào LeGia'Nest, legiaNest`} />
+                <meta
+                    name="keywords"
+                    content={`${categoryName}, yến, yến tổ, yến chưng, set quà tặng, yến sào nguyên chất, yến sào LeGia'Nest, legiaNest`}
+                />
                 <meta name="author" content="Yến Sào LeGia Nest " />
             </Helmet>
 
             <Title subText={categoryName} />
-
-            {/* <div className={cx('filter')}>
-                <Space direction="vertical" size={12}>
-                    <RangePicker
-                        value={filterDates}
-                        onChange={handleRangeChange}
-                        locale="vi"
-                        popupStyle={{
-                            width: windowWidth < 992 ? '100%' : 'auto',
-                            maxWidth: windowWidth < 992 ? '300px' : 'none',
-                            minWidth: '250px',
-                            overflow: 'hidden',
-                        }}
-                    />
-                </Space>
-                <Button
-                    className={cx('filter-button')}
-                    type="primary"
-                    icon={<FilterOutlined />}
-                    onClick={() => setCurrentPage(1)}
-                >
-                    Lọc
-                </Button>
-            </div> */}
 
             <div className={cx('newsGrid')}>{renderNewsCategory()}</div>
             {renderPagination()}

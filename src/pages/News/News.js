@@ -73,6 +73,12 @@ const News = () => {
         <article className={cx('wrapper')}>
             <Helmet>
                 <title>Tin Tức | Yến Sào LeGia Nest </title>
+                <meta
+                    name="description"
+                    content="Yến Sào LeGia Nest chuyên phân phối tổ yến tươi, yến sào, yến chưng nguyên chất 100%, cam kết CHẤT LƯỢNG – KHÔNG PHA TRỘN để đảm bảo giữ nguyên vị thuần túy 100% từ tổ Yến tự nhiên."
+                />
+                <meta name="keywords" content="yến, yến tươi, yến sào, yến chưng, set quà tặng, LegiaNest" />
+                <meta name="author" content="Yến Sào LeGia'Nest" />
             </Helmet>
             <div className={cx('news-section')}>
                 <div className={cx('news-column')}>

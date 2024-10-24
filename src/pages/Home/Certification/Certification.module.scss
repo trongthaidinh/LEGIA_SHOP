@@ -29,7 +29,8 @@
 
         .certificates {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
+            gap: 120px;
             margin-top: 40px;
 
             @include respond-to(lg) {

@@ -159,6 +159,10 @@
     margin: 0 4px;
     transition: all ease-in-out 0.2s;
 
+    @include respond-to(lg) {
+        margin: 0 8px;
+    }
+
     &:hover {
         opacity: 0.8;
     }
@@ -247,8 +251,18 @@
 
     &.price-info {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
+        gap: 70px;
+        @include respond-to(sm) {
+            gap: 34px;
+        }
+    }
+
+    &-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
 }
 
@@ -262,12 +276,30 @@
     height: 80px;
     object-fit: cover;
     border-radius: 8px;
+
+    @include respond-to(lg) {
+        width: 120px;
+        height: 120px;
+    }
+
+    @include respond-to(sm) {
+        width: 80px;
+        height: 80px;
+    }
 }
 
 .mobile-name {
     font-size: 1.4rem;
     font-weight: 700;
     color: var(--text-color);
+
+    @include respond-to(lg) {
+        font-size: 1.8rem;
+    }
+
+    @include respond-to(sm) {
+        font-size: 1.4rem;
+    }
 }
 
 .mobile-remove-btn {
@@ -281,6 +313,11 @@
     border-radius: 50%;
     border: 1px solid transparent;
     transition: all ease-in-out 0.3s;
+
+    @include respond-to(lg) {
+        font-size: 2.8rem;
+        padding: 0 8px;
+    }
 
     &:hover {
         background-color: red;

@@ -140,8 +140,10 @@ const Cart = () => {
                                             <span className={cx('mobile-label')}>Sản phẩm:</span>
                                         </div>
                                         <div className={cx('mobile-row', 'product-info')}>
-                                            <img src={item.image} alt={item.name} className={cx('mobile-image')} />
-                                            <span className={cx('mobile-name')}>{item.name}</span>
+                                            <div className={cx('mobile-row-left')}>
+                                                <img src={item.image} alt={item.name} className={cx('mobile-image')} />
+                                                <span className={cx('mobile-name')}>{item.name}</span>
+                                            </div>
                                             <button
                                                 className={cx('mobile-remove-btn')}
                                                 onClick={() => removeItem(item.id)}

@@ -23,12 +23,14 @@ function Product({ image, name, price, link, original_price }) {
                     <h2 className={cx('product-item-name')}>{name}</h2>
                     <div className={cx('product-item-price-wrapper')}>
                         <p className={cx('product-item-price')}>
-                            {Number(formatPrice(price)).toLocaleString()}
-                            <span className={cx('product-item-currency')}>đ</span>
+                            <span className={cx('product-item-currency')}>
+                                {Number(formatPrice(price)).toLocaleString()}đ
+                            </span>
                             {original_price > price && (
                                 <span className={cx('product-item-original-price')}>
-                                    {Number(formatPrice(original_price)).toLocaleString()}
-                                    <span className={cx('product-item-currency')}>đ</span>
+                                    <span className={cx('product-item-currency')}>
+                                        {Number(formatPrice(original_price)).toLocaleString()}đ
+                                    </span>
                                 </span>
                             )}
                         </p>

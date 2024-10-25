@@ -39,7 +39,6 @@ const AddProduct = () => {
         name: Yup.string().required('Tên sản phẩm là bắt buộc'),
         images: Yup.array().required('Hình ảnh là bắt buộc'),
         price: Yup.number().required('Giá là bắt buộc'),
-        original_price: Yup.number().required('Giá gốc là bắt buộc'),
         available_stock: Yup.number().required('Số lượng là bắt buộc'),
         content: Yup.string().required('Nội dung là bắt buộc'),
         child_nav_id: Yup.string().required('Danh mục là bắt buộc'),

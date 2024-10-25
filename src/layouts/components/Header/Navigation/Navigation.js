@@ -12,11 +12,9 @@ import {
     faTimes,
     faChevronRight,
     faChevronDown,
-    faShoppingCart,
-    faUser,
-    faPhone,
     faPhoneVolume,
     faSearch,
+    faBasketShopping,
     // faHome,
     // faInfoCircle,
     // faBox,
@@ -310,10 +308,12 @@ function Navigation({ isFixed }) {
                             </div> */}
                             <div className={cx('cart')}>
                                 <Link to={routes.cart} className={cx('cart-link')}>
-                                    <FontAwesomeIcon icon={faShoppingCart} className={cx('icon')} />
+                                    <FontAwesomeIcon icon={faBasketShopping} className={cx('icon')} />
                                     <div className={cx('text')}>
-                                        <span>Giỏ hàng</span>
-                                        <span className={cx('cart-items')}>{cartQuantity} sản phẩm</span>
+                                        <span className={cx('cart-items-text')}>Giỏ hàng</span>
+                                        <span className={cx('cart-items')}>
+                                            {cartQuantity} <span className={cx('cart-items-text')}>sản phẩm</span>
+                                        </span>
                                     </div>
                                 </Link>
                             </div>

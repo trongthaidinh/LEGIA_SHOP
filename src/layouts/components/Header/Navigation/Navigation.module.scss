@@ -152,6 +152,7 @@
                     cursor: pointer;
 
                     @include respond-to(lg) {
+                        position: relative;
                         margin-right: 0;
                     }
 
@@ -161,7 +162,7 @@
                         }
 
                         .icon {
-                            background-color: var(--secondary-hover);
+                            color: var(--secondary);
                         }
                     }
 
@@ -176,6 +177,9 @@
                         display: flex;
                         flex-direction: column;
                         color: var(--secondary-hover);
+                    }
+
+                    .cart-items-text {
                         @include respond-to(lg) {
                             display: none;
                         }
@@ -184,14 +188,18 @@
                     .icon {
                         margin-right: 5px;
                         padding: 14px;
-                        width: 16px;
                         color: var(--white);
                         background-color: var(--secondary-fade);
                         border-radius: 50%;
                         transition: 0.3s ease-in-out all;
+                        font-size: 1.8rem;
 
                         @include respond-to(lg) {
+                            background-color: transparent;
+                            color: var(--secondary-fade);
                             margin: 0;
+                            font-size: 2.4rem;
+                            padding: 4px;
                         }
                     }
 
@@ -199,6 +207,17 @@
                     .username,
                     .cart-items {
                         font-weight: bold;
+
+                        @include respond-to(lg) {
+                            position: absolute;
+                            top: -8px;
+                            right: -12px;
+                            background-color: orangered;
+                            padding: 0px 6px;
+                            border-radius: 50%;
+                            font-size: 1.4rem;
+                            color: var(--white);
+                        }
                     }
                 }
 

@@ -54,8 +54,8 @@
         }
 
         @include respond-to(sm) {
-            font-size: 1.6rem;
-            min-height: 50px;
+            font-size: 1.4rem;
+            min-height: 40px;
         }
     }
 
@@ -64,6 +64,10 @@
         justify-content: space-between;
         align-items: center;
         position: relative;
+
+        @include respond-to(sm) {
+            margin-top: 8px;
+        }
     }
 
     &-icon {
@@ -91,7 +95,10 @@
         }
 
         @include respond-to(sm) {
+            display: flex;
+            flex-direction: column;
             font-size: 1.4rem;
+            margin: 0;
         }
     }
 
@@ -102,6 +109,10 @@
         color: #ccc;
         font-weight: 500;
 
+        @include respond-to(sm) {
+            margin-left: 0;
+        }
+
         .product-item-currency {
             color: #9f9f9f;
             font-size: 1.4rem;
@@ -109,10 +120,6 @@
             color: #d8d8d8;
             font-weight: 500;
         }
-    }
-
-    &-currency {
-        text-decoration: underline;
     }
 
     &-button {

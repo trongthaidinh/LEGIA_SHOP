@@ -93,7 +93,7 @@ const AddProduct = () => {
             }, 1000);
         } catch (error) {
             setNotification({ message: 'Lỗi khi thêm sản phẩm hoặc navigation.', type: 'error' });
-            console.error('Lỗi khi tạo sản phẩm hoặc navigation:', error);
+            console.error('Lỗi khi tạ   o sản phẩm hoặc navigation:', error);
         }
     };
 
@@ -151,7 +151,7 @@ const AddProduct = () => {
                             ))}
                         </div>
                         <div className={styles.formGroup}>
-                            <label htmlFor="price">Giá</label>
+                            <label htmlFor="price">Giá bán</label>
                             <Field name="price" type="number" className={styles.input} />
                             <ErrorMessage name="price" component="div" className={styles.error} />
                         </div>

@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faEnvelope, faChevronRight, faMapMarkerAlt, faCircle } from '@fortawesome/free-solid-svg-icons';
-import { faYoutube, faFacebook, faInstagram, faTwitter, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import {
+    faPhone,
+    faEnvelope,
+    faMapMarkerAlt,
+    faCircle,
+    faArrowRightToBracket,
+} from '@fortawesome/free-solid-svg-icons';
+import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import companyLogo from '~/assets/images/legia-logo.png';
 import styles from './Footer.module.scss';
 import classNames from 'classnames/bind';
@@ -104,18 +110,21 @@ const Footer = () => {
                     <Link to="#">
                         <FontAwesomeIcon icon={faTwitter} />
                     </Link>
+                    <Link to={routes.admin}>
+                        <FontAwesomeIcon icon={faArrowRightToBracket} />
+                    </Link>
                 </div>
             </div>
             <div className={cx('bottomBar')}>
                 <p>
                     Copyright 2024 &copy;{' '}
-                    <a href="#" className={cx('company-name')}>
+                    <Link href="#" className={cx('company-name')}>
                         Yến Sào LeGia'Nest
-                    </a>
+                    </Link>
                     . All Rights Reserved. Thiết kế bởi{' '}
-                    <a href="https://www.takatech.com.vn/" className={cx('company-design-name')}>
+                    <Link href="https://www.takatech.com.vn/" className={cx('company-design-name')}>
                         TakaTech
-                    </a>
+                    </Link>
                 </p>
             </div>
         </footer>

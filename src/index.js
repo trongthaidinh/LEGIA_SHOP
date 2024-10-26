@@ -7,7 +7,7 @@ import { ConfigProvider } from 'antd';
 import viVN from 'antd/es/locale/vi_VN';
 import ReactGA from 'react-ga4';
 
-ReactGA.initialize('G-GRXHD0H7CY');
+ReactGA.initialize('G-MBHKEHX37W');
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

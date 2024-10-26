@@ -1,7 +1,6 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow: /private/
-Allow: /
+Disallow:
 Sitemap: https://legia-shop.vercel.app/sitemap.xml
 
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './Product.module.scss';
@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { getProducts, getProductListBySlug } from '~/services/productService';
 import { getCategoriesBySlug } from '~/services/categoryService';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +21,7 @@ const Products = () => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const [priceRange, setPriceRange] = useState([0, 100000]);
+    const [priceRange, setPriceRange] = useState([0, 5000000]);
     const [categoryFilter, setCategoryFilter] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -69,7 +71,8 @@ const Products = () => {
             const fetchedProducts = await getProducts();
 
             const filtered = fetchedProducts.filter((product) => {
-                const isPriceInRange = product.price >= priceRange[0] && product.price <= priceRange[1];
+                const productPrice = Number(product.price);
+                const isPriceInRange = productPrice >= priceRange[0] && productPrice <= priceRange[1];
                 const isCategorySelected = categoryFilter.length
                     ? categoryFilter.includes(product.child_nav_id.toString())
                     : true;
@@ -87,7 +90,7 @@ const Products = () => {
     };
 
     const handleFilterReset = () => {
-        setPriceRange([0, 100000]);
+        setPriceRange([0, 5000000]);
         setCategoryFilter([]);
         setFilteredProducts(products);
         setCurrentPage(1);
@@ -99,8 +102,8 @@ const Products = () => {
         return filteredProducts.slice(startIndex, endIndex);
     };
 
-    const handlePriceChange = (event) => {
-        setPriceRange([0, event.target.value]);
+    const handlePriceChange = (value) => {
+        setPriceRange(value);
     };
 
     const handleCategoryChange = (event) => {
@@ -120,15 +123,18 @@ const Products = () => {
         setIsFilterOpen((prev) => !prev);
     };
 
-    const closeFilter = () => {
+    const closeFilter = useCallback(() => {
         setIsFilterOpen(false);
-    };
+    }, []);
 
-    const handleClickOutside = (event) => {
-        if (filterRef.current && !filterRef.current.contains(event.target)) {
-            closeFilter();
-        }
-    };
+    const handleClickOutside = useCallback(
+        (event) => {
+            if (filterRef.current && !filterRef.current.contains(event.target)) {
+                closeFilter();
+            }
+        },
+        [filterRef, closeFilter],
+    );
 
     useEffect(() => {
         if (isFilterOpen) {
@@ -140,7 +146,7 @@ const Products = () => {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [isFilterOpen]);
+    }, [isFilterOpen, handleClickOutside]);
 
     if (isLoading) {
         return <LoadingScreen isLoading={isLoading} />;
@@ -173,7 +179,7 @@ const Products = () => {
                     </div>
                     <div className={cx('filter-item')}>
                         <label>Khoảng giá</label>
-                        <input type="range" min="0" max="1000000" value={priceRange[1]} onChange={handlePriceChange} />
+                        <Slider range min={0} max={5000000} value={priceRange} onChange={handlePriceChange} />
                         <span>
                             Giá: {Number(priceRange[0]).toLocaleString()} - {Number(priceRange[1]).toLocaleString()}đ
                         </span>
@@ -220,7 +226,6 @@ const Products = () => {
                             />
                         ))}
                     </div>
-                    {/* Phân trang */}
                     <div className={cx('pagination')}>
                         {Array.from({ length: totalPages }, (_, index) => (
                             <button

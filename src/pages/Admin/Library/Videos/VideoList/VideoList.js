@@ -55,7 +55,7 @@ const VideoList = () => {
 
     return (
         <div className={styles.videoContainer}>
-            <Title className={styles.pageTitle} text="Danh sách Video" />
+            <Title className={styles.pageTitle} subText="Danh sách Video" />
             <div className={styles.actionsContainer}>
                 <input
                     type="text"

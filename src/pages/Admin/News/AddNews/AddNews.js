@@ -39,7 +39,7 @@ const AddNews = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const fetchedCategories = await getCategoriesBySlug('tin-tuc');
+                const fetchedCategories = await getCategoriesBySlug('bai-viet');
                 setCategories(fetchedCategories);
             } catch (error) {
                 console.error('Lỗi khi tải danh mục:', error);

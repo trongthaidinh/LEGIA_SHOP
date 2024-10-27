@@ -48,6 +48,9 @@ import OrderSuccess from '~/pages/OrderSuccess';
 import BuyingGuide from '~/pages/BuyingGuide';
 import Policy from '~/pages/Policy';
 import OrderList from '~/pages/Admin/Orders/OrderList';
+import ReviewList from '~/pages/Admin/Reviews/ReviewList';
+import AddReview from '~/pages/Admin/Reviews/AddReview';
+import UpdateReview from '~/pages/Admin/Reviews/UpdateReview';
 
 // Public Routes
 const publicRoutes = [
@@ -121,6 +124,9 @@ const privateRoutes = [
     { path: config.routes.newsList, component: NewsList, layout: AdminLayout },
     { path: config.routes.addNews, component: AddNews, layout: AdminLayout },
     { path: config.routes.updateNews, component: UpdateNews, layout: AdminLayout },
+    { path: config.routes.reviewList, component: ReviewList, layout: AdminLayout },
+    { path: config.routes.addReview, component: AddReview, layout: AdminLayout },
+    { path: config.routes.updateReview, component: UpdateReview, layout: AdminLayout },
     { path: config.routes.updateUser, component: UpdateUser, layout: AdminLayout },
     { path: config.routes.userList, component: UserList, layout: AdminLayout },
     { path: config.routes.videosList, component: VideoList, layout: AdminLayout },

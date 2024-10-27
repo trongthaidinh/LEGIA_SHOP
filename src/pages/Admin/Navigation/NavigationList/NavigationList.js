@@ -111,7 +111,7 @@ const NavigationList = () => {
 
     return (
         <div className={styles.navigationContainer}>
-            <Title className={styles.pageTitle} text="Danh sách Navigation" />
+            <Title className={styles.pageTitle} subText="Danh sách Navigation" />
             <div className={styles.actionsContainer}>
                 <input
                     type="text"

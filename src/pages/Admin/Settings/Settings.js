@@ -119,7 +119,7 @@ const Settings = () => {
 
     return (
         <div className={styles.settingsContainer}>
-            <Title className={styles.pageTitle} text="Cài đặt chung" />
+            <Title className={styles.pageTitle} subText="Cài đặt chung" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <form onSubmit={handleSubmit} className={styles.settingsForm} encType="multipart/form-data">
                 <div className={styles.formGroup}>

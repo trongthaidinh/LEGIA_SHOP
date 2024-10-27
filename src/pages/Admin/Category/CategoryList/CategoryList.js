@@ -58,7 +58,7 @@ const CategoryList = () => {
 
     return (
         <div className={styles.categoryContainer}>
-            <Title className={styles.pageTitle} text="Danh sách Danh mục" />
+            <Title className={styles.pageTitle} subText="Danh sách Danh mục" />
             {notificationMessage && (
                 <PushNotification message={notificationMessage} type={isError ? 'error' : 'success'} />
             )}

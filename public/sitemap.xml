@@ -1,111 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap-image/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap-image/1.1 http://www.sitemaps.org/schemas/sitemap-image/1.1/sitemap-image.xsd">
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
         <loc>https://yensaolegia.com</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>1.0</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
     <url>
         <loc>https://yensaolegia.com/gioi-thieu/ve-chung-toi</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
     <url>
         <loc>https://yensaolegia.com/gioi-thieu/tam-nhin-gia-tri-su-menh</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
     <url>
         <loc>https://yensaolegia.com/san-pham</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
     <url>
         <loc>https://yensaolegia.com/san-pham/yen-chung</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
     <url>
         <loc>https://yensaolegia.com/san-pham/yen-to</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
     <url>
         <loc>https://yensaolegia.com/san-pham/set-qua-tang</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
     <url>
         <loc>https://yensaolegia.com/san-pham/yen-chung/yen-chung-gung</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
     <url>
         <loc>https://yensaolegia.com/san-pham/yen-chung/yen-chung-tao-do</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
     <url>
         <loc>https://yensaolegia.com/san-pham/yen-chung/yen-chung-nam-dong-trung</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
     <url>
         <loc>https://yensaolegia.com/bai-viet</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
     <url>
         <loc>https://yensaolegia.com/bai-viet/chia-se</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
         <url>
         <loc>https://yensaolegia.com/bai-viet/tin-tuc</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
             <url>
         <loc>https://yensaolegia.com/bai-viet/chuong-trinh-khuyen-mai</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
                 <url>
         <loc>https://yensaolegia.com/bai-viet/cam-nhan-khach-hang</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
     <url>
         <loc>https://yensaolegia.com/lien-he</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
     <url>
         <loc>https://yensaolegia.com/dieu-khoan-chinh-sach</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
-        <url>
+    <url>
         <loc>https://yensaolegia.com/chinh-sach-bao-mat</loc>
-        <lastmod>2024-10-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
+        <lastmod>2024-10-27T00:42:29+00:00</lastmod>
     </url>
 </urlset>

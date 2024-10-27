@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Formik, Form, ErrorMessage } from 'formik';
+import { Formik, Form, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { createImage } from '~/services/libraryService';
@@ -18,10 +18,12 @@ const AddImage = () => {
 
     const initialValues = {
         image: [],
+        type: 'public',
     };
 
     const validationSchema = Yup.object({
         image: Yup.array().required('Logo là bắt buộc'),
+        type: Yup.string().oneOf(['public', 'private']).required('Vui lòng chọn loại hình ảnh!'),
     });
 
     const { getRootProps, getInputProps } = useDropzone({
@@ -40,8 +42,9 @@ const AddImage = () => {
         const formData = new FormData();
         files.forEach((image) => {
             formData.append('image', image);
-            formData.append('name', 'phunong_image');
+            formData.append('name', 'legia_image');
         });
+        formData.append('type', values.type);
 
         try {
             await createImage(formData);
@@ -63,7 +66,7 @@ const AddImage = () => {
 
     return (
         <div className={styles.addImage}>
-            <Title subText="Thêm hình ảnh" />
+            <Title text="Thêm hình ảnh" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ isSubmitting }) => (
@@ -90,6 +93,14 @@ const AddImage = () => {
                                     </button>
                                 </div>
                             ))}
+                        </div>
+                        <div className={styles.formGroup}>
+                            <label htmlFor="type">Loại hình ảnh</label>
+                            <Field as="select" name="type" className={styles.formGroup}>
+                                <option value="public">public</option>
+                                <option value="private">private</option>
+                            </Field>
+                            <ErrorMessage name="type" component="div" className={styles.error} />
                         </div>
                         <button type="submit" disabled={isSubmitting} className={styles.submitButton}>
                             {isSubmitting ? <div className={styles.spinner}></div> : 'Thêm ảnh'}

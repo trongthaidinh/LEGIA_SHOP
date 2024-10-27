@@ -42,7 +42,7 @@ const PageInfoList = () => {
 
     return (
         <div className={styles.pageContainer}>
-            <Title className={styles.pageTitle} text="Danh sách Trang" />
+            <Title className={styles.pageTitle} subText="Danh sách Trang" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <div className={styles.actionsContainer}>
                 <input

@@ -55,7 +55,7 @@ const MessageList = () => {
 
     return (
         <div className={styles.messageContainer}>
-            <Title className={styles.pageTitle} text="Danh sách Tin nhắn" />
+            <Title className={styles.pageTitle} subText="Danh sách Tin nhắn" />
             {notificationMessage && (
                 <PushNotification message={notificationMessage} type={isError ? 'error' : 'success'} />
             )}

@@ -111,7 +111,7 @@ const EditNavigation = () => {
 
     return (
         <div className={styles.navigationContainer}>
-            <Title className={styles.pageTitle} text="Chỉnh sửa Navigation" />
+            <Title className={styles.pageTitle} subText="Chỉnh sửa Navigation" />
             <form onSubmit={handleSave}>
                 <div className={styles.formGroup}>
                     <label htmlFor="title">Tiêu đề</label>

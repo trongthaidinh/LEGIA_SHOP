@@ -8,7 +8,6 @@ import {
     faTachometerAlt,
     faClipboardList,
     faEnvelope,
-    faUsers,
     faBox,
     faCogs,
     faChevronRight,
@@ -17,8 +16,7 @@ import {
     faLayerGroup,
     faBookOpen,
     faInfoCircle,
-    faEarthAsia,
-    faUserFriends,
+    faRankingStar,
 } from '@fortawesome/free-solid-svg-icons';
 import routes from '~/config/routes';
 import images from '~/assets/images';
@@ -200,31 +198,31 @@ const SideBar = () => {
                         </li>
                     </ul>
                 </li>
-                {/* 
+
                 <li>
-                    <div className={cx('menuItem')} onClick={() => toggleMenu('experienceManagement')}>
+                    <div className={cx('menuItem')} onClick={() => toggleMenu('reviewManagement')}>
                         <div>
-                            <FontAwesomeIcon icon={faEarthAsia} className={cx('menuIcon')} />
-                            <span className={cx('menuText')}>Quản lý trải nghiệm</span>
+                            <FontAwesomeIcon icon={faRankingStar} className={cx('menuIcon')} />
+                            <span className={cx('menuText')}>Quản lý đánh giá</span>
                         </div>
                         {!isCollapsed && (
                             <>
                                 <FontAwesomeIcon
-                                    icon={openMenus.experienceManagement ? faChevronDown : faChevronRight}
+                                    icon={openMenus.reviewManagement ? faChevronDown : faChevronRight}
                                     className={cx('chevronIcon')}
                                 />
                             </>
                         )}
                     </div>
-                    <ul className={cx('subMenu', { open: openMenus.experienceManagement })}>
+                    <ul className={cx('subMenu', { open: openMenus.reviewManagement })}>
                         <li>
-                            <NavLink to={routes.experienceList}>Danh sách trải nghiệm</NavLink>
+                            <NavLink to={routes.reviewList}>Danh sách đánh giá</NavLink>
                         </li>
                         <li>
-                            <NavLink to={routes.addExperience}>Thêm mục trải nghiệm</NavLink>
+                            <NavLink to={routes.addReview}>Thêm mục đánh giá</NavLink>
                         </li>
                     </ul>
-                </li> */}
+                </li>
                 <li>
                     <div className={styles.menuItem} onClick={() => toggleMenu('libraryManagement')}>
                         <div>

@@ -68,7 +68,7 @@ const UserList = () => {
 
     return (
         <div className={styles.userContainer}>
-            <Title className={styles.pageTitle} text="Danh sách Người dùng" />
+            <Title className={styles.pageTitle} subText="Danh sách Người dùng" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <div className={styles.actionsContainer}>
                 <input

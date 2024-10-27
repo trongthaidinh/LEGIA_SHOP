@@ -6,6 +6,7 @@ import styles from './OrderList.module.scss';
 import { getOrders, updateStatus } from 'services/orderService';
 import PushNotification from '~/components/PushNotification';
 import { Spin, Modal as AntdModal } from 'antd';
+import Title from '~/components/Title';
 
 const OrderList = () => {
     const [orders, setOrders] = useState([]);
@@ -94,7 +95,7 @@ const OrderList = () => {
 
     return (
         <div className={styles.orderContainer}>
-            <h1 className={styles.title}>Danh sách đơn hàng</h1>
+            <Title className={styles.title} subText="Danh sách đơn hàng" />
 
             <input
                 type="text"

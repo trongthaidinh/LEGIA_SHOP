@@ -55,7 +55,7 @@ const ProductList = () => {
 
     return (
         <div className={styles.productContainer}>
-            <Title className={styles.pageTitle} text="Danh sách Sản phẩm" />
+            <Title className={styles.pageTitle} subText="Danh sách Sản phẩm" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <div className={styles.actionsContainer}>
                 <input

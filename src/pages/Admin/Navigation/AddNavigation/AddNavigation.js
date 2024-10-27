@@ -105,7 +105,7 @@ const AddNavigation = () => {
     return (
         <div className={styles.navigationContainer}>
             <div className={styles.formContainer}>
-                <Title className={styles.pageTitle} text="Thêm mới Navigation" />
+                <Title className={styles.pageTitle} subText="Thêm mới Navigation" />
                 <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                     {({ isSubmitting, values, setFieldValue }) => (
                         <Form className={styles.form}>

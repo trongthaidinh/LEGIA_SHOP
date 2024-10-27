@@ -5,7 +5,6 @@ import Dropdown from './Dropdown';
 import styles from './Header.module.scss';
 import { useAuth } from '~/hooks/useAuth';
 import { getMessages } from '~/services/contactService';
-import { getUserByEmail } from '~/services/userService';
 import { useNavigate } from 'react-router-dom';
 import routes from '~/config/routes';
 import LoadingScreen from 'components/LoadingScreen';

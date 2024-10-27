@@ -56,7 +56,7 @@ const NewsList = () => {
 
     return (
         <div className={styles.newsContainer}>
-            <Title className={styles.pageTitle} text="Danh sách Tin tức" />
+            <Title className={styles.pageTitle} subText="Danh sách Tin tức" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <div className={styles.actionsContainer}>
                 <input

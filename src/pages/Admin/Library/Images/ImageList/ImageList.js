@@ -38,7 +38,7 @@ const ImageList = () => {
         if (window.confirm('Bạn có chắc chắn muốn xóa hình ảnh này?')) {
             try {
                 await deleteImage(id);
-                setImages(images.filter((image) => image.id !== id));
+                setImages(images.filter((image) => image._id !== id));
                 setNotification({ message: 'Hình ảnh đã được xóa thành công!', type: 'success' });
             } catch (error) {
                 console.error('Error deleting image:', error);
@@ -76,6 +76,8 @@ const ImageList = () => {
                     <thead>
                         <tr>
                             <th>Hình ảnh</th>
+                            <th>Đường dẫn</th>
+                            <th>Loại hình ảnh</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -84,10 +86,14 @@ const ImageList = () => {
                             currentImages.map((image) => (
                                 <tr key={image.id}>
                                     <td>
-                                        <a href={image.url} target="_blank" rel="noopener noreferrer">
+                                        <img src={image.url} alt={image.type} className={styles.previewImage} />
+                                    </td>
+                                    <td>
+                                        <a href={image.url} target="_blank" rel="noreferrer">
                                             {image.url}
                                         </a>
                                     </td>
+                                    <td>{image.type}</td>
                                     <td>
                                         <button onClick={() => handleDelete(image.id)} className={styles.deleteButton}>
                                             <FontAwesomeIcon icon={faTrash} /> Xóa
@@ -97,7 +103,7 @@ const ImageList = () => {
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="6">Không có dữ liệu</td>
+                                <td colSpan="4">Không có dữ liệu</td>
                             </tr>
                         )}
                     </tbody>

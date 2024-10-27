@@ -62,6 +62,10 @@
         padding: 10px;
         border-bottom: 1px solid #ddd;
         text-align: left;
+        max-width: 250px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     th {
@@ -78,6 +82,13 @@
     height: 200px;
     border-radius: 8px;
     object-fit: cover;
+}
+
+.previewImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
 }
 
 .childRow {

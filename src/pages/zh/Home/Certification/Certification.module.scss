@@ -1,0 +1,73 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/variables';
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+
+    @include respond-to(lg) {
+        padding: 0 20px;
+    }
+
+    .inner {
+        width: var(--default-layout-width);
+
+        @include respond-to(lg) {
+            width: 100%;
+            margin: 40px 0;
+        }
+        .title {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .certificates {
+            width: 100%;
+            display: grid;
+            grid-template-columns: calc(33.33333% - 20px) calc(33.33333% - 20px) calc(33.33333% - 20px);
+            gap: 20px;
+            margin-top: 40px;
+
+            @include respond-to(lg) {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 20px;
+            }
+
+            .certificate {
+                text-align: center;
+
+                @include respond-to(lg) {
+                    width: 100%;
+                    max-width: 100%;
+                    height: 100%;
+                    max-height: 100%;
+                }
+
+                .certificate-image {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    object-fit: contain;
+
+                    @include respond-to(lg) {
+                        width: 100%;
+                        height: auto;
+                    }
+                }
+
+                .certificate-title {
+                    margin-top: 10px;
+                    font-size: 16px;
+                    color: #333;
+                }
+            }
+        }
+    }
+}

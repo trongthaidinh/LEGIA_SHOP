@@ -1,0 +1,36 @@
+@import '../../../../../styles/mixins';
+@import '../../../../../styles/variables';
+
+.wrapper {
+    width: 100%;
+
+    @include respond-to(lg) {
+        width: 100%;
+    }
+}
+
+.inner {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.news-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: space-between;
+    gap: 24px 10px;
+
+    @include respond-to(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to(sm) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.card {
+    flex: 0 0 calc(33.33% - 20px);
+    max-width: 380px;
+}

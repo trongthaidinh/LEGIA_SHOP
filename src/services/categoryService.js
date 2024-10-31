@@ -38,6 +38,16 @@ export const getCategoryById = async (id) => {
     }
 };
 
+export const getZhCategoryById = async (id) => {
+    try {
+        const response = await httpRequest.get(`/zh-child-navs/${id}`);
+        return response.data.data;
+    } catch (error) {
+        console.error(`Error fetching category for ID ${id}`, error);
+        throw error;
+    }
+};
+
 export const getCategoriesByType = async (value) => {
     try {
         const response = await httpRequest.get(`/category/type?value=${value}`);
@@ -51,6 +61,16 @@ export const getCategoriesByType = async (value) => {
 export const getCategoriesBySlug = async (slug) => {
     try {
         const response = await httpRequest.get(`/parent-navs/slug/${slug}`);
+        return response.data.data;
+    } catch (error) {
+        console.error(`Error fetching categories for slug ${slug}`, error);
+        throw error;
+    }
+};
+
+export const getZhCategoriesBySlug = async (slug) => {
+    try {
+        const response = await httpRequest.get(`/zh-parent-navs/slug/${slug}`);
         return response.data.data;
     } catch (error) {
         console.error(`Error fetching categories for slug ${slug}`, error);

@@ -1,0 +1,26 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/variables';
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    @include respond-to(lg) {
+        margin-top: 20px;
+    }
+}
+
+.inner {
+    width: var(--default-layout-width);
+
+    @include respond-to(lg) {
+        width: 100%;
+    }
+}
+
+.swiper {
+    margin-top: 40px;
+}

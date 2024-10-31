@@ -1,0 +1,318 @@
+import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import styles from './SideBar.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faCaretRight,
+    faCaretLeft,
+    faTachometerAlt,
+    faClipboardList,
+    faEnvelope,
+    faBox,
+    faCogs,
+    faChevronRight,
+    faChevronDown,
+    faNewspaper,
+    faLayerGroup,
+    faBookOpen,
+    faInfoCircle,
+    faRankingStar,
+} from '@fortawesome/free-solid-svg-icons';
+import routes from '~/config/routes';
+import images from '~/assets/images';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
+
+const SideBar = () => {
+    const [isCollapsed, setIsCollapsed] = useState(false);
+    const [openMenus, setOpenMenus] = useState({});
+
+    const toggleSidebar = () => {
+        if (!isCollapsed) {
+            setOpenMenus({});
+        }
+        setIsCollapsed(!isCollapsed);
+    };
+
+    const toggleMenu = (menu) => {
+        if (isCollapsed) {
+            setIsCollapsed(false);
+        } else {
+            setOpenMenus((prev) => ({
+                [menu]: !prev[menu],
+                ...(prev[menu]
+                    ? {}
+                    : Object.keys(prev).reduce((acc, key) => {
+                          if (key !== menu) acc[key] = false;
+                          return acc;
+                      }, {})),
+            }));
+        }
+    };
+
+    return (
+        <div className={cx('sidebar', { collapsed: isCollapsed, expanded: !isCollapsed })}>
+            <div className={cx('logoWrapper')}>
+                <Link to={routes.homeZH}>
+                    <img src={images.logo} alt="Company Logo" className={cx('logo')} />
+                </Link>
+                <FontAwesomeIcon
+                    icon={isCollapsed ? faCaretRight : faCaretLeft}
+                    onClick={toggleSidebar}
+                    className={cx('toggleIcon')}
+                />
+            </div>
+            <ul className={cx('menu')}>
+                <li>
+                    <NavLink to={routes.adminZH} className={cx('menuItem')}>
+                        <div>
+                            <FontAwesomeIcon icon={faTachometerAlt} className={cx('menuIcon')} />
+                            <span className={cx('menuText')}>{!isCollapsed && 'Bảng điều khiển'}</span>
+                        </div>
+                    </NavLink>
+                </li>
+                <li>
+                    <div className={cx('menuItem')} onClick={() => toggleMenu('menuManagement')}>
+                        <div>
+                            <FontAwesomeIcon icon={faClipboardList} className={cx('menuIcon')} />
+                            <span className={cx('menuText')}>Quản lý Menu</span>
+                        </div>
+                        {!isCollapsed && (
+                            <>
+                                <FontAwesomeIcon
+                                    icon={openMenus.menuManagement ? faChevronDown : faChevronRight}
+                                    className={cx('chevronIcon')}
+                                />
+                            </>
+                        )}
+                    </div>
+                    <ul className={cx('subMenu', { open: openMenus.menuManagement })}>
+                        <li>
+                            <NavLink to={routes.navigationListZH}>Danh sách Menu</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={routes.addNavigationZH}>Thêm Menu</NavLink>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <NavLink to={routes.messagesListZH} className={cx('menuItem')}>
+                        <div>
+                            <FontAwesomeIcon icon={faEnvelope} className={cx('menuIcon')} />
+                            <span className={cx('menuText')}>{!isCollapsed && 'Quản lý tin nhắn'}</span>
+                        </div>
+                    </NavLink>
+                </li>
+                {/* <li>
+                    <div className={cx('menuItem')} onClick={() => toggleMenu('userManagement')}>
+                        <div>
+                            <FontAwesomeIcon icon={faUsers} className={cx('menuIcon')} />
+                            <span className={cx('menuText')}>Quản lý người dùng</span>
+                        </div>
+                        {!isCollapsed && (
+                            <>
+                                <FontAwesomeIcon
+                                    icon={openMenus.userManagement ? faChevronDown : faChevronRight}
+                                    className={cx('chevronIcon')}
+                                />
+                            </>
+                        )}
+                    </div>
+                    <ul className={cx('subMenu', { open: openMenus.userManagement })}>
+                        <li>
+                            <NavLink to={routes.userList}>Danh sách người dùng</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={routes.addUser}>Thêm người dùng</NavLink>
+                        </li>
+                    </ul>
+                </li> */}
+                <li>
+                    <div className={cx('menuItem')} onClick={() => toggleMenu('productManagement')}>
+                        <div>
+                            <FontAwesomeIcon icon={faBox} className={cx('menuIcon')} />
+                            <span className={cx('menuText')}>Quản lý sản phẩm</span>
+                        </div>
+                        {!isCollapsed && (
+                            <>
+                                <FontAwesomeIcon
+                                    icon={openMenus.productManagement ? faChevronDown : faChevronRight}
+                                    className={cx('chevronIcon')}
+                                />
+                            </>
+                        )}
+                    </div>
+                    <ul className={cx('subMenu', { open: openMenus.productManagement })}>
+                        <li>
+                            <NavLink to={routes.productListZH}>Danh sách sản phẩm</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={routes.addProductZH}>Thêm sản phẩm</NavLink>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div className={cx('menuItem')} onClick={() => toggleMenu('newsManagement')}>
+                        <div>
+                            <FontAwesomeIcon icon={faNewspaper} className={cx('menuIcon')} />
+                            <span className={cx('menuText')}>Quản lý tin tức</span>
+                        </div>
+                        {!isCollapsed && (
+                            <>
+                                <FontAwesomeIcon
+                                    icon={openMenus.newsManagement ? faChevronDown : faChevronRight}
+                                    className={cx('chevronIcon')}
+                                />
+                            </>
+                        )}
+                    </div>
+                    <ul className={cx('subMenu', { open: openMenus.newsManagement })}>
+                        <li>
+                            <NavLink to={routes.newsListZH}>Danh sách tin tức</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={routes.addNewsZH}>Thêm tin tức</NavLink>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <div className={cx('menuItem')} onClick={() => toggleMenu('orderManagement')}>
+                        <div>
+                            <FontAwesomeIcon icon={faLayerGroup} className={cx('menuIcon')} />
+                            <span className={cx('menuText')}>Quản lý đơn hàng</span>
+                        </div>
+                        {!isCollapsed && (
+                            <>
+                                <FontAwesomeIcon
+                                    icon={openMenus.orderManagement ? faChevronDown : faChevronRight}
+                                    className={cx('chevronIcon')}
+                                />
+                            </>
+                        )}
+                    </div>
+                    <ul className={cx('subMenu', { open: openMenus.orderManagement })}>
+                        <li>
+                            <NavLink to={routes.orderListZH}>Danh sách đơn hàng</NavLink>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <div className={cx('menuItem')} onClick={() => toggleMenu('reviewManagement')}>
+                        <div>
+                            <FontAwesomeIcon icon={faRankingStar} className={cx('menuIcon')} />
+                            <span className={cx('menuText')}>Quản lý đánh giá</span>
+                        </div>
+                        {!isCollapsed && (
+                            <>
+                                <FontAwesomeIcon
+                                    icon={openMenus.reviewManagement ? faChevronDown : faChevronRight}
+                                    className={cx('chevronIcon')}
+                                />
+                            </>
+                        )}
+                    </div>
+                    <ul className={cx('subMenu', { open: openMenus.reviewManagement })}>
+                        <li>
+                            <NavLink to={routes.reviewListZH}>Danh sách đánh giá</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={routes.addReviewZH}>Thêm mục đánh giá</NavLink>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div className={styles.menuItem} onClick={() => toggleMenu('libraryManagement')}>
+                        <div>
+                            <FontAwesomeIcon icon={faBookOpen} className={styles.menuIcon} />
+                            <span className={styles.menuText}>Quản lý thư viện</span>
+                        </div>
+                        {!isCollapsed && (
+                            <>
+                                <FontAwesomeIcon
+                                    icon={openMenus.libraryManagement ? faChevronDown : faChevronRight}
+                                    className={styles.chevronIcon}
+                                />
+                            </>
+                        )}
+                    </div>
+                    <ul className={`${styles.subMenu} ${openMenus.libraryManagement ? styles.open : ''}`}>
+                        <li>
+                            <NavLink to={routes.videosListZH}>Danh sách video</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={routes.addVideoZH}>Thêm video</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={routes.imagesListZH}>Danh sách hình ảnh</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={routes.addImageZH}>Thêm hình ảnh</NavLink>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <div className={styles.menuItem} onClick={() => toggleMenu('aboutManagement')}>
+                        <div>
+                            <FontAwesomeIcon icon={faInfoCircle} className={styles.menuIcon} />
+                            <span className={styles.menuText}>Quản lý trang</span>
+                        </div>
+                        {!isCollapsed && (
+                            <>
+                                <FontAwesomeIcon
+                                    icon={openMenus.aboutManagement ? faChevronDown : faChevronRight}
+                                    className={styles.chevronIcon}
+                                />
+                            </>
+                        )}
+                    </div>
+                    <ul className={`${styles.subMenu} ${openMenus.aboutManagement ? styles.open : ''}`}>
+                        <li>
+                            <NavLink to={routes.pageListZH}>Danh sách trang</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={routes.addPageZH}>Thêm trang</NavLink>
+                        </li>
+                    </ul>
+                </li>
+                {/* <li>
+                    <div className={styles.menuItem} onClick={() => toggleMenu('teamManagement')}>
+                        <div>
+                            <FontAwesomeIcon icon={faUserFriends} className={styles.menuIcon} />
+                            <span className={styles.menuText}>Quản lý thành viên</span>
+                        </div>
+                        {!isCollapsed && (
+                            <>
+                                <FontAwesomeIcon
+                                    icon={openMenus.teamManagement ? faChevronDown : faChevronRight}
+                                    className={styles.chevronIcon}
+                                />
+                            </>
+                        )}
+                    </div>
+                    <ul className={`${styles.subMenu} ${openMenus.teamManagement ? styles.open : ''}`}>
+                        <li>
+                            <NavLink to={routes.memberListZH}>Danh sách thành viên</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={routes.addMemberZH}>Thêm thành viên</NavLink>
+                        </li>
+                    </ul>
+                </li> */}
+                <li>
+                    <NavLink to={routes.settingsZH} className={styles.menuItem}>
+                        <div>
+                            <FontAwesomeIcon icon={faCogs} className={styles.menuIcon} />
+                            <span className={styles.menuText}>{!isCollapsed && 'Cài đặt'}</span>
+                        </div>
+                    </NavLink>
+                </li>
+            </ul>
+        </div>
+    );
+};
+
+export default SideBar;

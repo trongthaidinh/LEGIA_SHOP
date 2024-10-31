@@ -7,6 +7,7 @@ import Gifts from './Gifts';
 import Products2 from './Products2';
 import Reviews from './Reviews';
 import Certification from './Certification/Certification';
+import Overview from './Overview';
 
 const Home = () => (
     <article>
@@ -20,6 +21,7 @@ const Home = () => (
             <meta name="author" content="Yến Sào LeGia'Nest" />
         </Helmet>
         <Banner />
+        <Overview />
         <Products />
         <Products2 />
         <Gifts />

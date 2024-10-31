@@ -4,6 +4,7 @@ import { Spin } from 'antd';
 import PushNotification from '~/components/PushNotification';
 import styles from './Settings.module.scss';
 import Title from '~/components/Title';
+import LoadingScreen from 'components/LoadingScreen';
 
 const Settings = () => {
     const [settings, setSettings] = useState({
@@ -91,13 +92,17 @@ const Settings = () => {
         try {
             const formData = new FormData();
 
+            // Add basic fields
             formData.append('name', settings.name);
             formData.append('contact_email', settings.contact_email);
             formData.append('phone_number', settings.phone_number);
 
+            const sliderUrls = settings.homepage_slider.filter((slide) => !slide.file).map((slide) => slide.image_url);
+            formData.append('homepage_slider', JSON.stringify(sliderUrls));
+
             settings.homepage_slider.forEach((slide, index) => {
                 if (slide.file) {
-                    formData.append(`homepage_slider[${index}]`, slide.file);
+                    formData.append(`slide_images[${index}]`, slide.file);
                 }
             });
 
@@ -114,7 +119,7 @@ const Settings = () => {
         setConfigurationType(e.target.value);
     };
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <LoadingScreen isLoading={loading} />;
     if (error) return <div>{error}</div>;
 
     return (
@@ -122,7 +127,7 @@ const Settings = () => {
             <Title className={styles.pageTitle} subText="Cài đặt chung" />
             {notification.message && <PushNotification message={notification.message} type={notification.type} />}
             <form onSubmit={handleSubmit} className={styles.settingsForm} encType="multipart/form-data">
-                <div className={styles.formGroup}>
+                {/* <div className={styles.formGroup}>
                     <label htmlFor="configurationType">Chọn loại cấu hình</label>
                     <select
                         id="configurationType"
@@ -133,7 +138,7 @@ const Settings = () => {
                         <option value="desktop">Desktop</option>
                         <option value="mobile">Mobile</option>
                     </select>
-                </div>
+                </div> */}
 
                 <div className={styles.formGroup}>
                     <label htmlFor="name">Tên công ty</label>

@@ -6,6 +6,9 @@
     justify-content: center;
     margin-top: 60px;
     padding: 0 20px;
+    @include respond-to(lg) {
+        margin-top: 20px;
+    }
 }
 
 .inner {

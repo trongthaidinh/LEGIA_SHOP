@@ -1,0 +1,149 @@
+import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faAngleLeft, faAngleRight, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { deleteImage } from '~/services/libraryService';
+import styles from './ImageList.module.scss';
+import Title from '~/components/Title';
+import { Link } from 'react-router-dom';
+import routes from '~/config/routes';
+import PushNotification from '~/components/PushNotification';
+import { getAllImages } from 'services/libraryService';
+
+const ImageList = () => {
+    const [images, setImages] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [notification, setNotification] = useState({ message: '', type: '' });
+
+    useEffect(() => {
+        fetchImages();
+    }, [currentPage, itemsPerPage]);
+
+    const fetchImages = async () => {
+        try {
+            const data = await getAllImages();
+            if (data) {
+                setImages(data);
+            } else {
+                setNotification({ message: 'Lỗi khi tải thư viện ảnh!', type: 'error' });
+            }
+        } catch (error) {
+            console.error('Lỗi khi lấy hình ảnh:', error);
+            setNotification({ message: 'Lỗi khi tải thư viện ảnh.', type: 'error' });
+        }
+    };
+
+    const handleDelete = async (id) => {
+        if (window.confirm('Bạn có chắc chắn muốn xóa hình ảnh này không?')) {
+            try {
+                await deleteImage(id);
+                setImages(images.filter((image) => image._id !== id));
+                setNotification({ message: 'Xóa hình ảnh thành công!', type: 'success' });
+            } catch (error) {
+                console.error('Lỗi khi xóa hình ảnh:', error);
+                setNotification({ message: 'Lỗi khi xóa hình ảnh!', type: 'error' });
+            }
+        }
+    };
+
+    const filteredImages = images.filter((image) => image.url.toLowerCase().includes(searchTerm.toLowerCase()));
+
+    const totalPages = Math.ceil(filteredImages.length / itemsPerPage);
+    const indexOfLastImage = currentPage * itemsPerPage;
+    const indexOfFirstImage = indexOfLastImage - itemsPerPage;
+    const currentImages = filteredImages.slice(indexOfFirstImage, indexOfLastImage);
+
+    return (
+        <div className={styles.imageContainer}>
+            <Title className={styles.pageTitle} text="Danh sách hình ảnh" />
+            {notification.message && <PushNotification message={notification.message} type={notification.type} />}
+            <div className={styles.actionsContainer}>
+                <input
+                    type="text"
+                    placeholder="Tìm kiếm hình ảnh..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className={styles.searchInput}
+                />
+                <Link to={routes.addImage} className={styles.addButton}>
+                    <FontAwesomeIcon icon={faPlus} /> Thêm hình ảnh mới
+                </Link>
+            </div>
+
+            <div className={styles.imageList}>
+                <table className={styles.table}>
+                    <thead>
+                        <tr>
+                            <th>Hình ảnh</th>
+                            <th>Đường dẫn</th>
+                            <th>Loại</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {currentImages.length > 0 ? (
+                            currentImages.map((image) => (
+                                <tr key={image.id}>
+                                    <td>
+                                        <img src={image.url} alt={image.type} className={styles.previewImage} />
+                                    </td>
+                                    <td>
+                                        <a href={image.url} target="_blank" rel="noreferrer">
+                                            {image.url}
+                                        </a>
+                                    </td>
+                                    <td>{image.type}</td>
+                                    <td>
+                                        <button onClick={() => handleDelete(image.id)} className={styles.deleteButton}>
+                                            <FontAwesomeIcon icon={faTrash} /> Xóa
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="4">Không có dữ liệu</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
+            <div className={styles.itemsPerPage}>
+                <label htmlFor="itemsPerPage">Hiển thị: </label>
+                <select
+                    id="itemsPerPage"
+                    value={itemsPerPage}
+                    onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                >
+                    <option value={5}>5</option>
+                    <option value={10}>10</option>
+                    <option value={20}>20</option>
+                </select>
+            </div>
+
+            <div className={styles.pagination}>
+                <span>
+                    Hiển thị {indexOfFirstImage + 1} đến {Math.min(indexOfLastImage, filteredImages.length)} trong{' '}
+                    {filteredImages.length} mục
+                </span>
+                <div className={styles.paginationControls}>
+                    <button
+                        onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                        disabled={currentPage === 1}
+                    >
+                        <FontAwesomeIcon icon={faAngleLeft} />
+                    </button>
+                    <button
+                        onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                        disabled={currentPage === totalPages}
+                    >
+                        <FontAwesomeIcon icon={faAngleRight} />
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ImageList;

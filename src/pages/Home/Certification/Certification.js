@@ -15,6 +15,10 @@ const mockCertificates = [
         id: 2,
         url: 'https://res.cloudinary.com/drioug4df/image/upload/v1728013729/ec36f79c-f114-4004-959d-93dc38f7b82d.jpg',
     },
+    {
+        id: 3,
+        url: 'https://res.cloudinary.com/drioug4df/image/upload/v1730169609/eeae9a70-18b9-4988-9644-fc4c495400cb_gdovgj.jpg',
+    },
 ];
 
 function Certification() {

@@ -1,0 +1,46 @@
+@import '../../../../../styles/mixins';
+@import '../../../../../styles/variables';
+
+.language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    @include respond-to(xl) {
+        gap: 2px;
+    }
+}
+
+.lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+
+    .lang-btn-img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    span {
+        color: var(--secondary-fade);
+        font-weight: 600;
+    }
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    &.active {
+        background: rgba(255, 255, 255, 0.1);
+        span {
+            color: var(--secondary-hover);
+        }
+    }
+}

@@ -39,6 +39,7 @@ const ProductDetail = () => {
     const [notification, setNotification] = useState(null);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [quantity, setQuantity] = useState(1);
+    const [mainSwiper, setMainSwiper] = useState(null);
     const [availableStock, setAvailableStock] = useState(0);
     const [activeTab, setActiveTab] = useState('info');
     const [imagePreviews, setImagePreviews] = useState([]);
@@ -215,6 +216,7 @@ const ProductDetail = () => {
                         modules={[Navigation, Thumbs]}
                         navigation
                         loop={true}
+                        onSwiper={setMainSwiper}
                         thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
                         className={cx('main-image-wrapper')}
                     >
@@ -238,11 +240,15 @@ const ProductDetail = () => {
                         className={cx('thumbnail-wrapper')}
                     >
                         {productDetail.images.map((image, index) => (
-                            <SwiperSlide className={cx('thumbnail-image-wrapper')} key={index}>
+                            <SwiperSlide
+                                className={cx('thumbnail-image-wrapper')}
+                                key={index}
+                                onClick={() => mainSwiper?.slideTo(index)}
+                            >
                                 <img
                                     className={cx('thumbnail-image')}
                                     src={image.replace(/\\/g, '')}
-                                    alt={`${productDetail.name} main ${index + 1}`}
+                                    alt={`${productDetail.name} thumbnail ${index + 1}`}
                                 />
                             </SwiperSlide>
                         ))}

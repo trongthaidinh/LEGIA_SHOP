@@ -1,0 +1,24 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/variables';
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    padding: 0 20px;
+    @include respond-to(lg) {
+        margin-top: 20px;
+    }
+}
+
+.inner {
+    display: flex;
+    flex-direction: column;
+    gap: 60px 0;
+    width: var(--default-layout-width);
+
+    @include respond-to(lg) {
+        width: 100%;
+        flex-direction: column;
+    }
+}

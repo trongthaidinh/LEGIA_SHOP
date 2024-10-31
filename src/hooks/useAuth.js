@@ -35,11 +35,13 @@ const useProvideAuth = () => {
                 scheduleAccessTokenRefresh(data.accessTokenExpiresAt);
             } else {
                 signout();
+                signoutZH();
                 throw new Error('Làm mới token thất bại');
             }
         } catch (error) {
             console.error('Error refreshing access token:', error);
             signout();
+            signoutZH();
         }
     };
 
@@ -111,6 +113,31 @@ const useProvideAuth = () => {
         }
     };
 
+    const signinZH = async (credentials) => {
+        try {
+            const response = await login(credentials);
+            if (response.statusCode === 200) {
+                const { data } = response;
+                setUser({ accessToken: data.accessToken });
+
+                localStorage.setItem('accessToken', data.accessToken);
+                localStorage.setItem('accessTokenExpiresAt', data.accessTokenExpiresAt);
+                localStorage.setItem('refreshToken', data.refreshToken);
+                localStorage.setItem('refreshTokenExpiresAt', data.refreshTokenExpiresAt);
+                localStorage.setItem('userEmail', credentials.email);
+
+                scheduleAccessTokenRefresh(data.accessTokenExpiresAt);
+
+                navigate('/zh/admin/dashboard');
+            } else {
+                throw new Error(response.message);
+            }
+        } catch (error) {
+            console.error('Error signing in:', error);
+            throw error;
+        }
+    };
+
     const signout = () => {
         logout();
         setUser(null);
@@ -124,11 +151,26 @@ const useProvideAuth = () => {
         navigate('/login');
     };
 
+    const signoutZH = () => {
+        logout();
+        setUser(null);
+
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('accessTokenExpiresAt');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('refreshTokenExpiresAt');
+        localStorage.removeItem('userEmail');
+
+        navigate('/zh/login');
+    };
+
     return {
         user,
         loading,
         signin,
         signout,
+        signoutZH,
+        signinZH,
     };
 };
 

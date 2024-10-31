@@ -15,27 +15,10 @@ import {
     faPhoneVolume,
     faSearch,
     faBasketShopping,
-    // faHome,
-    // faInfoCircle,
-    // faBox,
-    // faLayerGroup,
-    // faProjectDiagram,
-    // faNewspaper,
-    // faUsers,
-    // faEnvelope,
 } from '@fortawesome/free-solid-svg-icons';
 import images from '~/assets/images';
 import routes from 'config/routes';
-
-// const iconsData = [
-//     { position: 1, icon: faInfoCircle },
-//     { position: 2, icon: faBox },
-//     { position: 3, icon: faLayerGroup },
-//     { position: 4, icon: faProjectDiagram },
-//     { position: 5, icon: faNewspaper },
-//     { position: 6, icon: faUsers },
-//     { position: 7, icon: faEnvelope },
-// ];
+import LanguageSwitcher from './LanguageSwitcher';
 
 const cx = classNames.bind(styles);
 
@@ -47,116 +30,6 @@ function Navigation({ isFixed }) {
     const [openSubMenus, setOpenSubMenus] = useState({});
     const [openSubSubMenus, setOpenSubSubMenus] = useState({});
     const [cartQuantity, setCartQuantity] = useState(0);
-
-    // const mockNavigationLinks = [
-    //     {
-    //         id: 1,
-    //         title: 'Giới Thiệu',
-    //         slug: 'gioi-thieu',
-    //         position: 1,
-    //         children: [
-    //             {
-    //                 id: 11,
-    //                 title: 'Về Chúng Tôi',
-    //                 slug: 've-chung-toi',
-    //                 position: 1,
-    //                 children: [],
-    //             },
-    //             {
-    //                 id: 12,
-    //                 title: 'Tầm Nhìn & Sứ Mệnh',
-    //                 slug: 'tam-nhin-su-menh',
-    //                 position: 1,
-    //                 children: [],
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         id: 2,
-    //         title: 'Sản Phẩm',
-    //         slug: 'san-pham',
-    //         position: 2,
-    //         children: [
-    //             {
-    //                 id: 21,
-    //                 title: 'Yến Chưng',
-    //                 slug: 'yen-chung',
-    //                 position: 1,
-    //                 children: [
-    //                     // {
-    //                     //     id: 211,
-    //                     //     title: 'Chi Tiết Sản Phẩm A1',
-    //                     //     slug: 'chi-tiet-san-pham-a1',
-    //                     //     position: 1,
-    //                     // },
-    //                     // {
-    //                     //     id: 212,
-    //                     //     title: 'Chi Tiết Sản Phẩm A2',
-    //                     //     slug: 'chi-tiet-san-pham-a2',
-    //                     //     position: 2,
-    //                     // },
-    //                 ],
-    //             },
-    //             {
-    //                 id: 22,
-    //                 title: 'Yến Tổ',
-    //                 slug: 'san-pham-b',
-    //                 position: 2,
-    //                 children: [],
-    //             },
-    //             {
-    //                 id: 23,
-    //                 title: 'Set Quà Tặng',
-    //                 slug: 'set-qua-tang',
-    //                 position: 3,
-    //                 children: [],
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         id: 3,
-    //         title: 'Tin Tức',
-    //         slug: 'tin-tuc',
-    //         position: 3,
-    //         children: [],
-    //     },
-    //     // {
-    //     //     id: 4,
-    //     //     title: 'Chính sách',
-    //     //     slug: 'chinh-sach',
-    //     //     position: 4,
-    //     //     children: [
-    //     //         {
-    //     //             id: 1,
-    //     //             title: 'Chính sách bảo hành',
-    //     //             slug: 'chinh-sach-bao-hanh',
-    //     //             position: 1,
-    //     //             children: [],
-    //     //         },
-    //     //         {
-    //     //             id: 2,
-    //     //             title: 'Chính sách thanh toán',
-    //     //             slug: 'chinh-sach-thanh-toan',
-    //     //             position: 2,
-    //     //             children: [],
-    //     //         },
-    //     //     ],
-    //     // },
-    //     // {
-    //     //     id: 6,
-    //     //     title: 'Hướng dẫn mua hàng',
-    //     //     slug: 'huong-dan-mua-hang',
-    //     //     position: 5,
-    //     //     children: [],
-    //     // },
-    //     {
-    //         id: 7,
-    //         title: 'Liên Hệ',
-    //         slug: 'lien-he',
-    //         position: 5,
-    //         children: [],
-    //     },
-    // ];
 
     useEffect(() => {
         const fetchNavigationLinks = async () => {
@@ -287,6 +160,7 @@ function Navigation({ isFixed }) {
                             <Search />
                         </div>
                         <div className={cx('right-section')}>
+                            <LanguageSwitcher />
                             <div className={cx('search')}>
                                 <FontAwesomeIcon icon={faSearch} className={cx('icon')} />
                             </div>

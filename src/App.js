@@ -1,10 +1,12 @@
 import { Fragment } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { publicRoutes, privateRoutes } from '~/routes';
 import DefaultLayout from '~/layouts/DefaultLayout';
+import NothingLayout from '~/layouts/NothingLayout';
 import LoadingScreen from '~/components/LoadingScreen';
 import { AuthProvider, useAuth } from '~/hooks/useAuth';
 import Login from '~/pages/Admin/Login';
+import LoginZH from '~/pages/zh/Admin/Login';
 import ScrollToTop from '~/components/ScrollToTop';
 import Error404 from './pages/Error404';
 import usePageTracking from './hooks/usePageTracking';
@@ -51,7 +53,7 @@ function App() {
 
                         {privateRoutes.map((route, index) => {
                             const Page = route.component;
-                            const Layout = route.layout || DefaultLayout;
+                            const Layout = route.layout || NothingLayout;
 
                             return (
                                 <Route
@@ -69,6 +71,7 @@ function App() {
                         })}
 
                         <Route path="/login" element={<Login />} />
+                        <Route path="/zh/login" element={<LoginZH />} />
                         <Route path="*" element={<Error404 />} />
                     </Routes>
                 </div>
@@ -79,12 +82,15 @@ function App() {
 
 function PrivateRoute({ children }) {
     const { user, loading } = useAuth();
+    const location = useLocation();
 
     if (loading) {
         return <LoadingScreen isLoading={loading} />;
     }
 
-    return user ? children : <Navigate to="/login" />;
+    const isZhPath = location.pathname.includes('/zh');
+
+    return user ? children : <Navigate to={isZhPath ? '/zh/login' : '/login'} />;
 }
 
 export default App;
